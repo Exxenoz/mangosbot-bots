@@ -3,6 +3,7 @@
 #include "MoveSplineInitArgs.h"
 #include <boost/functional/hash.hpp>
 #include "ObjectMgr.h"
+#include "PlayerbotAIConfig.h"
 #include "GridDefines.h"
 #include "SharedDefines.h"
 
