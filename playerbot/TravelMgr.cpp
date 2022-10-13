@@ -7,7 +7,11 @@
 #include "PlayerbotAI.h"
 
 #include "Creature.h"
+#include "GameObject.h"
+#include "Map.h"
 #include "ObjectMgr.h"
+#include "Player.h"
+#include "Unit.h"
 #include <numeric>
 #include <iomanip>
 
