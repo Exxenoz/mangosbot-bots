@@ -12,6 +12,7 @@
 #include "ObjectMgr.h"
 #include "Player.h"
 #include "Unit.h"
+#include "QuestDef.h"
 #include <numeric>
 #include <iomanip>
 
