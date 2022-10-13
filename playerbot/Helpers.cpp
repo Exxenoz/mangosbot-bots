@@ -20,7 +20,7 @@ void split(std::vector<std::string>& dest, const std::string& str, const char* d
 
 vector<std::string>& split(const std::string &s, char delim, std::vector<std::string> &elems)
 {
-    stringstream ss(s);
+    std::stringstream ss(s);
     std::string item;
     while(getline(ss, item, delim))
     {

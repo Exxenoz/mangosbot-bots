@@ -3080,7 +3080,7 @@ void TravelMgr::LoadQuestTravelTable()
                 actionKeys.push_back(action.first);
 
             std::sort(actionKeys.begin(), actionKeys.end(), [](std::string i, std::string j)
-                {stringstream is(i); stringstream js(j); float iref, jref; std::string iact, jact, itrig, jtrig, istrat, jstrat;
+                {std::stringstream is(i); std::stringstream js(j); float iref, jref; std::string iact, jact, itrig, jtrig, istrat, jstrat;
             is >> iref >> iact >> itrig >> istrat;
             js >> jref >> jact >> jtrig >> jstrat;
             if (iref > jref)

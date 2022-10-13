@@ -82,7 +82,7 @@ namespace ai
         float getO() const { return orientation; }
         G3D::Vector3 getVector3();
         virtual std::string print();
-        std::string to_string() {stringstream out; out << mapid; out << coord_x; out << coord_y; out << coord_z;  out << orientation; return out.str();};
+        std::string to_string() {std::stringstream out; out << mapid; out << coord_x; out << coord_y; out << coord_z;  out << orientation; return out.str();};
 
         void printWKT(std::vector<WorldPosition> points, std::ostringstream& out, uint32 dim = 0, bool loop = false);
         void printWKT(std::ostringstream& out) { printWKT({ *this }, out); }
