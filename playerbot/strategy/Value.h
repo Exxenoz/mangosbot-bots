@@ -74,24 +74,18 @@ namespace ai
 
     template <class T> class SingleCalculatedValue : public CalculatedValue<T>
     {
-        using CalculatedValue<T>::Calculate;
-        using CalculatedValue<T>::context;
-        using CalculatedValue<T>::getName;
-        using CalculatedValue<T>::lastCheckTime;
-        using CalculatedValue<T>::Reset;
-        using CalculatedValue<T>::value;
     public:
         SingleCalculatedValue(PlayerbotAI* ai, string name = "value") : CalculatedValue<T>(ai, name) { Reset(); }
 
         virtual T Get()
         {
             time_t now = time(0);
-            if (!lastCheckTime)
+            if (!CalculatedValue<T>::lastCheckTime)
             {
-                lastCheckTime = now;
+                CalculatedValue<T>::lastCheckTime = now;
 
-                PerformanceMonitorOperation* pmo = sPerformanceMonitor.start(PERF_MON_VALUE, getName(), context ?  &context->performanceStack : nullptr);
-                value = Calculate();
+                PerformanceMonitorOperation* pmo = sPerformanceMonitor.start(PERF_MON_VALUE, CalculatedValue<T>::getName(), CalculatedValue<T>::context ?  &CalculatedValue<T>::context->performanceStack : nullptr);
+                CalculatedValue<T>::value = CalculatedValue<T>::Calculate();
                 if (pmo) pmo->finish();
             }
             return value;
@@ -100,15 +94,14 @@ namespace ai
     
     template<class T> class MemoryCalculatedValue : public CalculatedValue<T>
     {
-        using CalculatedValue<T>::value;
     public:
         MemoryCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) : CalculatedValue<T>(ai, name,checkInterval) { lastChangeTime = time(0); }
         virtual bool EqualToLast(T value) = 0;
-        virtual bool CanCheckChange() { return time(0) - lastChangeTime > minChangeInterval && !EqualToLast(value); }
-        virtual bool UpdateChange() { if (!CanCheckChange()) return false; lastChangeTime = time(0); lastValue = value; return true; }
+        virtual bool CanCheckChange() { return time(0) - lastChangeTime > minChangeInterval && !EqualToLast(CalculatedValue<T>::value); }
+        virtual bool UpdateChange() { if (!CanCheckChange()) return false; lastChangeTime = time(0); lastValue = CalculatedValue<T>::value; return true; }
 
         virtual void Set(T value) { CalculatedValue<T>::Set(value); UpdateChange(); }
-        virtual T Get() {value = CalculatedValue<T>::Get(); UpdateChange(); return value;}
+        virtual T Get() { CalculatedValue<T>::value = CalculatedValue<T>::Get(); UpdateChange(); return CalculatedValue<T>::value;}
 
         time_t LastChangeOn() {Get(); UpdateChange(); return lastChangeTime;}
         uint32 LastChangeDelay() { return time(0) - LastChangeOn(); }
@@ -124,7 +117,7 @@ namespace ai
     {
     public:
         LogCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) : MemoryCalculatedValue<T>(ai, name, checkInterval) {};
-        virtual bool UpdateChange() { if (MemoryCalculatedValue<T>::UpdateChange()) return false; valueLog.push_back(make_pair(MemoryCalculatedValue<T>::value, time(0))); if (valueLog.size() > logLength) valueLog.pop_front(); return true; }
+        virtual bool UpdateChange() { if (MemoryCalculatedValue<T>::UpdateChange()) return false; valueLog.push_back(make_pair(CalculatedValue<T>::value, time(0))); if (valueLog.size() > logLength) valueLog.pop_front(); return true; }
 
         list<pair<T, time_t>> ValueLog() { return valueLog; }
 
