@@ -13,7 +13,7 @@ bool TaxiAction::Execute(Event event)
     LastMovement& movement = context->GetValue<LastMovement&>("last taxi")->Get();
 
     WorldPacket& p = event.getPacket();
-    string param = event.getParam();
+    std::string param = event.getParam();
     if ((!p.empty() && (p.GetOpcode() == CMSG_TAXICLEARALLNODES || p.GetOpcode() == CMSG_TAXICLEARNODE)) || param == "clear")
     {
         movement.taxiNodes.clear();

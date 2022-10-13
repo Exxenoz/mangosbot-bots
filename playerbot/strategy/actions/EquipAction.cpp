@@ -9,7 +9,7 @@ using namespace ai;
 
 bool EquipAction::Execute(Event event)
 {
-    string text = event.getParam();
+    std::string text = event.getParam();
     ItemIds ids = chat->parseItems(text);
     EquipItems(ids);
     return true;

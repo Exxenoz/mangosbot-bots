@@ -7,11 +7,11 @@
 #include "../../ServerFacade.h"
 using namespace ai;
 
-map<string, uint32> EmoteActionBase::emotes;
-map<string, uint32> EmoteActionBase::textEmotes;
+map<std::string, uint32> EmoteActionBase::emotes;
+map<std::string, uint32> EmoteActionBase::textEmotes;
 char *strstri(const char *haystack, const char *needle);
 
-EmoteActionBase::EmoteActionBase(PlayerbotAI* ai, string name) : Action(ai, name)
+EmoteActionBase::EmoteActionBase(PlayerbotAI* ai, std::string name) : Action(ai, name)
 {
     if (emotes.empty()) InitEmotes();
 }
@@ -137,8 +137,8 @@ bool EmoteActionBase::ReceiveEmote(Player* source, uint32 emote, bool verbal)
 {
     uint32 emoteId = 0;
     uint32 textEmote = 0;
-    string emoteText;
-    string emoteYell;
+    std::string emoteText;
+    std::string emoteYell;
     switch (emote)
     {
     case TEXTEMOTE_BONK:
@@ -650,7 +650,7 @@ bool EmoteAction::Execute(Event event)
         uint32 text_emote;
         uint32 emote_num;
         uint32 namlen;
-        string nam;
+        std::string nam;
         p.rpos(0);
         p >> source >> text_emote >> emote_num >> namlen;
         if (namlen > 1)
@@ -758,7 +758,7 @@ bool EmoteAction::Execute(Event event)
             return false;
     }
 
-    string param = event.getParam();
+    std::string param = event.getParam();
     if ((!isReact && param.empty()) || emote)
     {
         time_t lastEmote = AI_VALUE2(time_t, "last emote", qualifier);
@@ -787,7 +787,7 @@ bool EmoteAction::Execute(Event event)
     if (param.empty() || emotes.find(param) == emotes.end())
     {
         int index = rand() % emotes.size();
-        for (map<string, uint32>::iterator i = emotes.begin(); i != emotes.end() && index; ++i, --index)
+        for (map<std::string, uint32>::iterator i = emotes.begin(); i != emotes.end() && index; ++i, --index)
             emote = i->second;
     }
     else

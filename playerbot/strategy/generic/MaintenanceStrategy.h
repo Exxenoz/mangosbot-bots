@@ -7,7 +7,7 @@ namespace ai
     {
     public:
         MaintenanceStrategy(PlayerbotAI* ai) : NonCombatStrategy(ai) {}
-        virtual string getName() { return "maintenance"; }
+        virtual std::string getName() { return "maintenance"; }
         virtual int GetType() { return STRATEGY_TYPE_NONCOMBAT; }
         NextAction** getDefaultActions();
 

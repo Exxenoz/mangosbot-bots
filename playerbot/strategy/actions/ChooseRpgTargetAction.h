@@ -8,7 +8,7 @@ namespace ai
 {
     class ChooseRpgTargetAction : public Action {
     public:
-        ChooseRpgTargetAction(PlayerbotAI* ai, string name = "choose rpg target") : Action(ai, name) {}
+        ChooseRpgTargetAction(PlayerbotAI* ai, std::string name = "choose rpg target") : Action(ai, name) {}
 
         virtual bool Execute(Event event);
         virtual bool isUseful();

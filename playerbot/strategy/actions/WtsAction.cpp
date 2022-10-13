@@ -19,12 +19,12 @@ bool WtsAction::Execute(Event event)
         return false;
 
     ostringstream out;
-    string text = event.getParam();
+    std::string text = event.getParam();
 
     if (!sRandomPlayerbotMgr.IsRandomBot(bot))
         return false;
 
-    string link = event.getParam();
+    std::string link = event.getParam();
 
     ItemIds itemIds = chat->parseItems(link);
     if (itemIds.empty())

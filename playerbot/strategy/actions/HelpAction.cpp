@@ -39,11 +39,11 @@ void HelpAction::TellStrategies()
     ai->TellError(out.str());
 }
 
-string HelpAction::CombineSupported(set<string> commands)
+string HelpAction::CombineSupported(set<std::string> commands)
 {
     ostringstream out;
 
-    for (set<string>::iterator i = commands.begin(); i != commands.end(); )
+    for (set<std::string>::iterator i = commands.begin(); i != commands.end(); )
 	{
         out << *i;
 		if (++i != commands.end())

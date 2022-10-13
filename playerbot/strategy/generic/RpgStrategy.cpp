@@ -9,8 +9,8 @@ float RpgActionMultiplier::GetValue(Action* action)
 {
     if (action == NULL) return 1.0f;
 
-    string nextAction = AI_VALUE(string, "next rpg action");
-    string name = action->getName();
+    std::string nextAction = AI_VALUE(string, "next rpg action");
+    std::string name = action->getName();
 
     if (dynamic_cast<RpgEnabled*>(action))
         if (!nextAction.empty() && name != nextAction)

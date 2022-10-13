@@ -61,25 +61,25 @@ class PlayerbotTextMgr
         }
 
 	public:
-        string GetBotText(string name, std::map<string, string> placeholders);
-        string GetBotText(string name);
-        string GetBotText(ChatReplyType replyType, std::map<string, string> placeholders);
-        string GetBotText(ChatReplyType replyType, string name);
-        bool GetBotText(string name, string& text);
-        bool GetBotText(string name, string& text, std::map<string, string> placeholders);
+        std::string GetBotText(std::string name, std::map<std::string, string> placeholders);
+        std::string GetBotText(std::string name);
+        std::string GetBotText(ChatReplyType replyType, std::map<std::string, string> placeholders);
+        std::string GetBotText(ChatReplyType replyType, std::string name);
+        bool GetBotText(std::string name, string& text);
+        bool GetBotText(std::string name, string& text, std::map<std::string, string> placeholders);
         void LoadBotTexts();
         void LoadBotTextChance();
 
         void replaceAll(std::string& str, const std::string& from, const std::string& to);
-        bool rollTextChance(string text);
+        bool rollTextChance(std::string text);
 
         int32 GetLocalePriority();
         void AddLocalePriority(int32 locale);
         void ResetLocalePriority();
 
     private:
-        std::map<string, std::vector<BotTextEntry>> botTexts;
-        std::map<string, uint32 > botTextChance;
+        std::map<std::string, std::vector<BotTextEntry>> botTexts;
+        std::map<std::string, uint32 > botTextChance;
         uint32 botTextLocalePriority[MAX_LOCALE];
 };
 

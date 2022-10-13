@@ -183,7 +183,7 @@ string StanceValue::Save()
     return value ? value->getName() : "?";
 }
 
-bool StanceValue::Load(string name)
+bool StanceValue::Load(std::string name)
 {
     if (name == "behind")
     {
@@ -213,7 +213,7 @@ bool StanceValue::Load(string name)
 
 bool SetStanceAction::Execute(Event event)
 {
-    string stance = event.getParam();
+    std::string stance = event.getParam();
 
     StanceValue* value = (StanceValue*)context->GetValue<Stance*>("stance");
     if (stance == "?" || stance.empty())

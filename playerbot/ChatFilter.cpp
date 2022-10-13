@@ -6,7 +6,7 @@
 using namespace ai;
 using namespace std;
 
-string ChatFilter::Filter(string message)
+string ChatFilter::Filter(std::string message)
 {
     if (message.find("@") == string::npos)
         return message;
@@ -19,7 +19,7 @@ class StrategyChatFilter : public ChatFilter
 public:
     StrategyChatFilter(PlayerbotAI* ai) : ChatFilter(ai) {}
 
-    virtual string Filter(string message)
+    virtual std::string Filter(std::string message)
     {
         Player* bot = ai->GetBot();
 
@@ -55,7 +55,7 @@ class LevelChatFilter : public ChatFilter
 public:
     LevelChatFilter(PlayerbotAI* ai) : ChatFilter(ai) {}
 
-    virtual string Filter(string message)
+    virtual std::string Filter(std::string message)
     {
         Player* bot = ai->GetBot();
 
@@ -86,7 +86,7 @@ class CombatTypeChatFilter : public ChatFilter
 public:
     CombatTypeChatFilter(PlayerbotAI* ai) : ChatFilter(ai) {}
 
-    virtual string Filter(string message)
+    virtual std::string Filter(std::string message)
     {
         Player* bot = ai->GetBot();
 
@@ -148,7 +148,7 @@ public:
         rtis.push_back("@skull");
     }
 
-    virtual string Filter(string message)
+    virtual std::string Filter(std::string message)
     {
         Player* bot = ai->GetBot();
         Group *group = bot->GetGroup();
@@ -157,9 +157,9 @@ public:
 
         bool found = false;
         bool isRti = false;
-        for (std::list<string>::iterator i = rtis.begin(); i != rtis.end(); i++)
+        for (std::list<std::string>::iterator i = rtis.begin(); i != rtis.end(); i++)
         {
-            string rti = *i;
+            std::string rti = *i;
 
             bool isRti = message.find(rti) == 0;
             if (!isRti)
@@ -188,7 +188,7 @@ public:
     }
 
 private:
-    std::list<string> rtis;
+    std::list<std::string> rtis;
 };
 
 class ClassChatFilter : public ChatFilter
@@ -210,13 +210,13 @@ public:
         classNames["@warrior"] = CLASS_WARRIOR;
     }
 
-    virtual string Filter(string message)
+    virtual std::string Filter(std::string message)
     {
         Player* bot = ai->GetBot();
 
         bool found = false;
         bool isClass = false;
-        for (map<string, uint8>::iterator i = classNames.begin(); i != classNames.end(); i++)
+        for (map<std::string, uint8>::iterator i = classNames.begin(); i != classNames.end(); i++)
         {
             bool isClass = message.find(i->first) == 0;
             if (isClass && bot->getClass() != i->second)
@@ -234,7 +234,7 @@ public:
     }
 
 private:
-    std::map<string, uint8> classNames;
+    std::map<std::string, uint8> classNames;
 };
 
 class SubGroupChatFilter : public ChatFilter
@@ -242,13 +242,13 @@ class SubGroupChatFilter : public ChatFilter
 public:
     SubGroupChatFilter(PlayerbotAI* ai) : ChatFilter(ai) {}
 
-    virtual string Filter(string message)
+    virtual std::string Filter(std::string message)
     {
         Player* bot = ai->GetBot();
 
         if (message.find("@group") == 0)
         {
-            string pnum = message.substr(6, message.find(" "));
+            std::string pnum = message.substr(6, message.find(" "));
             int from = atoi(pnum.c_str());
             int to = from;
             if (pnum.find("-") != string::npos)
@@ -285,7 +285,7 @@ CompositeChatFilter::~CompositeChatFilter()
         delete (*i);
 }
 
-string CompositeChatFilter::Filter(string message)
+string CompositeChatFilter::Filter(std::string message)
 {
     for (int j = 0; j < filters.size(); ++j)
     {

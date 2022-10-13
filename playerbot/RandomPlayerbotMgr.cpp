@@ -994,7 +994,7 @@ void RandomPlayerbotMgr::CheckBgQueue()
             }
 #endif
             BattleGroundTypeId bgTypeId = sServerFacade.BgTemplateId(queueTypeId);
-            string _bgType;
+            std::string _bgType;
             switch (bgTypeId)
             {
             case BATTLEGROUND_AV:
@@ -2199,7 +2199,7 @@ list<uint32> RandomPlayerbotMgr::GetBgBots(uint32 bracket)
     return BgBots;
 }
 
-uint32 RandomPlayerbotMgr::GetEventValue(uint32 bot, string event)
+uint32 RandomPlayerbotMgr::GetEventValue(uint32 bot, std::string event)
 {
     // load all events at once on first event load
     if (eventCache[bot].empty())
@@ -2210,7 +2210,7 @@ uint32 RandomPlayerbotMgr::GetEventValue(uint32 bot, string event)
             do
             {
                 Field* fields = results->Fetch();
-                string eventName = fields[0].GetString();
+                std::string eventName = fields[0].GetString();
                 CachedEvent e;
                 e.value = fields[1].GetUInt32();
                 e.lastChangeTime = fields[2].GetUInt32();
@@ -2247,9 +2247,9 @@ uint32 RandomPlayerbotMgr::GetEventValue(uint32 bot, string event)
     return e.value;
 }
 
-string RandomPlayerbotMgr::GetEventData(uint32 bot, string event)
+string RandomPlayerbotMgr::GetEventData(uint32 bot, std::string event)
 {
-    string data = "";
+    std::string data = "";
     if (GetEventValue(bot, event))
     {
         CachedEvent e = eventCache[bot][event];
@@ -2258,7 +2258,7 @@ string RandomPlayerbotMgr::GetEventData(uint32 bot, string event)
     return data;
 }
 
-uint32 RandomPlayerbotMgr::SetEventValue(uint32 bot, string event, uint32 value, uint32 validIn, string data)
+uint32 RandomPlayerbotMgr::SetEventValue(uint32 bot, std::string event, uint32 value, uint32 validIn, std::string data)
 {
     PlayerbotDatabase.PExecute("delete from ai_playerbot_random_bots where owner = 0 and bot = '%u' and event = '%s'",
             bot, event.c_str());
@@ -2283,27 +2283,27 @@ uint32 RandomPlayerbotMgr::SetEventValue(uint32 bot, string event, uint32 value,
     return value;
 }
 
-uint32 RandomPlayerbotMgr::GetValue(uint32 bot, string type)
+uint32 RandomPlayerbotMgr::GetValue(uint32 bot, std::string type)
 {
     return GetEventValue(bot, type);
 }
 
-uint32 RandomPlayerbotMgr::GetValue(Player* bot, string type)
+uint32 RandomPlayerbotMgr::GetValue(Player* bot, std::string type)
 {
     return GetValue(bot->GetObjectGuid().GetCounter(), type);
 }
 
-string RandomPlayerbotMgr::GetData(uint32 bot, string type)
+string RandomPlayerbotMgr::GetData(uint32 bot, std::string type)
 {
     return GetEventData(bot, type);
 }
 
-void RandomPlayerbotMgr::SetValue(uint32 bot, string type, uint32 value, string data)
+void RandomPlayerbotMgr::SetValue(uint32 bot, std::string type, uint32 value, std::string data)
 {
     SetEventValue(bot, type, value, 15*24*3600, data);
 }
 
-void RandomPlayerbotMgr::SetValue(Player* bot, string type, uint32 value, string data)
+void RandomPlayerbotMgr::SetValue(Player* bot, std::string type, uint32 value, std::string data)
 {
     SetValue(bot->GetObjectGuid().GetCounter(), type, value, data);
 }
@@ -2322,7 +2322,7 @@ bool RandomPlayerbotMgr::HandlePlayerbotConsoleCommand(ChatHandler* handler, cha
         return false;
     }
 
-    string cmd = args;
+    std::string cmd = args;
 
     if (cmd == "reset")
     {
@@ -2352,12 +2352,12 @@ bool RandomPlayerbotMgr::HandlePlayerbotConsoleCommand(ChatHandler* handler, cha
 
     if (cmd.find("pid ") != std::string::npos)
     {
-        string pids = cmd.substr(4);
-        std::vector<string> pid = Qualified::getMultiQualifiers(pids);
+        std::string pids = cmd.substr(4);
+        std::vector<std::string> pid = Qualified::getMultiQualifiers(pids);
         sRandomPlayerbotMgr.pid.adjust(stof(pid[0]), stof(pid[1]), stof(pid[2]));
     }
 
-    std::map<string, ConsoleCommandHandler> handlers;
+    std::map<std::string, ConsoleCommandHandler> handlers;
     handlers["init"] = &RandomPlayerbotMgr::RandomizeFirst;
     handlers["upgrade"] = &RandomPlayerbotMgr::UpdateGearSpells;
     handlers["refresh"] = &RandomPlayerbotMgr::Refresh;
@@ -2367,11 +2367,11 @@ bool RandomPlayerbotMgr::HandlePlayerbotConsoleCommand(ChatHandler* handler, cha
     handlers["grind"] = &RandomPlayerbotMgr::RandomTeleport;
     handlers["change_strategy"] = &RandomPlayerbotMgr::ChangeStrategy;
 
-    for (map<string, ConsoleCommandHandler>::iterator j = handlers.begin(); j != handlers.end(); ++j)
+    for (map<std::string, ConsoleCommandHandler>::iterator j = handlers.begin(); j != handlers.end(); ++j)
     {
-        string prefix = j->first;
+        std::string prefix = j->first;
         if (cmd.find(prefix) != 0) continue;
-        string name = cmd.size() > prefix.size() + 1 ? cmd.substr(1 + prefix.size()) : "%";
+        std::string name = cmd.size() > prefix.size() + 1 ? cmd.substr(1 + prefix.size()) : "%";
 
         std::list<uint32> botIds;
         for (std::list<uint32>::iterator i = sPlayerbotAIConfig.randomBotAccounts.begin(); i != sPlayerbotAIConfig.randomBotAccounts.end(); ++i)
@@ -2419,15 +2419,15 @@ bool RandomPlayerbotMgr::HandlePlayerbotConsoleCommand(ChatHandler* handler, cha
         return true;
     }
 
-    std::list<string> messages = sRandomPlayerbotMgr.HandlePlayerbotCommand(args, NULL);
-    for (std::list<string>::iterator i = messages.begin(); i != messages.end(); ++i)
+    std::list<std::string> messages = sRandomPlayerbotMgr.HandlePlayerbotCommand(args, NULL);
+    for (std::list<std::string>::iterator i = messages.begin(); i != messages.end(); ++i)
     {
         sLog.outString("%s",i->c_str());
     }
     return true;
 }
 
-void RandomPlayerbotMgr::HandleCommand(uint32 type, const string& text, Player& fromPlayer, string channelName, Team team)
+void RandomPlayerbotMgr::HandleCommand(uint32 type, const string& text, Player& fromPlayer, std::string channelName, Team team)
 {
     for (PlayerBotMap::const_iterator it = GetPlayerBotsBegin(); it != GetPlayerBotsEnd(); ++it)
     {
@@ -2863,7 +2863,7 @@ uint32 RandomPlayerbotMgr::GetTradeDiscount(Player* bot, Player* master)
     return GetEventValue(botId, name.str());
 }
 
-string RandomPlayerbotMgr::HandleRemoteCommand(string request)
+string RandomPlayerbotMgr::HandleRemoteCommand(std::string request)
 {
     string::iterator pos = find(request.begin(), request.end(), ',');
     if (pos == request.end())
@@ -2872,7 +2872,7 @@ string RandomPlayerbotMgr::HandleRemoteCommand(string request)
         return out.str();
     }
 
-    string command = string(request.begin(), pos);
+    std::string command = string(request.begin(), pos);
     uint32 guid = atoi(string(pos + 1, request.end()).c_str());
     Player* bot = GetPlayerBot(guid);
     if (!bot)

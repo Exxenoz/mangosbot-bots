@@ -25,10 +25,10 @@ bool SendMailAction::Execute(Event event)
         }
     }
 
-    string text = event.getParam();
+    std::string text = event.getParam();
     Player* receiver = GetMaster();
     Player* tellTo = receiver;
-    std::vector<string> ss = split(text, ' ');
+    std::vector<std::string> ss = split(text, ' ');
     if (ss.size() > 1)
     {
         Player* p = sObjectMgr.GetPlayer(ss[ss.size() - 1].c_str());

@@ -8,7 +8,7 @@ namespace ai
     public:
         ExternalEventHelper(AiObjectContext* aiObjectContext) : aiObjectContext(aiObjectContext) {}
 
-        bool ParseChatCommand(string command, Player* owner = NULL)
+        bool ParseChatCommand(std::string command, Player* owner = NULL)
         {
             if (HandleCommand(command, "", owner))
                 return true;
@@ -20,8 +20,8 @@ namespace ai
                 if (found == string::npos || !found)
                     break;
 
-                string name = command.substr(0, found);
-                string param = command.substr(found + 1);
+                std::string name = command.substr(0, found);
+                std::string param = command.substr(found + 1);
 
                 i = found - 1;
 
@@ -40,7 +40,7 @@ namespace ai
         void HandlePacket(map<uint16, string> &handlers, const WorldPacket &packet, Player* owner = NULL)
         {
             uint16 opcode = packet.GetOpcode();
-            string name = handlers[opcode];
+            std::string name = handlers[opcode];
             if (name.empty())
                 return;
 
@@ -52,7 +52,7 @@ namespace ai
             trigger->ExternalEvent(p, owner);
         }
 
-        bool HandleCommand(string name, string param, Player* owner = NULL)
+        bool HandleCommand(std::string name, std::string param, Player* owner = NULL)
         {
             Trigger* trigger = aiObjectContext->GetTrigger(name);
             if (!trigger)

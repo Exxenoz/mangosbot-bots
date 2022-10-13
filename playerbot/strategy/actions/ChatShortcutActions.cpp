@@ -41,7 +41,7 @@ bool FollowChatShortcutAction::Execute(Event event)
     if (sServerFacade.IsInCombat(bot))
     {
         Formation* formation = AI_VALUE(Formation*, "formation");
-        string target = formation->GetTargetName();
+        std::string target = formation->GetTargetName();
         bool moved = false;
         if (!target.empty())
         {

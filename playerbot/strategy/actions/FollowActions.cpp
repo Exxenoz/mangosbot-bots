@@ -14,7 +14,7 @@ using namespace ai;
 bool FollowAction::Execute(Event event)
 {
     Formation* formation = AI_VALUE(Formation*, "formation");
-    string target = formation->GetTargetName();
+    std::string target = formation->GetTargetName();
     bool moved = false;
     if (!target.empty())
     {
@@ -37,7 +37,7 @@ bool FollowAction::isUseful()
 {
     Formation* formation = AI_VALUE(Formation*, "formation");
     float distance = 0;
-    string target = formation->GetTargetName();
+    std::string target = formation->GetTargetName();
 
     Unit* fTarget = NULL;
     if (!target.empty())

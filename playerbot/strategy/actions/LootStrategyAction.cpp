@@ -9,7 +9,7 @@ using namespace ai;
 
 bool LootStrategyAction::Execute(Event event)
 {
-    string strategy = event.getParam();
+    std::string strategy = event.getParam();
 
     LootObjectStack* lootItems = AI_VALUE(LootObjectStack*, "available loot");
     set<uint32>& alwaysLootItems = AI_VALUE(set<uint32>&, "always loot list");

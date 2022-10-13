@@ -16,7 +16,7 @@ bool SetCraftAction::Execute(Event event)
     if (!master)
         return false;
 
-    string link = event.getParam();
+    std::string link = event.getParam();
 
     CraftData& data = AI_VALUE(CraftData&, "craft");
     if (link == "reset")

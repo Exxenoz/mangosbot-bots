@@ -11,7 +11,7 @@
 
 using namespace ai;
 
-vector<string> split(const string& s, char delim);
+vector<std::string> split(const string& s, char delim);
 char* strstri(const char* haystack, const char* needle);
 
 bool GoAction::Execute(Event event)
@@ -20,7 +20,7 @@ bool GoAction::Execute(Event event)
     if (!master)
         return false;
 
-    string param = event.getParam();
+    std::string param = event.getParam();
     if (param == "?")
     {
         float x = bot->GetPositionX();
@@ -36,7 +36,7 @@ bool GoAction::Execute(Event event)
     {
         WorldPosition* botPos = &WorldPosition(bot);
 
-        string destination = param.substr(7);
+        std::string destination = param.substr(7);
 
         TravelTarget* target = context->GetValue<TravelTarget*>("travel target")->Get();
 
@@ -105,7 +105,7 @@ bool GoAction::Execute(Event event)
 
     if (param.find(";") != string::npos)
     {
-        std::vector<string> coords = split(param, ';');
+        std::vector<std::string> coords = split(param, ';');
         float x = atof(coords[0].c_str());
         float y = atof(coords[1].c_str());
         float z;
@@ -163,7 +163,7 @@ bool GoAction::Execute(Event event)
 
     if (param.find(",") != string::npos)
     {
-        std::vector<string> coords = split(param, ',');
+        std::vector<std::string> coords = split(param, ',');
         float x = atof(coords[0].c_str());
         float y = atof(coords[1].c_str());
         Zone2MapCoordinates(x, y, bot->GetZoneId());

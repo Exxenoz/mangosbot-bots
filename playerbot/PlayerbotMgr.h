@@ -12,7 +12,7 @@ class Object;
 class Item;
 
 typedef std::map<uint32, Player*> PlayerBotMap;
-typedef std::map<string, set<string> > PlayerBotErrorMap;
+typedef std::map<std::string, set<std::string> > PlayerBotErrorMap;
 
 class PlayerbotHolder : public PlayerbotAIBase
 {
@@ -35,10 +35,10 @@ public:
     void LogoutAllBots();
     void OnBotLogin(Player* bot);
 
-    std::list<string> HandlePlayerbotCommand(char const* args, Player* master = NULL);
-    string ProcessBotCommand(string cmd, ObjectGuid guid, ObjectGuid masterguid, bool admin, uint32 masterAccountId, uint32 masterGuildId);
-    uint32 GetAccountId(string name);
-    string ListBots(Player* master);
+    std::list<std::string> HandlePlayerbotCommand(char const* args, Player* master = NULL);
+    std::string ProcessBotCommand(std::string cmd, ObjectGuid guid, ObjectGuid masterguid, bool admin, uint32 masterAccountId, uint32 masterGuildId);
+    uint32 GetAccountId(std::string name);
+    std::string ListBots(Player* master);
 
 protected:
     virtual void OnBotLoginInternal(Player * const bot) = 0;
@@ -61,7 +61,7 @@ public:
     void CancelLogout();
 
     virtual void UpdateAIInternal(uint32 elapsed, bool minimal = false);
-    void TellError(string botName, string text);
+    void TellError(std::string botName, std::string text);
 
     Player* GetMaster() const { return master; };
 

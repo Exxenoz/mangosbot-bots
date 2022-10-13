@@ -8,7 +8,7 @@ namespace ai
     class NextAction
     {
     public:
-        NextAction(string name, float relevance = 0.0f)
+        NextAction(std::string name, float relevance = 0.0f)
         {
             this->name = name;
             this->relevance = relevance;
@@ -20,7 +20,7 @@ namespace ai
         }
 
     public:
-        string getName() { return name; }
+        std::string getName() { return name; }
         float getRelevance() {return relevance;}
 
     public:
@@ -49,7 +49,7 @@ namespace ai
     class Action : public AiNamedObject
 	{
 	public:
-        Action(PlayerbotAI* ai, string name = "action") : verbose(false), AiNamedObject(ai, name) { }
+        Action(PlayerbotAI* ai, std::string name = "action") : verbose(false), AiNamedObject(ai, name) { }
         virtual ~Action(void) {}
 
     public:
@@ -64,7 +64,7 @@ namespace ai
         void Reset() {}
         virtual Unit* GetTarget();
         virtual Value<Unit*>* GetTargetValue();
-        virtual string GetTargetName() { return "self target"; }
+        virtual std::string GetTargetName() { return "self target"; }
         void MakeVerbose() { verbose = true; }
 
         void setRelevance(float relevance1) { relevance = relevance1; };
@@ -77,7 +77,7 @@ namespace ai
     class ActionNode
     {
     public:
-        ActionNode(string name, NextAction** prerequisites = NULL, NextAction** alternatives = NULL, NextAction** continuers = NULL)
+        ActionNode(std::string name, NextAction** prerequisites = NULL, NextAction** alternatives = NULL, NextAction** continuers = NULL)
         {
             this->action = NULL;
             this->name = name;
@@ -95,7 +95,7 @@ namespace ai
     public:
         Action* getAction() { return action; }
         void setAction(Action* action) { this->action = action; }
-        string getName() { return name; }
+        std::string getName() { return name; }
 
     public:
         NextAction** getContinuers() { return NextAction::merge(NextAction::clone(continuers), action->getContinuers()); }
@@ -103,7 +103,7 @@ namespace ai
         NextAction** getPrerequisites() { return NextAction::merge(NextAction::clone(prerequisites), action->getPrerequisites()); }
 
     private:
-        string name;
+        std::string name;
         Action* action;
         NextAction** continuers;
         NextAction** alternatives;

@@ -45,7 +45,7 @@ namespace ai
     //Global acess functions
     public:
         template<class T>
-        Value<T>* getGlobalValue(string name = "")
+        Value<T>* getGlobalValue(std::string name = "")
         {
             NamedObjectContextList<UntypedValue> valueContexts;
             valueContexts.Add(this);
@@ -56,13 +56,13 @@ namespace ai
         }
 
         template<class T>
-        Value<T>* getGlobalValue(string name, string param)
+        Value<T>* getGlobalValue(std::string name, std::string param)
         {
             return getGlobalValue<T>((string(name) + "::" + param));
         }
 
         template<class T>
-        Value<T>* getGlobalValue(string name, uint32 param)
+        Value<T>* getGlobalValue(std::string name, uint32 param)
         {
             ostringstream out; out << param;
             return getGlobalValue<T>(name, out.str());

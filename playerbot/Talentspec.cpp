@@ -5,10 +5,10 @@
 using namespace std::placeholders;
 
 //Checks a talent link on basic validity.
-bool TalentSpec::CheckTalentLink(string link, ostringstream* out) {
+bool TalentSpec::CheckTalentLink(std::string link, ostringstream* out) {
 
-    string validChar = "-";
-    string validNums = "012345";
+    std::string validChar = "-";
+    std::string validNums = "012345";
     int nums = 0;
 
     for (char& c : link) {
@@ -226,7 +226,7 @@ void TalentSpec::ReadTalents(Player* bot) {
 }
 
 //Set the talent ranks to the ranks of the link.
-void TalentSpec::ReadTalents(string link) {
+void TalentSpec::ReadTalents(std::string link) {
     int rank = 0;
     int pos = 0;
     int tab = 0;
@@ -303,8 +303,8 @@ int TalentSpec::GetTalentPoints(std::vector<TalentListEntry>& talents, int tabpa
 //Generates a wow-head link from a talent list.
 string TalentSpec::GetTalentLink()
 {
-    string link = "";
-    string treeLink[3];
+    std::string link = "";
+    std::string treeLink[3];
     int points[3];
     int curPoints = 0;
 

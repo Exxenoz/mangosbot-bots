@@ -18,12 +18,12 @@ string OutfitListValue::Save()
     return out.str();
 }
 
-bool OutfitListValue::Load(string text)
+bool OutfitListValue::Load(std::string text)
 {
     value.clear();
 
-    std::vector<string> ss = split(text, '^');
-    for (std::vector<string>::iterator i = ss.begin(); i != ss.end(); ++i)
+    std::vector<std::string> ss = split(text, '^');
+    for (std::vector<std::string>::iterator i = ss.begin(); i != ss.end(); ++i)
     {
         value.push_back(*i);
     }

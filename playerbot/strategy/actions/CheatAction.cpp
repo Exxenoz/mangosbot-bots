@@ -7,12 +7,12 @@ using namespace ai;
 
 bool CheatAction::Execute(Event event)
 {
-    string param = event.getParam();
+    std::string param = event.getParam();
 
     uint32 cheatMask = (uint32)ai->GetCheat();
 
-    std::vector<string> splitted = split(param, ',');
-    for (std::vector<string>::iterator i = splitted.begin(); i != splitted.end(); i++)
+    std::vector<std::string> splitted = split(param, ',');
+    for (std::vector<std::string>::iterator i = splitted.begin(); i != splitted.end(); i++)
     {
         const char* name = i->c_str();
         switch (name[0])
@@ -34,7 +34,7 @@ bool CheatAction::Execute(Event event)
     return true;
 }
 
-BotCheatMask CheatAction::GetCheatMask(string cheat)
+BotCheatMask CheatAction::GetCheatMask(std::string cheat)
 {
     if (cheat=="taxi")
         return BotCheatMask::taxi;

@@ -8,7 +8,7 @@ namespace ai
 {
     class LootRollAction : public QueryItemUsageAction {
     public:
-        LootRollAction(PlayerbotAI* ai, string name = "loot roll") : QueryItemUsageAction(ai, name) {}
+        LootRollAction(PlayerbotAI* ai, std::string name = "loot roll") : QueryItemUsageAction(ai, name) {}
         virtual bool Execute(Event event);
 
     protected:

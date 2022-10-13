@@ -7,7 +7,7 @@ namespace ai
     class PartyMemberToHeal : public PartyMemberValue
 	{
 	public:
-        PartyMemberToHeal(PlayerbotAI* ai, string name = "party member to heal") :
+        PartyMemberToHeal(PlayerbotAI* ai, std::string name = "party member to heal") :
           PartyMemberValue(ai, name) {}
     
     protected:
@@ -19,7 +19,7 @@ namespace ai
     class PartyMemberToProtect : public PartyMemberValue
     {
     public:
-        PartyMemberToProtect(PlayerbotAI* ai, string name = "party member to protect") :
+        PartyMemberToProtect(PlayerbotAI* ai, std::string name = "party member to protect") :
             PartyMemberValue(ai, name) {}
 
     protected:

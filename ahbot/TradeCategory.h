@@ -12,9 +12,9 @@ namespace ahbot
 
     public:
         virtual bool Contains(ItemPrototype const* proto);
-        virtual string GetName();
-        virtual string GetMainName();
-        virtual string GetLabel();
+        virtual std::string GetName();
+        virtual std::string GetMainName();
+        virtual std::string GetLabel();
         virtual uint32 GetSkillId() { return skill; }
 
         virtual uint32 GetMaxAllowedAuctionCount()
@@ -27,7 +27,7 @@ namespace ahbot
             return sAhBotConfig.GetMaxAllowedItemAuctionCount(GetName(), sAhBotConfig.GetMaxAllowedItemAuctionCount(GetMainName(), sAhBotConfig.GetMaxAllowedItemAuctionCount(typeName, defaultMaxType)));
         }
     protected:
-        string typeName = "trade";
+        std::string typeName = "trade";
         int32 defaultMaxType = 5;
 
     private:

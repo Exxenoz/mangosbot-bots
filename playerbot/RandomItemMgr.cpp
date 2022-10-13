@@ -948,7 +948,7 @@ void RandomItemMgr::BuildItemInfoCache()
         {
             Field* fields = results->Fetch();
             uint32 id = fields[0].GetUInt32();
-            string name = fields[1].GetString();
+            std::string name = fields[1].GetString();
             uint32 clazz = fields[2].GetUInt32();
 
             WeightScale scale;
@@ -970,7 +970,7 @@ void RandomItemMgr::BuildItemInfoCache()
             {
                 Field* fields = result->Fetch();
                 uint32 id = fields[0].GetUInt32();
-                string field = fields[1].GetString();
+                std::string field = fields[1].GetString();
                 uint32 weight = fields[2].GetUInt32();
 
                 WeightScaleStat stat;
@@ -1475,7 +1475,7 @@ uint32 RandomItemMgr::CalculateStatWeight(uint8 playerclass, uint8 spec, ItemPro
     {
         uint32 statType = 0;
         int32 val = 0;
-        string weightName = "";
+        std::string weightName = "";
 
         //if (j >= proto->StatsCount)
         //    continue;
@@ -1486,7 +1486,7 @@ uint32 RandomItemMgr::CalculateStatWeight(uint8 playerclass, uint8 spec, ItemPro
         if (val == 0)
             continue;
 
-        for (map<string, uint32 >::iterator i = weightStatLink.begin(); i != weightStatLink.end(); ++i)
+        for (map<std::string, uint32 >::iterator i = weightStatLink.begin(); i != weightStatLink.end(); ++i)
         {
             uint32 modd = i->second;
             if (modd == statType)
@@ -1713,7 +1713,7 @@ uint32 RandomItemMgr::CalculateStatWeight(uint8 playerclass, uint8 spec, ItemPro
                     isAttackItem = true;
                     bool isFeral = false;
 #ifdef MANGOSBOT_ONE
-                    string SpellName = spellproto->SpellName[0];
+                    std::string SpellName = spellproto->SpellName[0];
                     if (SpellName.find("Attack Power - Feral") != string::npos)
                         isFeral = true;
 #endif
@@ -1804,9 +1804,9 @@ uint32 RandomItemMgr::CalculateStatWeight(uint8 playerclass, uint8 spec, ItemPro
                         if (spellproto->EffectMiscValue[0] & (1 << rating))
                         {
                             int32 val = spellproto->EffectBasePoints[j] + 1;
-                            string weightName;
+                            std::string weightName;
 
-                            for (map<string, uint32 >::iterator i = weightRatingLink.begin(); i != weightRatingLink.end(); ++i)
+                            for (map<std::string, uint32 >::iterator i = weightRatingLink.begin(); i != weightRatingLink.end(); ++i)
                             {
                                 uint32 modd = i->second;
                                 if (modd == rating)

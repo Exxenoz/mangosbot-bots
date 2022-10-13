@@ -6,21 +6,21 @@
 using namespace ai;
 using namespace std;
 
-map<string, uint32> ChatHelper::consumableSubClasses;
-map<string, uint32> ChatHelper::tradeSubClasses;
-map<string, uint32> ChatHelper::itemQualities;
-map<string, uint32> ChatHelper::projectileSubClasses;
-map<string, uint32> ChatHelper::slots;
-map<string, uint32> ChatHelper::skills;
-map<string, ChatMsg> ChatHelper::chats;
+map<std::string, uint32> ChatHelper::consumableSubClasses;
+map<std::string, uint32> ChatHelper::tradeSubClasses;
+map<std::string, uint32> ChatHelper::itemQualities;
+map<std::string, uint32> ChatHelper::projectileSubClasses;
+map<std::string, uint32> ChatHelper::slots;
+map<std::string, uint32> ChatHelper::skills;
+map<std::string, ChatMsg> ChatHelper::chats;
 map<uint8, string> ChatHelper::classes;
 map<uint8, string> ChatHelper::races;
 map<uint8, std::map<uint8, string> > ChatHelper::specs;
 
 template<class T>
-static bool substrContainsInMap(string searchTerm, std::map<string, T> searchIn)
+static bool substrContainsInMap(std::string searchTerm, std::map<std::string, T> searchIn)
 {
-    for (typename std::map<string, T>::iterator i = searchIn.begin(); i != searchIn.end(); ++i)
+    for (typename std::map<std::string, T>::iterator i = searchIn.begin(); i != searchIn.end(); ++i)
     {
 		string term = i->first;
 		if (term.size() > 1 && searchTerm.find(term) != string::npos)
@@ -218,7 +218,7 @@ string ChatHelper::formatMoney(uint32 copper)
 uint32 ChatHelper::parseMoney(string& text)
 {
     // if user specified money in ##g##s##c format
-    string acum = "";
+    std::string acum = "";
     uint32 copper = 0;
     for (uint8 i = 0; i < text.length(); i++)
     {
@@ -264,7 +264,7 @@ ItemIds ChatHelper::parseItems(string& text)
         int endPos = text.find(':', pos);
         if (endPos == -1)
             break;
-        string idC = text.substr(pos, endPos - pos);
+        std::string idC = text.substr(pos, endPos - pos);
         uint32 id = atol(idC.c_str());
         pos = endPos;
         if (id)
@@ -475,7 +475,7 @@ list<ObjectGuid> ChatHelper::parseGameobjects(string& text)
         if (endPos == -1)     //break if error
             break;
 
-        std::string entryC = text.substr(pos, endPos - pos);     // get string within window i.e entry
+        std::string entryC = text.substr(pos, endPos - pos);     // get std::string within window i.e entry
         uint32 entry = atol(entryC.c_str());     // convert ascii to float
 
         ObjectGuid lootCurrent = ObjectGuid(guid);
@@ -506,7 +506,7 @@ list<int32> ChatHelper::parseWorldEntries(string& text)
         int endPos = text.find(':', pos);     // end of window in text 22
         if (endPos == -1)     //break if error
             break;
-        std::string entryC = text.substr(pos, endPos - pos);     // get string within window i.e entry        
+        std::string entryC = text.substr(pos, endPos - pos);     // get std::string within window i.e entry        
         uint32 entry = atol(entryC.c_str());     // convert ascii to float
 
         if (entry)
@@ -516,7 +516,7 @@ list<int32> ChatHelper::parseWorldEntries(string& text)
     return entries;
 }
 
-string ChatHelper::formatQuestObjective(string name, int available, int required)
+string ChatHelper::formatQuestObjective(std::string name, int available, int required)
 {
     ostringstream out;
     out << "|cFFFFFFFF" << name << (available >= required ? "|c0000FF00: " : "|c00FF0000: ")
@@ -526,7 +526,7 @@ string ChatHelper::formatQuestObjective(string name, int available, int required
 }
 
 
-uint32 ChatHelper::parseItemQuality(string text)
+uint32 ChatHelper::parseItemQuality(std::string text)
 {
     if (itemQualities.find(text) == itemQualities.end())
         return MAX_ITEM_QUALITY;
@@ -534,7 +534,7 @@ uint32 ChatHelper::parseItemQuality(string text)
     return itemQualities[text];
 }
 
-bool ChatHelper::parseItemClass(string text, uint32 *itemClass, uint32 *itemSubClass)
+bool ChatHelper::parseItemClass(std::string text, uint32 *itemClass, uint32 *itemSubClass)
 {
     if (text == "questitem")
     {
@@ -567,7 +567,7 @@ bool ChatHelper::parseItemClass(string text, uint32 *itemClass, uint32 *itemSubC
     return false;
 }
 
-uint32 ChatHelper::parseSlot(string text)
+uint32 ChatHelper::parseSlot(std::string text)
 {
     if (slots.find(text) != slots.end())
         return slots[text];
@@ -575,7 +575,7 @@ uint32 ChatHelper::parseSlot(string text)
     return EQUIPMENT_SLOT_END;
 }
 
-bool ChatHelper::parseable(string text)
+bool ChatHelper::parseable(std::string text)
 {
     return text.find("|H") != string::npos ||
             text == "questitem" ||
@@ -629,7 +629,7 @@ uint32 ChatHelper::parseSkill(string& text)
 
 string ChatHelper::formatSkill(uint32 skill)
 {
-    for (map<string, uint32>::iterator i = skills.begin(); i != skills.end(); ++i)
+    for (map<std::string, uint32>::iterator i = skills.begin(); i != skills.end(); ++i)
     {
         if (i->second == skill)
             return i->first;
@@ -646,7 +646,7 @@ string ChatHelper::formatBoolean(bool flag)
 void ChatHelper::eraseAllSubStr(std::string& mainStr, const std::string& toErase)
 {
     size_t pos = std::string::npos;
-    // Search for the substring in string in a loop untill nothing is found
+    // Search for the substring in std::string in a loop untill nothing is found
     while ((pos = mainStr.find(toErase)) != std::string::npos)
     {
         // If found then erase it from string

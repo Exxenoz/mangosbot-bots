@@ -7,7 +7,7 @@
 
 using namespace ai;
 
-int FindLastSeparator(string text, string sep)
+int FindLastSeparator(std::string text, std::string sep)
 {
     int pos = text.rfind(sep);
     if (pos == string::npos) return pos;
@@ -33,7 +33,7 @@ bool CastCustomSpellAction::Execute(Event event)
         return false;
 
     Unit* target = NULL;
-    string text = event.getParam();
+    std::string text = event.getParam();
     Player* master = GetMaster();
 
     std::list<ObjectGuid> gos = chat->parseGameobjects(text);
@@ -67,7 +67,7 @@ bool CastCustomSpellAction::Execute(Event event)
     int castCount = 1;
     if (pos != string::npos)
     {
-        string param = text.substr(pos + 1);
+        std::string param = text.substr(pos + 1);
         std::list<Item*> items = InventoryAction::parseItems(param, ITERATE_ITEMS_IN_BAGS);
         if (!items.empty()) itemTarget = *items.begin();
         else
@@ -153,7 +153,7 @@ bool CastRandomSpellAction::Execute(Event event)
     Unit* target = nullptr;
     GameObject* got = nullptr;
 
-    string name = event.getParam();
+    std::string name = event.getParam();
     if (name.empty())
         name = getName();
 

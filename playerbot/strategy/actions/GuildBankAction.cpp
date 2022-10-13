@@ -12,7 +12,7 @@ using namespace ai;
 bool GuildBankAction::Execute(Event event)
 {
 #ifndef MANGOSBOT_ZERO
-    string text = event.getParam();
+    std::string text = event.getParam();
     if (text.empty())
         return false;
 
@@ -39,7 +39,7 @@ bool GuildBankAction::Execute(Event event)
 #endif
 }
 
-bool GuildBankAction::Execute(string text, GameObject* bank)
+bool GuildBankAction::Execute(std::string text, GameObject* bank)
 {
     bool result = true;
 

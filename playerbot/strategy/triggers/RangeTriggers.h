@@ -140,7 +140,7 @@ namespace ai
 
     class EnemyInRangeTrigger : public Trigger {
     public:
-        EnemyInRangeTrigger(PlayerbotAI* ai, string name, float distance) : Trigger(ai, name)
+        EnemyInRangeTrigger(PlayerbotAI* ai, std::string name, float distance) : Trigger(ai, name)
         {
             this->distance = distance;
         }
@@ -156,7 +156,7 @@ namespace ai
 
     class OutOfRangeTrigger : public Trigger {
     public:
-        OutOfRangeTrigger(PlayerbotAI* ai, string name, float distance) : Trigger(ai, name)
+        OutOfRangeTrigger(PlayerbotAI* ai, std::string name, float distance) : Trigger(ai, name)
         {
             this->distance = distance;
         }
@@ -166,7 +166,7 @@ namespace ai
             return target &&
                 sServerFacade.IsDistanceGreaterThan(AI_VALUE2(float, "distance", GetTargetName()), distance);
         }
-        virtual string GetTargetName() { return "current target"; }
+        virtual std::string GetTargetName() { return "current target"; }
 
     protected:
         float distance;
@@ -204,7 +204,7 @@ namespace ai
     {
     public:
         PartyMemberToHealOutOfSpellRangeTrigger(PlayerbotAI* ai) : OutOfRangeTrigger(ai, "party member to heal out of spell range", ai->GetRange("heal")) {}
-        virtual string GetTargetName() { return "party member to heal"; }
+        virtual std::string GetTargetName() { return "party member to heal"; }
         virtual bool IsActive()
         {
             Unit* target = AI_VALUE(Unit*, GetTargetName());
@@ -217,7 +217,7 @@ namespace ai
 
     class FarFromMasterTrigger : public Trigger {
     public:
-        FarFromMasterTrigger(PlayerbotAI* ai, string name = "far from master", float distance = 12.0f, int checkInterval = 50) : Trigger(ai, name, checkInterval), distance(distance) {}
+        FarFromMasterTrigger(PlayerbotAI* ai, std::string name = "far from master", float distance = 12.0f, int checkInterval = 50) : Trigger(ai, name, checkInterval), distance(distance) {}
 
         virtual bool IsActive()
         {

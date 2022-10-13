@@ -13,7 +13,7 @@ namespace ai
         virtual bool Execute(Event event);
 
     private:
-        void AppendRti(ostringstream & out, string type);
+        void AppendRti(ostringstream & out, std::string type);
     };
 
     class MarkRtiAction : public Action

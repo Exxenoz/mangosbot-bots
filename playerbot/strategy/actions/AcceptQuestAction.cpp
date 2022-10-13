@@ -26,7 +26,7 @@ bool AcceptQuestAction::Execute(Event event)
     uint64 guid = 0;
     uint32 quest = 0;
 
-    string text = event.getParam();
+    std::string text = event.getParam();
     PlayerbotChatHandler ch(master);
     quest = ch.extractQuestId(text);
 

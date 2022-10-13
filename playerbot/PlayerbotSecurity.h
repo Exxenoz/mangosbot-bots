@@ -41,7 +41,7 @@ class PlayerbotSecurity
     private:
         Player* const bot;
         uint32 account;
-        std::map<uint64, std::map<string, time_t> > whispers;
+        std::map<uint64, std::map<std::string, time_t> > whispers;
 };
 
 #endif

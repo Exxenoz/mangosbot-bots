@@ -25,7 +25,7 @@ bool BuyPetitionAction::Execute(Event event)
         if (!pCreature)
             continue;
 
-        string guildName = RandomPlayerbotFactory::CreateRandomGuildName();
+        std::string guildName = RandomPlayerbotFactory::CreateRandomGuildName();
         if (guildName.empty())
             continue;
 

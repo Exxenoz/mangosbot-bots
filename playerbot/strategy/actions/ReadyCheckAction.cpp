@@ -11,11 +11,11 @@ using namespace ai;
 
 using namespace ai;
 
-string formatPercent(string name, uint8 value, float percent)
+string formatPercent(std::string name, uint8 value, float percent)
 {
     ostringstream out;
 
-    string color;
+    std::string color;
     if (percent > 75)
         color = "|cff00ff00";
     else if (percent > 50)
@@ -31,7 +31,7 @@ class ReadyChecker
 {
 public:
     virtual bool Check(PlayerbotAI *ai, AiObjectContext* context) = 0;
-    virtual string GetName() = 0;
+    virtual std::string GetName() = 0;
     virtual bool PrintAlways() { return true; }
 
     static std::list<ReadyChecker*> checkers;
@@ -46,7 +46,7 @@ public:
     {
         return AI_VALUE2(uint8, "health", "self target") > sPlayerbotAIConfig.almostFullHealth;
     }
-    virtual string GetName() { return "HP"; }
+    virtual std::string GetName() { return "HP"; }
 };
 
 class ManaChecker : public ReadyChecker
@@ -56,7 +56,7 @@ public:
     {
         return !AI_VALUE2(bool, "has mana", "self target") || AI_VALUE2(uint8, "mana", "self target") > sPlayerbotAIConfig.mediumHealth;
     }
-    virtual string GetName() { return "MP"; }
+    virtual std::string GetName() { return "MP"; }
 };
 
 class DistanceChecker : public ReadyChecker
@@ -77,7 +77,7 @@ public:
         return true;
     }
     virtual bool PrintAlways() { return false; }
-    virtual string GetName() { return "Far away"; }
+    virtual std::string GetName() { return "Far away"; }
 };
 
 class HunterChecker : public ReadyChecker
@@ -109,29 +109,29 @@ public:
         return true;
     }
     virtual bool PrintAlways() { return false; }
-    virtual string GetName() { return "Far away"; }
+    virtual std::string GetName() { return "Far away"; }
 };
 
 
 class ItemCountChecker : public ReadyChecker
 {
 public:
-    ItemCountChecker(string item, string name) { this->item = item; this->name = name; }
+    ItemCountChecker(std::string item, std::string name) { this->item = item; this->name = name; }
 
     virtual bool Check(PlayerbotAI *ai, AiObjectContext* context)
     {
         return AI_VALUE2(uint32, "item count", item) > 0;
     }
-    virtual string GetName() { return name; }
+    virtual std::string GetName() { return name; }
 
 private:
-    string item, name;
+    std::string item, name;
 };
 
 class ManaPotionChecker : public ItemCountChecker
 {
 public:
-    ManaPotionChecker(string item, string name) : ItemCountChecker(item, name) {}
+    ManaPotionChecker(std::string item, std::string name) : ItemCountChecker(item, name) {}
 
     virtual bool Check(PlayerbotAI *ai, AiObjectContext* context)
     {

@@ -7,7 +7,7 @@ using namespace ai;
 
 bool ChangeTalentsAction::Execute(Event event)
 {
-    string param = event.getParam();
+    std::string param = event.getParam();
 
     ostringstream out;
 
@@ -47,7 +47,7 @@ bool ChangeTalentsAction::Execute(Event event)
             if (botSpec.CheckTalentLink(param, &out))
             {
                 TalentSpec newSpec(bot, param);
-                string specLink = newSpec.GetTalentLink();
+                std::string specLink = newSpec.GetTalentLink();
 
                 if (crop)
                 {
@@ -87,7 +87,7 @@ bool ChangeTalentsAction::Execute(Event event)
                             out << "Found " << paths.size() << " possible specs to choose from. ";
                         TalentPath* path = PickPremadePath(paths, sRandomPlayerbotMgr.IsRandomBot(bot));
                         TalentSpec newSpec = *GetBestPremadeSpec(path->id);
-                        string specLink = newSpec.GetTalentLink();
+                        std::string specLink = newSpec.GetTalentLink();
                         newSpec.CropTalents(bot->GetLevel());
                         newSpec.ApplyTalents(bot, &out);
                         if (newSpec.GetTalentPoints() > 0)
@@ -106,7 +106,7 @@ bool ChangeTalentsAction::Execute(Event event)
     else
     {
         uint32 specId = sRandomPlayerbotMgr.GetValue(bot->GetGUIDLow(), "specNo") - 1;
-        string specName = "";
+        std::string specName = "";
         TalentPath* specPath;
         if (specId)
         {
@@ -128,7 +128,7 @@ bool ChangeTalentsAction::Execute(Event event)
     return true;
 }
 
-std::vector<TalentPath*> ChangeTalentsAction::getPremadePaths(string findName)
+std::vector<TalentPath*> ChangeTalentsAction::getPremadePaths(std::string findName)
 {
     std::vector<TalentPath*> ret;
     for (auto& path : sPlayerbotAIConfig.classSpecs[bot->getClass()].talentPath)
@@ -223,7 +223,7 @@ bool ChangeTalentsAction::AutoSelectTalents(ostringstream* out)
 
     uint32 specNo = sRandomPlayerbotMgr.GetValue(bot->GetGUIDLow(), "specNo");
     uint32 specId = specNo ? specNo - 1 : 0;
-    string specLink = sRandomPlayerbotMgr.GetData(bot->GetGUIDLow(), "specLink");
+    std::string specLink = sRandomPlayerbotMgr.GetData(bot->GetGUIDLow(), "specLink");
 
     //Continue the current spec
     if (specNo > 0)

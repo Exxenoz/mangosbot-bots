@@ -53,7 +53,7 @@ bool CompareSpells(pair<uint32, string>& s1, pair<uint32, string>& s2)
     return p1 > p2;
 }
 
-list<pair<uint32, string> > ListSpellsAction::GetSpellList(string filter)
+list<pair<uint32, string> > ListSpellsAction::GetSpellList(std::string filter)
 {    
     if (skillSpells.empty())
     {
@@ -85,7 +85,7 @@ list<pair<uint32, string> > ListSpellsAction::GetSpellList(string filter)
 
     uint32 skill = 0;
 
-    std::vector<string> ss = split(filter, ' ');
+    std::vector<std::string> ss = split(filter, ' ');
     if (!ss.empty())
     {
         skill = chat->parseSkill(ss[0]);
@@ -108,7 +108,7 @@ list<pair<uint32, string> > ListSpellsAction::GetSpellList(string filter)
     int minLevel = 0, maxLevel = 0;
     if (filter.find("-") != string::npos)
     {
-        std::vector<string> ff = split(filter, '-');
+        std::vector<std::string> ff = split(filter, '-');
         minLevel = atoi(ff[0].c_str());
         maxLevel = atoi(ff[1].c_str());
         filter = "";
@@ -140,7 +140,7 @@ list<pair<uint32, string> > ListSpellsAction::GetSpellList(string filter)
         if (skill != SKILL_NONE && (!skillLine || skillLine->skillId != skill))
             continue;
 
-        string comp = pSpellInfo->SpellName[0];
+        std::string comp = pSpellInfo->SpellName[0];
         if (!(ignoreList.find(comp) == std::string::npos && alreadySeenList.find(comp) == std::string::npos))
             continue;
 
@@ -266,7 +266,7 @@ bool ListSpellsAction::Execute(Event event)
     if (!master)
         return false;
 
-    string filter = event.getParam();
+    std::string filter = event.getParam();
 
     std::list<pair<uint32, string> > spells = GetSpellList(filter);
 

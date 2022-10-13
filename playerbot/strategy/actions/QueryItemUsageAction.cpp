@@ -85,7 +85,7 @@ bool QueryItemUsageAction::Execute(Event event)
         return true;
     }
 
-    string text = event.getParam();
+    std::string text = event.getParam();
     ItemIds items = chat->parseItems(text);
     for (ItemIds::iterator i = items.begin(); i != items.end(); i++)
     {
@@ -115,14 +115,14 @@ string QueryItemUsageAction::QueryItem(ItemPrototype const *item, uint32 count, 
 {
     ostringstream out;
 #ifdef CMANGOS
-    string usage = QueryItemUsage(item);
+    std::string usage = QueryItemUsage(item);
 #endif
 #ifdef MANGOS
     bool usage = QueryItemUsage(item);
 #endif
-    string quest = QueryQuestItem(item->ItemId);
-    string price = QueryItemPrice(item);
-    string power = QueryItemPower(item->ItemId);
+    std::string quest = QueryQuestItem(item->ItemId);
+    std::string price = QueryItemPrice(item);
+    std::string power = QueryItemPower(item->ItemId);
 #ifdef CMANGOS
     if (usage.empty())
 #endif
@@ -233,7 +233,7 @@ string QueryItemUsageAction::QueryQuestItem(uint32 itemId)
         if (status == QUEST_STATUS_INCOMPLETE || (status == QUEST_STATUS_COMPLETE && !bot->GetQuestRewardStatus(questId)))
         {
             QuestStatusData const& questStatus = i->second;
-            string usage = QueryQuestItem(itemId, questTemplate, &questStatus);
+            std::string usage = QueryQuestItem(itemId, questTemplate, &questStatus);
             if (!usage.empty()) return usage;
         }
     }

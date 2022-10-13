@@ -61,7 +61,7 @@ bool SpellCastUsefulValue::Calculate()
     if (skipSpells.find(spellid) != skipSpells.end())
         return false;
 
-    const string spellName = spellInfo->SpellName[0];
+    const std::string spellName = spellInfo->SpellName[0];
     for (set<uint32>::iterator i = skipSpells.begin(); i != skipSpells.end(); ++i)
     {
         SpellEntry const *spell = sServerFacade.LookupSpellInfo(*i);

@@ -24,7 +24,7 @@ namespace ai
     class ItemUsageValue : public CalculatedValue<ItemUsage>, public Qualified
 	{
 	public:
-        ItemUsageValue(PlayerbotAI* ai, string name = "item usage") : CalculatedValue<ItemUsage>(ai, name) {}
+        ItemUsageValue(PlayerbotAI* ai, std::string name = "item usage") : CalculatedValue<ItemUsage>(ai, name) {}
 
     public:
         virtual ItemUsage Calculate();
@@ -39,13 +39,13 @@ namespace ai
         bool IsItemNeededForUsefullSpell(ItemPrototype const* proto, bool checkAllReagents = false);
         Item* CurrentItem(ItemPrototype const* proto);
         float CurrentStacks(ItemPrototype const* proto);
-        float BetterStacks(ItemPrototype const* proto, string usageType = "");
+        float BetterStacks(ItemPrototype const* proto, std::string usageType = "");
 
     public:
         static bool HasItemsNeededForSpell(uint32 spellId, ItemPrototype const* proto, Player* bot);
         static std::vector<uint32> SpellsUsingItem(uint32 itemId, Player* bot);
         static bool SpellGivesSkillUp(uint32 spellId, Player* bot);
 
-        static string GetConsumableType(ItemPrototype const* proto, bool hasMana);
+        static std::string GetConsumableType(ItemPrototype const* proto, bool hasMana);
 	};
 }

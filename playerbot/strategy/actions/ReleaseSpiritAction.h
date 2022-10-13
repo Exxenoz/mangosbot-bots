@@ -10,7 +10,7 @@ namespace ai
 {
     class ReleaseSpiritAction : public Action {
     public:
-        ReleaseSpiritAction(PlayerbotAI* ai, string name = "release") : Action(ai, name) {}
+        ReleaseSpiritAction(PlayerbotAI* ai, std::string name = "release") : Action(ai, name) {}
 
     public:
         virtual bool Execute(Event event)
@@ -53,7 +53,7 @@ namespace ai
 
     class AutoReleaseSpiritAction : public ReleaseSpiritAction {
     public:
-        AutoReleaseSpiritAction(PlayerbotAI* ai, string name = "auto release") : ReleaseSpiritAction(ai, name) {}
+        AutoReleaseSpiritAction(PlayerbotAI* ai, std::string name = "auto release") : ReleaseSpiritAction(ai, name) {}
 
         virtual bool Execute(Event event)
         {
@@ -118,7 +118,7 @@ namespace ai
 
     class RepopAction : public SpiritHealerAction {
     public:
-        RepopAction(PlayerbotAI* ai, string name = "repop") : SpiritHealerAction(ai, name) {}
+        RepopAction(PlayerbotAI* ai, std::string name = "repop") : SpiritHealerAction(ai, name) {}
 
     public:
         virtual bool Execute(Event event)

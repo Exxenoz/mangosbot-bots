@@ -24,7 +24,7 @@ bool AttackAnythingAction::isUseful() {
     if (context->GetValue<TravelTarget*>("travel target")->Get()->isTraveling() && ChooseRpgTargetAction::isFollowValid(bot, *context->GetValue<TravelTarget*>("travel target")->Get()->getPosition())) //Bot is traveling
         return false;
 
-    string name = string(target->GetName());
+    std::string name = string(target->GetName());
 
     if (!name.empty() && name.find("Dummy") != std::string::npos) //Target is not a targetdummy
         return false;

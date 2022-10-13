@@ -64,21 +64,21 @@ namespace ai
         Engine(PlayerbotAI* ai, AiObjectContext *factory);
 
 	    void Init();
-        void addStrategy(string name);
-		void addStrategies(string first, ...);
-        bool removeStrategy(string name);
-        bool HasStrategy(string name);
+        void addStrategy(std::string name);
+		void addStrategies(std::string first, ...);
+        bool removeStrategy(std::string name);
+        bool HasStrategy(std::string name);
         void removeAllStrategies();
-        void toggleStrategy(string name);
+        void toggleStrategy(std::string name);
         std::string ListStrategies();
-        std::list<string> GetStrategies();
+        std::list<std::string> GetStrategies();
 		bool ContainsStrategy(StrategyType type);
-		void ChangeStrategy(string names);
+		void ChangeStrategy(std::string names);
 		string GetLastAction() { return lastAction; }
 
     public:
 	    virtual bool DoNextAction(Unit*, int depth = 0, bool minimal = false);
-	    ActionResult ExecuteAction(string name, Event event = Event(), string qualifier = "");
+	    ActionResult ExecuteAction(std::string name, Event event = Event(), std::string qualifier = "");
 
     public:
         void AddActionExecutionListener(ActionExecutionListener* listener)
@@ -99,7 +99,7 @@ namespace ai
         void ProcessTriggers(bool minimal);
         void PushDefaultActions();
         void PushAgain(ActionNode* actionNode, float relevance, Event event);
-        ActionNode* CreateActionNode(string name);
+        ActionNode* CreateActionNode(std::string name);
         Action* InitializeAction(ActionNode* actionNode);
         bool ListenAndExecute(Action* action, Event event);
 
@@ -112,7 +112,7 @@ namespace ai
 	    std::list<TriggerNode*> triggers;
         std::list<Multiplier*> multipliers;
         AiObjectContext* aiObjectContext;
-        std::map<string, Strategy*> strategies;
+        std::map<std::string, Strategy*> strategies;
         float lastRelevance;
         std::string lastAction;
 

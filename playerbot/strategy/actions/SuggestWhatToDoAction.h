@@ -7,7 +7,7 @@ namespace ai
     class SuggestWhatToDoAction : public InventoryAction
     {
     public:
-        SuggestWhatToDoAction(PlayerbotAI* ai, string name = "suggest what to do");
+        SuggestWhatToDoAction(PlayerbotAI* ai, std::string name = "suggest what to do");
         virtual bool Execute(Event event);
         virtual bool isUseful();
 
@@ -20,13 +20,13 @@ namespace ai
         void grindReputation();
         void something();
         void trade();
-        void spam(string msg, uint8 flags = 0, bool worldChat = false, bool guild = false);
+        void spam(std::string msg, uint8 flags = 0, bool worldChat = false, bool guild = false);
 
         std::vector<uint32> GetIncompletedQuests();
 
     private:
-        static std::map<string, int> instances;
-        static std::map<string, int> factions;
+        static std::map<std::string, int> instances;
+        static std::map<std::string, int> factions;
         int32 _locale;
     };
 

@@ -7,13 +7,13 @@ namespace ai
     class LootStrategyValue : public ManualSetValue<LootStrategy*>
 	{
 	public:
-        LootStrategyValue(PlayerbotAI* ai, string name = "loot strategy") : ManualSetValue<LootStrategy*>(ai, normal, name) {}
+        LootStrategyValue(PlayerbotAI* ai, std::string name = "loot strategy") : ManualSetValue<LootStrategy*>(ai, normal, name) {}
         virtual ~LootStrategyValue() { delete defaultValue; }
 
-        virtual string Save();
-        virtual bool Load(string value);
+        virtual std::string Save();
+        virtual bool Load(std::string value);
 
         static LootStrategy *normal, *gray, *all, *disenchant;
-        static LootStrategy* instance(string name);
+        static LootStrategy* instance(std::string name);
     };
 }

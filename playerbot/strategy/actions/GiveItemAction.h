@@ -8,13 +8,13 @@ namespace ai
     class GiveItemAction : public InventoryAction
     {
     public:
-        GiveItemAction(PlayerbotAI* ai, string name, string item) : InventoryAction(ai, name), item(item) {}
+        GiveItemAction(PlayerbotAI* ai, std::string name, std::string item) : InventoryAction(ai, name), item(item) {}
         virtual bool Execute(Event event);
         virtual bool isUseful() { return GetTarget() && AI_VALUE2(uint8, "mana", "self target") > sPlayerbotAIConfig.lowMana; }
         virtual Unit* GetTarget();
 
     protected:
-        string item;
+        std::string item;
     };
 
     class GiveFoodAction : public GiveItemAction

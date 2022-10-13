@@ -38,11 +38,11 @@ namespace ahbot
         void Init();
         void Update();
         void ForceUpdate();
-        void HandleCommand(string command);
+        void HandleCommand(std::string command);
         void Won(AuctionEntry* entry) { AddToHistory(entry); }
         void Expired(AuctionEntry* entry) {}
 
-        double GetCategoryMultiplier(string category)
+        double GetCategoryMultiplier(std::string category)
         {
             return categoryMultipliers[category] ? categoryMultipliers[category] : 1;
         }
@@ -72,8 +72,8 @@ namespace ahbot
         void FindMinPrice(const AuctionHouseObject::AuctionEntryMap& auctionEntryMap, AuctionEntry*& entry, Item*& item, uint32* minBid,
                 uint32* minBuyout);
         uint32 GetBuyTime(uint32 entry, uint32 itemId, uint32 auctionHouse, Category*& category, double priceLevel);
-        uint32 GetTime(string category, uint32 id, uint32 auctionHouse, uint32 type);
-        void SetTime(string category, uint32 id, uint32 auctionHouse, uint32 type, uint32 value);
+        uint32 GetTime(std::string category, uint32 id, uint32 auctionHouse, uint32 type);
+        void SetTime(std::string category, uint32 id, uint32 auctionHouse, uint32 type, uint32 value);
         uint32 GetSellTime(uint32 itemId, uint32 auctionHouse, Category*& category);
         void CheckSendMail(uint32 bidder, uint32 price, AuctionEntry *entry);
         void Dump();
@@ -88,10 +88,10 @@ namespace ahbot
     private:
         AvailableItemsBag availableItems;
         time_t nextAICheckTime;
-        std::map<string, double> categoryMultipliers;
-        std::map<string, uint32> categoryMaxAuctionCount;
-        std::map<string, uint32> categoryMaxItemAuctionCount;
-        std::map<string, uint64> categoryMultiplierExpireTimes;
+        std::map<std::string, double> categoryMultipliers;
+        std::map<std::string, uint32> categoryMaxAuctionCount;
+        std::map<std::string, uint32> categoryMaxItemAuctionCount;
+        std::map<std::string, uint64> categoryMultiplierExpireTimes;
         std::map<uint32, std::vector<uint32> > bidders;
         set<uint32> allBidders;
         bool updating;

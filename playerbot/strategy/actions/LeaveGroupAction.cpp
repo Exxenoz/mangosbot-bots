@@ -30,7 +30,7 @@ namespace ai
         if (!shouldStay)
         {
             WorldPacket p;
-            string member = bot->GetName();
+            std::string member = bot->GetName();
             p << uint32(PARTY_OP_LEAVE) << member << uint32(0);
             bot->GetSession()->HandleGroupDisbandOpcode(p);
             if (ai->GetMaster() && ai->GetMaster()->GetObjectGuid() != player->GetObjectGuid())

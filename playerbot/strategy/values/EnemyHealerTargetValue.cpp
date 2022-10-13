@@ -8,7 +8,7 @@ using namespace ai;
 
 Unit* EnemyHealerTargetValue::Calculate()
 {
-    string spell = qualifier;
+    std::string spell = qualifier;
 
     std::list<ObjectGuid> attackers = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("attackers")->Get();
     Unit* target = ai->GetAiObjectContext()->GetValue<Unit*>("current target")->Get();

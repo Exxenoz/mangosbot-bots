@@ -51,22 +51,22 @@ void AiObjectContext::Reset()
     valueContexts.Reset();
 }
 
-list<string> AiObjectContext::Save()
+list<std::string> AiObjectContext::Save()
 {
-    std::list<string> result;
+    std::list<std::string> result;
 
-    set<string> names = valueContexts.GetCreated();
-    for (set<string>::iterator i = names.begin(); i != names.end(); ++i)
+    set<std::string> names = valueContexts.GetCreated();
+    for (set<std::string>::iterator i = names.begin(); i != names.end(); ++i)
     {
         UntypedValue* value = GetUntypedValue(*i);
         if (!value)
             continue;
 
-        string data = value->Save();
+        std::string data = value->Save();
         if (data == "?")
             continue;
 
-        string name = *i;
+        std::string name = *i;
         ostringstream out;
         out << name;
 
@@ -76,16 +76,16 @@ list<string> AiObjectContext::Save()
     return result;
 }
 
-void AiObjectContext::Load(std::list<string> data)
+void AiObjectContext::Load(std::list<std::string> data)
 {
-    for (std::list<string>::iterator i = data.begin(); i != data.end(); ++i)
+    for (std::list<std::string>::iterator i = data.begin(); i != data.end(); ++i)
     {
-        string row = *i;
-        std::vector<string> parts = split(row, '>');
+        std::string row = *i;
+        std::vector<std::string> parts = split(row, '>');
         if (parts.size() != 2) continue;
 
-        string name = parts[0];
-        string text = parts[1];
+        std::string name = parts[0];
+        std::string text = parts[1];
 
         UntypedValue* value = GetUntypedValue(name);
         if (!value) continue;

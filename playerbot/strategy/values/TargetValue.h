@@ -42,7 +42,7 @@ namespace ai
     class TargetValue : public UnitCalculatedValue
 	{
 	public:
-        TargetValue(PlayerbotAI* ai, string name = "target", int checkInterval = 1) : UnitCalculatedValue(ai, name, checkInterval) {}
+        TargetValue(PlayerbotAI* ai, std::string name = "target", int checkInterval = 1) : UnitCalculatedValue(ai, name, checkInterval) {}
 
     protected:
         Unit* FindTarget(FindTargetStrategy* strategy);
@@ -51,13 +51,13 @@ namespace ai
     class RpgTargetValue : public ManualSetValue<GuidPosition>
     {
     public:
-        RpgTargetValue(PlayerbotAI* ai, string name = "rpg target") : ManualSetValue<GuidPosition>(ai, GuidPosition(), name) {}
+        RpgTargetValue(PlayerbotAI* ai, std::string name = "rpg target") : ManualSetValue<GuidPosition>(ai, GuidPosition(), name) {}
     };
 
     class TravelTargetValue : public ManualSetValue<TravelTarget *>
     {
     public:
-        TravelTargetValue(PlayerbotAI* ai, string name = "travel target") : ManualSetValue<TravelTarget*>(ai, new TravelTarget(ai), name) {}
+        TravelTargetValue(PlayerbotAI* ai, std::string name = "travel target") : ManualSetValue<TravelTarget*>(ai, new TravelTarget(ai), name) {}
         virtual ~TravelTargetValue() { delete value; }
     };	
 
@@ -89,12 +89,12 @@ namespace ai
     class TalkTargetValue : public ManualSetValue<ObjectGuid>
     {
     public:
-        TalkTargetValue(PlayerbotAI* ai, string name = "talk target") : ManualSetValue<ObjectGuid>(ai, ObjectGuid(), name) {}
+        TalkTargetValue(PlayerbotAI* ai, std::string name = "talk target") : ManualSetValue<ObjectGuid>(ai, ObjectGuid(), name) {}
     };
 
     class PullTargetValue : public ManualSetValue<ObjectGuid>
     {
     public:
-        PullTargetValue(PlayerbotAI* ai, string name = "pull target") : ManualSetValue<ObjectGuid>(ai, ObjectGuid(), name) {}
+        PullTargetValue(PlayerbotAI* ai, std::string name = "pull target") : ManualSetValue<ObjectGuid>(ai, ObjectGuid(), name) {}
     };
 }

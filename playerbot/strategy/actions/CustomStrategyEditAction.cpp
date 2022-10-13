@@ -9,15 +9,15 @@ using namespace ai;
 
 bool CustomStrategyEditAction::Execute(Event event)
 {
-    string text = event.getParam();
+    std::string text = event.getParam();
     int pos = text.find(" ");
     if (pos == string::npos) return PrintHelp();
-    string name = text.substr(0, pos);
+    std::string name = text.substr(0, pos);
     text = text.substr(pos + 1);
 
     pos = text.find(" ");
     if (pos == string::npos) pos = text.size();
-    string idx = text.substr(0, pos);
+    std::string idx = text.substr(0, pos);
     text = pos >= text.size() ? "" : text.substr(pos + 1);
 
     return idx == "?" ? Print(name) : Edit(name, atoi(idx.c_str()), text);
@@ -35,7 +35,7 @@ bool CustomStrategyEditAction::PrintHelp()
         do
         {
             Field* fields = results->Fetch();
-            string name = fields[0].GetString();
+            std::string name = fields[0].GetString();
             ai->TellMaster(name);
         } while (results->NextRow());
 
@@ -45,7 +45,7 @@ bool CustomStrategyEditAction::PrintHelp()
     return false;
 }
 
-bool CustomStrategyEditAction::Print(string name)
+bool CustomStrategyEditAction::Print(std::string name)
 {
     ostringstream out; out << "=== " << name << " ===";
     ai->TellMaster(out.str());
@@ -59,7 +59,7 @@ bool CustomStrategyEditAction::Print(string name)
         {
             Field* fields = results->Fetch();
             uint32 idx = fields[0].GetUInt32();
-            string action = fields[1].GetString();
+            std::string action = fields[1].GetString();
 
             PrintActionLine(idx, action);
         } while (results->NextRow());
@@ -69,7 +69,7 @@ bool CustomStrategyEditAction::Print(string name)
     return true;
 }
 
-bool CustomStrategyEditAction::Edit(string name, uint32 idx, string command)
+bool CustomStrategyEditAction::Edit(std::string name, uint32 idx, std::string command)
 {
     uint32 owner = (uint32)ai->GetBot()->GetGUIDLow();
     QueryResult* results = PlayerbotDatabase.PQuery("SELECT action_line FROM ai_playerbot_custom_strategy WHERE name = '%s' and owner = '%u' and idx = '%u'",
@@ -110,7 +110,7 @@ bool CustomStrategyEditAction::Edit(string name, uint32 idx, string command)
     return true;
 }
 
-bool CustomStrategyEditAction::PrintActionLine(uint32 idx, string command)
+bool CustomStrategyEditAction::PrintActionLine(uint32 idx, std::string command)
 {
     ostringstream out; out << "#" << idx << " " << command;
     ai->TellMaster(out.str());

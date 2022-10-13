@@ -7,7 +7,7 @@ using namespace ai;
 
 bool RangeAction::Execute(Event event)
 {
-    string param = event.getParam();
+    std::string param = event.getParam();
     if (param == "?")
     {
         PrintRange("spell");
@@ -18,8 +18,8 @@ bool RangeAction::Execute(Event event)
     int pos = param.find(" ");
     if (pos == string::npos) return false;
 
-    string qualifier = param.substr(0, pos);
-    string value = param.substr(pos + 1);
+    std::string qualifier = param.substr(0, pos);
+    std::string value = param.substr(pos + 1);
 
     if (value == "?")
     {
@@ -41,7 +41,7 @@ bool RangeAction::Execute(Event event)
     return true;
 }
 
-void RangeAction::PrintRange(string type)
+void RangeAction::PrintRange(std::string type)
 {
     float curVal = AI_VALUE2(float, "range", type);
 

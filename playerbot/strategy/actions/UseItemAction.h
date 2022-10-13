@@ -8,7 +8,7 @@ namespace ai
 {
    class UseItemAction : public Action {
    public:
-      UseItemAction(PlayerbotAI* ai, string name = "use", bool selfOnly = false) : Action(ai, name), selfOnly(selfOnly) {}
+      UseItemAction(PlayerbotAI* ai, std::string name = "use", bool selfOnly = false) : Action(ai, name), selfOnly(selfOnly) {}
 
    public:
       virtual bool Execute(Event event);
@@ -21,7 +21,7 @@ namespace ai
       bool UseItem(Item* item, ObjectGuid go, Item* itemTarget, Unit* unitTarget = nullptr);
       bool UseGameObject(ObjectGuid guid);
       bool SocketItem(Item * item, Item * gem, bool replace = false);
-      void TellConsumableUse(Item* item, string action, float percent);
+      void TellConsumableUse(Item* item, std::string action, float percent);
 
    private:
       bool selfOnly;
@@ -29,7 +29,7 @@ namespace ai
 
    class UseSpellItemAction : public UseItemAction {
    public:
-      UseSpellItemAction(PlayerbotAI* ai, string name, bool selfOnly = false) : UseItemAction(ai, name, selfOnly) {}
+      UseSpellItemAction(PlayerbotAI* ai, std::string name, bool selfOnly = false) : UseItemAction(ai, name, selfOnly) {}
 
    public:
       virtual bool isUseful();

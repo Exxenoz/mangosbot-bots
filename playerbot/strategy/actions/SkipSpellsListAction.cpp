@@ -10,7 +10,7 @@ using namespace ai;
 
 bool SkipSpellsListAction::Execute(Event event)
 {
-    string cmd = event.getParam();
+    std::string cmd = event.getParam();
 
     set<uint32>& skipSpells = AI_VALUE(set<uint32>&, "skip spells list");
 
@@ -101,7 +101,7 @@ bool SkipSpellsListAction::Execute(Event event)
 }
 
 
-SpellIds SkipSpellsListAction::parseIds(string text)
+SpellIds SkipSpellsListAction::parseIds(std::string text)
 {
     SpellIds spellIds;
 
@@ -112,7 +112,7 @@ SpellIds SkipSpellsListAction::parseIds(string text)
         if (endPos == -1)
             endPos = text.size();
 
-        string idC = text.substr(pos, endPos - pos);
+        std::string idC = text.substr(pos, endPos - pos);
         uint32 id = atol(idC.c_str());
         pos = endPos + 1;
         if (id)

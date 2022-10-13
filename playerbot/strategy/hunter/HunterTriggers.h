@@ -170,7 +170,7 @@ namespace ai
     {
     public:
         AimedShotTrigger(PlayerbotAI* ai) : Trigger(ai, "aimed shot", 2) {}
-        virtual string GetTargetName() { return "current target"; }
+        virtual std::string GetTargetName() { return "current target"; }
         virtual bool IsActive()
         {
             if (!bot->HasSpell(19434) || !bot->IsSpellReady(19434))

@@ -118,7 +118,7 @@ bool SeeSpellAction::Execute(Event event)
 
     bool selected = AI_VALUE(bool, "RTSC selected");
     bool inRange = spellPosition.distance(bot) <= 10;
-    string nextAction = AI_VALUE(string, "RTSC next spell action");
+    std::string nextAction = AI_VALUE(string, "RTSC next spell action");
 
     if (nextAction.empty())
     {
@@ -140,7 +140,7 @@ bool SeeSpellAction::Execute(Event event)
     }
     else if (nextAction.find("save ") != std::string::npos)
     {
-        string locationName;
+        std::string locationName;
         if (nextAction.find("save selected ") != std::string::npos)
         {
             if (!selected)

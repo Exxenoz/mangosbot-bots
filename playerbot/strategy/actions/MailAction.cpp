@@ -7,7 +7,7 @@
 
 using namespace ai;
 
-map<string, MailProcessor*> MailAction::processors;
+map<std::string, MailProcessor*> MailAction::processors;
 
 class TellMailProcessor : public MailProcessor
 {
@@ -55,7 +55,7 @@ public:
 
     virtual bool After(PlayerbotAI* ai)
     {
-        for (std::list<string>::iterator i = tells.begin(); i != tells.end(); ++i)
+        for (std::list<std::string>::iterator i = tells.begin(); i != tells.end(); ++i)
             ai->TellMaster(*i, PLAYERBOT_SECURITY_ALLOW_ALL, false);
 
         return true;
@@ -64,7 +64,7 @@ public:
     static TellMailProcessor instance;
 
 private:
-    std::list<string> tells;
+    std::list<std::string> tells;
 };
 
 class TakeMailProcessor : public MailProcessor
@@ -212,16 +212,16 @@ bool MailAction::Execute(Event event)
         processors["read"] = &ReadMailProcessor::instance;
     }
 
-    string text = event.getParam();
+    std::string text = event.getParam();
     if (text.empty())
     {
         ai->TellMaster("whisper 'mail ?' to query mailbox, 'mail take/delete/read filter' to take/delete/read mails by filter");
         return false;
     }
 
-    std::vector<string> ss = split(text, ' ');
-    string action = ss[0];
-    string filter = ss.size() > 1 ? ss[1] : "";
+    std::vector<std::string> ss = split(text, ' ');
+    std::string action = ss[0];
+    std::string filter = ss.size() > 1 ? ss[1] : "";
     MailProcessor* processor = processors[action];
     if (!processor)
     {

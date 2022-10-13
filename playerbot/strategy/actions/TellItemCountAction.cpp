@@ -7,7 +7,7 @@ using namespace ai;
 
 bool TellItemCountAction::Execute(Event event)
 {
-    string text = event.getParam();
+    std::string text = event.getParam();
     std::list<Item*> found = parseItems(text);
     std::map<uint32, uint32> itemMap;
     std::map<uint32, bool> soulbound;

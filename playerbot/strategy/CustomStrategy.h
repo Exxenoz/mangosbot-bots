@@ -10,14 +10,14 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "custom::" + qualifier; }
+        virtual std::string getName() { return "custom::" + qualifier; }
         void Reset();
 
     private:
-        std::list<string> actionLines;
+        std::list<std::string> actionLines;
         void LoadActionLines(uint32 owner);
 
     public:
-        static std::map<string, string> actionLinesCache;
+        static std::map<std::string, string> actionLinesCache;
     };
 }

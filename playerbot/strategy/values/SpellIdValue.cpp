@@ -21,7 +21,7 @@ VehicleSpellIdValue::VehicleSpellIdValue(PlayerbotAI* ai) :
 
 uint32 SpellIdValue::Calculate()
 {
-    string namepart = qualifier;
+    std::string namepart = qualifier;
     ItemIds itemIds = ChatHelper::parseItems(namepart);
 
     PlayerbotChatHandler handler(bot);
@@ -118,7 +118,7 @@ uint32 SpellIdValue::Calculate()
 
             std::string spellName = pSpellInfo->Rank[0];
 
-            // For atoi, the input string has to start with a digit, so lets search for the first digit
+            // For atoi, the input std::string has to start with a digit, so lets search for the first digit
             size_t i = 0;
             for (; i < spellName.length(); i++) { if (isdigit(spellName[i])) break; }
 
@@ -178,7 +178,7 @@ uint32 VehicleSpellIdValue::Calculate()
     if (!seat || !seat->HasFlag(SEAT_FLAG_CAN_CAST))
         return 0;
 
-    string namepart = qualifier;
+    std::string namepart = qualifier;
 
     PlayerbotChatHandler handler(bot);
     uint32 extractedSpellId = handler.extractSpellId(namepart);

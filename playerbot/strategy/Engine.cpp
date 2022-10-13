@@ -100,7 +100,7 @@ void Engine::Init()
 {
     Reset();
 
-    for (map<string, Strategy*>::iterator i = strategies.begin(); i != strategies.end(); i++)
+    for (map<std::string, Strategy*>::iterator i = strategies.begin(); i != strategies.end(); i++)
     {
         Strategy* strategy = i->second;
         strategy->InitMultipliers(multipliers);
@@ -285,9 +285,9 @@ bool Engine::DoNextAction(Unit* unit, int depth, bool minimal)
     return actionExecuted;
 }
 
-ActionNode* Engine::CreateActionNode(string name)
+ActionNode* Engine::CreateActionNode(std::string name)
 {
-    for (map<string, Strategy*>::iterator i = strategies.begin(); i != strategies.end(); i++)
+    for (map<std::string, Strategy*>::iterator i = strategies.begin(); i != strategies.end(); i++)
     {
         Strategy* strategy = i->second;
         ActionNode* node = strategy->GetAction(name);
@@ -340,7 +340,7 @@ bool Engine::MultiplyAndPush(NextAction** actions, float forceRelevance, bool sk
     return pushed;
 }
 
-ActionResult Engine::ExecuteAction(string name, Event event, string qualifier)
+ActionResult Engine::ExecuteAction(std::string name, Event event, std::string qualifier)
 {
 	bool result = false;
 
@@ -384,15 +384,15 @@ ActionResult Engine::ExecuteAction(string name, Event event, string qualifier)
 	return result ? ACTION_RESULT_OK : ACTION_RESULT_FAILED;
 }
 
-void Engine::addStrategy(string name)
+void Engine::addStrategy(std::string name)
 {
     removeStrategy(name);
 
     Strategy* strategy = aiObjectContext->GetStrategy(name);
     if (strategy)
     {
-        set<string> siblings = aiObjectContext->GetSiblingStrategy(name);
-        for (set<string>::iterator i = siblings.begin(); i != siblings.end(); i++)
+        set<std::string> siblings = aiObjectContext->GetSiblingStrategy(name);
+        for (set<std::string>::iterator i = siblings.begin(); i != siblings.end(); i++)
             removeStrategy(*i);
 
         LogAction("S:+%s", strategy->getName().c_str());
@@ -402,7 +402,7 @@ void Engine::addStrategy(string name)
         Init();
 }
 
-void Engine::addStrategies(string first, ...)
+void Engine::addStrategies(std::string first, ...)
 {
 	addStrategy(first);
 
@@ -421,9 +421,9 @@ void Engine::addStrategies(string first, ...)
 	va_end(vl);
 }
 
-bool Engine::removeStrategy(string name)
+bool Engine::removeStrategy(std::string name)
 {
-    std::map<string, Strategy*>::iterator i = strategies.find(name);
+    std::map<std::string, Strategy*>::iterator i = strategies.find(name);
     if (i == strategies.end())
         return false;
 
@@ -439,13 +439,13 @@ void Engine::removeAllStrategies()
     Init();
 }
 
-void Engine::toggleStrategy(string name)
+void Engine::toggleStrategy(std::string name)
 {
     if (!removeStrategy(name))
         addStrategy(name);
 }
 
-bool Engine::HasStrategy(string name)
+bool Engine::HasStrategy(std::string name)
 {
     return strategies.find(name) != strategies.end();
 }
@@ -504,7 +504,7 @@ void Engine::ProcessTriggers(bool minimal)
 
 void Engine::PushDefaultActions()
 {
-    for (map<string, Strategy*>::iterator i = strategies.begin(); i != strategies.end(); i++)
+    for (map<std::string, Strategy*>::iterator i = strategies.begin(); i != strategies.end(); i++)
     {
         Strategy* strategy = i->second;
         Event emptyEvent;
@@ -514,12 +514,12 @@ void Engine::PushDefaultActions()
 
 string Engine::ListStrategies()
 {
-    string s = "Strategies: ";
+    std::string s = "Strategies: ";
 
     if (strategies.empty())
         return s;
 
-    for (map<string, Strategy*>::iterator i = strategies.begin(); i != strategies.end(); i++)
+    for (map<std::string, Strategy*>::iterator i = strategies.begin(); i != strategies.end(); i++)
     {
         s.append(i->first);
         s.append(", ");
@@ -527,10 +527,10 @@ string Engine::ListStrategies()
     return s.substr(0, s.length() - 2);
 }
 
-list<string> Engine::GetStrategies()
+list<std::string> Engine::GetStrategies()
 {
-    std::list<string> result;
-    for (map<string, Strategy*>::iterator i = strategies.begin(); i != strategies.end(); i++)
+    std::list<std::string> result;
+    for (map<std::string, Strategy*>::iterator i = strategies.begin(); i != strategies.end(); i++)
     {
         result.push_back(i->first);
     }
@@ -548,7 +548,7 @@ void Engine::PushAgain(ActionNode* actionNode, float relevance, Event event)
 
 bool Engine::ContainsStrategy(StrategyType type)
 {
-	for (map<string, Strategy*>::iterator i = strategies.begin(); i != strategies.end(); i++)
+	for (map<std::string, Strategy*>::iterator i = strategies.begin(); i != strategies.end(); i++)
 	{
 		Strategy* strategy = i->second;
 		if (strategy->GetType() & type)
@@ -635,10 +635,10 @@ void Engine::LogAction(const char* format, ...)
     }
 }
 
-void Engine::ChangeStrategy(string names)
+void Engine::ChangeStrategy(std::string names)
 {
-    std::vector<string> splitted = split(names, ',');
-    for (std::vector<string>::iterator i = splitted.begin(); i != splitted.end(); i++)
+    std::vector<std::string> splitted = split(names, ',');
+    for (std::vector<std::string>::iterator i = splitted.begin(); i != splitted.end(); i++)
     {
         const char* name = i->c_str();
         switch (name[0])
@@ -668,6 +668,6 @@ void Engine::LogValues()
     if (sPlayerbotAIConfig.logInGroupOnly && !bot->GetGroup())
         return;
 
-    string text = ai->GetAiObjectContext()->FormatValues();
+    std::string text = ai->GetAiObjectContext()->FormatValues();
     sLog.outDebug( "Values for %s: %s", bot->GetName(), text.c_str());
 }

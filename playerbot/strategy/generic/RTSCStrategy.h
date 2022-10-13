@@ -6,7 +6,7 @@ namespace ai
     {
     public:
         RTSCStrategy(PlayerbotAI* ai);
-        virtual string getName() { return "RTSC"; }
+        virtual std::string getName() { return "RTSC"; }
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);

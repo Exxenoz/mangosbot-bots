@@ -9,7 +9,7 @@ namespace ai
     {
     public:
         GenericWarlockStrategy(PlayerbotAI* ai);
-        virtual string getName() { return "warlock"; }
+        virtual std::string getName() { return "warlock"; }
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
@@ -20,7 +20,7 @@ namespace ai
     {
     public:
         WarlockBoostStrategy(PlayerbotAI* ai) : Strategy(ai) {};
-        virtual string getName() { return "boost"; }
+        virtual std::string getName() { return "boost"; }
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
@@ -30,7 +30,7 @@ namespace ai
     {
     public:
         WarlockCcStrategy(PlayerbotAI* ai) : Strategy(ai) {};
-        virtual string getName() { return "cc"; }
+        virtual std::string getName() { return "cc"; }
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);

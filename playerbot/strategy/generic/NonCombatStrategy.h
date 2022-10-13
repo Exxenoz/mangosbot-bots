@@ -17,7 +17,7 @@ namespace ai
         CollisionStrategy(PlayerbotAI* ai) : Strategy(ai) {}
 		virtual int GetType() { return STRATEGY_TYPE_NONCOMBAT; }
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "collision"; }
+        virtual std::string getName() { return "collision"; }
     };
 
     class MountStrategy : public Strategy
@@ -26,7 +26,7 @@ namespace ai
         MountStrategy(PlayerbotAI* ai) : Strategy(ai) {};
         virtual int GetType() { return STRATEGY_TYPE_NONCOMBAT; }
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "mount"; }
+        virtual std::string getName() { return "mount"; }
     };
 
     class AttackTaggedStrategy : public Strategy
@@ -34,6 +34,6 @@ namespace ai
     public:
         AttackTaggedStrategy(PlayerbotAI* ai) : Strategy(ai) {}
         virtual int GetType() { return STRATEGY_TYPE_NONCOMBAT; }
-        virtual string getName() { return "attack tagged"; }
+        virtual std::string getName() { return "attack tagged"; }
     };
 }

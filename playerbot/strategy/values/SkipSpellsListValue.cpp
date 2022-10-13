@@ -18,12 +18,12 @@ string SkipSpellsListValue::Save()
     return out.str();
 }
 
-bool SkipSpellsListValue::Load(string text)
+bool SkipSpellsListValue::Load(std::string text)
 {
     value.clear();
 
-    std::vector<string> ss = split(text, ',');
-    for (std::vector<string>::iterator i = ss.begin(); i != ss.end(); ++i)
+    std::vector<std::string> ss = split(text, ',');
+    for (std::vector<std::string>::iterator i = ss.begin(); i != ss.end(); ++i)
     {
         value.insert(atoi(i->c_str()));
     }

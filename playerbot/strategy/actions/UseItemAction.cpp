@@ -11,7 +11,7 @@ using namespace ai;
 
 bool UseItemAction::Execute(Event event)
 {
-   string name = event.getParam();
+   std::string name = event.getParam();
    if (name.empty())
       name = getName();
 
@@ -428,7 +428,7 @@ bool UseItemAction::UseItem(Item* item, ObjectGuid goGuid, Item* itemTarget, Uni
    return true;
 }
 
-void UseItemAction::TellConsumableUse(Item* item, string action, float percent)
+void UseItemAction::TellConsumableUse(Item* item, std::string action, float percent)
 {
     ostringstream out;
     out << action << " " << chat->formatItem(item->GetProto());
@@ -543,7 +543,7 @@ bool UseRandomRecipe::Execute(Event event)
 {
     std::list<Item*> recipes = AI_VALUE2(std::list<Item*>, "inventory items", "recipe");   
 
-    string recipeName = "";
+    std::string recipeName = "";
 
     for (auto& recipe : recipes)
     {

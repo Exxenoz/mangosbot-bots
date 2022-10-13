@@ -61,7 +61,7 @@ float AvoidAoeStrategyMultiplier::GetValue(Action* action)
     if (!action)
         return 1.0f;
 
-    string name = action->getName();
+    std::string name = action->getName();
     if (name == "follow" || name == "co" || name == "nc" || name == "drop target" || name == "flee")
         return 1.0f;
 

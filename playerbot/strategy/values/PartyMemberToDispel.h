@@ -7,7 +7,7 @@ namespace ai
     class PartyMemberToDispel : public PartyMemberValue, public Qualified
 	{
 	public:
-        PartyMemberToDispel(PlayerbotAI* ai, string name = "party member to dispel") :
+        PartyMemberToDispel(PlayerbotAI* ai, std::string name = "party member to dispel") :
           PartyMemberValue(ai, name), Qualified() {}
 
     protected:

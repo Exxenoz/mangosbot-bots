@@ -50,7 +50,7 @@ bool IsNearLeaderValue::Calculate()
 
 bool BoolANDValue::Calculate()
 {
-    std::vector<string> values = split(getQualifier(), ',');
+    std::vector<std::string> values = split(getQualifier(), ',');
 
     for (auto value : values)
     {

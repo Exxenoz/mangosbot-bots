@@ -13,7 +13,7 @@ namespace ai
         virtual bool Execute(Event event);
 
     private:
-        void PrintRange(string type);
+        void PrintRange(std::string type);
 
     };
 }

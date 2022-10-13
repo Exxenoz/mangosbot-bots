@@ -7,7 +7,7 @@ namespace ai
     {
     public:
         DpsAssistStrategy(PlayerbotAI* ai) : NonCombatStrategy(ai) {}
-        virtual string getName() { return "dps assist"; }
+        virtual std::string getName() { return "dps assist"; }
 		virtual int GetType() { return STRATEGY_TYPE_DPS; }
 
     public:
@@ -18,7 +18,7 @@ namespace ai
     {
     public:
         DpsAoeStrategy(PlayerbotAI* ai) : NonCombatStrategy(ai) {}
-        virtual string getName() { return "dps aoe"; }
+        virtual std::string getName() { return "dps aoe"; }
         virtual int GetType() { return STRATEGY_TYPE_DPS; }
 
     public:

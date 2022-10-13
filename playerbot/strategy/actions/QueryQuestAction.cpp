@@ -6,7 +6,7 @@
 
 using namespace ai;
 
-void QueryQuestAction::TellObjective(string name, int available, int required)
+void QueryQuestAction::TellObjective(std::string name, int available, int required)
 {
     ai->TellMaster(chat->formatQuestObjective(name, available, required), PLAYERBOT_SECURITY_ALLOW_ALL, false);
 }
@@ -15,7 +15,7 @@ bool QueryQuestAction::Execute(Event event)
 {
     Player *bot = ai->GetBot();
     WorldPosition* botPos = &WorldPosition(bot);
-    string text = event.getParam();
+    std::string text = event.getParam();
     bool travel = false;
 
     if (text.find("travel") != std::string::npos)

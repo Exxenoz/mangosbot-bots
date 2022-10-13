@@ -606,7 +606,7 @@ void TravelNode::print(bool printFailed)
     uint32 mapSize = getNodeMap(true).size();
 
     ostringstream out;
-    string name = getName();
+    std::string name = getName();
     name.erase(remove(name.begin(), name.end(), '\"'), name.end());
     out << name.c_str() << ",";
     out << std::fixed << std::setprecision(2);
@@ -1061,7 +1061,7 @@ TravelNodeMap::TravelNodeMap(TravelNodeMap* baseMap)
     baseMap->m_nMapMtx.unlock_shared();
 }
 
-TravelNode* TravelNodeMap::addNode(WorldPosition pos, string preferedName, bool isImportant, bool checkDuplicate, bool transport, uint32 transportId)
+TravelNode* TravelNodeMap::addNode(WorldPosition pos, std::string preferedName, bool isImportant, bool checkDuplicate, bool transport, uint32 transportId)
 {
     TravelNode* newNode;
 
@@ -1072,7 +1072,7 @@ TravelNode* TravelNodeMap::addNode(WorldPosition pos, string preferedName, bool 
             return newNode;
     }
 
-    string finalName = preferedName;
+    std::string finalName = preferedName;
 
     if (!isImportant)
     {
@@ -1466,15 +1466,15 @@ TravelNode* TravelNodeMap::addZoneLinkNode(TravelNode* startNode)
 
         TravelNode* endNode = path.first;
 
-        string zoneName = startNode->getPosition()->getAreaName(true, true);
+        std::string zoneName = startNode->getPosition()->getAreaName(true, true);
         for (auto& pos : path.second.getPath())
         {
-            string newZoneName = pos.getAreaName(true, true);
+            std::string newZoneName = pos.getAreaName(true, true);
             if (zoneName != newZoneName)
             {
                 if (!getNode(pos, NULL, 100.0f))
                 {
-                    string nodeName = zoneName + " to " + newZoneName;
+                    std::string nodeName = zoneName + " to " + newZoneName;
                     return sTravelNodeMap.addNode(pos, nodeName, false, true);
                 }
                 zoneName = newZoneName;
@@ -1597,7 +1597,7 @@ void TravelNodeMap::generateNpcNodes()
 
         if (cInfo->NpcFlags & flagMask)
         {
-            string nodeName = guidP.getAreaName(false);
+            std::string nodeName = guidP.getAreaName(false);
 
             if (cInfo->NpcFlags & UNIT_NPC_FLAG_INNKEEPER)
                 nodeName += " innkeeper";
@@ -1612,7 +1612,7 @@ void TravelNodeMap::generateNpcNodes()
         }
         else if (cInfo->Rank == 3)
         {
-            string nodeName = cInfo->Name;
+            std::string nodeName = cInfo->Name;
 
             sTravelNodeMap.addNode(guidP, nodeName, true, true);
         }
@@ -1637,7 +1637,7 @@ void TravelNodeMap::generateNpcNodes()
         if (!cInfo)
             continue;
 
-        string nodeName = cInfo->Name;
+        std::string nodeName = cInfo->Name;
 
         sTravelNodeMap.addNode(guidP, nodeName, true, true);
     }
@@ -1668,7 +1668,7 @@ void TravelNodeMap::generateStartNodes()
 
              WorldPosition pos(info->mapId, info->positionX, info->positionY, info->positionZ, info->orientation);
 
-            string nodeName = startNames[i] + " start";
+            std::string nodeName = startNames[i] + " start";
 
             sTravelNodeMap.addNode(pos, nodeName, true, true);
 
@@ -1695,7 +1695,7 @@ void TravelNodeMap::generateAreaTriggerNodes()
 
         WorldPosition outPos = WorldPosition(at->target_mapId, at->target_X, at->target_Y, at->target_Z, at->target_Orientation);
 
-        string nodeName;
+        std::string nodeName;
 
         if (!outPos.isOverworld())
             nodeName = outPos.getAreaName(false) + " entrance";
@@ -1723,7 +1723,7 @@ void TravelNodeMap::generateAreaTriggerNodes()
 
         WorldPosition outPos = WorldPosition(at->target_mapId, at->target_X, at->target_Y, at->target_Z, at->target_Orientation);
 
-        string nodeName;
+        std::string nodeName;
 
         if (!outPos.isOverworld())
             nodeName = outPos.getAreaName(false) + " entrance";
@@ -2206,7 +2206,7 @@ void TravelNodeMap::printMap()
 
 void TravelNodeMap::printNodeStore()
 {
-    string nodeStore = "TravelNodeStore.h";
+    std::string nodeStore = "TravelNodeStore.h";
 
     if (!sPlayerbotAIConfig.hasLog(nodeStore))
         return;
@@ -2237,10 +2237,10 @@ void TravelNodeMap::printNodeStore()
 
         ostringstream out;
 
-        string name = node->getName();
+        std::string name = node->getName();
         name.erase(remove(name.begin(), name.end(), '\"'), name.end());
 
-        //        struct addNode {uint32 node; WorldPosition point; string name; bool isPortal; bool isTransport; uint32 transportId; };
+        //        struct addNode {uint32 node; WorldPosition point; std::string name; bool isPortal; bool isTransport; uint32 transportId; };
         out << std::fixed << std::setprecision(2) << "        addNodes.push_back(addNode{" << i << ",";
         out << "WorldPosition(" << node->getMapId() << ", " << node->getX() << "f, " << node->getY() << "f, " << node->getZ() << "f, " << node->getO() << "f),";
         out << "\"" << name << "\"";
@@ -2307,7 +2307,7 @@ void TravelNodeMap::saveNodeStore()
     {
         TravelNode* node = anodes[i];
 
-        string name = node->getName();
+        std::string name = node->getName();
         name.erase(remove(name.begin(), name.end(), '\''), name.end());
 
         PlayerbotDatabase.PExecute("INSERT INTO `ai_playerbot_travelnode` (`id`, `name`, `map_id`, `x`, `y`, `z`, `linked`) VALUES ('%lu', '%s', '%d', '%f', '%f', '%f', '%d%')"
@@ -2373,7 +2373,7 @@ void TravelNodeMap::saveNodeStore()
 
 void TravelNodeMap::loadNodeStore()
 {    
-    string query = "SELECT id, name, map_id, x, y, z, linked FROM ai_playerbot_travelnode";
+    std::string query = "SELECT id, name, map_id, x, y, z, linked FROM ai_playerbot_travelnode";
 
     std::unordered_map<uint32, TravelNode*> saveNodes;   
 
@@ -2413,7 +2413,7 @@ void TravelNodeMap::loadNodeStore()
 
     {
         //                     0        1          2    3      4         5              6          7          8               9             10 
-        string query = "SELECT node_id, to_node_id,type,object,distance,swim_distance, extra_cost,calculated, max_creature_0,max_creature_1,max_creature_2 FROM ai_playerbot_travelnode_link";
+        std::string query = "SELECT node_id, to_node_id,type,object,distance,swim_distance, extra_cost,calculated, max_creature_0,max_creature_1,max_creature_2 FROM ai_playerbot_travelnode_link";
 
         QueryResult* result = PlayerbotDatabase.PQuery(query.c_str());
 
@@ -2451,7 +2451,7 @@ void TravelNodeMap::loadNodeStore()
 
     {
         //                     0        1           2   3      4   5  6
-        string query = "SELECT node_id, to_node_id, nr, map_id, x, y, z FROM ai_playerbot_travelnode_path order by node_id, to_node_id, nr";
+        std::string query = "SELECT node_id, to_node_id, nr, map_id, x, y, z FROM ai_playerbot_travelnode_path order by node_id, to_node_id, nr";
 
         QueryResult* result = PlayerbotDatabase.PQuery(query.c_str());
 

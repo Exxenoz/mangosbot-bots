@@ -19,7 +19,7 @@ Player* GuidManageAction::GetPlayer(Event event)
             return player;
     }
 
-    string text = event.getParam();
+    std::string text = event.getParam();
 
     if (!text.empty())
     {

@@ -7,12 +7,12 @@ using namespace ai;
 
 bool ChangeCombatStrategyAction::Execute(Event event)
 {
-    string text = event.getParam();
+    std::string text = event.getParam();
     ai->ChangeStrategy(text.empty() ? getName() : text, BOT_STATE_COMBAT);
     if (event.getSource() == "co")
     {
-        std::vector<string> splitted = split(text, ',');
-        for (std::vector<string>::iterator i = splitted.begin(); i != splitted.end(); i++)
+        std::vector<std::string> splitted = split(text, ',');
+        for (std::vector<std::string>::iterator i = splitted.begin(); i != splitted.end(); i++)
         {
             const char* name = i->c_str();
             switch (name[0])
@@ -32,7 +32,7 @@ bool ChangeCombatStrategyAction::Execute(Event event)
 
 bool ChangeNonCombatStrategyAction::Execute(Event event)
 {
-    string text = event.getParam();
+    std::string text = event.getParam();
 
     uint32 account = sObjectMgr.GetPlayerAccountIdByGUID(bot->GetObjectGuid());
     if (sPlayerbotAIConfig.IsInRandomAccountList(account) && ai->GetMaster() && ai->GetMaster()->GetSession()->GetSecurity() < SEC_GAMEMASTER)
@@ -48,8 +48,8 @@ bool ChangeNonCombatStrategyAction::Execute(Event event)
 
     if (event.getSource() == "nc")
     {
-        std::vector<string> splitted = split(text, ',');
-        for (std::vector<string>::iterator i = splitted.begin(); i != splitted.end(); i++)
+        std::vector<std::string> splitted = split(text, ',');
+        for (std::vector<std::string>::iterator i = splitted.begin(); i != splitted.end(); i++)
         {
             const char* name = i->c_str();
             switch (name[0])
@@ -69,7 +69,7 @@ bool ChangeNonCombatStrategyAction::Execute(Event event)
 
 bool ChangeDeadStrategyAction::Execute(Event event)
 {
-    string text = event.getParam();
+    std::string text = event.getParam();
     ai->ChangeStrategy(text, BOT_STATE_DEAD);
     return true;
 }

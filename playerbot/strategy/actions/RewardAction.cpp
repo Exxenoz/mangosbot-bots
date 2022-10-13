@@ -8,7 +8,7 @@ using namespace ai;
 
 bool RewardAction::Execute(Event event)
 {
-    string link = event.getParam();
+    std::string link = event.getParam();
 
     ItemIds itemIds = chat->parseItems(link);
     if (itemIds.empty())
@@ -65,8 +65,8 @@ bool RewardAction::Reward(uint32 itemId, Object* questGiver)
                 {
                     bot->RewardQuest(pQuest, rewardIdx, questGiver, false);
 
-                    string questTitle  = pQuest->GetTitle();
-                    string itemName = pRewardItem->Name1;
+                    std::string questTitle  = pQuest->GetTitle();
+                    std::string itemName = pRewardItem->Name1;
 
                     ostringstream out; out << chat->formatItem(pRewardItem) << " rewarded";
                     ai->TellMaster(out);

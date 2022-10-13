@@ -6,7 +6,7 @@ namespace ai
     {
     public:
         TravelStrategy(PlayerbotAI* ai);
-        virtual string getName() { return "travel"; }
+        virtual std::string getName() { return "travel"; }
 
     public:
         virtual NextAction** getDefaultActions();
@@ -17,20 +17,20 @@ namespace ai
     {
     public:
         ExploreStrategy(PlayerbotAI* ai) : Strategy(ai) {};
-        virtual string getName() { return "explore"; }
+        virtual std::string getName() { return "explore"; }
     };
 
     class MapStrategy : public Strategy
     {
     public:
         MapStrategy(PlayerbotAI* ai) : Strategy(ai) {};
-        virtual string getName() { return "map"; }
+        virtual std::string getName() { return "map"; }
     };
 
     class MapFullStrategy : public Strategy
     {
     public:
         MapFullStrategy(PlayerbotAI* ai) : Strategy(ai) {};
-        virtual string getName() { return "map full"; }
+        virtual std::string getName() { return "map full"; }
     };
 }

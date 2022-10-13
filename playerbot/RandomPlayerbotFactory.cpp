@@ -116,7 +116,7 @@ RandomPlayerbotFactory::RandomPlayerbotFactory(uint32 accountId) : accountId(acc
 #endif
 }
 
-bool RandomPlayerbotFactory::CreateRandomBot(uint8 cls, std::unordered_map<uint8, std::vector<string>>& names)
+bool RandomPlayerbotFactory::CreateRandomBot(uint8 cls, std::unordered_map<uint8, std::vector<std::string>>& names)
 {
     sLog.outDebug( "Creating new random bot for class %d", cls);
 
@@ -124,7 +124,7 @@ bool RandomPlayerbotFactory::CreateRandomBot(uint8 cls, std::unordered_map<uint8
 
     uint8 race = availableRaces[cls][urand(0, availableRaces[cls].size() - 1)];
 
-    string name;
+    std::string name;
     if(names.empty())
         name = CreateRandomBotName(gender);
     else
@@ -264,16 +264,16 @@ string RandomPlayerbotFactory::CreateRandomBotName(uint8 gender)
     }
 
 	fields = result->Fetch();
-    string bname = fields[0].GetString();
+    std::string bname = fields[0].GetString();
     delete result;
     return bname;
 }
 
-inline string GetNamePostFix(int32 nr)
+inline std::string GetNamePostFix(int32 nr)
 {
-    string ret;
+    std::string ret;
 
-    string str("abcdefghijklmnopqrstuvwxyz");
+    std::string str("abcdefghijklmnopqrstuvwxyz");
 
     while (nr >= 0)
     {
@@ -316,7 +316,7 @@ void RandomPlayerbotFactory::CreateRandomBots()
         for (uint32 accountNumber = 0; accountNumber < sPlayerbotAIConfig.randomBotAccountCount; ++accountNumber)
         {
             ostringstream out; out << sPlayerbotAIConfig.randomBotAccountPrefix << accountNumber;
-            string accountName = out.str();
+            std::string accountName = out.str();
 
             QueryResult* results = LoginDatabase.PQuery("SELECT id FROM account where username = '%s'", accountName.c_str());
             if (!results)
@@ -421,7 +421,7 @@ void RandomPlayerbotFactory::CreateRandomBots()
     for (uint32 accountNumber = 0; accountNumber < sPlayerbotAIConfig.randomBotAccountCount; ++accountNumber)
     {
         ostringstream out; out << sPlayerbotAIConfig.randomBotAccountPrefix << accountNumber;
-        string accountName = out.str();
+        std::string accountName = out.str();
         QueryResult* results = LoginDatabase.PQuery("SELECT id FROM account where username = '%s'", accountName.c_str());
         if (results)
         {
@@ -429,7 +429,7 @@ void RandomPlayerbotFactory::CreateRandomBots()
             continue;
         }
 
-        string password = "";
+        std::string password = "";
         if (sPlayerbotAIConfig.randomBotRandomPassword)
         {
             for (int i = 0; i < 10; i++)
@@ -470,7 +470,7 @@ void RandomPlayerbotFactory::CreateRandomBots()
 
     sLog.outString("Loading available names...");
     
-    std::unordered_map<uint8,std::vector<string>> names;
+    std::unordered_map<uint8,std::vector<std::string>> names;
     QueryResult* result = CharacterDatabase.PQuery("SELECT n.gender, n.name FROM ai_playerbot_names n LEFT OUTER JOIN characters e ON e.name = n.name WHERE e.guid IS NULL");
     if (!result)
     {
@@ -478,13 +478,13 @@ void RandomPlayerbotFactory::CreateRandomBots()
         return;
     }
 
-    std::unordered_map<string, bool> used;
+    std::unordered_map<std::string, bool> used;
 
     do
     {
         Field* fields = result->Fetch();
         uint8 gender = fields[0].GetUInt8();
-        string bname = fields[1].GetString();
+        std::string bname = fields[1].GetString();
         names[gender].push_back(bname);
         used[bname] = true;
     } while (result->NextRow());
@@ -495,7 +495,7 @@ void RandomPlayerbotFactory::CreateRandomBots()
     {
         int32 postItt = 0;
 
-        std::vector<string> newNames;
+        std::vector<std::string> newNames;
 
         if (totalCharCount < names[gender].size())
             continue;
@@ -506,14 +506,14 @@ void RandomPlayerbotFactory::CreateRandomBots()
 
         while(namesNeeded)
         {
-            string post = GetNamePostFix(postItt);
+            std::string post = GetNamePostFix(postItt);
 
             for (auto name : names[gender])
             {
                 if (name.size() + post.size() > 12)
                     continue;
 
-                string newName = name + post;
+                std::string newName = name + post;
                 if (used.find(newName) != used.end())
                     continue;
 
@@ -536,7 +536,7 @@ void RandomPlayerbotFactory::CreateRandomBots()
     for (uint32 accountNumber = 0; accountNumber < sPlayerbotAIConfig.randomBotAccountCount; ++accountNumber)
     {
         ostringstream out; out << sPlayerbotAIConfig.randomBotAccountPrefix << accountNumber;
-        string accountName = out.str();
+        std::string accountName = out.str();
 
         QueryResult* results = LoginDatabase.PQuery("SELECT id FROM account where username = '%s'", accountName.c_str());
         if (!results)
@@ -693,7 +693,7 @@ void RandomPlayerbotFactory::CreateRandomGuilds()
         if (sPlayerbotAIConfig.randomBotGuilds.size() >= sPlayerbotAIConfig.randomBotGuildCount)
             break;
 
-        string guildName = CreateRandomGuildName();
+        std::string guildName = CreateRandomGuildName();
         if (guildName.empty())
             continue;
 
@@ -755,7 +755,7 @@ string RandomPlayerbotFactory::CreateRandomGuildName()
     }
 
     fields = result->Fetch();
-    string gname = fields[0].GetString();
+    std::string gname = fields[0].GetString();
     delete result;
     return gname;
 }
@@ -854,7 +854,7 @@ void RandomPlayerbotFactory::CreateRandomArenaTeams()
             break;
         }
 
-        string arenaTeamName = CreateRandomArenaTeamName();
+        std::string arenaTeamName = CreateRandomArenaTeamName();
         if (arenaTeamName.empty())
             continue;
 
@@ -1005,7 +1005,7 @@ string RandomPlayerbotFactory::CreateRandomArenaTeamName()
     }
 
     fields = result->Fetch();
-    string aname = fields[0].GetString();
+    std::string aname = fields[0].GetString();
     delete result;
     return aname;
 }

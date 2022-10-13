@@ -59,7 +59,7 @@ public:
 
 bool SellAction::Execute(Event event)
 {
-    string text = event.getParam();
+    std::string text = event.getParam();
 
     if (text == "gray" || text == "*")
     {

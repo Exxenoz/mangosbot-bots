@@ -14,7 +14,7 @@ bool BuyAction::Execute(Event event)
 {
     bool buyUseful = false;
     ItemIds itemIds;
-    string link = event.getParam();
+    std::string link = event.getParam();
 
     if (link == "vendor")
         buyUseful = true;

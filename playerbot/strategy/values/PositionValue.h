@@ -17,15 +17,15 @@ namespace ai
         uint32 mapId;
     };
 
-    typedef std::map<string, PositionEntry> PositionMap;
+    typedef std::map<std::string, PositionEntry> PositionMap;
 
     class PositionValue : public ManualSetValue<PositionMap&>
 	{
 	public:
-        PositionValue(PlayerbotAI* ai, string name = "position");
+        PositionValue(PlayerbotAI* ai, std::string name = "position");
 
-        virtual string Save();
-        virtual bool Load(string value);
+        virtual std::string Save();
+        virtual bool Load(std::string value);
 
 	private:
         PositionMap positions;
@@ -34,7 +34,7 @@ namespace ai
     class CurrentPositionValue : public LogCalculatedValue<WorldPosition>
     {
     public:
-        CurrentPositionValue(PlayerbotAI* ai, string name = "current position", uint32 checkInterval = 1) : LogCalculatedValue<WorldPosition>(ai, name, checkInterval) { minChangeInterval = 60;  logLength = 30; };
+        CurrentPositionValue(PlayerbotAI* ai, std::string name = "current position", uint32 checkInterval = 1) : LogCalculatedValue<WorldPosition>(ai, name, checkInterval) { minChangeInterval = 60;  logLength = 30; };
         virtual bool EqualToLast(WorldPosition value) { return value.fDist(lastValue) < sPlayerbotAIConfig.tooCloseDistance; }
 
         virtual WorldPosition Calculate() {return WorldPosition(bot);};
@@ -43,7 +43,7 @@ namespace ai
     class MasterPositionValue : public MemoryCalculatedValue<WorldPosition>
     {
     public:
-        MasterPositionValue(PlayerbotAI* ai, string name = "master position", uint32 checkInterval = 1) : MemoryCalculatedValue<WorldPosition>(ai, name, checkInterval) { minChangeInterval = 1; };
+        MasterPositionValue(PlayerbotAI* ai, std::string name = "master position", uint32 checkInterval = 1) : MemoryCalculatedValue<WorldPosition>(ai, name, checkInterval) { minChangeInterval = 1; };
         virtual bool EqualToLast(WorldPosition value) { return value.fDist(lastValue) < sPlayerbotAIConfig.lootDistance; }
 
         virtual WorldPosition Calculate() { Player* master = GetMaster();  if (master) return WorldPosition(master); return WorldPosition(); };
@@ -52,7 +52,7 @@ namespace ai
     class CustomPositionValue : public ManualSetValue<WorldPosition>, public Qualified
     {
     public:
-        CustomPositionValue(PlayerbotAI* ai, string name = "custom position") : ManualSetValue<WorldPosition>(ai, WorldPosition(), name) { };
+        CustomPositionValue(PlayerbotAI* ai, std::string name = "custom position") : ManualSetValue<WorldPosition>(ai, WorldPosition(), name) { };
 
         virtual WorldPosition Calculate() { return WorldPosition(bot); };
     };

@@ -5,12 +5,12 @@
 #include "../../ServerFacade.h"
 using namespace ai;
 
-extern std::vector<string> split(const string &s, char delim);
+extern std::vector<std::string> split(const std::string &s, char delim);
 
 class PlayerWithoutAuraPredicate : public FindPlayerPredicate, public PlayerbotAIAware
 {
 public:
-    PlayerWithoutAuraPredicate(PlayerbotAI* ai, string aura) :
+    PlayerWithoutAuraPredicate(PlayerbotAI* ai, std::string aura) :
         PlayerbotAIAware(ai), FindPlayerPredicate(), auras(split(aura, ',')) {}
 
 public:
@@ -22,7 +22,7 @@ public:
 
         if (!sServerFacade.IsAlive(unit)) return false;
 
-        for (std::vector<string>::iterator i = auras.begin(); i != auras.end(); ++i)
+        for (std::vector<std::string>::iterator i = auras.begin(); i != auras.end(); ++i)
         {
             if (ai->HasAura(*i, unit))
                 return false;
@@ -32,7 +32,7 @@ public:
     }
 
 private:
-    std::vector<string> auras;
+    std::vector<std::string> auras;
 };
 
 Unit* PartyMemberWithoutAuraValue::Calculate()
@@ -44,7 +44,7 @@ Unit* PartyMemberWithoutAuraValue::Calculate()
 class PlayerWithoutMyAuraPredicate : public FindPlayerPredicate, public PlayerbotAIAware
 {
 public:
-    PlayerWithoutMyAuraPredicate(PlayerbotAI* ai, string aura) :
+    PlayerWithoutMyAuraPredicate(PlayerbotAI* ai, std::string aura) :
         PlayerbotAIAware(ai), FindPlayerPredicate(), auras(split(aura, ',')) {}
 
 public:
@@ -57,7 +57,7 @@ public:
         if (!sServerFacade.IsAlive(unit)) return false;
         if (sServerFacade.GetDistance2d(unit, ai->GetBot()) > 30.0f) return false;
 
-        for (std::vector<string>::iterator i = auras.begin(); i != auras.end(); ++i)
+        for (std::vector<std::string>::iterator i = auras.begin(); i != auras.end(); ++i)
         {
             if (ai->HasMyAura(*i, unit))
                 return false;
@@ -67,7 +67,7 @@ public:
     }
 
 private:
-    std::vector<string> auras;
+    std::vector<std::string> auras;
 };
 
 Unit* PartyMemberWithoutMyAuraValue::Calculate()

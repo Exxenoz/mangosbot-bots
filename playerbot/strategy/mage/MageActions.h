@@ -33,7 +33,7 @@ namespace ai
     {
     public:
         CastArcaneBlastAction(PlayerbotAI* ai) : CastBuffSpellAction(ai, "arcane blast") {}
-        virtual string GetTargetName() { return "current target"; }
+        virtual std::string GetTargetName() { return "current target"; }
     };
 
     class CastArcaneBarrageAction : public CastSpellAction
@@ -178,7 +178,7 @@ namespace ai
         CastPolymorphAction(PlayerbotAI* ai) : CastCrowdControlSpellAction(ai, "polymorph") {}
         virtual bool Execute(Event event)
         {
-            std::vector<string> polySpells;
+            std::vector<std::string> polySpells;
             polySpells.push_back("polymorph");
             if (bot->HasSpell(28271))
                 polySpells.push_back("polymorph: turtle");
@@ -227,7 +227,7 @@ namespace ai
 	{
 	public:
 	    CastEvocationAction(PlayerbotAI* ai) : CastSpellAction(ai, "evocation") {}
-	    virtual string GetTargetName() { return "self target"; }
+	    virtual std::string GetTargetName() { return "self target"; }
 	};
 
     class CastCounterspellOnEnemyHealerAction : public CastSpellOnEnemyHealerAction

@@ -85,7 +85,7 @@ bool MoveToTravelTargetAction::Execute(Event event)
         WorldPosition* pos = target->getPosition();
         GuidPosition* guidP = dynamic_cast<GuidPosition*>(pos);
 
-        string name = (guidP && guidP->GetWorldObject()) ? chat->formatWorldobject(guidP->GetWorldObject()) : "travel target";
+        std::string name = (guidP && guidP->GetWorldObject()) ? chat->formatWorldobject(guidP->GetWorldObject()) : "travel target";
         
         ai->Poi(x, y, name);
     }

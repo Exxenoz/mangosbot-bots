@@ -19,15 +19,15 @@ class RandomPlayerbotFactory
 		virtual ~RandomPlayerbotFactory() {}
 
 	public:
-        bool CreateRandomBot(uint8 cls, std::unordered_map<uint8, std::vector<string>>& names);
+        bool CreateRandomBot(uint8 cls, std::unordered_map<uint8, std::vector<std::string>>& names);
         static void CreateRandomBots();
         static void CreateRandomGuilds();
         static void CreateRandomArenaTeams();
-        static string CreateRandomGuildName();
+        static std::string CreateRandomGuildName();
 
 	private:
-        string CreateRandomBotName(uint8 gender);
-        static string CreateRandomArenaTeamName();
+        std::string CreateRandomBotName(uint8 gender);
+        static std::string CreateRandomArenaTeamName();
 
     private:
         uint32 accountId;

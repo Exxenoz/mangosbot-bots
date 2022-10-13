@@ -11,7 +11,7 @@
 
 using namespace std;
 
-typedef std::vector<string> PerformanceStack;
+typedef std::vector<std::string> PerformanceStack;
 
 struct PerformanceData
 {
@@ -33,12 +33,12 @@ enum PerformanceMetric
 class PerformanceMonitorOperation
 {
 public:
-    PerformanceMonitorOperation(PerformanceData* data, string name, PerformanceStack* stack);
+    PerformanceMonitorOperation(PerformanceData* data, std::string name, PerformanceStack* stack);
     void finish();
 
 private:
     PerformanceData* data;
-    string name;
+    std::string name;
     PerformanceStack* stack;
 #ifdef CMANGOS
     std::chrono::milliseconds started;
@@ -57,12 +57,12 @@ class PerformanceMonitor
         }
 
 	public:
-        PerformanceMonitorOperation* start(PerformanceMetric metric, string name, PerformanceStack* stack = nullptr);
+        PerformanceMonitorOperation* start(PerformanceMetric metric, std::string name, PerformanceStack* stack = nullptr);
         void PrintStats(bool perTick = false,  bool fullStack = false);
         void Reset();
 
 	private:
-        std::map<PerformanceMetric, std::map<string, PerformanceData*> > data;
+        std::map<PerformanceMetric, std::map<std::string, PerformanceData*> > data;
 #ifdef CMANGOS
 		std::mutex lock;
 #endif

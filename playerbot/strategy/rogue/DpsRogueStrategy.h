@@ -12,7 +12,7 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);
-        virtual string getName() { return "rogue"; }
+        virtual std::string getName() { return "rogue"; }
     };
 
     class DpsRogueStrategy : public GenericRogueStrategy
@@ -22,7 +22,7 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "dps"; }
+        virtual std::string getName() { return "dps"; }
     };
 
     class AssassinationRogueStrategy : public GenericRogueStrategy
@@ -32,7 +32,7 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);
-        virtual string getName() { return "assassin"; }
+        virtual std::string getName() { return "assassin"; }
     };
 
     class CombatRogueStrategy : public GenericRogueStrategy
@@ -42,7 +42,7 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);
-        virtual string getName() { return "combat"; }
+        virtual std::string getName() { return "combat"; }
     };
 
     class SubtletyRogueStrategy : public GenericRogueStrategy
@@ -52,7 +52,7 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);
-        virtual string getName() { return "subtlety"; }
+        virtual std::string getName() { return "subtlety"; }
     };
 
     class StealthedRogueStrategy : public Strategy
@@ -62,7 +62,7 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "stealthed"; }
+        virtual std::string getName() { return "stealthed"; }
     };
 
     class StealthStrategy : public Strategy
@@ -71,7 +71,7 @@ namespace ai
         StealthStrategy(PlayerbotAI* ai) : Strategy(ai) {};
         //virtual int GetType() { return STRATEGY_TYPE_NONCOMBAT; }
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "stealth"; }
+        virtual std::string getName() { return "stealth"; }
     };
 
     class RogueAoeStrategy : public Strategy
@@ -81,7 +81,7 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "aoe"; }
+        virtual std::string getName() { return "aoe"; }
     };
 
     class RogueBoostStrategy : public Strategy
@@ -91,7 +91,7 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "boost"; }
+        virtual std::string getName() { return "boost"; }
     };
 
     class RogueCcStrategy : public Strategy
@@ -101,6 +101,6 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "cc"; }
+        virtual std::string getName() { return "cc"; }
     };
 }

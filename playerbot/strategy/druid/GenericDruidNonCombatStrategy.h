@@ -8,7 +8,7 @@ namespace ai
     {
     public:
         GenericDruidNonCombatStrategy(PlayerbotAI* ai);
-        virtual string getName() { return "nc"; }
+        virtual std::string getName() { return "nc"; }
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
@@ -18,7 +18,7 @@ namespace ai
     {
     public:
         GenericDruidBuffStrategy(PlayerbotAI* ai);
-        virtual string getName() { return "buff"; }
+        virtual std::string getName() { return "buff"; }
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);

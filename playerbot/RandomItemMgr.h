@@ -47,13 +47,13 @@ enum ItemSpecType
 struct WeightScaleInfo
 {
     uint32 id;
-    string name;
+    std::string name;
     uint8 classId;
 };
 
 struct WeightScaleStat
 {
-    string stat;
+    std::string stat;
     uint32 weight;
 };
 
@@ -202,8 +202,8 @@ class RandomItemMgr
         std::map<uint32, std::vector<uint32> > tradeCache;
         std::map<uint32, float> rarityCache;
         std::map<uint32, WeightScale> m_weightScales;
-        std::map<string, uint32 > weightStatLink;
-        std::map<string, uint32 > weightRatingLink;
+        std::map<std::string, uint32 > weightStatLink;
+        std::map<std::string, uint32 > weightRatingLink;
         std::map<uint32, ItemInfoEntry*> itemInfoCache;
 };
 

@@ -16,7 +16,7 @@ bool DebugAction::Execute(Event event)
     if (!master)
         master = bot;
 
-    string text = event.getParam();
+    std::string text = event.getParam();
     if (text == "scan")
     {
         sPlayerbotAIConfig.openLog("scan.csv", "w");
@@ -75,9 +75,9 @@ bool DebugAction::Execute(Event event)
         WorldPosition botPos = WorldPosition(bot);
 
         WorldPosition poiPoint = botPos;
-        string name = "bot";
+        std::string name = "bot";
 
-        std::vector<string> args = Qualified::getMultiQualifiers(text.substr(4));
+        std::vector<std::string> args = Qualified::getMultiQualifiers(text.substr(4));
         TravelDestination* dest = ChooseTravelTargetAction::FindDestination(bot, args[0]);
 
         if (dest)
@@ -116,7 +116,7 @@ bool DebugAction::Execute(Event event)
 
         if (text.size() > 4)
         {
-            string link = text.substr(4);
+            std::string link = text.substr(4);
 
             if (!link.empty())
             {
@@ -247,7 +247,7 @@ bool DebugAction::Execute(Event event)
     {
         WorldPosition botPos = WorldPosition(bot);
 
-        string destination = text.substr(7);
+        std::string destination = text.substr(7);
 
         TravelDestination* dest = ChooseTravelTargetAction::FindDestination(bot, destination);
         if (dest)
@@ -475,7 +475,7 @@ bool DebugAction::Execute(Event event)
 
             for (auto entry : entries)
             {
-                string qualifier = Qualified::MultiQualify({ to_string(entry) , to_string(itemId) });
+                std::string qualifier = Qualified::MultiQualify({ to_string(entry) , to_string(itemId) });
                 float chance = GAI_VALUE2(float, "loot chance", qualifier);
                 if(chance > 0)
                     chances.push_back(make_pair(entry, chance));
@@ -557,7 +557,7 @@ bool DebugAction::Execute(Event event)
 
         for (auto itemId : itemIds)
         {
-            string qualifier = Qualified::MultiQualify({ to_string(entry) , to_string(itemId) });
+            std::string qualifier = Qualified::MultiQualify({ to_string(entry) , to_string(itemId) });
             float chance = GAI_VALUE2(float, "loot chance", qualifier);
             if (chance > 0 && sObjectMgr.GetItemPrototype(itemId))
             {
@@ -583,7 +583,7 @@ bool DebugAction::Execute(Event event)
     {
         WorldPosition pos(bot);
 
-        string name = "USER:" + text.substr(9);
+        std::string name = "USER:" + text.substr(9);
 
         TravelNode* startNode = sTravelNodeMap.addNode(pos, name, false, false);
 
@@ -1271,7 +1271,7 @@ bool DebugAction::Execute(Event event)
         return true;
     }
 
-    string response = ai->HandleRemoteCommand(text);
+    std::string response = ai->HandleRemoteCommand(text);
     ai->TellMaster(response);
     return true;
 }

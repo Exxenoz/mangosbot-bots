@@ -13,7 +13,7 @@ public:
 class BotRolesValue : public Uint8CalculatedValue, public Qualified
 {
 public:
-    BotRolesValue(PlayerbotAI* ai, string name = "bot roles") : Uint8CalculatedValue(ai, name, 10) {}
+    BotRolesValue(PlayerbotAI* ai, std::string name = "bot roles") : Uint8CalculatedValue(ai, name, 10) {}
     virtual uint8 Calculate()
     {
         return AiFactory::GetPlayerRoles(bot);

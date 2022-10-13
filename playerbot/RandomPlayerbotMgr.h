@@ -19,14 +19,14 @@ class CachedEvent
 public:
     CachedEvent() : value(0), lastChangeTime(0), validIn(0), data("") {}
     CachedEvent(const CachedEvent& other) : value(other.value), lastChangeTime(other.lastChangeTime), validIn(other.validIn), data(other.data) {}
-    CachedEvent(uint32 value, uint32 lastChangeTime, uint32 validIn, string data = "") : value(value), lastChangeTime(lastChangeTime), validIn(validIn), data(data) {}
+    CachedEvent(uint32 value, uint32 lastChangeTime, uint32 validIn, std::string data = "") : value(value), lastChangeTime(lastChangeTime), validIn(validIn), data(data) {}
 
 public:
     bool IsEmpty() { return !lastChangeTime; }
 
 public:
     uint32 value, lastChangeTime, validIn;
-    string data;
+    std::string data;
 };
 
 class PerformanceMonitorOperation;
@@ -80,8 +80,8 @@ class RandomPlayerbotMgr : public PlayerbotHolder
         void UpdateGearSpells(Player* bot);
         void ScheduleTeleport(uint32 bot, uint32 time = 0);
         void ScheduleChangeStrategy(uint32 bot, uint32 time = 0);
-        void HandleCommand(uint32 type, const string& text, Player& fromPlayer, string channelName = "", Team team = TEAM_BOTH_ALLOWED);
-        string HandleRemoteCommand(string request);
+        void HandleCommand(uint32 type, const string& text, Player& fromPlayer, std::string channelName = "", Team team = TEAM_BOTH_ALLOWED);
+        std::string HandleRemoteCommand(std::string request);
         void OnPlayerLogout(Player* player);
         void OnPlayerLogin(Player* player);
         void OnPlayerLoginError(uint32 bot);
@@ -104,11 +104,11 @@ class RandomPlayerbotMgr : public PlayerbotHolder
         void Revive(Player* player);
         void ChangeStrategy(Player* player);
         void ChangeStrategyOnce(Player* player);
-        uint32 GetValue(Player* bot, string type);
-        uint32 GetValue(uint32 bot, string type);
-        string GetData(uint32 bot, string type);
-        void SetValue(uint32 bot, string type, uint32 value, string data = "");
-        void SetValue(Player* bot, string type, uint32 value, string data = "");
+        uint32 GetValue(Player* bot, std::string type);
+        uint32 GetValue(uint32 bot, std::string type);
+        std::string GetData(uint32 bot, std::string type);
+        void SetValue(uint32 bot, std::string type, uint32 value, std::string data = "");
+        void SetValue(Player* bot, std::string type, uint32 value, std::string data = "");
         void Remove(Player* bot);
         void Hotfix(Player* player, uint32 version);
         uint32 GetBattleMasterEntry(Player* bot, BattleGroundTypeId bgTypeId, bool fake = false);
@@ -146,9 +146,9 @@ class RandomPlayerbotMgr : public PlayerbotHolder
         //.rndbot pid 0.001, 0.001, 0.0001
         botPID pid = botPID(1, 1, -1, 0.0001, 0.0001, 0.001);
         float activityMod = 0.25;
-        uint32 GetEventValue(uint32 bot, string event);
-        string GetEventData(uint32 bot, string event);
-        uint32 SetEventValue(uint32 bot, string event, uint32 value, uint32 validIn, string data = "");
+        uint32 GetEventValue(uint32 bot, std::string event);
+        std::string GetEventData(uint32 bot, std::string event);
+        uint32 SetEventValue(uint32 bot, std::string event, uint32 value, uint32 validIn, std::string data = "");
         std::list<uint32> GetBots();
         std::list<uint32> GetBgBots(uint32 bracket);
         time_t BgCheckTimer;
@@ -170,7 +170,7 @@ class RandomPlayerbotMgr : public PlayerbotHolder
         std::map<uint32, std::vector<WorldLocation> > rpgLocsCache;
 		map<uint32, std::map<uint32, std::vector<WorldLocation> > > rpgLocsCacheLevel;
         std::map<Team, std::map<BattleGroundTypeId, std::list<uint32> > > BattleMastersCache;
-        std::map<uint32, std::map<string, CachedEvent> > eventCache;
+        std::map<uint32, std::map<std::string, CachedEvent> > eventCache;
         BarGoLink* loginProgressBar;
         std::list<uint32> currentBots;
         std::list<uint32> arenaTeamMembers;

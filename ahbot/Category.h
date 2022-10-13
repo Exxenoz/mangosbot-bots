@@ -18,9 +18,9 @@ namespace ahbot
 
     public:
         virtual bool Contains(ItemPrototype const* proto) { return false; }
-        virtual string GetName() { return typeName; }
-        virtual string GetDisplayName() { return GetName(); }
-        virtual string GetLabel() { return GetName(); }
+        virtual std::string GetName() { return typeName; }
+        virtual std::string GetDisplayName() { return GetName(); }
+        virtual std::string GetLabel() { return GetName(); }
 
         virtual uint32 GetStackCount(ItemPrototype const* proto);
         virtual uint32 GetSkillId() { return 0; }
@@ -37,7 +37,7 @@ namespace ahbot
             return sAhBotConfig.GetMaxAllowedItemAuctionCount(GetName(), sAhBotConfig.GetMaxAllowedItemAuctionCount(typeName, defaultMaxType));
         }
     protected:
-        string typeName = "default";
+        std::string typeName = "default";
         int32 defaultMaxType = 1;
     private:
         PricingStrategy *pricingStrategy;
@@ -53,9 +53,9 @@ namespace ahbot
             return proto->Class == ITEM_CLASS_CONSUMABLE;
         }
 
-        virtual string GetName() { return typeName; }
-        virtual string GetDisplayName() { return GetName(); }
-        virtual string GetLabel() { return "consumables"; }
+        virtual std::string GetName() { return typeName; }
+        virtual std::string GetDisplayName() { return GetName(); }
+        virtual std::string GetLabel() { return "consumables"; }
 
         virtual uint32 GetMaxAllowedAuctionCount()
         {
@@ -67,7 +67,7 @@ namespace ahbot
             return sAhBotConfig.GetMaxAllowedItemAuctionCount(GetName(), sAhBotConfig.GetMaxAllowedItemAuctionCount(typeName, defaultMaxType));
         }
     protected:
-        string typeName = "consumable";
+        std::string typeName = "consumable";
         int32 defaultMaxType = 10;
     };
 
@@ -80,9 +80,9 @@ namespace ahbot
         {
             return proto->Class == ITEM_CLASS_QUEST;
         }
-        virtual string GetName() { return typeName; }
-        virtual string GetDisplayName() { return GetName(); }
-        virtual string GetLabel() { return "quest items"; }
+        virtual std::string GetName() { return typeName; }
+        virtual std::string GetDisplayName() { return GetName(); }
+        virtual std::string GetLabel() { return "quest items"; }
 
         virtual uint32 GetMaxAllowedAuctionCount()
         {
@@ -94,7 +94,7 @@ namespace ahbot
             return sAhBotConfig.GetMaxAllowedItemAuctionCount(GetName(), sAhBotConfig.GetMaxAllowedItemAuctionCount(typeName, defaultMaxType));
         }
     protected:
-        string typeName = "quest";
+        std::string typeName = "quest";
         int32 defaultMaxType = 5;
     };
 
@@ -115,8 +115,8 @@ namespace ahbot
                 ;
         }
 
-        virtual string GetName() { return typeName; }
-        virtual string GetDisplayName() { return GetName(); }
+        virtual std::string GetName() { return typeName; }
+        virtual std::string GetDisplayName() { return GetName(); }
 
         virtual uint32 GetMaxAllowedAuctionCount()
         {
@@ -128,7 +128,7 @@ namespace ahbot
             return sAhBotConfig.GetMaxAllowedItemAuctionCount(GetName(), sAhBotConfig.GetMaxAllowedItemAuctionCount(typeName, defaultMaxType));
         }
     protected:
-        string typeName = "trade";
+        std::string typeName = "trade";
         int32 defaultMaxType = 5;
     };
 
@@ -142,9 +142,9 @@ namespace ahbot
         {
             return proto->Class == ITEM_CLASS_REAGENT;
         }
-        virtual string GetName() { return typeName; }
-        virtual string GetDisplayName() { return GetName(); }
-        virtual string GetLabel() { return "reagents"; }
+        virtual std::string GetName() { return typeName; }
+        virtual std::string GetDisplayName() { return GetName(); }
+        virtual std::string GetLabel() { return "reagents"; }
 
         virtual uint32 GetMaxAllowedAuctionCount()
         {
@@ -156,7 +156,7 @@ namespace ahbot
             return sAhBotConfig.GetMaxAllowedItemAuctionCount(GetName(), sAhBotConfig.GetMaxAllowedItemAuctionCount(typeName, defaultMaxType));
         }
     protected:
-        string typeName = "reagent";
+        std::string typeName = "reagent";
         int32 defaultMaxType = 1;
     };
 
@@ -170,9 +170,9 @@ namespace ahbot
         {
             return proto->Class == ITEM_CLASS_RECIPE;
         }
-        virtual string GetName() { return typeName; }
-        virtual string GetDisplayName() { return GetName(); }
-        virtual string GetLabel() { return "recipes and patterns"; }
+        virtual std::string GetName() { return typeName; }
+        virtual std::string GetDisplayName() { return GetName(); }
+        virtual std::string GetLabel() { return "recipes and patterns"; }
 
         virtual uint32 GetMaxAllowedAuctionCount()
         {
@@ -189,7 +189,7 @@ namespace ahbot
             return 1;
         }
     protected:
-        string typeName = "recipe";
+        std::string typeName = "recipe";
         int32 defaultMaxType = 1;
     };
 
@@ -204,9 +204,9 @@ namespace ahbot
             return (proto->Class == ITEM_CLASS_WEAPON ||
                 proto->Class == ITEM_CLASS_ARMOR) && proto->ItemLevel > 1;
         }
-        virtual string GetName() { return typeName; }
-        virtual string GetDisplayName() { return GetName(); }
-        virtual string GetLabel() { return "armor and weapons"; }
+        virtual std::string GetName() { return typeName; }
+        virtual std::string GetDisplayName() { return GetName(); }
+        virtual std::string GetLabel() { return "armor and weapons"; }
 
         virtual uint32 GetMaxAllowedAuctionCount()
         {
@@ -223,7 +223,7 @@ namespace ahbot
             return 1;
         }
     protected:
-        string typeName = "equip";
+        std::string typeName = "equip";
         int32 defaultMaxType = 1;
     };
 
@@ -238,9 +238,9 @@ namespace ahbot
             return proto->Class == ITEM_CLASS_QUIVER && proto->ItemLevel > 1;
         }
 
-        virtual string GetName() { return typeName; }
-        virtual string GetDisplayName() { return GetName(); }
-        virtual string GetLabel() { return "quivers and ammo poaches"; }
+        virtual std::string GetName() { return typeName; }
+        virtual std::string GetDisplayName() { return GetName(); }
+        virtual std::string GetLabel() { return "quivers and ammo poaches"; }
 
         virtual uint32 GetMaxAllowedAuctionCount()
         {
@@ -258,7 +258,7 @@ namespace ahbot
         }
 
     protected:
-        string typeName = "quiver";
+        std::string typeName = "quiver";
         int32 defaultMaxType = 1;
     };
 
@@ -273,9 +273,9 @@ namespace ahbot
             return proto->Class == ITEM_CLASS_PROJECTILE;
         }
 
-        virtual string GetName() { return typeName; }
-        virtual string GetDisplayName() { return GetName(); }
-        virtual string GetLabel() { return "projectiles"; }
+        virtual std::string GetName() { return typeName; }
+        virtual std::string GetDisplayName() { return GetName(); }
+        virtual std::string GetLabel() { return "projectiles"; }
 
         virtual uint32 GetMaxAllowedAuctionCount()
         {
@@ -293,7 +293,7 @@ namespace ahbot
         }
 
     protected:
-        string typeName = "projectile";
+        std::string typeName = "projectile";
         int32 defaultMaxType = 5;
     };
 
@@ -308,9 +308,9 @@ namespace ahbot
             return proto->Class == ITEM_CLASS_CONTAINER;
         }
 
-        virtual string GetName() { return typeName; }
-        virtual string GetDisplayName() { return GetName(); }
-        virtual string GetLabel() { return "containers"; }
+        virtual std::string GetName() { return typeName; }
+        virtual std::string GetDisplayName() { return GetName(); }
+        virtual std::string GetLabel() { return "containers"; }
 
         virtual uint32 GetMaxAllowedAuctionCount()
         {
@@ -328,7 +328,7 @@ namespace ahbot
         }
 
     protected:
-        string typeName = "container";
+        std::string typeName = "container";
         int32 defaultMaxType = 1;
     };
 
@@ -346,9 +346,9 @@ namespace ahbot
                     proto->SubClass == ITEM_SUBCLASS_EXPLOSIVES);
         }
 
-        virtual string GetName() { return typeName; }
-        virtual string GetDisplayName() { return GetName(); }
-        virtual string GetLabel() { return "devices and explosives"; }
+        virtual std::string GetName() { return typeName; }
+        virtual std::string GetDisplayName() { return GetName(); }
+        virtual std::string GetLabel() { return "devices and explosives"; }
 
         virtual uint32 GetMaxAllowedAuctionCount()
         {
@@ -361,7 +361,7 @@ namespace ahbot
         }
 
     protected:
-        string typeName = "devices";
+        std::string typeName = "devices";
         int32 defaultMaxType = 1;
     };
 
@@ -372,9 +372,9 @@ namespace ahbot
 
     public:
         virtual bool Contains(ItemPrototype const* proto);
-        virtual string GetName() { return category->GetName(); }
-        virtual string GetDisplayName() { return combinedName; }
-        virtual string GetLabel() { return category->GetLabel(); }
+        virtual std::string GetName() { return category->GetName(); }
+        virtual std::string GetDisplayName() { return combinedName; }
+        virtual std::string GetLabel() { return category->GetLabel(); }
         virtual uint32 GetStackCount(ItemPrototype const* proto) { return category->GetStackCount(proto); }
         virtual PricingStrategy* GetPricingStrategy() { return category->GetPricingStrategy(); }
         virtual uint32 GetSkillId() { return category->GetSkillId(); }
@@ -392,6 +392,6 @@ namespace ahbot
     private:
         uint32 quality;
         Category* category;
-        string combinedName;
+        std::string combinedName;
     };
 };

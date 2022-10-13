@@ -7,7 +7,7 @@ namespace ai
     class InviteToGroupAction : public Action
     {
     public:
-        InviteToGroupAction(PlayerbotAI* ai, string name = "invite") : Action(ai, name) {}
+        InviteToGroupAction(PlayerbotAI* ai, std::string name = "invite") : Action(ai, name) {}
 
         virtual bool Execute(Event event)
         {
@@ -22,7 +22,7 @@ namespace ai
     class InviteNearbyToGroupAction : public InviteToGroupAction
     {
     public:
-        InviteNearbyToGroupAction(PlayerbotAI* ai, string name = "invite nearby") : InviteToGroupAction(ai, name) {}
+        InviteNearbyToGroupAction(PlayerbotAI* ai, std::string name = "invite nearby") : InviteToGroupAction(ai, name) {}
 
         virtual bool Execute(Event event);
         virtual bool isUseful();
@@ -43,7 +43,7 @@ namespace ai
     class InviteGuildToGroupAction : public InviteNearbyToGroupAction
     {
     public:
-        InviteGuildToGroupAction(PlayerbotAI* ai, string name = "invite guild") : InviteNearbyToGroupAction(ai, name) {}
+        InviteGuildToGroupAction(PlayerbotAI* ai, std::string name = "invite guild") : InviteNearbyToGroupAction(ai, name) {}
 
         virtual bool Execute(Event event);
         virtual bool isUseful() { return bot->GetGuildId() && InviteNearbyToGroupAction::isUseful(); };

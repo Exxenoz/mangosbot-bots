@@ -7,7 +7,7 @@ namespace ai
        {
        public:
            RunawayStrategy(PlayerbotAI* ai) : NonCombatStrategy(ai) {}
-           virtual string getName() { return "runaway"; }
+           virtual std::string getName() { return "runaway"; }
            virtual void InitTriggers(std::list<TriggerNode*> &triggers);
        };
 

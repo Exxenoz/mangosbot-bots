@@ -84,7 +84,7 @@ public:
     uint32 randomBotMinLevel, randomBotMaxLevel;
     float randomChangeMultiplier;
     uint32 specProbability[MAX_CLASSES][10];
-    string premadeLevelSpec[MAX_CLASSES][10][91]; //lvl 10 - 100
+    std::string premadeLevelSpec[MAX_CLASSES][10][91]; //lvl 10 - 100
     ClassSpecs classSpecs[MAX_CLASSES];
     std::string commandPrefix, commandSeparator;
     std::string randomBotAccountPrefix;
@@ -139,11 +139,11 @@ public:
 
     std::mutex m_logMtx;
 
-    std::list<string> allowedLogFiles;
+    std::list<std::string> allowedLogFiles;
 
     std::unordered_map <std::string, std::pair<FILE*, bool>> logFiles;
 
-    std::list<string> botCheats;
+    std::list<std::string> botCheats;
     uint32 botCheatMask = 0;
 
     struct worldBuff{
@@ -167,10 +167,10 @@ public:
 
     std::string GetTimestampStr();
 
-    bool hasLog(string fileName) { return std::find(allowedLogFiles.begin(), allowedLogFiles.end(), fileName) != allowedLogFiles.end(); };
-    bool openLog(string fileName, char const* mode = "a");
-    bool isLogOpen(string fileName) { auto it = logFiles.find(fileName); return it != logFiles.end() && it->second.second;}
-    void log(string fileName, const char* str, ...);
+    bool hasLog(std::string fileName) { return std::find(allowedLogFiles.begin(), allowedLogFiles.end(), fileName) != allowedLogFiles.end(); };
+    bool openLog(std::string fileName, char const* mode = "a");
+    bool isLogOpen(std::string fileName) { auto it = logFiles.find(fileName); return it != logFiles.end() && it->second.second;}
+    void log(std::string fileName, const char* str, ...);
 private:
     Config config;
 };

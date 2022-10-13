@@ -9,7 +9,7 @@ namespace ai
     class ReturnPositionResetAction : public Action
     {
     public:
-        ReturnPositionResetAction(PlayerbotAI* ai, string name) : Action(ai, name) {}
+        ReturnPositionResetAction(PlayerbotAI* ai, std::string name) : Action(ai, name) {}
         void ResetReturnPosition();
         void SetReturnPosition(float x, float y, float z);
     };

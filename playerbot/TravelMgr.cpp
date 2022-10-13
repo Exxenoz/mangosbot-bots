@@ -304,7 +304,7 @@ string WorldPosition::getAreaName(bool fullName, bool zoneName)
     if (!area)
         return "";
 
-    string areaName = area->area_name[0];
+    std::string areaName = area->area_name[0];
 
     if (fullName)
     {
@@ -317,7 +317,7 @@ string WorldPosition::getAreaName(bool fullName, bool zoneName)
             if (!parentArea)
                 break;
 
-            string subAreaName = parentArea->area_name[0];
+            std::string subAreaName = parentArea->area_name[0];
 
             if (zoneName)
                 areaName = subAreaName;
@@ -479,7 +479,7 @@ vector<WorldPosition> WorldPosition::frommGridPair(mGridPair gridPair)
 
 void WorldPosition::loadMapAndVMap(uint32 mapId, uint32 instanceId, int x, int y)
 {
-    string fileName = "load_map_grid.csv";
+    std::string fileName = "load_map_grid.csv";
 
     if (isOverworld() && false || false)
     {
@@ -1637,7 +1637,7 @@ void TravelMgr::Clear()
     pointsMap.clear();
 }
 
-void TravelMgr::logEvent(PlayerbotAI* ai, string eventName, string info1, string info2)
+void TravelMgr::logEvent(PlayerbotAI* ai, std::string eventName, std::string info1, std::string info2)
 {
     if (sPlayerbotAIConfig.hasLog("bot_events.csv"))
     {
@@ -1664,9 +1664,9 @@ void TravelMgr::logEvent(PlayerbotAI* ai, string eventName, string info1, string
 };
 
 
-void TravelMgr::logEvent(PlayerbotAI* ai, string eventName, ObjectGuid guid, string info2)
+void TravelMgr::logEvent(PlayerbotAI* ai, std::string eventName, ObjectGuid guid, std::string info2)
 {
-    string info1 = "";
+    std::string info1 = "";
 
     Unit* victim;
     if (guid)
@@ -1783,7 +1783,7 @@ void TravelMgr::loadAreaLevels()
 
     PlayerbotDatabase.PExecute("CREATE TABLE IF NOT EXISTS `ai_playerbot_zone_level` (`id` bigint(20) NOT NULL ,`level` bigint(20) NOT NULL,PRIMARY KEY(`id`))");
 
-    string query = "SELECT id, level FROM ai_playerbot_zone_level";
+    std::string query = "SELECT id, level FROM ai_playerbot_zone_level";
 
     {
         QueryResult* result = PlayerbotDatabase.PQuery(query.c_str());
@@ -1837,7 +1837,7 @@ void TravelMgr::logQuestError(uint32 errorNr, Quest* quest, uint32 objective, ui
 
     if (errorNr == 1)
     {
-        string unitName = "<unknown>";
+        std::string unitName = "<unknown>";
         CreatureInfo const* cInfo = NULL;
         GameObjectInfo const* gInfo = NULL;
 
@@ -1855,7 +1855,7 @@ void TravelMgr::logQuestError(uint32 errorNr, Quest* quest, uint32 objective, ui
     }
     else if (errorNr == 2)
     {
-        string unitName = "<unknown>";
+        std::string unitName = "<unknown>";
         CreatureInfo const* cInfo = NULL;
         GameObjectInfo const* gInfo = NULL;
 
@@ -1879,7 +1879,7 @@ void TravelMgr::logQuestError(uint32 errorNr, Quest* quest, uint32 objective, ui
     {
         ItemPrototype const* proto = sObjectMgr.GetItemPrototype(itemId);
 
-        string unitName = "<unknown>";
+        std::string unitName = "<unknown>";
         CreatureInfo const* cInfo = NULL;
         GameObjectInfo const* gInfo = NULL;
 
@@ -2177,7 +2177,7 @@ void TravelMgr::LoadQuestTravelTable()
 
         if (cInfo->Rank == 3 || (cInfo->Rank == 1 && !point.isOverworld() && u.c == 1))
         {
-            string nodeName = cInfo->Name;
+            std::string nodeName = cInfo->Name;
 
             bLoc = new BossTravelDestination(u.entry, sPlayerbotAIConfig.tooCloseDistance, sPlayerbotAIConfig.sightDistance);
             bLoc->setExpireDelay(5 * 60 * 1000);
@@ -2284,7 +2284,7 @@ void TravelMgr::LoadQuestTravelTable()
 
             WorldPosition point = WorldPosition(cData.mapid, cData.posX, cData.posY, cData.posZ, cData.orientation);
 
-            string name = cInfo->Name;
+            std::string name = cInfo->Name;
             name.erase(remove(name.begin(), name.end(), ','), name.end());
             name.erase(remove(name.begin(), name.end(), '\"'), name.end());
 
@@ -2727,7 +2727,7 @@ void TravelMgr::LoadQuestTravelTable()
 
             WorldPosition point = WorldPosition(gData.mapid, gData.posX, gData.posY, gData.posZ, gData.orientation);
 
-            string name = data->name;
+            std::string name = data->name;
             name.erase(remove(name.begin(), name.end(), ','), name.end());
             name.erase(remove(name.begin(), name.end(), '\"'), name.end());
 
@@ -2744,14 +2744,14 @@ void TravelMgr::LoadQuestTravelTable()
 
     if (sPlayerbotAIConfig.hasLog("zones.csv"))
     {
-        std::unordered_map<string, std::vector<WorldPosition>> zoneLocs;
+        std::unordered_map<std::string, std::vector<WorldPosition>> zoneLocs;
 
         std::vector<WorldPosition> Locs = {};
         
         for (auto& u : units)
         {
             WorldPosition point = WorldPosition(u.map, u.x, u.y, u.z, u.o);
-            string name = to_string(u.map) + point.getAreaName();
+            std::string name = to_string(u.map) + point.getAreaName();
 
             if (zoneLocs.find(name) == zoneLocs.end())
                 zoneLocs.insert_or_assign(name, Locs);
@@ -2910,7 +2910,7 @@ void TravelMgr::LoadQuestTravelTable()
 
         //Use randombot 0.
         ostringstream cout; cout << sPlayerbotAIConfig.randomBotAccountPrefix << 0;
-        string accountName = cout.str();
+        std::string accountName = cout.str();
 
         QueryResult* results = LoginDatabase.PQuery("SELECT id FROM account where username = '%s'", accountName.c_str());
         if (results)
@@ -2928,7 +2928,7 @@ void TravelMgr::LoadQuestTravelTable()
 
             std::vector <pair<pair<uint32, uint32>, uint32>> classSpecLevel;
 
-            std::unordered_map<string, std::vector<pair<pair<uint32, uint32>, uint32>>> actions;
+            std::unordered_map<std::string, std::vector<pair<pair<uint32, uint32>, uint32>>> actions;
 
             ostringstream out;
 
@@ -2978,8 +2978,8 @@ void TravelMgr::LoadQuestTravelTable()
 
                                     AiObjectContext* con = ai->GetAiObjectContext();
 
-                                    std::list<string> tstrats;
-                                    set<string> strategies, sstrats;
+                                    std::list<std::string> tstrats;
+                                    set<std::string> strategies, sstrats;
 
                                     tstrats = ai->GetStrategies(BOT_STATE_COMBAT);
                                     sstrats = con->GetSupportedStrategies();
@@ -3072,8 +3072,8 @@ void TravelMgr::LoadQuestTravelTable()
             for (auto& action : actions)
                 actionKeys.push_back(action.first);
 
-            std::sort(actionKeys.begin(), actionKeys.end(), [](string i, string j)
-                {stringstream is(i); stringstream js(j); float iref, jref; string iact, jact, itrig, jtrig, istrat, jstrat;
+            std::sort(actionKeys.begin(), actionKeys.end(), [](std::string i, std::string j)
+                {stringstream is(i); stringstream js(j); float iref, jref; std::string iact, jact, itrig, jtrig, istrat, jstrat;
             is >> iref >> iact >> itrig >> istrat;
             js >> jref >> jact >> jtrig >> jstrat;
             if (iref > jref)
@@ -3233,7 +3233,7 @@ void TravelMgr::LoadQuestTravelTable()
         for (auto j : i.second->getPoints())
         {
             ostringstream out;
-            string name = i.second->getTitle();
+            std::string name = i.second->getTitle();
             name.erase(remove(name.begin(), name.end(), '\"'), name.end());
             out << std::fixed << std::setprecision(2) << name.c_str() << "," << i.first << "," << j->getDisplayX() << "," << j->getDisplayY() << "," << j->getX() << "," << j->getY() << "," << j->getZ();
             sPlayerbotAIConfig.log(5, out.str().c_str());
@@ -3738,9 +3738,9 @@ float TravelMgr::fastMapTransDistance(WorldPosition start, WorldPosition end)
     return minDist;
 }
 
-void TravelMgr::printGrid(uint32 mapId, int x, int y, string type)
+void TravelMgr::printGrid(uint32 mapId, int x, int y, std::string type)
 {
-    string fileName = "unload_grid.csv";
+    std::string fileName = "unload_grid.csv";
 
     if (sPlayerbotAIConfig.hasLog(fileName))
     {
@@ -3754,9 +3754,9 @@ void TravelMgr::printGrid(uint32 mapId, int x, int y, string type)
     }
 }
 
-void TravelMgr::printObj(WorldObject* obj, string type)
+void TravelMgr::printObj(WorldObject* obj, std::string type)
 {
-    string fileName = "unload_grid.csv";
+    std::string fileName = "unload_grid.csv";
 
     if (sPlayerbotAIConfig.hasLog(fileName))
     {

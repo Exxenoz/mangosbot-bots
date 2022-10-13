@@ -40,7 +40,7 @@ void PlayerbotTextMgr::LoadBotTexts()
             std::string text;
             std::map<int32, std::string> text_locale;
             Field* fields = results->Fetch();
-            string name = fields[0].GetString();
+            std::string name = fields[0].GetString();
             text = fields[1].GetString();
             uint32 sayType = fields[2].GetUInt32();
             uint32 replyType = fields[3].GetUInt32();
@@ -67,7 +67,7 @@ void PlayerbotTextMgr::LoadBotTextChance()
             do
             {
                 Field* fields = results->Fetch();
-                string name = fields[0].GetString();
+                std::string name = fields[0].GetString();
                 uint32 probability = fields[1].GetUInt32();
 
                 botTextChance[name] = probability;
@@ -79,7 +79,7 @@ void PlayerbotTextMgr::LoadBotTextChance()
 
 // general texts
 
-string PlayerbotTextMgr::GetBotText(string name)
+string PlayerbotTextMgr::GetBotText(std::string name)
 {
     if (botTexts.empty())
     {
@@ -106,13 +106,13 @@ string PlayerbotTextMgr::GetBotText(string name)
     }
 }
 
-string PlayerbotTextMgr::GetBotText(string name, std::map<string, string> placeholders)
+string PlayerbotTextMgr::GetBotText(std::string name, std::map<std::string, string> placeholders)
 {
-    string botText = GetBotText(name);
+    std::string botText = GetBotText(name);
     if (botText.empty())
         return "";
 
-    for (map<string, string>::iterator i = placeholders.begin(); i != placeholders.end(); ++i)
+    for (map<std::string, string>::iterator i = placeholders.begin(); i != placeholders.end(); ++i)
         replaceAll(botText, i->first, i->second);
 
     return botText;
@@ -120,7 +120,7 @@ string PlayerbotTextMgr::GetBotText(string name, std::map<string, string> placeh
 
 // chat replies
 
-string PlayerbotTextMgr::GetBotText(ChatReplyType replyType, std::map<string, string> placeholders)
+string PlayerbotTextMgr::GetBotText(ChatReplyType replyType, std::map<std::string, string> placeholders)
 {
     if (botTexts.empty())
     {
@@ -154,15 +154,15 @@ string PlayerbotTextMgr::GetBotText(ChatReplyType replyType, std::map<string, st
             botText = textEntry.m_text;
     }
 
-    for (map<string, string>::iterator i = placeholders.begin(); i != placeholders.end(); ++i)
+    for (map<std::string, string>::iterator i = placeholders.begin(); i != placeholders.end(); ++i)
         replaceAll(botText, i->first, i->second);
 
     return botText;
 }
 
-string PlayerbotTextMgr::GetBotText(ChatReplyType replyType, string name)
+string PlayerbotTextMgr::GetBotText(ChatReplyType replyType, std::string name)
 {
-    std::map<string, string> placeholders;
+    std::map<std::string, string> placeholders;
     placeholders["%s"] = name;
 
     return GetBotText(replyType, placeholders);
@@ -170,7 +170,7 @@ string PlayerbotTextMgr::GetBotText(ChatReplyType replyType, string name)
 
 // probabilities
 
-bool PlayerbotTextMgr::rollTextChance(string name)
+bool PlayerbotTextMgr::rollTextChance(std::string name)
 {
     if (!botTextChance[name])
         return true;
@@ -178,7 +178,7 @@ bool PlayerbotTextMgr::rollTextChance(string name)
     return urand(0, 100) < botTextChance[name];
 }
 
-bool PlayerbotTextMgr::GetBotText(string name, string &text)
+bool PlayerbotTextMgr::GetBotText(std::string name, std::string &text)
 {
     if (!rollTextChance(name))
         return false;
@@ -187,7 +187,7 @@ bool PlayerbotTextMgr::GetBotText(string name, string &text)
     return !text.empty();
 }
 
-bool PlayerbotTextMgr::GetBotText(string name, string& text, std::map<string, string> placeholders)
+bool PlayerbotTextMgr::GetBotText(std::string name, string& text, std::map<std::string, string> placeholders)
 {
     if (!rollTextChance(name))
         return false;

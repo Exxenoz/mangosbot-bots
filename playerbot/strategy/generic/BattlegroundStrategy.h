@@ -9,7 +9,7 @@ namespace ai
         BGStrategy(PlayerbotAI* ai);
         virtual int GetType() { return STRATEGY_TYPE_NONCOMBAT; }
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "bg"; }
+        virtual std::string getName() { return "bg"; }
     };
 
     class BattlegroundStrategy : public Strategy
@@ -18,7 +18,7 @@ namespace ai
         BattlegroundStrategy(PlayerbotAI* ai) : Strategy(ai) {};
         virtual int GetType() { return STRATEGY_TYPE_NONCOMBAT; }
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "battleground"; }
+        virtual std::string getName() { return "battleground"; }
     };
 
     class WarsongStrategy : public Strategy
@@ -27,7 +27,7 @@ namespace ai
         WarsongStrategy(PlayerbotAI* ai) : Strategy(ai) {};
         virtual int GetType() { return STRATEGY_TYPE_GENERIC; }
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "warsong"; }
+        virtual std::string getName() { return "warsong"; }
     };
 
     class AlteracStrategy : public Strategy
@@ -36,7 +36,7 @@ namespace ai
         AlteracStrategy(PlayerbotAI* ai) : Strategy(ai) {};
         virtual int GetType() { return STRATEGY_TYPE_GENERIC; }
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "alterac"; }
+        virtual std::string getName() { return "alterac"; }
     };
 
     class ArathiStrategy : public Strategy
@@ -45,7 +45,7 @@ namespace ai
         ArathiStrategy(PlayerbotAI* ai) : Strategy(ai) {};
         virtual int GetType() { return STRATEGY_TYPE_GENERIC; }
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "arathi"; }
+        virtual std::string getName() { return "arathi"; }
     };
 
     class EyeStrategy : public Strategy
@@ -54,7 +54,7 @@ namespace ai
         EyeStrategy(PlayerbotAI* ai) : Strategy(ai) {};
         virtual int GetType() { return STRATEGY_TYPE_GENERIC; }
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);
-        virtual string getName() { return "eye"; }
+        virtual std::string getName() { return "eye"; }
     };
 
     class IsleStrategy : public Strategy
@@ -63,7 +63,7 @@ namespace ai
         IsleStrategy(PlayerbotAI* ai) : Strategy(ai) {};
         virtual int GetType() { return STRATEGY_TYPE_GENERIC; }
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);
-        virtual string getName() { return "isle"; }
+        virtual std::string getName() { return "isle"; }
     };
 
     class ArenaStrategy : public Strategy
@@ -72,6 +72,6 @@ namespace ai
         ArenaStrategy(PlayerbotAI* ai) : Strategy(ai) {};
         virtual int GetType() { return STRATEGY_TYPE_GENERIC; }
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "arena"; }
+        virtual std::string getName() { return "arena"; }
     };
 }

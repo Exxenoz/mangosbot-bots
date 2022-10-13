@@ -8,7 +8,7 @@ namespace ai
 {
     class AutoLearnSpellAction : public Action {
     public:
-        AutoLearnSpellAction(PlayerbotAI* ai, string name = "auto learn spell") : Action(ai, name) {}
+        AutoLearnSpellAction(PlayerbotAI* ai, std::string name = "auto learn spell") : Action(ai, name) {}
 
     public:
         virtual bool Execute(Event event);

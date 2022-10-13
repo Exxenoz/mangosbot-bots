@@ -23,7 +23,7 @@ PricingStrategy* Category::GetPricingStrategy()
         return pricingStrategy;
 
     ostringstream out; out << "AhBot.PricingStrategy." << GetName();
-    string name = sAhBotConfig.GetStringDefault(out.str().c_str(), "default");
+    std::string name = sAhBotConfig.GetStringDefault(out.str().c_str(), "default");
     return pricingStrategy = PricingStrategyFactory::Create(name, this);
 }
 

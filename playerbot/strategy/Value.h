@@ -10,12 +10,12 @@ namespace ai
     class UntypedValue : public AiNamedObject
     {
     public:
-        UntypedValue(PlayerbotAI* ai, string name) : AiNamedObject(ai, name) {}
+        UntypedValue(PlayerbotAI* ai, std::string name) : AiNamedObject(ai, name) {}
         virtual void Update() {}
         virtual void Reset() {}
-        virtual string Format() { return "?"; }
-        virtual string Save() { return "?"; }
-        virtual bool Load(string value) { return false; }
+        virtual std::string Format() { return "?"; }
+        virtual std::string Save() { return "?"; }
+        virtual bool Load(std::string value) { return false; }
     };
 
     template<class T>
@@ -33,7 +33,7 @@ namespace ai
     class CalculatedValue : public UntypedValue, public Value<T>
 	{
 	public:
-        CalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) : UntypedValue(ai, name),
+        CalculatedValue(PlayerbotAI* ai, std::string name = "value", int checkInterval = 1) : UntypedValue(ai, name),
             checkInterval(checkInterval)
         {
             lastCheckTime = 0;
@@ -75,7 +75,7 @@ namespace ai
     template <class T> class SingleCalculatedValue : public CalculatedValue<T>
     {
     public:
-        SingleCalculatedValue(PlayerbotAI* ai, string name = "value") : CalculatedValue<T>(ai, name) { this->Reset(); }
+        SingleCalculatedValue(PlayerbotAI* ai, std::string name = "value") : CalculatedValue<T>(ai, name) { this->Reset(); }
 
         virtual T Get()
         {
@@ -95,7 +95,7 @@ namespace ai
     template<class T> class MemoryCalculatedValue : public CalculatedValue<T>
     {
     public:
-        MemoryCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) : CalculatedValue<T>(ai, name,checkInterval) { lastChangeTime = time(0); }
+        MemoryCalculatedValue(PlayerbotAI* ai, std::string name = "value", int checkInterval = 1) : CalculatedValue<T>(ai, name,checkInterval) { lastChangeTime = time(0); }
         virtual bool EqualToLast(T value) = 0;
         virtual bool CanCheckChange() { return time(0) - lastChangeTime > minChangeInterval && !EqualToLast(this->value); }
         virtual bool UpdateChange() { if (!CanCheckChange()) return false; lastChangeTime = time(0); lastValue = this->value; return true; }
@@ -116,7 +116,7 @@ namespace ai
     template<class T> class LogCalculatedValue : public MemoryCalculatedValue<T>
     {
     public:
-        LogCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) : MemoryCalculatedValue<T>(ai, name, checkInterval) {};
+        LogCalculatedValue(PlayerbotAI* ai, std::string name = "value", int checkInterval = 1) : MemoryCalculatedValue<T>(ai, name, checkInterval) {};
         virtual bool UpdateChange() { if (this->UpdateChange()) return false; valueLog.push_back(make_pair(this->value, time(0))); if (valueLog.size() > logLength) valueLog.pop_front(); return true; }
 
         std::list<pair<T, time_t>> ValueLog() { return valueLog; }
@@ -130,10 +130,10 @@ namespace ai
     class Uint8CalculatedValue : public CalculatedValue<uint8>
     {
     public:
-        Uint8CalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
+        Uint8CalculatedValue(PlayerbotAI* ai, std::string name = "value", int checkInterval = 1) :
             CalculatedValue<uint8>(ai, name, checkInterval) {}
 
-        virtual string Format()
+        virtual std::string Format()
         {
             ostringstream out; out << (int)this->Calculate();
             return out.str();
@@ -143,10 +143,10 @@ namespace ai
     class Uint32CalculatedValue : public CalculatedValue<uint32>
     {
     public:
-        Uint32CalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
+        Uint32CalculatedValue(PlayerbotAI* ai, std::string name = "value", int checkInterval = 1) :
             CalculatedValue<uint32>(ai, name, checkInterval) {}
 
-        virtual string Format()
+        virtual std::string Format()
         {
             ostringstream out; out << (int)this->Calculate();
             return out.str();
@@ -156,10 +156,10 @@ namespace ai
     class FloatCalculatedValue : public CalculatedValue<float>
     {
     public:
-        FloatCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
+        FloatCalculatedValue(PlayerbotAI* ai, std::string name = "value", int checkInterval = 1) :
             CalculatedValue<float>(ai, name, checkInterval) {}
 
-        virtual string Format()
+        virtual std::string Format()
         {
             ostringstream out; out << this->Calculate();
             return out.str();
@@ -169,10 +169,10 @@ namespace ai
     class BoolCalculatedValue : public CalculatedValue<bool>
     {
     public:
-        BoolCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
+        BoolCalculatedValue(PlayerbotAI* ai, std::string name = "value", int checkInterval = 1) :
             CalculatedValue<bool>(ai, name, checkInterval) {}
 
-        virtual string Format()
+        virtual std::string Format()
         {
             return this->Calculate() ? "true" : "false";
         }
@@ -181,10 +181,10 @@ namespace ai
     class UnitCalculatedValue : public CalculatedValue<Unit*>
     {
     public:
-        UnitCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
+        UnitCalculatedValue(PlayerbotAI* ai, std::string name = "value", int checkInterval = 1) :
             CalculatedValue<Unit*>(ai, name, checkInterval) { this->lastCheckTime = time(0) - checkInterval / 2; }
 
-        virtual string Format()
+        virtual std::string Format()
         {
             Unit* unit = this->Calculate();
             return unit ? unit->GetName() : "<none>";
@@ -194,10 +194,10 @@ namespace ai
     class CDPairCalculatedValue : public CalculatedValue<CreatureDataPair const*>
     {
     public:
-        CDPairCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
+        CDPairCalculatedValue(PlayerbotAI* ai, std::string name = "value", int checkInterval = 1) :
             CalculatedValue<CreatureDataPair const*>(ai, name, checkInterval) { this->lastCheckTime = time(0) - checkInterval / 2; }
 
-        virtual string Format()
+        virtual std::string Format()
         {
             CreatureDataPair const* creatureDataPair = this->Calculate();
             CreatureInfo const* bmTemplate = ObjectMgr::GetCreatureTemplate(creatureDataPair->second.id);
@@ -208,10 +208,10 @@ namespace ai
     class CDPairListCalculatedValue : public CalculatedValue<std::list<CreatureDataPair const*>>
     {
     public:
-        CDPairListCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
+        CDPairListCalculatedValue(PlayerbotAI* ai, std::string name = "value", int checkInterval = 1) :
             CalculatedValue<std::list<CreatureDataPair const*>>(ai, name, checkInterval) { this->lastCheckTime = time(0) - checkInterval / 2; }
 
-        virtual string Format()
+        virtual std::string Format()
         {
             ostringstream out; out << "{";
             std::list<CreatureDataPair const*> cdPairs = this->Calculate();
@@ -228,10 +228,10 @@ namespace ai
     class ObjectGuidCalculatedValue : public CalculatedValue<ObjectGuid>
     {
     public:
-        ObjectGuidCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
+        ObjectGuidCalculatedValue(PlayerbotAI* ai, std::string name = "value", int checkInterval = 1) :
             CalculatedValue<ObjectGuid>(ai, name, checkInterval) { this->lastCheckTime = time(0) - checkInterval / 2; }
 
-        virtual string Format()
+        virtual std::string Format()
         {
             ObjectGuid guid = this->Calculate();
             return guid ? to_string(guid.GetRawValue()) : "<none>";
@@ -241,10 +241,10 @@ namespace ai
     class ObjectGuidListCalculatedValue : public CalculatedValue<std::list<ObjectGuid> >
     {
     public:
-        ObjectGuidListCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
+        ObjectGuidListCalculatedValue(PlayerbotAI* ai, std::string name = "value", int checkInterval = 1) :
             CalculatedValue<std::list<ObjectGuid> >(ai, name, checkInterval) { this->lastCheckTime = time(0) - checkInterval/2; }
 
-        virtual string Format()
+        virtual std::string Format()
         {
             ostringstream out; out << "{";
             std::list<ObjectGuid> guids = this->Calculate();
@@ -262,7 +262,7 @@ namespace ai
     class ManualSetValue : public UntypedValue, public Value<T>
     {
     public:
-        ManualSetValue(PlayerbotAI* ai, T defaultValue, string name = "value") :
+        ManualSetValue(PlayerbotAI* ai, T defaultValue, std::string name = "value") :
             UntypedValue(ai, name), value(defaultValue), defaultValue(defaultValue) {}
         virtual ~ManualSetValue() {}
 
@@ -281,10 +281,10 @@ namespace ai
     class UnitManualSetValue : public ManualSetValue<Unit*>
     {
     public:
-        UnitManualSetValue(PlayerbotAI* ai, Unit* defaultValue, string name = "value") :
+        UnitManualSetValue(PlayerbotAI* ai, Unit* defaultValue, std::string name = "value") :
             ManualSetValue<Unit*>(ai, defaultValue, name) {}
 
-        virtual string Format()
+        virtual std::string Format()
         {
             Unit* unit = Get();
             return unit ? unit->GetName() : "<none>";

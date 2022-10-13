@@ -18,7 +18,7 @@ using namespace ai;
 class BGJoinAction : public Action
 {
 public:
-    BGJoinAction(PlayerbotAI* ai, string name = "bg join") : Action(ai, name) {}
+    BGJoinAction(PlayerbotAI* ai, std::string name = "bg join") : Action(ai, name) {}
     virtual bool Execute(Event event);
     virtual bool isUseful();
     virtual bool canJoinBg(BattleGroundQueueTypeId queueTypeId, BattleGroundBracketId bracketId);
@@ -35,14 +35,14 @@ protected:
 class FreeBGJoinAction : public BGJoinAction
 {
 public:
-    FreeBGJoinAction(PlayerbotAI* ai, string name = "free bg join") : BGJoinAction(ai, name) {}
+    FreeBGJoinAction(PlayerbotAI* ai, std::string name = "free bg join") : BGJoinAction(ai, name) {}
     virtual bool shouldJoinBg(BattleGroundQueueTypeId queueTypeId, BattleGroundBracketId bracketId);
 };
 
 class BGLeaveAction : public Action
 {
 public:
-    BGLeaveAction(PlayerbotAI* ai, string name = "bg leave") : Action(ai) {}
+    BGLeaveAction(PlayerbotAI* ai, std::string name = "bg leave") : Action(ai) {}
     virtual bool Execute(Event event);
 };
 
@@ -57,7 +57,7 @@ public:
 class BGStatusCheckAction : public Action
 {
 public:
-    BGStatusCheckAction(PlayerbotAI* ai, string name = "bg status check") : Action(ai, name) {}
+    BGStatusCheckAction(PlayerbotAI* ai, std::string name = "bg status check") : Action(ai, name) {}
     virtual bool Execute(Event event);
     virtual bool isUseful();
 };

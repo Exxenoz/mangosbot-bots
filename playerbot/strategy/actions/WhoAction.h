@@ -13,9 +13,9 @@ namespace ai
         virtual bool Execute(Event event);
 
     private:
-        string QueryTrade(string text);
-        string QuerySkill(string text);
-        string QuerySpec(string text);
+        std::string QueryTrade(std::string text);
+        std::string QuerySkill(std::string text);
+        std::string QuerySpec(std::string text);
     };
 
 }

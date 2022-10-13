@@ -131,7 +131,7 @@ namespace ai
     class DialogStatusValue : public Uint32CalculatedValue, public Qualified
     {
     public:
-        DialogStatusValue(PlayerbotAI* ai, string name = "dialog status") : Uint32CalculatedValue(ai, name , 2) {}
+        DialogStatusValue(PlayerbotAI* ai, std::string name = "dialog status") : Uint32CalculatedValue(ai, name , 2) {}
 
         static uint32 getDialogStatus(Player* bot, int32 questgiver, uint32 questId = 0);
 

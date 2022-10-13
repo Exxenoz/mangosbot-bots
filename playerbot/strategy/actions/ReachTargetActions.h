@@ -10,7 +10,7 @@ namespace ai
     class ReachTargetAction : public MovementAction
     {
     public:
-        ReachTargetAction(PlayerbotAI* ai, string name, float distance) : MovementAction(ai, name)
+        ReachTargetAction(PlayerbotAI* ai, std::string name, float distance) : MovementAction(ai, name)
 		{
             this->distance = distance;
         }
@@ -58,7 +58,7 @@ namespace ai
             //Unit* target = AI_VALUE(Unit*, GetTargetName());
             //return target && (!bot->IsWithinDistInMap(target, distance) || (bot->IsWithinDistInMap(target, distance) && !bot->IsWithinLOSInMap(target, true)));
         }
-        virtual string GetTargetName() { return "current target"; }
+        virtual std::string GetTargetName() { return "current target"; }
 
     protected:
         float distance;
@@ -67,7 +67,7 @@ namespace ai
     class CastReachTargetSpellAction : public CastSpellAction
     {
     public:
-        CastReachTargetSpellAction(PlayerbotAI* ai, string spell, float distance) : CastSpellAction(ai, spell)
+        CastReachTargetSpellAction(PlayerbotAI* ai, std::string spell, float distance) : CastSpellAction(ai, spell)
 		{
             this->distance = distance;
         }
@@ -96,6 +96,6 @@ namespace ai
     {
     public:
         ReachPartyMemberToHealAction(PlayerbotAI* ai) : ReachTargetAction(ai, "reach party member to heal", ai->GetRange("heal")) {}
-        virtual string GetTargetName() { return "party member to heal"; }
+        virtual std::string GetTargetName() { return "party member to heal"; }
     };
 }

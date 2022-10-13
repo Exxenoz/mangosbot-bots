@@ -7,7 +7,7 @@ namespace ai
     {
     public:
         TankAssistStrategy(PlayerbotAI* ai) : Strategy(ai) {}
-        virtual string getName() { return "tank assist"; }
+        virtual std::string getName() { return "tank assist"; }
         virtual int GetType() { return STRATEGY_TYPE_TANK; }
 
     public:

@@ -11,7 +11,7 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "arcane"; }
+        virtual std::string getName() { return "arcane"; }
         virtual NextAction** getDefaultActions();
     };
 
@@ -22,6 +22,6 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);
-        virtual string getName() { return "arcane aoe"; }
+        virtual std::string getName() { return "arcane aoe"; }
     };
 }

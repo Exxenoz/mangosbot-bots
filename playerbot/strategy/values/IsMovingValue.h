@@ -7,7 +7,7 @@ namespace ai
     class IsMovingValue : public BoolCalculatedValue, public Qualified
 	{
 	public:
-        IsMovingValue(PlayerbotAI* ai, string name = "is moving") : BoolCalculatedValue(ai, name) {}
+        IsMovingValue(PlayerbotAI* ai, std::string name = "is moving") : BoolCalculatedValue(ai, name) {}
 
         virtual bool Calculate()
         {
@@ -23,7 +23,7 @@ namespace ai
     class IsSwimmingValue : public BoolCalculatedValue, public Qualified
 	{
 	public:
-        IsSwimmingValue(PlayerbotAI* ai, string name = "is swimming") : BoolCalculatedValue(ai, name) {}
+        IsSwimmingValue(PlayerbotAI* ai, std::string name = "is swimming") : BoolCalculatedValue(ai, name) {}
 
         virtual bool Calculate()
         {

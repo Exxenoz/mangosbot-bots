@@ -229,7 +229,7 @@ void ChooseTravelTargetAction::ReportTravelTarget(TravelTarget* newTarget, Trave
         else
             gInfo = ObjectMgr::GetGameObjectInfo(destination->getEntry() * -1);
 
-        string Sub;
+        std::string Sub;
 
         if (newTarget->isGroupCopy())
             out << "Following group ";
@@ -341,7 +341,7 @@ void ChooseTravelTargetAction::ReportTravelTarget(TravelTarget* newTarget, Trave
 
     ai->TellMasterNoFacing(out,PLAYERBOT_SECURITY_ALLOW_ALL, false);
 
-    string message = out.str().c_str();
+    std::string message = out.str().c_str();
 
     if (sPlayerbotAIConfig.hasLog("travel_map.csv"))
     {
@@ -732,7 +732,7 @@ bool ChooseTravelTargetAction::SetExploreTarget(TravelTarget* target)
 
 char* strstri(const char* haystack, const char* needle);
 
-bool ChooseTravelTargetAction::SetNpcFlagTarget(TravelTarget* target, std::vector<NPCFlags> flags, string name, std::vector<uint32> items)
+bool ChooseTravelTargetAction::SetNpcFlagTarget(TravelTarget* target, std::vector<NPCFlags> flags, std::string name, std::vector<uint32> items)
 {
     WorldPosition* botPos = &WorldPosition(bot);
 
@@ -829,11 +829,11 @@ bool ChooseTravelTargetAction::SetNullTarget(TravelTarget* target)
     return true;
 }
 
-vector<string> split(const string& s, char delim);
+vector<std::string> split(const string& s, char delim);
 char* strstri(const char* haystack, const char* needle);
 
 //Find a destination based on (part of) it's name. Includes zones, ncps and mobs. Picks the closest one that matches.
-TravelDestination* ChooseTravelTargetAction::FindDestination(Player* bot, string name)
+TravelDestination* ChooseTravelTargetAction::FindDestination(Player* bot, std::string name)
 {
     PlayerbotAI* ai = bot->GetPlayerbotAI();
 

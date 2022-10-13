@@ -22,12 +22,12 @@ PlayerbotAIConfig::PlayerbotAIConfig()
 }
 
 template <class T>
-void LoadList(string value, T &list)
+void LoadList(std::string value, T &list)
 {
-    std::vector<string> ids = split(value, ',');
-    for (std::vector<string>::iterator i = ids.begin(); i != ids.end(); i++)
+    std::vector<std::string> ids = split(value, ',');
+    for (std::vector<std::string>::iterator i = ids.begin(); i != ids.end(); i++)
     {
-        string string = *i;
+        std::string string = *i;
         if (string.empty())
             continue;
 
@@ -38,12 +38,12 @@ void LoadList(string value, T &list)
 }
 
 template <class T>
-void LoadListString(string value, T& list)
+void LoadListString(std::string value, T& list)
 {
-    std::vector<string> strings = split(value, ',');
-    for (std::vector<string>::iterator i = strings.begin(); i != strings.end(); i++)
+    std::vector<std::string> strings = split(value, ',');
+    for (std::vector<std::string>::iterator i = strings.begin(); i != strings.end(); i++)
     {
-        string string = *i;
+        std::string string = *i;
         if (string.empty())
             continue;
 
@@ -189,7 +189,7 @@ bool PlayerbotAIConfig::Initialize()
         for (uint32 spec = 0; spec < MAX_LEVEL; ++spec)
         {
             ostringstream os; os << "AiPlayerbot.PremadeSpecName." << cls << "." << spec;
-            string specName = config.GetStringDefault(os.str().c_str(), "");
+            std::string specName = config.GetStringDefault(os.str().c_str(), "");
             if (!specName.empty())
             {
                 ostringstream os; os << "AiPlayerbot.PremadeSpecProb." << cls << "." << spec;
@@ -200,7 +200,7 @@ bool PlayerbotAIConfig::Initialize()
                 for (int level = 10; level <= 100; level++)
                 {
                     ostringstream os; os << "AiPlayerbot.PremadeSpecLink." << cls << "." << spec << "." << level;
-                    string specLink = config.GetStringDefault(os.str().c_str(), "");
+                    std::string specLink = config.GetStringDefault(os.str().c_str(), "");
                     specLink = specLink.substr(0, specLink.find("#", 0));;
                     specLink = specLink.substr(0, specLink.find(" ", 0));;
 
@@ -238,7 +238,7 @@ bool PlayerbotAIConfig::Initialize()
     }
 
     botCheats.clear();
-    LoadListString<std::list<string>>(config.GetStringDefault("AiPlayerbot.BotCheats", "taxi,supply"), botCheats);
+    LoadListString<std::list<std::string>>(config.GetStringDefault("AiPlayerbot.BotCheats", "taxi,supply"), botCheats);
 
     botCheatMask = 0;
 
@@ -256,7 +256,7 @@ bool PlayerbotAIConfig::Initialize()
         botCheatMask |= (uint32)BotCheatMask::supply;
 
 
-    LoadListString<std::list<string>>(config.GetStringDefault("AiPlayerbot.AllowedLogFiles", ""), allowedLogFiles);
+    LoadListString<std::list<std::string>>(config.GetStringDefault("AiPlayerbot.AllowedLogFiles", ""), allowedLogFiles);
 
     worldBuffs.clear();
     
@@ -375,7 +375,7 @@ bool PlayerbotAIConfig::IsInPvpProhibitedZone(uint32 id)
 	return find(pvpProhibitedZoneIds.begin(), pvpProhibitedZoneIds.end(), id) != pvpProhibitedZoneIds.end();
 }
 
-string PlayerbotAIConfig::GetValue(string name)
+string PlayerbotAIConfig::GetValue(std::string name)
 {
     ostringstream out;
 
@@ -414,7 +414,7 @@ string PlayerbotAIConfig::GetValue(string name)
     return out.str();
 }
 
-void PlayerbotAIConfig::SetValue(string name, string value)
+void PlayerbotAIConfig::SetValue(std::string name, std::string value)
 {
     istringstream out(value, istringstream::in);
 
@@ -548,7 +548,7 @@ std::string PlayerbotAIConfig::GetTimestampStr()
     return std::string(buf);
 }
 
-bool PlayerbotAIConfig::openLog(string fileName, char const* mode)
+bool PlayerbotAIConfig::openLog(std::string fileName, char const* mode)
 {
     if (!hasLog(fileName))
         return false;
@@ -566,7 +566,7 @@ bool PlayerbotAIConfig::openLog(string fileName, char const* mode)
     if (fileOpen) //close log file
         fclose(file);
 
-    string m_logsDir = sConfig.GetStringDefault("LogsDir");
+    std::string m_logsDir = sConfig.GetStringDefault("LogsDir");
     if (!m_logsDir.empty())
     {
         if ((m_logsDir.at(m_logsDir.length() - 1) != '/') && (m_logsDir.at(m_logsDir.length() - 1) != '\\'))
@@ -583,7 +583,7 @@ bool PlayerbotAIConfig::openLog(string fileName, char const* mode)
     return true;
 }
 
-void PlayerbotAIConfig::log(string fileName, const char* str, ...)
+void PlayerbotAIConfig::log(std::string fileName, const char* str, ...)
 {
     if (!str)
         return;

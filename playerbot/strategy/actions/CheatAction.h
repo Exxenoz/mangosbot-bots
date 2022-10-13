@@ -10,8 +10,8 @@ namespace ai
         CheatAction(PlayerbotAI* ai) : Action(ai, "cheat") {}
         virtual bool Execute(Event event);
     private:
-        static BotCheatMask GetCheatMask(string cheat);
-        static string GetCheatName(BotCheatMask cheatMask);
+        static BotCheatMask GetCheatMask(std::string cheat);
+        static std::string GetCheatName(BotCheatMask cheatMask);
         void ListCheats();
     };
 }

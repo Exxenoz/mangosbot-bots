@@ -8,7 +8,7 @@ namespace ai
 {
     class MovementAction : public Action {
     public:
-        MovementAction(PlayerbotAI* ai, string name) : Action(ai, name) {}
+        MovementAction(PlayerbotAI* ai, std::string name) : Action(ai, name) {}
 
     protected:
         bool ChaseTo(WorldObject *obj, float distance = 0.0f, float angle = 0.0f);

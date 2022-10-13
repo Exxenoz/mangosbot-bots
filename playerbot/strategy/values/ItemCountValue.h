@@ -12,13 +12,13 @@ namespace ai
         virtual bool Execute(Event event) { return false; }
 
     protected:
-        std::list<Item*> Find(string qualifier);
+        std::list<Item*> Find(std::string qualifier);
     };
 
     class ItemCountValue : public Uint32CalculatedValue, public Qualified, InventoryItemValueBase
 	{
 	public:
-        ItemCountValue(PlayerbotAI* ai, string name = "item count") : Uint32CalculatedValue(ai, name), InventoryItemValueBase(ai) {}
+        ItemCountValue(PlayerbotAI* ai, std::string name = "item count") : Uint32CalculatedValue(ai, name), InventoryItemValueBase(ai) {}
 
     public:
         virtual uint32 Calculate();
@@ -27,7 +27,7 @@ namespace ai
     class InventoryItemValue : public CalculatedValue<std::list<Item*> >, public Qualified, InventoryItemValueBase
     {
     public:
-        InventoryItemValue(PlayerbotAI* ai, string name = "inventory items") : CalculatedValue<std::list<Item*> >(ai, name), InventoryItemValueBase(ai) {}
+        InventoryItemValue(PlayerbotAI* ai, std::string name = "inventory items") : CalculatedValue<std::list<Item*> >(ai, name), InventoryItemValueBase(ai) {}
 
     public:
         virtual std::list<Item*> Calculate();
@@ -36,7 +36,7 @@ namespace ai
     class InventoryItemIdValue : public CalculatedValue<std::list<uint32> >, public Qualified
     {
     public:
-        InventoryItemIdValue(PlayerbotAI* ai, string name = "inventory item ids") : CalculatedValue<std::list<uint32> >(ai, name) {}
+        InventoryItemIdValue(PlayerbotAI* ai, std::string name = "inventory item ids") : CalculatedValue<std::list<uint32> >(ai, name) {}
     public:
         virtual std::list<uint32> Calculate() {list<uint32> retVal;  for (auto& item : AI_VALUE2(std::list<Item*>, "inventory items", getQualifier())) { ItemPrototype const* proto = item->GetProto();  retVal.push_back(proto->ItemId);} return retVal;};
     };

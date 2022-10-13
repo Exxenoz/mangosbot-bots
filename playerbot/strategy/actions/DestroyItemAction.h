@@ -7,7 +7,7 @@ namespace ai
 {
     class DestroyItemAction : public InventoryAction {
     public:
-        DestroyItemAction(PlayerbotAI* ai, string name = "destroy") : InventoryAction(ai, name) {}
+        DestroyItemAction(PlayerbotAI* ai, std::string name = "destroy") : InventoryAction(ai, name) {}
         virtual bool Execute(Event event);
 
     protected:

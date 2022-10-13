@@ -8,13 +8,13 @@ namespace ai
 {
     class ChangeTalentsAction : public Action {
     public:
-        ChangeTalentsAction(PlayerbotAI* ai, string name = "talents") : Action(ai, name) {}
+        ChangeTalentsAction(PlayerbotAI* ai, std::string name = "talents") : Action(ai, name) {}
 
     public:
         virtual bool Execute(Event event);
         virtual bool AutoSelectTalents(ostringstream* out);
     private:
-        std::vector<TalentPath*> getPremadePaths(string findName);
+        std::vector<TalentPath*> getPremadePaths(std::string findName);
         std::vector<TalentPath*> getPremadePaths(TalentSpec* oldSpec);
         TalentPath* ChangeTalentsAction::getPremadePath(int id);
         void listPremadePaths(std::vector<TalentPath*> paths, ostringstream* out);

@@ -25,12 +25,12 @@ class GuildTaskMgr
         bool CheckItemTask(uint32 itemId, uint32 obtained, Player* owner, Player* bot, bool byMail = false);
         void CheckKillTask(Player* owner, Unit* victim);
         void CheckKillTaskInternal(Player* owner, Unit* victim);
-        bool CheckTaskTransfer(string text, Player* owner, Player* bot);
+        bool CheckTaskTransfer(std::string text, Player* owner, Player* bot);
 
     private:
-        std::map<uint32,uint32> GetTaskValues(uint32 owner, string type, uint32 *validIn = NULL);
-        uint32 GetTaskValue(uint32 owner, uint32 guildId, string type, uint32 *validIn = NULL);
-        uint32 SetTaskValue(uint32 owner, uint32 guildId, string type, uint32 value, uint32 validIn);
+        std::map<uint32,uint32> GetTaskValues(uint32 owner, std::string type, uint32 *validIn = NULL);
+        uint32 GetTaskValue(uint32 owner, uint32 guildId, std::string type, uint32 *validIn = NULL);
+        uint32 SetTaskValue(uint32 owner, uint32 guildId, std::string type, uint32 value, uint32 validIn);
         uint32 CreateTask(uint32 owner, uint32 guildId);
         bool SendAdvertisement(uint32 owner, uint32 guildId);
         bool SendItemAdvertisement(uint32 itemId, uint32 owner, uint32 guildId, uint32 validIn);
@@ -43,7 +43,7 @@ class GuildTaskMgr
         void CleanupAdverts();
         void RemoveDuplicatedAdverts();
         void DeleteMail(std::list<uint32> buffer);
-        void SendCompletionMessage(Player* player, string verb);
+        void SendCompletionMessage(Player* player, std::string verb);
 };
 
 #define sGuildTaskMgr GuildTaskMgr::instance()

@@ -6,17 +6,17 @@
 
 using namespace ai;
 
-vector<string> split(const string &s, char delim);
+vector<std::string> split(const std::string &s, char delim);
 
 bool UnequipAction::Execute(Event event)
 {
-    string text = event.getParam();
+    std::string text = event.getParam();
 
     ItemIds ids = chat->parseItems(text);
     if (ids.empty())
     {
-        std::vector<string> names = split(text, ',');
-        for (std::vector<string>::iterator i = names.begin(); i != names.end(); ++i)
+        std::vector<std::string> names = split(text, ',');
+        for (std::vector<std::string>::iterator i = names.begin(); i != names.end(); ++i)
         {
             uint32 slot = chat->parseSlot(*i);
             if (slot != EQUIPMENT_SLOT_END)

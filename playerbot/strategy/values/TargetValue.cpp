@@ -43,7 +43,7 @@ bool FindNonCcTargetStrategy::IsCcTarget(Unit* attacker)
                 if (ai->GetAiObjectContext()->GetValue<Unit*>("rti cc target")->Get() == attacker)
                     return true;
 
-                string rti = ai->GetAiObjectContext()->GetValue<string>("rti cc")->Get();
+                std::string rti = ai->GetAiObjectContext()->GetValue<std::string>("rti cc")->Get();
                 int index = RtiTargetValue::GetRtiIndex(rti);
                 if (index != -1)
                 {

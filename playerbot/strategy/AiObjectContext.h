@@ -15,51 +15,51 @@ namespace ai
         virtual ~AiObjectContext() {}
 
     public:
-        virtual Strategy* GetStrategy(string name) { return strategyContexts.GetObject(name, ai); }
-        virtual set<string> GetSiblingStrategy(string name) { return strategyContexts.GetSiblings(name); }
-        virtual Trigger* GetTrigger(string name) { return triggerContexts.GetObject(name, ai); }
-        virtual Action* GetAction(string name) { return actionContexts.GetObject(name, ai); }
-        virtual UntypedValue* GetUntypedValue(string name) { return valueContexts.GetObject(name, ai); }
+        virtual Strategy* GetStrategy(std::string name) { return strategyContexts.GetObject(name, ai); }
+        virtual set<std::string> GetSiblingStrategy(std::string name) { return strategyContexts.GetSiblings(name); }
+        virtual Trigger* GetTrigger(std::string name) { return triggerContexts.GetObject(name, ai); }
+        virtual Action* GetAction(std::string name) { return actionContexts.GetObject(name, ai); }
+        virtual UntypedValue* GetUntypedValue(std::string name) { return valueContexts.GetObject(name, ai); }
 
         template<class T>
-        Value<T>* GetValue(string name)
+        Value<T>* GetValue(std::string name)
         {
             return dynamic_cast<Value<T>*>(GetUntypedValue(name));
         }
 
         template<class T>
-        Value<T>* GetValue(string name, string param)
+        Value<T>* GetValue(std::string name, std::string param)
         {
             return GetValue<T>((string(name) + "::" + param));
         }
 
         template<class T>
-        Value<T>* GetValue(string name, int32 param)
+        Value<T>* GetValue(std::string name, int32 param)
         {
         	ostringstream out; out << param;
             return GetValue<T>(name, out.str());
         }
 
-        set<string> GetValues()
+        set<std::string> GetValues()
         {
             return valueContexts.GetCreated();
         }
 
-        set<string> GetSupportedStrategies()
+        set<std::string> GetSupportedStrategies()
         {
             return strategyContexts.supports();
         }
 
-        set<string> GetSupportedActions()
+        set<std::string> GetSupportedActions()
         {
             return actionContexts.supports();
         }
 
-        string FormatValues(string findName = "")
+        std::string FormatValues(std::string findName = "")
         {
             ostringstream out;
-            set<string> names = valueContexts.GetCreated();
-            for (set<string>::iterator i = names.begin(); i != names.end(); ++i)
+            set<std::string> names = valueContexts.GetCreated();
+            for (set<std::string>::iterator i = names.begin(); i != names.end(); ++i)
             {
                 UntypedValue* value = GetUntypedValue(*i);
                 if (!value)
@@ -68,7 +68,7 @@ namespace ai
                 if (!findName.empty() && i->find(findName) == string::npos)
                     continue;
 
-                string text = value->Format();
+                std::string text = value->Format();
                 if (text == "?")
                     continue;
 
@@ -85,10 +85,10 @@ namespace ai
         {
             valueContexts.Add(sharedValues);
         }
-        std::list<string> Save();
-        void Load(std::list<string> data);
+        std::list<std::string> Save();
+        void Load(std::list<std::string> data);
 
-        std::vector<string> performanceStack;
+        std::vector<std::string> performanceStack;
     protected:
         NamedObjectContextList<Strategy> strategyContexts;
         NamedObjectContextList<Action> actionContexts;

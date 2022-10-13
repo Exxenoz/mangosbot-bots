@@ -40,22 +40,22 @@
 using namespace ai;
 using namespace std;
 
-vector<string>& split(const string &s, char delim, std::vector<string> &elems);
-vector<string> split(const string &s, char delim);
-char * strstri (string str1, string str2);
+vector<std::string>& split(const std::string &s, char delim, std::vector<std::string> &elems);
+vector<std::string> split(const std::string &s, char delim);
+char * strstri (std::string str1, std::string str2);
 uint64 extractGuid(WorldPacket& packet);
 std::string &trim(std::string &s);
 
-set<string> PlayerbotAI::unsecuredCommands;
+set<std::string> PlayerbotAI::unsecuredCommands;
 
-uint32 PlayerbotChatHandler::extractQuestId(string str)
+uint32 PlayerbotChatHandler::extractQuestId(std::string str)
 {
     char* source = (char*)str.c_str();
     char* cId = ExtractKeyFromLink(&source,"Hquest");
     return cId ? atol(cId) : 0;
 }
 
-void PacketHandlingHelper::AddHandler(uint16 opcode, string handler)
+void PacketHandlingHelper::AddHandler(uint16 opcode, std::string handler)
 {
     handlers[opcode] = handler;
 }
@@ -332,7 +332,7 @@ void PlayerbotAI::UpdateAIInternal(uint32 elapsed, bool minimal)
     if (bot->IsBeingTeleported() || !bot->IsInWorld())
         return;
 
-    string mapString = WorldPosition(bot).isOverworld() ? to_string(bot->GetMapId()) : "I";
+    std::string mapString = WorldPosition(bot).isOverworld() ? to_string(bot->GetMapId()) : "I";
 
     PerformanceMonitorOperation *pmo = sPerformanceMonitor.start(PERF_MON_TOTAL, "PlayerbotAI::UpdateAIInternal " + mapString);
     ExternalEventHelper helper(aiObjectContext);
@@ -347,7 +347,7 @@ void PlayerbotAI::UpdateAIInternal(uint32 elapsed, bool minimal)
             chatCommands.pop();
             continue;
         }
-        string command = holder.GetCommand();
+        std::string command = holder.GetCommand();
         Player* owner = holder.GetOwner();
         if (!helper.ParseChatCommand(command, owner) && holder.GetType() == CHAT_MSG_WHISPER)
         {
@@ -537,9 +537,9 @@ void PlayerbotAI::Reset(bool full)
     }
 }
 
-map<string,ChatMsg> chatMap;
+map<std::string,ChatMsg> chatMap;
 
-bool PlayerbotAI::IsAllowedCommand(string text)
+bool PlayerbotAI::IsAllowedCommand(std::string text)
 {
     if (unsecuredCommands.empty())
     {
@@ -550,7 +550,7 @@ bool PlayerbotAI::IsAllowedCommand(string text)
         unsecuredCommands.insert("leave");
     }
 
-    for (set<string>::iterator i = unsecuredCommands.begin(); i != unsecuredCommands.end(); ++i)
+    for (set<std::string>::iterator i = unsecuredCommands.begin(); i != unsecuredCommands.end(); ++i)
     {
         if (text.find(*i) == 0)
         {
@@ -563,7 +563,7 @@ bool PlayerbotAI::IsAllowedCommand(string text)
 
 void PlayerbotAI::HandleCommand(uint32 type, const string& text, Player& fromPlayer)
 {
-    string filtered = text;
+    std::string filtered = text;
 
     if (!IsAllowedCommand(filtered) && !GetSecurity()->CheckLevelFor(PLAYERBOT_SECURITY_INVITE, type != CHAT_MSG_WHISPER, &fromPlayer))
         return;
@@ -576,9 +576,9 @@ void PlayerbotAI::HandleCommand(uint32 type, const string& text, Player& fromPla
 
     if (text.find(sPlayerbotAIConfig.commandSeparator) != string::npos)
     {
-        std::vector<string> commands;
+        std::vector<std::string> commands;
         split(commands, text, sPlayerbotAIConfig.commandSeparator.c_str());
-        for (std::vector<string>::iterator i = commands.begin(); i != commands.end(); ++i)
+        for (std::vector<std::string>::iterator i = commands.begin(); i != commands.end(); ++i)
         {
             HandleCommand(type, *i, fromPlayer);
         }
@@ -602,7 +602,7 @@ void PlayerbotAI::HandleCommand(uint32 type, const string& text, Player& fromPla
         chatMap["#g "] = CHAT_MSG_GUILD;
     }
     currentChat = pair<ChatMsg, time_t>(CHAT_MSG_WHISPER, 0);
-    for (map<string,ChatMsg>::iterator i = chatMap.begin(); i != chatMap.end(); ++i)
+    for (map<std::string,ChatMsg>::iterator i = chatMap.begin(); i != chatMap.end(); ++i)
     {
         if (filtered.find(i->first) == 0)
         {
@@ -618,7 +618,7 @@ void PlayerbotAI::HandleCommand(uint32 type, const string& text, Player& fromPla
 
     if (filtered.substr(0, 6) == "debug ")
     {
-        string response = HandleRemoteCommand(filtered.substr(6));
+        std::string response = HandleRemoteCommand(filtered.substr(6));
         WorldPacket data;
         ChatHandler::BuildChatPacket(data, CHAT_MSG_ADDON, response.c_str(), LANG_ADDON,
                 CHAT_TAG_NONE, bot->GetObjectGuid(), bot->GetName());
@@ -1476,7 +1476,7 @@ void PlayerbotAI::ReInitCurrentEngine()
     currentEngine->Init();
 }
 
-void PlayerbotAI::ChangeStrategy(string names, BotState type)
+void PlayerbotAI::ChangeStrategy(std::string names, BotState type)
 {
     Engine* e = engines[type];
     if (!e)
@@ -1494,16 +1494,16 @@ void PlayerbotAI::ClearStrategies(BotState type)
     e->removeAllStrategies();
 }
 
-list<string> PlayerbotAI::GetStrategies(BotState type)
+list<std::string> PlayerbotAI::GetStrategies(BotState type)
 {
     Engine* e = engines[type];
     if (!e)
-        return std::list<string>();
+        return std::list<std::string>();
 
     return e->GetStrategies();
 }
 
-bool PlayerbotAI::DoSpecificAction(string name, Event event, bool silent, string qualifier)
+bool PlayerbotAI::DoSpecificAction(std::string name, Event event, bool silent, std::string qualifier)
 {
     for (int i = 0 ; i < BOT_STATE_MAX; i++)
     {
@@ -1586,7 +1586,7 @@ bool PlayerbotAI::ContainsStrategy(StrategyType type)
     return false;
 }
 
-bool PlayerbotAI::HasStrategy(string name, BotState type)
+bool PlayerbotAI::HasStrategy(std::string name, BotState type)
 {
     return engines[type]->HasStrategy(name);
 }
@@ -1796,7 +1796,7 @@ WorldObject* PlayerbotAI::GetWorldObject(ObjectGuid guid)
     return map->GetWorldObject(guid);
 }
 
-bool PlayerbotAI::TellMasterNoFacing(string text, PlayerbotSecurityLevel securityLevel, bool isPrivate)
+bool PlayerbotAI::TellMasterNoFacing(std::string text, PlayerbotSecurityLevel securityLevel, bool isPrivate)
 {
     time_t lastSaid = whispers[text];
     if (!lastSaid || (time(0) - lastSaid) >= sPlayerbotAIConfig.repeatDelay / 1000)
@@ -1870,7 +1870,7 @@ bool PlayerbotAI::TellMasterNoFacing(string text, PlayerbotSecurityLevel securit
     return true;
 }
 
-bool PlayerbotAI::TellError(string text, PlayerbotSecurityLevel securityLevel)
+bool PlayerbotAI::TellError(std::string text, PlayerbotSecurityLevel securityLevel)
 {
     Player* master = GetMaster();
     if (!IsTellAllowed(securityLevel) || !master || master->GetPlayerbotAI())
@@ -1899,7 +1899,7 @@ bool PlayerbotAI::IsTellAllowed(PlayerbotSecurityLevel securityLevel)
     return true;
 }
 
-bool PlayerbotAI::TellMaster(string text, PlayerbotSecurityLevel securityLevel, bool isPrivate)
+bool PlayerbotAI::TellMaster(std::string text, PlayerbotSecurityLevel securityLevel, bool isPrivate)
 {
     if (!TellMasterNoFacing(text, securityLevel, isPrivate))
         return false;
@@ -1933,7 +1933,7 @@ bool IsRealAura(Player* bot, Aura const* aura, Unit* unit)
     return false;
 }
 
-bool PlayerbotAI::HasAura(string name, Unit* unit, bool maxStack, bool checkIsOwner, int maxAuraAmount, bool hasMyAura)
+bool PlayerbotAI::HasAura(std::string name, Unit* unit, bool maxStack, bool checkIsOwner, int maxAuraAmount, bool hasMyAura)
 {
     if (!unit)
         return false;
@@ -1959,7 +1959,7 @@ bool PlayerbotAI::HasAura(string name, Unit* unit, bool maxStack, bool checkIsOw
 			if (!aura)
 				continue;
 
-			const string auraName = aura->GetSpellProto()->SpellName[0];
+			const std::string auraName = aura->GetSpellProto()->SpellName[0];
 			if (auraName.empty() || auraName.length() != wnamepart.length() || !Utf8FitTo(auraName, wnamepart))
 				continue;
 
@@ -2046,7 +2046,7 @@ bool PlayerbotAI::HasAnyAuraOf(Unit* player, ...)
     return false;
 }
 
-bool PlayerbotAI::CanCastSpell(string name, Unit* target, uint8 effectMask, Item* itemTarget)
+bool PlayerbotAI::CanCastSpell(std::string name, Unit* target, uint8 effectMask, Item* itemTarget)
 {
     return CanCastSpell(aiObjectContext->GetValue<uint32>("spell id", name)->Get(), target, 0, true, itemTarget);
 }
@@ -2290,7 +2290,7 @@ uint8 PlayerbotAI::GetManaPercent() const
    return GetManaPercent(*bot);
 }
 
-bool PlayerbotAI::CastSpell(string name, Unit* target, Item* itemTarget)
+bool PlayerbotAI::CastSpell(std::string name, Unit* target, Item* itemTarget)
 {
     bool result = CastSpell(aiObjectContext->GetValue<uint32>("spell id", name)->Get(), target, itemTarget);
     if (result)
@@ -2984,14 +2984,14 @@ void PlayerbotAI::InterruptSpell()
 }
 
 
-void PlayerbotAI::RemoveAura(string name)
+void PlayerbotAI::RemoveAura(std::string name)
 {
     uint32 spellid = aiObjectContext->GetValue<uint32>("spell id", name)->Get();
     if (spellid && HasAura(spellid, bot))
         bot->RemoveAurasDueToSpell(spellid);
 }
 
-bool PlayerbotAI::IsInterruptableSpellCasting(Unit* target, string spell, uint8 effectMask)
+bool PlayerbotAI::IsInterruptableSpellCasting(Unit* target, std::string spell, uint8 effectMask)
 {
 	uint32 spellid = aiObjectContext->GetValue<uint32>("spell id", spell)->Get();
 	if (!spellid || !target->IsNonMeleeSpellCasted(true))
@@ -3581,7 +3581,7 @@ void PlayerbotAI::_fillGearScoreData(Player *player, Item* item, std::vector<uin
     }
 }
 
-string PlayerbotAI::HandleRemoteCommand(string command)
+string PlayerbotAI::HandleRemoteCommand(std::string command)
 {
     if (command == "state")
     {
@@ -3773,7 +3773,7 @@ bool ChatHandler::HandleGuildTaskCommand(char* args)
     return GuildTaskMgr::HandleConsoleCommand(this, args);
 }
 
-float PlayerbotAI::GetRange(string type)
+float PlayerbotAI::GetRange(std::string type)
 {
     float val = 0;
     if (aiObjectContext) val = aiObjectContext->GetValue<float>("range", type)->Get();
@@ -3900,7 +3900,7 @@ void PlayerbotAI::Ping(float x, float y)
     }
 }
 
-void PlayerbotAI::Poi(float x, float y, string icon_name, Player* player, uint32 flags, uint32 icon, uint32 icon_data)
+void PlayerbotAI::Poi(float x, float y, std::string icon_name, Player* player, uint32 flags, uint32 icon, uint32 icon_data)
 {
     if (!player)
         player = master;
@@ -4277,7 +4277,7 @@ void PlayerbotAI::EnchantItemT(uint32 spellid, uint8 slot, Item* item)
    sLog.outDetail("%s: items was enchanted successfully!", bot->GetName());
 }
 
-uint32 PlayerbotAI::GetBuffedCount(Player* player, string spellname)
+uint32 PlayerbotAI::GetBuffedCount(Player* player, std::string spellname)
 {
     Group* group = bot->GetGroup();
     uint32 bcount = 0;

@@ -68,14 +68,14 @@ namespace ai
     {
     public:
         MeleeFormation(PlayerbotAI* ai) : FollowFormation(ai, "melee") {}
-        virtual string GetTargetName() { return "master target"; }
+        virtual std::string GetTargetName() { return "master target"; }
     };
 
     class QueueFormation : public FollowFormation
     {
     public:
         QueueFormation(PlayerbotAI* ai) : FollowFormation(ai, "queue") {}
-        virtual string GetTargetName() { return "line target"; }
+        virtual std::string GetTargetName() { return "line target"; }
     };
 
     class NearFormation : public MoveAheadFormation
@@ -472,7 +472,7 @@ string FormationValue::Save()
     return value ? value->getName() : "?";
 }
 
-bool FormationValue::Load(string formation)
+bool FormationValue::Load(std::string formation)
 {
 
     if (formation == "melee")
@@ -528,7 +528,7 @@ bool FormationValue::Load(string formation)
 
 bool SetFormationAction::Execute(Event event)
 {
-    string formation = event.getParam();
+    std::string formation = event.getParam();
 
     FormationValue* value = (FormationValue*)context->GetValue<Formation*>("formation");
     if (formation == "?" || formation.empty())

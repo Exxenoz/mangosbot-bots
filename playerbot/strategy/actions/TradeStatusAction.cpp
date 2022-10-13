@@ -173,7 +173,7 @@ bool TradeStatusAction::CheckTrade()
 
         if (isGettingItem)
         {
-            string name = trader->GetName();
+            std::string name = trader->GetName();
             if (bot->GetGroup() && bot->GetGroup()->IsMember(bot->GetTrader()->GetObjectGuid()) && ai->HasRealPlayerMaster())
                 ai->TellMasterNoFacing("Thank you " + name + ".", PLAYERBOT_SECURITY_ALLOW_ALL, false);
             else

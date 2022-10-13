@@ -3,9 +3,9 @@
 
 namespace ai
 {
-    class NextRpgActionValue : public ManualSetValue<string>
+    class NextRpgActionValue : public ManualSetValue<std::string>
 	{
 	public:
-        NextRpgActionValue(PlayerbotAI* ai, string defaultValue = "", string name = "next rpg action") : ManualSetValue(ai, defaultValue, name) {};
+        NextRpgActionValue(PlayerbotAI* ai, std::string defaultValue = "", std::string name = "next rpg action") : ManualSetValue(ai, defaultValue, name) {};
     };
 }

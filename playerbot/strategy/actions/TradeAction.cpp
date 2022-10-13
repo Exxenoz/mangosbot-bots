@@ -8,7 +8,7 @@ using namespace ai;
 
 bool TradeAction::Execute(Event event)
 {
-    string text = event.getParam();
+    std::string text = event.getParam();
 
     if (!bot->GetTrader())
     {

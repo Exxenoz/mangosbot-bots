@@ -23,7 +23,7 @@ bool WhoAction::Execute(Event event)
         return false;
 
     ostringstream out;
-    string text = event.getParam();
+    std::string text = event.getParam();
     if (!text.empty())
     {
         out << QuerySkill(text);
@@ -50,7 +50,7 @@ bool WhoAction::Execute(Event event)
         out << "playing with " << ai->GetMaster()->GetName();
     }
 
-    string tell = out.str();
+    std::string tell = out.str();
     if (tell.empty())
         return false;
 
@@ -60,7 +60,7 @@ bool WhoAction::Execute(Event event)
 }
 
 
-string WhoAction::QueryTrade(string text)
+string WhoAction::QueryTrade(std::string text)
 {
     ostringstream out;
 
@@ -79,14 +79,14 @@ string WhoAction::QueryTrade(string text)
     return "";
 }
 
-string WhoAction::QuerySkill(string text)
+string WhoAction::QuerySkill(std::string text)
 {
     ostringstream out;
     uint32 skill = chat->parseSkill(text);
     if (!skill || !ai->HasSkill((SkillType)skill))
         return "";
 
-    string skillName = chat->formatSkill(skill);
+    std::string skillName = chat->formatSkill(skill);
     uint32 spellId = AI_VALUE2(uint32, "spell id", skillName);
     uint16 value = bot->GetSkillValue(skill);
 #ifdef MANGOS
@@ -96,7 +96,7 @@ string WhoAction::QuerySkill(string text)
     uint16 maxSkill = bot->GetSkillMax(skill);
 #endif
     ObjectGuid guid = bot->GetObjectGuid();
-    string data = "0";
+    std::string data = "0";
     out << "|cFFFFFF00|Htrade:" << spellId << ":" << value << ":" << maxSkill << ":"
             << std::hex << std::uppercase << guid.GetRawValue()
             << std::nouppercase << std::dec << ":" << data
@@ -107,7 +107,7 @@ string WhoAction::QuerySkill(string text)
     return out.str();
 }
 
-string WhoAction::QuerySpec(string text)
+string WhoAction::QuerySpec(std::string text)
 {
     ostringstream out;
 

@@ -7,7 +7,7 @@ namespace ai
     class PullStrategy : public CombatStrategy
     {
     public:
-        PullStrategy(PlayerbotAI* ai, string action) : CombatStrategy(ai)
+        PullStrategy(PlayerbotAI* ai, std::string action) : CombatStrategy(ai)
         {
             this->action = action;
         }
@@ -15,11 +15,11 @@ namespace ai
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
         virtual void InitMultipliers(std::list<Multiplier*> &multipliers);
-        virtual string getName() { return "pull"; }
+        virtual std::string getName() { return "pull"; }
         virtual NextAction** getDefaultActions();
 
     private:
-        string action;
+        std::string action;
     };
 
     class PossibleAdsStrategy : public Strategy
@@ -29,6 +29,6 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "ads"; }
+        virtual std::string getName() { return "ads"; }
     };
 }

@@ -22,7 +22,7 @@ bool CastSpellAction::Execute(Event event)
             if (!pSpellInfo)
                 continue;
 
-            string namepart = pSpellInfo->SpellName[0];
+            std::string namepart = pSpellInfo->SpellName[0];
             strToLower(namepart);
 
             if (namepart.find(spell) == string::npos)

@@ -8,8 +8,8 @@ using namespace ai;
 
 bool RtiAction::Execute(Event event)
 {
-    string text = event.getParam();
-    string type = "rti";
+    std::string text = event.getParam();
+    std::string type = "rti";
     if (text.find("cc ") == 0)
     {
         type = "rti cc";
@@ -27,14 +27,14 @@ bool RtiAction::Execute(Event event)
         return true;
     }
 
-    context->GetValue<string>(type)->Set(text);
+    context->GetValue<std::string>(type)->Set(text);
     ostringstream out; out << type << " set to: ";
     AppendRti(out, type);
     ai->TellMaster(out);
     return true;
 }
 
-void RtiAction::AppendRti(ostringstream & out, string type)
+void RtiAction::AppendRti(ostringstream & out, std::string type)
 {
     out << AI_VALUE(string, type);
 
@@ -83,7 +83,7 @@ bool MarkRtiAction::Execute(Event event)
 
     if (!target) return false;
 
-    string rti = AI_VALUE(string, "rti");
+    std::string rti = AI_VALUE(string, "rti");
     int index = RtiTargetValue::GetRtiIndex(rti);
 #ifndef MANGOSBOT_TWO
     group->SetTargetIcon(index, target->GetObjectGuid());

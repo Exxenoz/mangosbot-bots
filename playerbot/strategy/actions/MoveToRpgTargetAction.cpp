@@ -120,7 +120,7 @@ bool MoveToRpgTargetAction::Execute(Event event)
 
     if (ai->HasStrategy("debug move", BOT_STATE_NON_COMBAT))
     {
-        string name = chat->formatWorldobject(wo);
+        std::string name = chat->formatWorldobject(wo);
 
         ai->Poi(x, y, name);
     }

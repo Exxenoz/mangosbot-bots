@@ -15,7 +15,7 @@ namespace ai
     public:
         DpsAoeAction(PlayerbotAI* ai) : AttackAction(ai, "dps aoe") {}
 
-        virtual string GetTargetName() { return "dps aoe target"; }
+        virtual std::string GetTargetName() { return "dps aoe target"; }
     };
 
     class DpsAssistAction : public AttackAction
@@ -23,7 +23,7 @@ namespace ai
     public:
         DpsAssistAction(PlayerbotAI* ai) : AttackAction(ai, "dps assist") {}
 
-        virtual string GetTargetName() { return "dps target"; }
+        virtual std::string GetTargetName() { return "dps target"; }
         virtual bool isUseful()
         {
             // if carry flag, do not start fight
@@ -38,7 +38,7 @@ namespace ai
     {
     public:
         TankAssistAction(PlayerbotAI* ai) : AttackAction(ai, "tank assist") {}
-        virtual string GetTargetName() { return "tank target"; }
+        virtual std::string GetTargetName() { return "tank target"; }
     };
 
     class AttackAnythingAction : public AttackAction
@@ -46,7 +46,7 @@ namespace ai
     private:   
     public:
         AttackAnythingAction(PlayerbotAI* ai) : AttackAction(ai, "attack anything") {}
-        virtual string GetTargetName() { return "grind target"; }
+        virtual std::string GetTargetName() { return "grind target"; }
 
         virtual bool isUseful();
 
@@ -80,14 +80,14 @@ namespace ai
     {
     public:
         AttackLeastHpTargetAction(PlayerbotAI* ai) : AttackAction(ai, "attack least hp target") {}
-        virtual string GetTargetName() { return "least hp target"; }
+        virtual std::string GetTargetName() { return "least hp target"; }
     };
 
     class AttackEnemyPlayerAction : public AttackAction
     {
     public:
         AttackEnemyPlayerAction(PlayerbotAI* ai) : AttackAction(ai, "attack enemy player") {}
-        virtual string GetTargetName() { return "enemy player target"; }
+        virtual std::string GetTargetName() { return "enemy player target"; }
         virtual bool isUseful() {
 
             // if carry flag, do not start fight
@@ -102,14 +102,14 @@ namespace ai
     {
     public:
         AttackRtiTargetAction(PlayerbotAI* ai) : AttackAction(ai, "attack rti target") {}
-        virtual string GetTargetName() { return "rti target"; }
+        virtual std::string GetTargetName() { return "rti target"; }
     };
 
     class AttackEnemyFlagCarrierAction : public AttackAction
     {
     public:
         AttackEnemyFlagCarrierAction(PlayerbotAI* ai) : AttackAction(ai, "attack enemy flag carrier") {}
-        virtual string GetTargetName() { return "enemy flag carrier"; }
+        virtual std::string GetTargetName() { return "enemy flag carrier"; }
         virtual bool isUseful() {
             Unit* target = context->GetValue<Unit*>("enemy flag carrier")->Get();
             return target && sServerFacade.IsDistanceLessOrEqualThan(sServerFacade.GetDistance2d(bot, target), 75.0f) && (bot->HasAura(23333) || bot->HasAura(23335) || bot->HasAura(34976));

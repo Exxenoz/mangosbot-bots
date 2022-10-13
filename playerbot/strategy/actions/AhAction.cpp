@@ -14,7 +14,7 @@ using namespace ai;
 
 bool AhAction::Execute(Event event)
 {
-    string text = event.getParam();
+    std::string text = event.getParam();
 
     std::list<ObjectGuid> npcs = AI_VALUE(std::list<ObjectGuid>, "nearest npcs");
     for (std::list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
@@ -37,7 +37,7 @@ bool AhAction::Execute(Event event)
     return false;
 }
 
-bool AhAction::Execute(string text, Unit* auctioneer)
+bool AhAction::Execute(std::string text, Unit* auctioneer)
 {
     uint32 time;
 #ifdef MANGOSBOT_ZERO
@@ -83,7 +83,7 @@ bool AhAction::Execute(string text, Unit* auctioneer)
     int pos = text.find(" ");
     if (pos == string::npos) return false;
 
-    string priceStr = text.substr(0, pos);
+    std::string priceStr = text.substr(0, pos);
     uint32 price = ChatHelper::parseMoney(priceStr);
 
     std::list<Item*> found = parseItems(text, ITERATE_ITEMS_IN_BAGS);
@@ -139,7 +139,7 @@ uint32 AhAction::GetSellPrice(ItemPrototype const* proto)
 }
 
 
-bool AhBidAction::Execute(string text, Unit* auctioneer)
+bool AhBidAction::Execute(std::string text, Unit* auctioneer)
 {
     AuctionHouseEntry const* auctionHouseEntry = bot->GetSession()->GetCheckedAuctionHouseForAuctioneer(auctioneer->GetObjectGuid());
     if (!auctionHouseEntry)
@@ -266,7 +266,7 @@ bool AhBidAction::Execute(string text, Unit* auctioneer)
     int pos = text.find(" ");
     if (pos == string::npos) return false;
 
-    string priceStr = text.substr(0, pos);
+    std::string priceStr = text.substr(0, pos);
     uint32 price = ChatHelper::parseMoney(priceStr);
 
     for (auto curAuction : map)

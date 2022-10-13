@@ -8,7 +8,7 @@ using namespace ai;
 
 bool ChangeChatAction::Execute(Event event)
 {
-    string text = event.getParam();
+    std::string text = event.getParam();
     ChatMsg parsed = chat->parseChat(text);
     if (parsed == CHAT_MSG_SYSTEM)
     {

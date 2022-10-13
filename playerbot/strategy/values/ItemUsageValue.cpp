@@ -62,7 +62,7 @@ ItemUsage ItemUsageValue::Calculate()
 
     if (proto->Class == ITEM_CLASS_CONSUMABLE)
     {       
-        string foodType = GetConsumableType(proto, bot->HasMana());
+        std::string foodType = GetConsumableType(proto, bot->HasMana());
 
         if (!foodType.empty() && bot->CanUseItem(proto) == EQUIP_ERR_OK)
         {
@@ -552,7 +552,7 @@ float ItemUsageValue::CurrentStacks(ItemPrototype const* proto)
     return itemCount / maxStack;
 }
 
-float ItemUsageValue::BetterStacks(ItemPrototype const* proto, string itemType)
+float ItemUsageValue::BetterStacks(ItemPrototype const* proto, std::string itemType)
 {
     std::list<Item*> items = AI_VALUE2(std::list<Item*>, "inventory items", itemType);
 
@@ -643,7 +643,7 @@ bool ItemUsageValue::SpellGivesSkillUp(uint32 spellId, Player* bot)
 
 string ItemUsageValue::GetConsumableType(ItemPrototype const* proto, bool hasMana)
 {
-    string foodType = "";
+    std::string foodType = "";
 
     if ((proto->SubClass == ITEM_SUBCLASS_CONSUMABLE || proto->SubClass == ITEM_SUBCLASS_FOOD))
     {

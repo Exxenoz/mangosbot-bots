@@ -8,7 +8,7 @@ using namespace ai;
 
 bool AutoLearnSpellAction::Execute(Event event)
 {
-    string param = event.getParam();
+    std::string param = event.getParam();
 
     ostringstream out;
 
@@ -84,7 +84,7 @@ void AutoLearnSpellAction::LearnTrainerSpells(ostringstream* out)
                 SpellEntry const* spell = sServerFacade.LookupSpellInfo(tSpell->spell);
                 if (spell)
                 {
-                    string SpellName = spell->SpellName[0];                    
+                    std::string SpellName = spell->SpellName[0];                    
                     if (spell->Effect[EFFECT_INDEX_1] == SPELL_EFFECT_SKILL_STEP)
                     {
                         uint32 skill = spell->EffectMiscValue[EFFECT_INDEX_1];
@@ -139,7 +139,7 @@ void AutoLearnSpellAction::LearnQuestSpells(ostringstream* out)
 string formatSpell(SpellEntry const* sInfo)
 {
     ostringstream out;
-    string rank = sInfo->Rank[0];
+    std::string rank = sInfo->Rank[0];
     
     if(rank.empty())
         out << "|cffffffff|Hspell:" << sInfo->Id << "|h[" << sInfo->SpellName[LOCALE_enUS] << "]|h|r";

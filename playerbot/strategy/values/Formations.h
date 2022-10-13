@@ -7,10 +7,10 @@ namespace ai
     class Formation : public AiNamedObject
     {
     public:
-        Formation(PlayerbotAI* ai, string name) : AiNamedObject (ai, name) {}
+        Formation(PlayerbotAI* ai, std::string name) : AiNamedObject (ai, name) {}
 
     public:
-        virtual string GetTargetName() { return ""; }
+        virtual std::string GetTargetName() { return ""; }
         virtual WorldLocation GetLocation() { return NullLocation; }
         virtual float GetMaxDistance() { return sPlayerbotAIConfig.followDistance; }
         static WorldLocation NullLocation;
@@ -23,13 +23,13 @@ namespace ai
     class FollowFormation : public Formation
     {
     public:
-        FollowFormation(PlayerbotAI* ai, string name) : Formation(ai, name) {}
+        FollowFormation(PlayerbotAI* ai, std::string name) : Formation(ai, name) {}
     };
 
     class MoveFormation : public Formation
     {
     public:
-        MoveFormation(PlayerbotAI* ai, string name) : Formation(ai, name) {}
+        MoveFormation(PlayerbotAI* ai, std::string name) : Formation(ai, name) {}
 
     protected:
         WorldLocation MoveLine(std::vector<Player*> line, float diff, float cx, float cy, float cz, float orientation, float range);
@@ -39,7 +39,7 @@ namespace ai
     class MoveAheadFormation : public MoveFormation
     {
     public:
-        MoveAheadFormation(PlayerbotAI* ai, string name) : MoveFormation(ai, name) {}
+        MoveAheadFormation(PlayerbotAI* ai, std::string name) : MoveFormation(ai, name) {}
         virtual WorldLocation GetLocation();
         virtual WorldLocation GetLocationInternal() { return NullLocation; }
     };
@@ -49,8 +49,8 @@ namespace ai
 	public:
         FormationValue(PlayerbotAI* ai);
         ~FormationValue() { if (value) { delete value; value = NULL; } }
-        virtual string Save();
-        virtual bool Load(string value);
+        virtual std::string Save();
+        virtual bool Load(std::string value);
     };
 
     class SetFormationAction : public Action

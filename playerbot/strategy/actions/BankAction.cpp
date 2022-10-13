@@ -9,7 +9,7 @@ using namespace ai;
 
 bool BankAction::Execute(Event event)
 {
-    string text = event.getParam();
+    std::string text = event.getParam();
 
     std::list<ObjectGuid> npcs = AI_VALUE(std::list<ObjectGuid>, "nearest npcs");
     for (std::list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
@@ -25,7 +25,7 @@ bool BankAction::Execute(Event event)
     return false;
 }
 
-bool BankAction::Execute(string text, Unit* bank)
+bool BankAction::Execute(std::string text, Unit* bank)
 {
     if (text.empty() || text == "?")
     {

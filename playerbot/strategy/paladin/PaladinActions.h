@@ -72,14 +72,14 @@ namespace ai
     class CastSealSpellAction : public CastBuffSpellAction
     {
     public:
-        CastSealSpellAction(PlayerbotAI* ai, string name) : CastBuffSpellAction(ai, name) {}
+        CastSealSpellAction(PlayerbotAI* ai, std::string name) : CastBuffSpellAction(ai, name) {}
         virtual bool isUseful() { return AI_VALUE2(bool, "combat", "self target"); }
     };	
 
     class CastBlessingOnPartyAction : public BuffOnPartyAction
     {
     public:
-        CastBlessingOnPartyAction(PlayerbotAI* ai, string name) : BuffOnPartyAction(ai, name), m_name(name) {}
+        CastBlessingOnPartyAction(PlayerbotAI* ai, std::string name) : BuffOnPartyAction(ai, name), m_name(name) {}
 		virtual bool isPossible() { return true; }
 		virtual bool isUseful() { return true; }
         virtual Unit* GetTarget();
@@ -91,7 +91,7 @@ namespace ai
 	class CastPaladinAuraAction : public CastBuffSpellAction
 	{
 	public:
-		CastPaladinAuraAction(PlayerbotAI* ai, string name) : CastBuffSpellAction(ai, name), m_name(name) {}
+		CastPaladinAuraAction(PlayerbotAI* ai, std::string name) : CastBuffSpellAction(ai, name), m_name(name) {}
 		virtual bool isPossible() { return true; }
 		virtual bool isUseful() { return true; }
 		virtual bool Execute(Event event);
@@ -118,14 +118,14 @@ namespace ai
 	{
 	public:
         CastBlessingOfMightOnPartyAction(PlayerbotAI* ai) : CastBlessingOnPartyAction(ai, "blessing of might") {}
-        virtual string getName() { return "blessing of might on party";}
+        virtual std::string getName() { return "blessing of might on party";}
 	};
 
 	class CastGreaterBlessingOfMightOnPartyAction : public CastBlessingOnPartyAction
 	{
 	public:
 		CastGreaterBlessingOfMightOnPartyAction(PlayerbotAI* ai) : CastBlessingOnPartyAction(ai, "greater blessing of might") {}
-		virtual string getName() { return "greater blessing of might on party"; }
+		virtual std::string getName() { return "greater blessing of might on party"; }
 	};
 
 	class CastBlessingOfWisdomAction : public CastBuffSpellAction
@@ -147,7 +147,7 @@ namespace ai
 	{
 	public:
         CastBlessingOfWisdomOnPartyAction(PlayerbotAI* ai) : CastBlessingOnPartyAction(ai, "blessing of wisdom") {}
-        virtual string getName() { return "blessing of wisdom on party";}
+        virtual std::string getName() { return "blessing of wisdom on party";}
         //virtual bool Execute(Event event);
 	};
 
@@ -155,7 +155,7 @@ namespace ai
 	{
 	public:
 		CastGreaterBlessingOfWisdomOnPartyAction(PlayerbotAI* ai) : CastBlessingOnPartyAction(ai, "greater blessing of wisdom") {}
-		virtual string getName() { return "greater blessing of wisdom on party"; }
+		virtual std::string getName() { return "greater blessing of wisdom on party"; }
 		//virtual bool Execute(Event event);
 	};
 
@@ -176,14 +176,14 @@ namespace ai
 	{
 	public:
         CastBlessingOfKingsOnPartyAction(PlayerbotAI* ai) : CastBlessingOnPartyAction(ai, "blessing of kings") {}
-        virtual string getName() { return "blessing of kings on party";}
+        virtual std::string getName() { return "blessing of kings on party";}
 	};
 
 	class CastGreaterBlessingOfKingsOnPartyAction : public CastBlessingOnPartyAction
 	{
 	public:
 		CastGreaterBlessingOfKingsOnPartyAction(PlayerbotAI* ai) : CastBlessingOnPartyAction(ai, "greater blessing of kings") {}
-		virtual string getName() { return "greater blessing of kings on party"; }
+		virtual std::string getName() { return "greater blessing of kings on party"; }
 	};
 
 	class CastBlessingOfSanctuaryAction : public CastBuffSpellAction
@@ -203,14 +203,14 @@ namespace ai
 	{
 	public:
         CastBlessingOfSanctuaryOnPartyAction(PlayerbotAI* ai) : CastBlessingOnPartyAction(ai, "blessing of sanctuary") {}
-        virtual string getName() { return "blessing of sanctuary on party";}
+        virtual std::string getName() { return "blessing of sanctuary on party";}
 	};
 
 	class CastGreaterBlessingOfSanctuaryOnPartyAction : public CastBlessingOnPartyAction
 	{
 	public:
 		CastGreaterBlessingOfSanctuaryOnPartyAction(PlayerbotAI* ai) : CastBlessingOnPartyAction(ai, "greater blessing of sanctuary") {}
-		virtual string getName() { return "greater blessing of sanctuary on party"; }
+		virtual std::string getName() { return "greater blessing of sanctuary on party"; }
 	};
 
     class CastHolyLightAction : public CastHealingSpellAction
@@ -260,7 +260,7 @@ namespace ai
     public:
         CastDivineProtectionOnPartyAction(PlayerbotAI* ai) : HealPartyMemberAction(ai, "divine protection") {}
 
-        virtual string getName() { return "divine protection on party"; }
+        virtual std::string getName() { return "divine protection on party"; }
     };
 
 	class CastDivineShieldAction: public CastBuffSpellAction
@@ -304,7 +304,7 @@ namespace ai
     public:
         CastPurifyPoisonOnPartyAction(PlayerbotAI* ai) : CurePartyMemberAction(ai, "purify", DISPEL_POISON) {}
 
-        virtual string getName() { return "purify poison on party"; }
+        virtual std::string getName() { return "purify poison on party"; }
     };
 
 	class CastPurifyDiseaseOnPartyAction : public CurePartyMemberAction
@@ -312,7 +312,7 @@ namespace ai
 	public:
 		CastPurifyDiseaseOnPartyAction(PlayerbotAI* ai) : CurePartyMemberAction(ai, "purify", DISPEL_DISEASE) {}
 
-		virtual string getName() { return "purify disease on party"; }
+		virtual std::string getName() { return "purify disease on party"; }
 	};
 
 	class CastHandOfReckoningAction : public CastSpellAction
@@ -350,7 +350,7 @@ namespace ai
     public:
         CastCleansePoisonOnPartyAction(PlayerbotAI* ai) : CurePartyMemberAction(ai, "cleanse", DISPEL_POISON) {}
 
-        virtual string getName() { return "cleanse poison on party"; }
+        virtual std::string getName() { return "cleanse poison on party"; }
     };
 
 	class CastCleanseDiseaseOnPartyAction : public CurePartyMemberAction
@@ -358,7 +358,7 @@ namespace ai
 	public:
 		CastCleanseDiseaseOnPartyAction(PlayerbotAI* ai) : CurePartyMemberAction(ai, "cleanse", DISPEL_DISEASE) {}
 
-		virtual string getName() { return "cleanse disease on party"; }
+		virtual std::string getName() { return "cleanse disease on party"; }
 	};
 
 	class CastCleanseMagicOnPartyAction : public CurePartyMemberAction
@@ -366,7 +366,7 @@ namespace ai
 	public:
 		CastCleanseMagicOnPartyAction(PlayerbotAI* ai) : CurePartyMemberAction(ai, "cleanse", DISPEL_MAGIC) {}
 
-		virtual string getName() { return "cleanse magic on party"; }
+		virtual std::string getName() { return "cleanse magic on party"; }
 	};
 
 	SPELL_ACTION_U(CastExorcismAction, "exorcism", (ai->IsTank(bot) || (AI_VALUE2(uint8, "mana", "self target") > sPlayerbotAIConfig.mediumMana)) && GetTarget() && GetTarget()->IsCreature() && (((Creature*)GetTarget())->GetCreatureInfo()->CreatureType == CREATURE_TYPE_UNDEAD || ((Creature*)GetTarget())->GetCreatureInfo()->CreatureType == CREATURE_TYPE_DEMON));

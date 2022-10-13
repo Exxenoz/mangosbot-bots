@@ -25,9 +25,9 @@ class PlayerbotChatHandler: protected ChatHandler
 {
 public:
     explicit PlayerbotChatHandler(Player* pMasterPlayer) : ChatHandler(pMasterPlayer->GetSession()) {}
-    void sysmessage(string str) { SendSysMessage(str.c_str()); }
-    uint32 extractQuestId(string str);
-    uint32 extractSpellId(string str)
+    void sysmessage(std::string str) { SendSysMessage(str.c_str()); }
+    uint32 extractQuestId(std::string str);
+    uint32 extractSpellId(std::string str)
     {
         char* source = (char*)str.c_str();
         return ExtractSpellIdFromLink(&source);
@@ -223,7 +223,7 @@ enum BotRoles
 class PacketHandlingHelper
 {
 public:
-    void AddHandler(uint16 opcode, string handler);
+    void AddHandler(uint16 opcode, std::string handler);
     void Handle(ExternalEventHelper &helper);
     void AddPacket(const WorldPacket& packet);
 
@@ -235,7 +235,7 @@ private:
 class ChatCommandHolder
 {
 public:
-    ChatCommandHolder(string command, Player* owner = NULL, uint32 type = CHAT_MSG_WHISPER, time_t time = 0) : command(command), owner(owner), type(type), time(time) {}
+    ChatCommandHolder(std::string command, Player* owner = NULL, uint32 type = CHAT_MSG_WHISPER, time_t time = 0) : command(command), owner(owner), type(type), time(time) {}
     ChatCommandHolder(ChatCommandHolder const& other)
     {
         this->command = other.command;
@@ -245,13 +245,13 @@ public:
     }
 
 public:
-    string GetCommand() { return command; }
+    std::string GetCommand() { return command; }
     Player* GetOwner() { return owner; }
     uint32 GetType() { return type; }
     time_t GetTime() { return time; }
 
 private:
-    string command;
+    std::string command;
     Player* owner;
     uint32 type;
     time_t time;
@@ -267,7 +267,7 @@ public:
     virtual void UpdateAI(uint32 elapsed, bool minimal = false);
 public:
 	virtual void UpdateAIInternal(uint32 elapsed, bool minimal = false);
-	string HandleRemoteCommand(string command);
+	string HandleRemoteCommand(std::string command);
     void HandleCommand(uint32 type, const string& text, Player& fromPlayer);
     void QueueChatResponse(uint8 msgtype, ObjectGuid guid1, ObjectGuid guid2, std::string message, std::string chanName, std::string name);
 	void HandleBotOutgoingPacket(const WorldPacket& packet);
@@ -276,12 +276,12 @@ public:
 	void HandleTeleportAck();
     void ChangeEngine(BotState type);
     void DoNextAction(bool minimal = false);
-    virtual bool DoSpecificAction(string name, Event event = Event(), bool silent = false, string qualifier = "");
-    void ChangeStrategy(string name, BotState type);
+    virtual bool DoSpecificAction(std::string name, Event event = Event(), bool silent = false, std::string qualifier = "");
+    void ChangeStrategy(std::string name, BotState type);
     void ClearStrategies(BotState type);
-    std::list<string> GetStrategies(BotState type);
+    std::list<std::string> GetStrategies(BotState type);
     bool ContainsStrategy(StrategyType type);
-    bool HasStrategy(string name, BotState type);
+    bool HasStrategy(std::string name, BotState type);
     BotState GetState() { return currentState; };
     void ResetStrategies(bool load = true);
     void ReInitCurrentEngine();
@@ -296,20 +296,20 @@ public:
     static GameObject* GetGameObject(GameObjectDataPair const* gameObjectDataPair);
     WorldObject* GetWorldObject(ObjectGuid guid);
     bool TellMaster(ostringstream &stream, PlayerbotSecurityLevel securityLevel = PLAYERBOT_SECURITY_ALLOW_ALL, bool isPrivate = true) { return TellMaster(stream.str(), securityLevel, isPrivate); }
-    bool TellMaster(string text, PlayerbotSecurityLevel securityLevel = PLAYERBOT_SECURITY_ALLOW_ALL, bool isPrivate = true);
+    bool TellMaster(std::string text, PlayerbotSecurityLevel securityLevel = PLAYERBOT_SECURITY_ALLOW_ALL, bool isPrivate = true);
     bool TellMasterNoFacing(ostringstream& stream, PlayerbotSecurityLevel securityLevel = PLAYERBOT_SECURITY_ALLOW_ALL, bool isPrivate = true) { return TellMasterNoFacing(stream.str(), securityLevel, isPrivate); }
-    bool TellMasterNoFacing(string text, PlayerbotSecurityLevel securityLevel = PLAYERBOT_SECURITY_ALLOW_ALL, bool isPrivate = true);
-    bool TellError(string text, PlayerbotSecurityLevel securityLevel = PLAYERBOT_SECURITY_ALLOW_ALL);
+    bool TellMasterNoFacing(std::string text, PlayerbotSecurityLevel securityLevel = PLAYERBOT_SECURITY_ALLOW_ALL, bool isPrivate = true);
+    bool TellError(std::string text, PlayerbotSecurityLevel securityLevel = PLAYERBOT_SECURITY_ALLOW_ALL);
     void SpellInterrupted(uint32 spellid);
     int32 CalculateGlobalCooldown(uint32 spellid);
     void InterruptSpell();
-    void RemoveAura(string name);
+    void RemoveAura(std::string name);
     void RemoveShapeshift();
     void WaitForSpellCast(Spell *spell);
     bool PlaySound(uint32 emote);
     bool PlayEmote(uint32 emote);
     void Ping(float x, float y);
-    void Poi(float x, float y, string icon_name = "This way", Player* player = nullptr, uint32 flags = 99, uint32 icon = 7 /* red flag */, uint32 icon_data = 0);
+    void Poi(float x, float y, std::string icon_name = "This way", Player* player = nullptr, uint32 flags = 99, uint32 icon = 7 /* red flag */, uint32 icon_data = 0);
     Item * FindPoison() const;
     Item * FindConsumable(uint32 displayId) const;
     Item * FindBandage() const;
@@ -324,20 +324,20 @@ public:
     void ImbueItem(Item* item, Unit* target);
     void ImbueItem(Item* item);
     void EnchantItemT(uint32 spellid, uint8 slot, Item* item = nullptr);
-    uint32 GetBuffedCount(Player* player, string spellname);
+    uint32 GetBuffedCount(Player* player, std::string spellname);
   
 
-    virtual bool CanCastSpell(string name, Unit* target, uint8 effectMask, Item* itemTarget = NULL);
-    virtual bool CastSpell(string name, Unit* target, Item* itemTarget = NULL);
-    virtual bool HasAura(string spellName, Unit* player, bool maxStack = false, bool checkIsOwner = false, int maxAmount = -1, bool hasMyAura = false);
+    virtual bool CanCastSpell(std::string name, Unit* target, uint8 effectMask, Item* itemTarget = NULL);
+    virtual bool CastSpell(std::string name, Unit* target, Item* itemTarget = NULL);
+    virtual bool HasAura(std::string spellName, Unit* player, bool maxStack = false, bool checkIsOwner = false, int maxAmount = -1, bool hasMyAura = false);
     virtual bool HasAnyAuraOf(Unit* player, ...);
-    virtual bool HasMyAura(string spellName, Unit* player) { return HasAura(spellName, player, false, false, -1, true); }
+    virtual bool HasMyAura(std::string spellName, Unit* player) { return HasAura(spellName, player, false, false, -1, true); }
     uint8 GetHealthPercent(const Unit& target) const;
     uint8 GetHealthPercent() const;
     uint8 GetManaPercent(const Unit& target) const;
     uint8 GetManaPercent() const;
 
-    virtual bool IsInterruptableSpellCasting(Unit* player, string spell, uint8 effectMask);
+    virtual bool IsInterruptableSpellCasting(Unit* player, std::string spell, uint8 effectMask);
     virtual bool HasAuraToDispel(Unit* player, uint32 dispelType);
     bool CanCastSpell(uint32 spellid, Unit* target, uint8 effectMask, bool checkHasSpell = true, Item* itemTarget = NULL);
     bool CanCastSpell(uint32 spellid, GameObject* goTarget, uint8 effectMask, bool checkHasSpell = true);
@@ -356,8 +356,8 @@ public:
     uint32 GetEquipGearScore(Player* player, bool withBags, bool withBank);
     uint32 GetEquipStatsValue(Player* player);
     bool HasSkill(SkillType skill);
-    bool IsAllowedCommand(string text);
-    float GetRange(string type);
+    bool IsAllowedCommand(std::string text);
+    float GetRange(std::string type);
 
     static ReputationRank GetFactionReaction(FactionTemplateEntry const* thisTemplate, FactionTemplateEntry const* otherTemplate);
     static bool friendToAlliance(FactionTemplateEntry const* templateEntry) { return GetFactionReaction(templateEntry, sFactionTemplateStore.LookupEntry(1)) >= REP_NEUTRAL; }
@@ -436,9 +436,9 @@ protected:
     PacketHandlingHelper masterOutgoingPacketHandlers;
     CompositeChatFilter chatFilter;
     PlayerbotSecurity security;
-    std::map<string, time_t> whispers;
+    std::map<std::string, time_t> whispers;
     pair<ChatMsg, time_t> currentChat;
-    static set<string> unsecuredCommands;
+    static set<std::string> unsecuredCommands;
     bool allowActive[MAX_ACTIVITY_TYPE];
     time_t allowActiveCheckTimer[MAX_ACTIVITY_TYPE];
     bool inCombat = false;

@@ -117,7 +117,7 @@ void TrainerAction::Iterate(Creature* creature, TrainerSpellAction action, Spell
 
 bool TrainerAction::Execute(Event event)
 {
-    string text = event.getParam();
+    std::string text = event.getParam();
 
     Player* master = GetMaster();
     Creature* creature;

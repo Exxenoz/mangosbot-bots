@@ -9,7 +9,7 @@ namespace ai
     {
     public:
         GenericMageStrategy(PlayerbotAI* ai);
-        virtual string getName() { return "mage"; }
+        virtual std::string getName() { return "mage"; }
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
@@ -22,7 +22,7 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "cure"; }
+        virtual std::string getName() { return "cure"; }
     };
 
     class MageBoostStrategy : public Strategy
@@ -32,7 +32,7 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "boost"; }
+        virtual std::string getName() { return "boost"; }
     };
 
     class MageCcStrategy : public Strategy
@@ -42,6 +42,6 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "cc"; }
+        virtual std::string getName() { return "cc"; }
     };
 }

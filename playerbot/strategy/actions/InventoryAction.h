@@ -7,17 +7,17 @@ namespace ai
 {
     class InventoryAction : public Action {
     public:
-        InventoryAction(PlayerbotAI* ai, string name) : Action(ai, name) {}
+        InventoryAction(PlayerbotAI* ai, std::string name) : Action(ai, name) {}
 
     protected:
         void IterateItems(IterateItemsVisitor* visitor, IterateItemsMask mask = ITERATE_ITEMS_IN_BAGS);
         void TellItems(map<uint32, int> items, std::map<uint32, bool> soulbound);
         void TellItem(ItemPrototype const * proto, int count, bool soulbound);
-        std::list<Item*> parseItems(string text, IterateItemsMask mask = ITERATE_ALL_ITEMS);
+        std::list<Item*> parseItems(std::string text, IterateItemsMask mask = ITERATE_ALL_ITEMS);
         uint32 GetItemCount(FindItemVisitor* visitor, IterateItemsMask mask = ITERATE_ITEMS_IN_BAGS);
-        string parseOutfitName(string outfit);
-        ItemIds parseOutfitItems(string outfit);
-        ItemIds FindOutfitItems(string name);
+        std::string parseOutfitName(std::string outfit);
+        ItemIds parseOutfitItems(std::string outfit);
+        ItemIds FindOutfitItems(std::string name);
 
     private:
         void IterateItemsInBags(IterateItemsVisitor* visitor);

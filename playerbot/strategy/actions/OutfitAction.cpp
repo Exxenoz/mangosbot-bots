@@ -8,7 +8,7 @@ using namespace ai;
 
 bool OutfitAction::Execute(Event event)
 {
-    string param = event.getParam();
+    std::string param = event.getParam();
 
     if (param == "?")
     {
@@ -19,7 +19,7 @@ bool OutfitAction::Execute(Event event)
     }
     else
     {
-        string name = parseOutfitName(param);
+        std::string name = parseOutfitName(param);
         ItemIds items = parseOutfitItems(param);
         if (!name.empty())
         {
@@ -38,7 +38,7 @@ bool OutfitAction::Execute(Event event)
 
         name = param.substr(0, space);
         ItemIds outfit = FindOutfitItems(name);
-        string command = param.substr(space + 1);
+        std::string command = param.substr(space + 1);
         if (command == "equip")
         {
             ostringstream out;
@@ -114,12 +114,12 @@ bool OutfitAction::Execute(Event event)
     return true;
 }
 
-void OutfitAction::Save(string name, ItemIds items)
+void OutfitAction::Save(std::string name, ItemIds items)
 {
-    std::list<string>& outfits = AI_VALUE(std::list<string>&, "outfit list");
-    for (std::list<string>::iterator i = outfits.begin(); i != outfits.end(); ++i)
+    std::list<std::string>& outfits = AI_VALUE(std::list<std::string>&, "outfit list");
+    for (std::list<std::string>::iterator i = outfits.begin(); i != outfits.end(); ++i)
     {
-        string outfit = *i;
+        std::string outfit = *i;
         if (name == parseOutfitName(outfit))
         {
             outfits.erase(i);
@@ -143,11 +143,11 @@ void OutfitAction::Save(string name, ItemIds items)
 
 void OutfitAction::List()
 {
-    std::list<string>& outfits = AI_VALUE(std::list<string>&, "outfit list");
-    for (std::list<string>::iterator i = outfits.begin(); i != outfits.end(); ++i)
+    std::list<std::string>& outfits = AI_VALUE(std::list<std::string>&, "outfit list");
+    for (std::list<std::string>::iterator i = outfits.begin(); i != outfits.end(); ++i)
     {
-        string outfit = *i;
-        string name = parseOutfitName(outfit);
+        std::string outfit = *i;
+        std::string name = parseOutfitName(outfit);
         ItemIds items = parseOutfitItems(outfit);
 
         ostringstream out;
@@ -164,7 +164,7 @@ void OutfitAction::List()
     }
 }
 
-void OutfitAction::Update(string name)
+void OutfitAction::Update(std::string name)
 {
     ListItemsVisitor visitor;
     IterateItems(&visitor, ITERATE_ITEMS_IN_EQUIP);

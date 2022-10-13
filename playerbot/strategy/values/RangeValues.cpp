@@ -14,7 +14,7 @@ string RangeValue::Save()
     ostringstream out; out << value; return out.str();
 }
 
-bool RangeValue::Load(string text)
+bool RangeValue::Load(std::string text)
 {
     value = atof(text.c_str());
     return true;

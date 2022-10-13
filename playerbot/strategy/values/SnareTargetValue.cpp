@@ -9,7 +9,7 @@ using namespace ai;
 
 Unit* SnareTargetValue::Calculate()
 {
-    string spell = qualifier;
+    std::string spell = qualifier;
 
     Unit* enemy = AI_VALUE(Unit*, "enemy player target");
     if (enemy)

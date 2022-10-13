@@ -7,28 +7,28 @@ namespace ai
     public:
         DebugStrategy(PlayerbotAI* ai) : Strategy(ai) {}
         virtual int GetType() { return STRATEGY_TYPE_NONCOMBAT; }
-        virtual string getName() { return "debug"; }
+        virtual std::string getName() { return "debug"; }
     };
     class DebugActionStrategy : public DebugStrategy
     {
     public:
         DebugActionStrategy(PlayerbotAI* ai) : DebugStrategy(ai) {}
         virtual int GetType() { return STRATEGY_TYPE_NONCOMBAT; }
-        virtual string getName() { return "debug action"; }
+        virtual std::string getName() { return "debug action"; }
     };
     class DebugMoveStrategy : public Strategy
     {
     public:
         DebugMoveStrategy(PlayerbotAI* ai) : Strategy(ai) {}
         virtual int GetType() { return STRATEGY_TYPE_NONCOMBAT; }
-        virtual string getName() { return "debug move"; }
+        virtual std::string getName() { return "debug move"; }
     };
     class DebugRpgStrategy : public Strategy
     {
     public:
         DebugRpgStrategy(PlayerbotAI* ai) : Strategy(ai) {}
         virtual int GetType() { return STRATEGY_TYPE_NONCOMBAT; }
-        virtual string getName() { return "debug rpg"; }
+        virtual std::string getName() { return "debug rpg"; }
     };
 
     class DebugSpellStrategy : public Strategy
@@ -36,7 +36,7 @@ namespace ai
     public:
         DebugSpellStrategy(PlayerbotAI* ai) : Strategy(ai) {}
         virtual int GetType() { return STRATEGY_TYPE_NONCOMBAT; }
-        virtual string getName() { return "debug spell"; }
+        virtual std::string getName() { return "debug spell"; }
     };
 
     class DebugTravelStrategy : public Strategy
@@ -44,6 +44,6 @@ namespace ai
     public:
         DebugTravelStrategy(PlayerbotAI* ai) : Strategy(ai) {}
         virtual int GetType() { return STRATEGY_TYPE_NONCOMBAT; }
-        virtual string getName() { return "debug travel"; }
+        virtual std::string getName() { return "debug travel"; }
     };
 }

@@ -10,7 +10,7 @@ namespace ai
         LootStrategy() {}
         virtual ~LootStrategy() {};
         virtual bool CanLoot(ItemPrototype const *proto, AiObjectContext *context) = 0;
-        virtual string GetName() = 0;
+        virtual std::string GetName() = 0;
     };
 
     class LootObject

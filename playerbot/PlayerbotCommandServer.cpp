@@ -48,9 +48,9 @@ void session(socket_ptr sock)
 {
     try
     {
-        string buffer, request;
+        std::string buffer, request;
         while (ReadLine(sock, &buffer, &request)) {
-            string response = sRandomPlayerbotMgr.HandleRemoteCommand(request) + "\n";
+            std::string response = sRandomPlayerbotMgr.HandleRemoteCommand(request) + "\n";
             boost::asio::write(*sock, boost::asio::buffer(response.c_str(), response.size()));
             request = "";
         }

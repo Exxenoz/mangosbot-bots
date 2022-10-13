@@ -182,7 +182,7 @@ void InventoryAction::TellItem(ItemPrototype const * proto, int count, bool soul
     ai->TellMaster(out.str());
 }
 
-list<Item*> InventoryAction::parseItems(string text, IterateItemsMask mask)
+list<Item*> InventoryAction::parseItems(std::string text, IterateItemsMask mask)
 {
     set<Item*> found;
     size_t pos = text.find(" ");
@@ -342,12 +342,12 @@ uint32 InventoryAction::GetItemCount(FindItemVisitor* visitor, IterateItemsMask 
 }
 
 
-ItemIds InventoryAction::FindOutfitItems(string name)
+ItemIds InventoryAction::FindOutfitItems(std::string name)
 {
-    std::list<string>& outfits = AI_VALUE(std::list<string>&, "outfit list");
-    for (std::list<string>::iterator i = outfits.begin(); i != outfits.end(); ++i)
+    std::list<std::string>& outfits = AI_VALUE(std::list<std::string>&, "outfit list");
+    for (std::list<std::string>::iterator i = outfits.begin(); i != outfits.end(); ++i)
     {
-        string outfit = *i;
+        std::string outfit = *i;
         if (name == parseOutfitName(outfit))
             return parseOutfitItems(outfit);
     }
@@ -355,14 +355,14 @@ ItemIds InventoryAction::FindOutfitItems(string name)
 }
 
 
-string InventoryAction::parseOutfitName(string outfit)
+string InventoryAction::parseOutfitName(std::string outfit)
 {
     int pos = outfit.find("=");
     if (pos == -1) return "";
     return outfit.substr(0, pos);
 }
 
-ItemIds InventoryAction::parseOutfitItems(string text)
+ItemIds InventoryAction::parseOutfitItems(std::string text)
 {
     ItemIds itemIds;
 
@@ -373,7 +373,7 @@ ItemIds InventoryAction::parseOutfitItems(string text)
         if (endPos == -1)
             endPos = text.size();
 
-        string idC = text.substr(pos, endPos - pos);
+        std::string idC = text.substr(pos, endPos - pos);
         uint32 id = atol(idC.c_str());
         pos = endPos + 1;
         if (id)

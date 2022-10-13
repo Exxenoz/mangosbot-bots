@@ -623,7 +623,7 @@ bool BGJoinAction::JoinQueue(uint32 type)
    bool isRated = false;
    uint8 arenaslot = 0;
    uint8 asGroup = false;
-   string _bgType;
+   std::string _bgType;
 
 // check if arena
 #ifndef MANGOSBOT_ZERO
@@ -992,7 +992,7 @@ bool BGStatusAction::Execute(Event event)
     uint32 Time1;
     uint32 Time2;
     uint8 unk1;
-    string _bgType;
+    std::string _bgType;
     uint8 isRated;
 
 #ifndef MANGOSBOT_ZERO

@@ -13,7 +13,7 @@ namespace ai
     private:
         bool TradeItem(const Item& item, int8 slot);
 
-        static std::map<string, uint32> slots;
+        static std::map<std::string, uint32> slots;
     };
 
 }

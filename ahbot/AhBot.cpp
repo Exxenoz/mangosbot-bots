@@ -437,7 +437,7 @@ int AhBot::Answer(int auction, Category* category, ItemBag* inAuctionItems)
     return answered;
 }
 
-uint32 AhBot::GetTime(string category, uint32 id, uint32 auctionHouse, uint32 type)
+uint32 AhBot::GetTime(std::string category, uint32 id, uint32 auctionHouse, uint32 type)
 {
     QueryResult* results = PlayerbotDatabase.PQuery("SELECT MAX(buytime) FROM ahbot_history WHERE item = '%u' AND won = '%u' AND auction_house = '%u' AND category = '%s'",
         id, type, factions[auctionHouse], category.c_str());
@@ -452,7 +452,7 @@ uint32 AhBot::GetTime(string category, uint32 id, uint32 auctionHouse, uint32 ty
     return result;
 }
 
-void AhBot::SetTime(string category, uint32 id, uint32 auctionHouse, uint32 type, uint32 value)
+void AhBot::SetTime(std::string category, uint32 id, uint32 auctionHouse, uint32 type, uint32 value)
 {
     PlayerbotDatabase.PExecute("DELETE FROM ahbot_history WHERE item = '%u' AND won = '%u' AND auction_house = '%u' AND category = '%s'",
         id, type, factions[auctionHouse], category.c_str());
@@ -471,7 +471,7 @@ uint32 AhBot::GetBuyTime(uint32 entry, uint32 itemId, uint32 auctionHouse, Categ
 
     uint32 result = entryTime;
 
-    string categoryName = category->GetName();
+    std::string categoryName = category->GetName();
     uint32 categoryTime = GetTime(categoryName, 0, auctionHouse, AHBOT_WON_DELAY);
     uint32 itemTime = GetTime("item", itemId, auctionHouse, AHBOT_WON_DELAY);
 
@@ -501,7 +501,7 @@ uint32 AhBot::GetSellTime(uint32 itemId, uint32 auctionHouse, Category*& categor
 
     uint32 result = itemTime;
 
-    string categoryName = category->GetDisplayName();
+    std::string categoryName = category->GetDisplayName();
     uint32 categorySellTime = GetTime(categoryName, 0, auctionHouse, AHBOT_SELL_DELAY);
     uint32 categoryBuyTime = GetTime(categoryName, 0, auctionHouse, AHBOT_WON_DELAY);
     uint32 categoryTime = max(categorySellTime, categoryBuyTime);
@@ -654,7 +654,7 @@ int AhBot::AddAuction(int auction, Category* category, ItemPrototype const* prot
     return 1;
 }
 
-void AhBot::HandleCommand(string command)
+void AhBot::HandleCommand(std::string command)
 {
     if (!sAhBotConfig.enabled)
         return;
@@ -796,7 +796,7 @@ void AhBot::AddToHistory(AuctionEntry* entry, uint32 won)
     if (!proto)
         return;
 
-    string category = "";
+    std::string category = "";
     for (int i = 0; i < CategoryList::instance.size(); i++)
     {
         if (CategoryList::instance[i]->Contains(proto))
@@ -922,10 +922,10 @@ void AhBot::CheckCategoryMultipliers()
 
     PlayerbotDatabase.PExecute("DELETE FROM ahbot_category");
 
-    set<string> tmp;
+    set<std::string> tmp;
     for (int i = 0; i < CategoryList::instance.size(); i++)
     {
-        string name = CategoryList::instance[i]->GetDisplayName();
+        std::string name = CategoryList::instance[i]->GetDisplayName();
 
         if (tmp.find(name) != tmp.end())
             continue;
@@ -1172,7 +1172,7 @@ void AhBot::CheckSendMail(uint32 bidder, uint32 price, AuctionEntry *entry)
     body << "\n";
     body << "Regards,\n";
 
-    string name;
+    std::string name;
     if (!sObjectMgr.GetPlayerNameByGUID(ObjectGuid(HIGHGUID_PLAYER, bidder), name))
         return;
 

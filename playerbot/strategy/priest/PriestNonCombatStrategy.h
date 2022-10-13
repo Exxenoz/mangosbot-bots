@@ -12,7 +12,7 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "nc"; }
+        virtual std::string getName() { return "nc"; }
     };
 
     class PriestBuffStrategy : public NonCombatStrategy
@@ -22,7 +22,7 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "buff"; }
+        virtual std::string getName() { return "buff"; }
     };
 
     class PriestShadowResistanceStrategy : public NonCombatStrategy
@@ -32,6 +32,6 @@ namespace ai
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
-        virtual string getName() { return "rshadow"; }
+        virtual std::string getName() { return "rshadow"; }
     };
 }

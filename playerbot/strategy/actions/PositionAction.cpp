@@ -5,7 +5,7 @@
 
 using namespace ai;
 
-void TellPosition(PlayerbotAI* ai, string name, ai::PositionEntry pos)
+void TellPosition(PlayerbotAI* ai, std::string name, ai::PositionEntry pos)
 {
     ostringstream out; out << "Position " << name;
     if (pos.isSet())
@@ -40,15 +40,15 @@ bool PositionAction::Execute(Event event)
         return true;
     }
 
-    std::vector<string> params = split(param, ' ');
+    std::vector<std::string> params = split(param, ' ');
     if (params.size() != 2)
     {
         ai->TellMaster("Whisper position <name> ?/set/reset");
         return false;
     }
 
-    string name = params[0];
-    string action = params[1];
+    std::string name = params[0];
+    std::string action = params[1];
 	ai::PositionEntry pos = posMap[name];
 	if (action == "?")
 	{
@@ -56,7 +56,7 @@ bool PositionAction::Execute(Event event)
 	    return true;
 	}
 
-    std::vector<string> coords = split(action, ',');
+    std::vector<std::string> coords = split(action, ',');
     if (coords.size() == 3)
     {
         pos.Set(atoi(coords[0].c_str()), atoi(coords[1].c_str()), atoi(coords[2].c_str()), ai->GetBot()->GetMapId());

@@ -15,7 +15,7 @@ namespace ai
     {
     public:
         RpgStrategy(PlayerbotAI* ai);
-        virtual string getName() { return "rpg"; }
+        virtual std::string getName() { return "rpg"; }
 
     public:
         //virtual NextAction** getDefaultActions();
@@ -27,7 +27,7 @@ namespace ai
     {
     public:
         RpgQuestStrategy(PlayerbotAI* ai) : RpgStrategy(ai) {};
-        virtual string getName() { return "rpg quest"; }
+        virtual std::string getName() { return "rpg quest"; }
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);
@@ -37,7 +37,7 @@ namespace ai
     {
     public:
         RpgVendorStrategy(PlayerbotAI* ai) : RpgStrategy(ai) {};
-        virtual string getName() { return "rpg vendor"; }
+        virtual std::string getName() { return "rpg vendor"; }
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);
@@ -47,7 +47,7 @@ namespace ai
     {
     public:
         RpgExploreStrategy(PlayerbotAI* ai) : RpgStrategy(ai) {};
-        virtual string getName() { return "rpg explore"; }
+        virtual std::string getName() { return "rpg explore"; }
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);
@@ -57,7 +57,7 @@ namespace ai
     {
     public:
         RpgMaintenanceStrategy(PlayerbotAI* ai) : RpgStrategy(ai) {};
-        virtual string getName() { return "rpg maintenance"; }
+        virtual std::string getName() { return "rpg maintenance"; }
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);
@@ -67,7 +67,7 @@ namespace ai
     {
     public:
         RpgGuildStrategy(PlayerbotAI* ai) : RpgStrategy(ai) {};
-        virtual string getName() { return "rpg guild"; }
+        virtual std::string getName() { return "rpg guild"; }
     public:
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);
     };
@@ -76,7 +76,7 @@ namespace ai
     {
     public:
         RpgBgStrategy(PlayerbotAI* ai) : RpgStrategy(ai) {};
-        virtual string getName() { return "rpg bg"; }
+        virtual std::string getName() { return "rpg bg"; }
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);
@@ -86,7 +86,7 @@ namespace ai
     {
     public:
         RpgPlayerStrategy(PlayerbotAI* ai) : RpgStrategy(ai) {};
-        virtual string getName() { return "rpg player"; }
+        virtual std::string getName() { return "rpg player"; }
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);
@@ -96,7 +96,7 @@ namespace ai
     {
     public:
         RpgCraftStrategy(PlayerbotAI* ai) : RpgStrategy(ai) {};
-        virtual string getName() { return "rpg craft"; }
+        virtual std::string getName() { return "rpg craft"; }
 
     public:
         virtual void InitTriggers(std::list<TriggerNode*>& triggers);

@@ -1,7 +1,7 @@
 #pragma once
 
 template<typename T>
-map<int, T> filterList(std::vector<T> src, string filter)
+map<int, T> filterList(std::vector<T> src, std::string filter)
 {
     std::map<int, T> result;
     if (filter.empty() || filter == "*")
@@ -14,7 +14,7 @@ map<int, T> filterList(std::vector<T> src, string filter)
 
     if (filter.find("-") != string::npos)
     {
-        std::vector<string> ss = split(filter, '-');
+        std::vector<std::string> ss = split(filter, '-');
         int from = 0, to = src.size() - 1;
         if (!ss[0].empty()) from = atoi(ss[0].c_str()) - 1;
         if (ss.size() > 1 && !ss[1].empty()) to = atoi(ss[1].c_str()) - 1;
@@ -29,8 +29,8 @@ map<int, T> filterList(std::vector<T> src, string filter)
         return result;
     }
 
-    std::vector<string> ss = split(filter, ',');
-    for (std::vector<string>::iterator i = ss.begin(); i != ss.end(); ++i)
+    std::vector<std::string> ss = split(filter, ',');
+    for (std::vector<std::string>::iterator i = ss.begin(); i != ss.end(); ++i)
     {
         int idx = atoi(i->c_str()) - 1;
         if (idx < 0) idx = 0;

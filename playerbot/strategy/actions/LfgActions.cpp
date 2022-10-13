@@ -152,7 +152,7 @@ bool LfgJoinAction::JoinLFG()
     uint32 dungeon = urand(0, selected.size() - 1);
     MeetingStoneInfo stoneInfo = selected[dungeon];
     BotRoles botRoles = AiFactory::GetPlayerRoles(bot);
-    string _botRoles;
+    std::string _botRoles;
     switch (botRoles)
     {
     case BOT_ROLE_TANK:
@@ -187,9 +187,9 @@ bool LfgJoinAction::JoinLFG()
     uint32 zoneLFG = 0;
     uint32 questLFG = 0;
     uint32 questZoneLFG = 0;
-    string questName;
-    string zoneName;
-    string lfgName;
+    std::string questName;
+    std::string zoneName;
+    std::string lfgName;
     uint32 needMembers = 0;
     LfgType lfgType = LFG_TYPE_NONE;
     TravelState state = TRAVEL_STATE_IDLE;
@@ -766,7 +766,7 @@ bool LfgJoinAction::JoinLFG()
 
     // set comment
     BotRoles botRoles = AiFactory::GetPlayerRoles(bot);
-    string _botRoles;
+    std::string _botRoles;
     switch (botRoles)
     {
     case BOT_ROLE_TANK:
@@ -785,7 +785,7 @@ bool LfgJoinAction::JoinLFG()
         _botRoles = "Tank or Dps";
 
     WorldPacket p;
-    string lfgComment;
+    std::string lfgComment;
     if (isLFM)
     {
         if (!group)
@@ -805,14 +805,14 @@ bool LfgJoinAction::JoinLFG()
     }
     if (lfgType == LFG_TYPE_DUNGEON)
     {
-        string _gs = to_string(bot->GetPlayerbotAI()->GetEquipGearScore(bot, false, false));
+        std::string _gs = to_string(bot->GetPlayerbotAI()->GetEquipGearScore(bot, false, false));
         lfgComment += ", GS " + _gs;
     }
 
     p << lfgComment;// +", GS - " + _gs;
     bot->GetSession()->HandleSetLfgCommentOpcode(p);
-    string lfgGroup = isLFG ? "LFG" : "LFM";
-    string lfgOption = lfgType == LFG_TYPE_QUEST ? "Quest" : (lfgType == LFG_TYPE_ZONE ? "Zone" : "Dungeon");
+    std::string lfgGroup = isLFG ? "LFG" : "LFM";
+    std::string lfgOption = lfgType == LFG_TYPE_QUEST ? "Quest" : (lfgType == LFG_TYPE_ZONE ? "Zone" : "Dungeon");
 
     if (realLFG)
         sLog.outBasic("Bot #%d %s:%d <%s>: uses %s, %s - %s (%s)", bot->GetGUIDLow(), bot->GetTeam() == ALLIANCE ? "A" : "H", bot->GetLevel(), bot->GetName(), lfgGroup.c_str(), lfgOption.c_str(), lfgName.c_str(), _botRoles.c_str());
@@ -899,7 +899,7 @@ bool LfgJoinAction::JoinLFG()
         return false;*/
 
     // check role for console msg
-    string _roles = "multiple roles";
+    std::string _roles = "multiple roles";
 
     if ((pState.GetPlayerRoles() & PLAYER_ROLE_TANK) != 0)
         _roles = "TANK";
@@ -968,7 +968,7 @@ bool LfgJoinAction::JoinLFG()
     }*/
 
     // Set Raid Browser comment
-    string _gs = to_string(bot->GetEquipGearScore());
+    std::string _gs = to_string(bot->GetEquipGearScore());
     sLFGMgr.JoinLfg(bot, GetRoles(), list, "Bot " + _roles + " GS:" + _gs + " for LFG");
 #endif
     return true;
@@ -1096,7 +1096,7 @@ bool LfgLeaveAction::Execute(Event event)
             bot->GetSession()->HandleLfmClearOpcode(p);
 
         // clear comment
-        string empty;
+        std::string empty;
         p << empty;
         bot->GetSession()->HandleSetLfgCommentOpcode(p);
     }

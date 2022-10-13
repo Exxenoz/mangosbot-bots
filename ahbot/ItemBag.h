@@ -51,7 +51,7 @@ namespace ahbot
 
     protected:
         virtual void Load() = 0;
-        virtual string GetName() = 0;
+        virtual std::string GetName() = 0;
 
     protected:
         std::map<Category*,std::vector<uint32> > content;
@@ -64,7 +64,7 @@ namespace ahbot
 
     protected:
         virtual void Load();
-        virtual string GetName() { return "available"; }
+        virtual std::string GetName() { return "available"; }
     };
 
     class InAuctionItemsBag : public ItemBag
@@ -74,7 +74,7 @@ namespace ahbot
 
     protected:
         virtual void Load();
-        virtual string GetName();
+        virtual std::string GetName();
 
     private:
         uint32 auctionId;

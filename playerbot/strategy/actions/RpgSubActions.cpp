@@ -22,7 +22,7 @@ void RpgHelper::BeforeExecute()
     setFacing(guidP());
 }
 
-void RpgHelper::AfterExecute(bool doDelay, bool waitForGroup, string nextAction)
+void RpgHelper::AfterExecute(bool doDelay, bool waitForGroup, std::string nextAction)
 {
     if (ai->HasRealPlayerMaster() && nextAction == "rpg") 
         nextAction = "rpg cancel"; 

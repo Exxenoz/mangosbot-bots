@@ -7,7 +7,7 @@ using namespace ai;
 
 bool ShareQuestAction::Execute(Event event)
 {
-    string link = event.getParam();
+    std::string link = event.getParam();
     if (!GetMaster())
         return false;
 

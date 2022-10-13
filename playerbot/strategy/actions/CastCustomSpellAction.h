@@ -10,9 +10,9 @@ namespace ai
     class CastCustomSpellAction : public InventoryAction
     {
     public:
-        CastCustomSpellAction(PlayerbotAI* ai, string name = "cast custom spell") : InventoryAction(ai, name) {}
+        CastCustomSpellAction(PlayerbotAI* ai, std::string name = "cast custom spell") : InventoryAction(ai, name) {}
         virtual bool Execute(Event event);
-        virtual string castString(WorldObject* target) { return "cast"; }
+        virtual std::string castString(WorldObject* target) { return "cast"; }
     protected:
         bool ncCast = false;
     };
@@ -20,15 +20,15 @@ namespace ai
     class CastCustomNcSpellAction : public CastCustomSpellAction
     {
     public:
-        CastCustomNcSpellAction(PlayerbotAI* ai, string name = "cast custom nc spell") : CastCustomSpellAction(ai, name) {}
+        CastCustomNcSpellAction(PlayerbotAI* ai, std::string name = "cast custom nc spell") : CastCustomSpellAction(ai, name) {}
         virtual bool isUseful() { return !bot->IsInCombat(); }
-        virtual string castString(WorldObject* target) { return "castnc " + chat->formatWorldobject(target); }
+        virtual std::string castString(WorldObject* target) { return "castnc " + chat->formatWorldobject(target); }
     };
 
     class CastRandomSpellAction : public ListSpellsAction
     {
     public:
-        CastRandomSpellAction(PlayerbotAI* ai, string name = "cast random spell") : ListSpellsAction(ai, name) {}
+        CastRandomSpellAction(PlayerbotAI* ai, std::string name = "cast random spell") : ListSpellsAction(ai, name) {}
 
         virtual bool AcceptSpell(const SpellEntry* pSpellInfo)
         {

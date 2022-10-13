@@ -18,10 +18,10 @@ void split(std::vector<std::string>& dest, const std::string& str, const char* d
     free(pTempStr);
 }
 
-vector<string>& split(const string &s, char delim, std::vector<string> &elems)
+vector<std::string>& split(const std::string &s, char delim, std::vector<std::string> &elems)
 {
     stringstream ss(s);
-    string item;
+    std::string item;
     while(getline(ss, item, delim))
     {
         elems.push_back(item);
@@ -30,9 +30,9 @@ vector<string>& split(const string &s, char delim, std::vector<string> &elems)
 }
 
 
-vector<string> split(const string &s, char delim)
+vector<std::string> split(const std::string &s, char delim)
 {
-    std::vector<string> elems;
+    std::vector<std::string> elems;
     return split(s, delim, elems);
 }
 

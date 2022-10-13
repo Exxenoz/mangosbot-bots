@@ -32,27 +32,27 @@ public:
     std::set<uint32> ignoreVendorItemIds;
     bool sendmail;
 
-    float GetSellPriceMultiplier(string category)
+    float GetSellPriceMultiplier(std::string category)
     {
         return GetCategoryParameter(sellPriceMultipliers, "PriceMultiplier.Sell", category, 1.0f);
     }
 
-    float GetBuyPriceMultiplier(string category)
+    float GetBuyPriceMultiplier(std::string category)
     {
         return GetCategoryParameter(buyPriceMultipliers, "PriceMultiplier.Buy", category, 1.0f);
     }
 
-    float GetItemPriceMultiplier(string name)
+    float GetItemPriceMultiplier(std::string name)
     {
         return GetCategoryParameter(itemPriceMultipliers, "PriceMultiplier.Item", name, 1.0f);
     }
 
-    int32 GetMaxAllowedAuctionCount(string category, int32 default_value)
+    int32 GetMaxAllowedAuctionCount(std::string category, int32 default_value)
     {
         return (int32)GetCategoryParameter(maxAuctionCount, "MaxAuctionCount", category, default_value);
     }
 
-    int32 GetMaxAllowedItemAuctionCount(string category, int32 default_value)
+    int32 GetMaxAllowedItemAuctionCount(std::string category, int32 default_value)
     {
         return (int32)GetCategoryParameter(maxItemAuctionCount, "MaxItemTypeCount", category, default_value);
     }    
@@ -78,7 +78,7 @@ public:
     }
 
 private:
-    float GetCategoryParameter(map<string, float>& cache, string type, string category, float defaultValue)
+    float GetCategoryParameter(map<std::string, float>& cache, std::string type, std::string category, float defaultValue)
     {
         if (cache.find(category) == cache.end())
         {
@@ -91,11 +91,11 @@ private:
 
 private:
     Config config;
-    std::map<string, float> sellPriceMultipliers;
-    std::map<string, float> buyPriceMultipliers;
-    std::map<string, float> itemPriceMultipliers;
-    std::map<string, float> maxAuctionCount;
-    std::map<string, float> maxItemAuctionCount;
+    std::map<std::string, float> sellPriceMultipliers;
+    std::map<std::string, float> buyPriceMultipliers;
+    std::map<std::string, float> itemPriceMultipliers;
+    std::map<std::string, float> maxAuctionCount;
+    std::map<std::string, float> maxItemAuctionCount;
 };
 
 #define sAhBotConfig MaNGOS::Singleton<AhBotConfig>::Instance()

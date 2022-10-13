@@ -23,8 +23,8 @@ public:
     void Reset(PlayerbotAI *ai);
 
 private:
-    void SaveValue(uint64 guid, string key, string value);
-    string FormatStrategies(string type, std::list<string> strategies);
+    void SaveValue(uint64 guid, std::string key, std::string value);
+    std::string FormatStrategies(std::string type, std::list<std::string> strategies);
 };
 
 #define sPlayerbotDbStore PlayerbotDbStore::instance()

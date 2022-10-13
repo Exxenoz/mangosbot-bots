@@ -47,7 +47,7 @@ namespace ahbot
     class PricingStrategyFactory
     {
     public:
-        static PricingStrategy* Create(string name, Category* category)
+        static PricingStrategy* Create(std::string name, Category* category)
         {
             if (name == "buyOnlyRare")
                 return new BuyOnlyRarePricingStrategy(category);

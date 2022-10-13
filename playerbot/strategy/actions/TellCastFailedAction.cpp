@@ -57,7 +57,7 @@ bool TellCastFailedAction::Execute(Event event)
 
 bool TellSpellAction::Execute(Event event)
 {
-    string spell = event.getParam();
+    std::string spell = event.getParam();
     uint32 spellId = AI_VALUE2(uint32, "spell id", spell);
     if (!spellId)
         return false;

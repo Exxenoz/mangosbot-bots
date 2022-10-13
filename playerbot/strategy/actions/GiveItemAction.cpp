@@ -6,7 +6,7 @@
 
 using namespace ai;
 
-vector<string> split(const string &s, char delim);
+vector<std::string> split(const std::string &s, char delim);
 
 bool GiveItemAction::Execute(Event event)
 {

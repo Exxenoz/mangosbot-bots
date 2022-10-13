@@ -8,7 +8,7 @@ namespace ai
 	public:
         RangeValue(PlayerbotAI* ai);
 
-        virtual string Save();
-        virtual bool Load(string value);
+        virtual std::string Save();
+        virtual bool Load(std::string value);
     };
 }

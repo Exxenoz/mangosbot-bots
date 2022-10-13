@@ -83,7 +83,7 @@ enum class TravelNodePathType : uint8
         void setCalculated(bool calculated1 = true) { calculated = calculated1; }
         bool getCalculated() { return calculated; }
 
-        string print();
+        std::string print();
 
         //Setters
         void setComplete(bool complete1) { complete = complete1; }
@@ -143,7 +143,7 @@ enum class TravelNodePathType : uint8
     public:
         //Constructors
         TravelNode() {};
-        TravelNode(WorldPosition point1, string nodeName1 = "Travel Node", bool important1 = false) { nodeName = nodeName1; point = point1; important = important1; }
+        TravelNode(WorldPosition point1, std::string nodeName1 = "Travel Node", bool important1 = false) { nodeName = nodeName1; point = point1; important = important1; }
         TravelNode(TravelNode* baseNode) { nodeName = baseNode->nodeName; point = baseNode->point; important = baseNode->important;}
 
         //Setters
@@ -151,7 +151,7 @@ enum class TravelNodePathType : uint8
         void setPoint(WorldPosition point1) { point = point1; }
 
         //Getters
-        string getName() { return nodeName; };
+        std::string getName() { return nodeName; };
         WorldPosition* getPosition() { return &point; };
         std::unordered_map<TravelNode*, TravelNodePath>* getPaths() { return &paths; }
         std::unordered_map<TravelNode*, TravelNodePath*>* getLinks() { return &links; }
@@ -209,7 +209,7 @@ enum class TravelNodePathType : uint8
         void print(bool printFailed = true);
     protected:
         //Logical name of the node
-        string nodeName;
+        std::string nodeName;
         //WorldPosition of the node.
         WorldPosition point;
 
@@ -345,7 +345,7 @@ enum class TravelNodePathType : uint8
         TravelNodeMap() {};
         TravelNodeMap(TravelNodeMap* baseMap);
 
-        TravelNode* addNode(WorldPosition pos, string preferedName = "Travel Node", bool isImportant = false, bool checkDuplicate = true, bool transport = false, uint32 transportId = 0);
+        TravelNode* addNode(WorldPosition pos, std::string preferedName = "Travel Node", bool isImportant = false, bool checkDuplicate = true, bool transport = false, uint32 transportId = 0);
         void removeNode(TravelNode* node);
         bool removeNodes() { if (m_nMapMtx.try_lock_for(std::chrono::seconds(10))) { for (auto& node : m_nodes) removeNode(node); m_nMapMtx.unlock(); return true; } return false; };
         void fullLinkNode(TravelNode* startNode, Unit* bot);

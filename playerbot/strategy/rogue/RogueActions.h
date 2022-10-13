@@ -32,14 +32,14 @@ namespace ai
 	{
 	public:
 		CastSprintAction(PlayerbotAI* ai) : CastBuffSpellAction(ai, "sprint") {}
-        virtual string GetTargetName() { return "self target"; }
+        virtual std::string GetTargetName() { return "self target"; }
 	};
 
     class CastStealthAction : public CastBuffSpellAction
     {
     public:
         CastStealthAction(PlayerbotAI* ai) : CastBuffSpellAction(ai, "stealth") {}
-        virtual string GetTargetName() { return "self target"; }
+        virtual std::string GetTargetName() { return "self target"; }
         virtual bool isUseful()
         {
             bool hasStealth = ai->HasAura("stealth", bot);

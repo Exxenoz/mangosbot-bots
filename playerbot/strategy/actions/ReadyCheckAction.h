@@ -8,7 +8,7 @@ namespace ai
     class ReadyCheckAction : public InventoryAction
     {
     public:
-        ReadyCheckAction(PlayerbotAI* ai, string name = "ready check") : InventoryAction(ai, name) {}
+        ReadyCheckAction(PlayerbotAI* ai, std::string name = "ready check") : InventoryAction(ai, name) {}
 
         virtual bool Execute(Event event);
 

@@ -26,12 +26,12 @@ void PlayerbotDbStore::Load(PlayerbotAI *ai)
         ai->ChangeStrategy("+chat", BOT_STATE_COMBAT);
         ai->ChangeStrategy("+chat", BOT_STATE_NON_COMBAT);
 
-        std::list<string> values;
+        std::list<std::string> values;
         do
         {
             Field* fields = results->Fetch();
-            string key = fields[0].GetString();
-            string value = fields[1].GetString();
+            std::string key = fields[0].GetString();
+            std::string value = fields[1].GetString();
             if (key == "value") values.push_back(value);
             else if (key == "co") ai->ChangeStrategy(value, BOT_STATE_COMBAT);
             else if (key == "nc") ai->ChangeStrategy(value, BOT_STATE_NON_COMBAT);
@@ -50,8 +50,8 @@ void PlayerbotDbStore::Save(PlayerbotAI *ai)
 
     Reset(ai);
 
-    std::list<string> data = ai->GetAiObjectContext()->Save();
-    for (std::list<string>::iterator i = data.begin(); i != data.end(); ++i)
+    std::list<std::string> data = ai->GetAiObjectContext()->Save();
+    for (std::list<std::string>::iterator i = data.begin(); i != data.end(); ++i)
     {
         SaveValue(guid, "value", *i);
     }
@@ -61,10 +61,10 @@ void PlayerbotDbStore::Save(PlayerbotAI *ai)
     SaveValue(guid, "dead", FormatStrategies("dead", ai->GetStrategies(BOT_STATE_DEAD)));
 }
 
-string PlayerbotDbStore::FormatStrategies(string type, std::list<string> strategies)
+string PlayerbotDbStore::FormatStrategies(std::string type, std::list<std::string> strategies)
 {
     ostringstream out;
-    for(std::list<string>::iterator i = strategies.begin(); i != strategies.end(); ++i)
+    for(std::list<std::string>::iterator i = strategies.begin(); i != strategies.end(); ++i)
         out << "+" << (*i).c_str() << ",";
 
 	string res = out.str();
@@ -79,7 +79,7 @@ void PlayerbotDbStore::Reset(PlayerbotAI *ai)
     PlayerbotDatabase.PExecute("DELETE FROM `ai_playerbot_db_store` WHERE `guid` = '%lu'", guid);
 }
 
-void PlayerbotDbStore::SaveValue(uint64 guid, string key, string value)
+void PlayerbotDbStore::SaveValue(uint64 guid, std::string key, std::string value)
 {
     PlayerbotDatabase.PExecute("INSERT INTO `ai_playerbot_db_store` (`guid`, `key`, `value`) VALUES ('%lu', '%s', '%s')", guid, key.c_str(), value.c_str());
 }

@@ -7,7 +7,7 @@ namespace ai
     {
     public:
         GroupStrategy(PlayerbotAI* ai) : NonCombatStrategy(ai) {}
-        virtual string getName() { return "group"; }
+        virtual std::string getName() { return "group"; }
         virtual int GetType() { return STRATEGY_TYPE_GENERIC; }
 
     public:

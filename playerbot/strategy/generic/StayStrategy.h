@@ -7,7 +7,7 @@ namespace ai
     {
     public:
         StayStrategy(PlayerbotAI* ai) : NonCombatStrategy(ai) {}
-        virtual string getName() { return "stay"; }
+        virtual std::string getName() { return "stay"; }
         virtual NextAction** getDefaultActions();
     };
 
@@ -15,7 +15,7 @@ namespace ai
     {
     public:
         SitStrategy(PlayerbotAI* ai) : NonCombatStrategy(ai) {}
-        virtual string getName() { return "sit"; }
+        virtual std::string getName() { return "sit"; }
         virtual void InitTriggers(std::list<TriggerNode*> &triggers);
     };
 

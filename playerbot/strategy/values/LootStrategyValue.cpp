@@ -17,7 +17,7 @@ namespace ai
             ItemUsage usage = AI_VALUE2(ItemUsage, "item usage", out.str());
             return usage != ITEM_USAGE_NONE;
         }
-        virtual string GetName() { return "normal"; }
+        virtual std::string GetName() { return "normal"; }
     };
 
     class GrayLootStrategy : public NormalLootStrategy
@@ -27,7 +27,7 @@ namespace ai
         {
             return NormalLootStrategy::CanLoot(proto, context) || proto->Quality == ITEM_QUALITY_POOR;
         }
-        virtual string GetName() { return "gray"; }
+        virtual std::string GetName() { return "gray"; }
     };
 
     class DisenchantLootStrategy : public NormalLootStrategy
@@ -39,7 +39,7 @@ namespace ai
                     (proto->Quality >= ITEM_QUALITY_UNCOMMON && proto->Bonding != BIND_WHEN_PICKED_UP &&
                     (proto->Class == ITEM_CLASS_ARMOR || proto->Class == ITEM_CLASS_WEAPON));
         }
-        virtual string GetName() { return "disenchant"; }
+        virtual std::string GetName() { return "disenchant"; }
     };
 
     class AllLootStrategy : public LootStrategy
@@ -49,7 +49,7 @@ namespace ai
         {
             return true;
         }
-        virtual string GetName() { return "all"; }
+        virtual std::string GetName() { return "all"; }
     };
 }
 
@@ -58,7 +58,7 @@ LootStrategy *LootStrategyValue::gray = new GrayLootStrategy();
 LootStrategy *LootStrategyValue::disenchant = new DisenchantLootStrategy();
 LootStrategy *LootStrategyValue::all = new AllLootStrategy();
 
-LootStrategy* LootStrategyValue::instance(string strategy)
+LootStrategy* LootStrategyValue::instance(std::string strategy)
 {
     if (strategy == "*" || strategy == "all")
         return all;
@@ -77,7 +77,7 @@ string LootStrategyValue::Save()
     return value ? value->GetName() : "?";
 }
 
-bool LootStrategyValue::Load(string text)
+bool LootStrategyValue::Load(std::string text)
 {
     value = LootStrategyValue::instance(text);
     return true;

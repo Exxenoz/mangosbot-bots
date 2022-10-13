@@ -8,7 +8,7 @@ namespace ai
 {
     class ChooseTravelTargetAction : public MovementAction {
     public:
-        ChooseTravelTargetAction(PlayerbotAI* ai, string name = "choose travel target") : MovementAction(ai, name) {}
+        ChooseTravelTargetAction(PlayerbotAI* ai, std::string name = "choose travel target") : MovementAction(ai, name) {}
 
         virtual bool Execute(Event event);
         virtual bool isUseful();
@@ -30,11 +30,11 @@ namespace ai
         bool SetGrindTarget(TravelTarget* target);
         bool SetBossTarget(TravelTarget* target);
         bool SetExploreTarget(TravelTarget* target);
-        bool SetNpcFlagTarget(TravelTarget* target, std::vector<NPCFlags> flags, string name = "", std::vector<uint32> items = {});
+        bool SetNpcFlagTarget(TravelTarget* target, std::vector<NPCFlags> flags, std::string name = "", std::vector<uint32> items = {});
         bool SetNullTarget(TravelTarget* target);
 
     public:
-        static TravelDestination* FindDestination(Player* bot, string name);
+        static TravelDestination* FindDestination(Player* bot, std::string name);
     private:
         virtual bool needForQuest(Unit* target);
         virtual bool needItemForQuest(uint32 itemId, const Quest* questTemplate, const QuestStatusData* questStatus);
