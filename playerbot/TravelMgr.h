@@ -795,7 +795,7 @@ namespace ai
 
         std::unordered_map<uint32, int32> areaLevels;
 
-        std::vector<tuple<uint32, int, int>> badVmap, badMmap;
+        std::vector<std::tuple<uint32, int, int>> badVmap, badMmap;
 
         std::unordered_map<std::pair<uint32, uint32>, std::vector<mapTransfer>, boost::hash<std::pair<uint32, uint32>>> mapTransfersMap;
     };
