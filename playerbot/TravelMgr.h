@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AiObject.h"
+#include "strategy/AiObject.h"
 #include "MoveSplineInitArgs.h"
 #include <boost/functional/hash.hpp>
 #include "ObjectMgr.h"
