@@ -922,7 +922,7 @@ void AhBot::CheckCategoryMultipliers()
 
     PlayerbotDatabase.PExecute("DELETE FROM ahbot_category");
 
-    set<std::string> tmp;
+    std::set<std::string> tmp;
     for (int i = 0; i < CategoryList::instance.size(); i++)
     {
         std::string name = CategoryList::instance[i]->GetDisplayName();

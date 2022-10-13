@@ -10,7 +10,7 @@ string AlwaysLootListValue::Save()
 {
     ostringstream out;
     bool first = true;
-    for (set<uint32>::iterator i = value.begin(); i != value.end(); ++i)
+    for (std::set<uint32>::iterator i = value.begin(); i != value.end(); ++i)
     {
         if (!first) out << ",";
         else first = false;

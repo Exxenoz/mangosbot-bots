@@ -1214,7 +1214,7 @@ bool RpgTravelDestination::isActive(Player* bot)
         return false;
 
     //Once the target rpged with it is added to the ignore list. We can now move on.
-    set<ObjectGuid>& ignoreList = bot->GetPlayerbotAI()->GetAiObjectContext()->GetValue<set<ObjectGuid>&>("ignore rpg target")->Get();
+    std::set<ObjectGuid>& ignoreList = bot->GetPlayerbotAI()->GetAiObjectContext()->GetValue<std::set<ObjectGuid>&>("ignore rpg target")->Get();
 
     for (auto& i : ignoreList)
     {
@@ -2979,7 +2979,7 @@ void TravelMgr::LoadQuestTravelTable()
                                     AiObjectContext* con = ai->GetAiObjectContext();
 
                                     std::list<std::string> tstrats;
-                                    set<std::string> strategies, sstrats;
+                                    std::set<std::string> strategies, sstrats;
 
                                     tstrats = ai->GetStrategies(BOT_STATE_COMBAT);
                                     sstrats = con->GetSupportedStrategies();

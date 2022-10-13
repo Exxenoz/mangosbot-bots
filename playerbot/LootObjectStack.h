@@ -50,7 +50,7 @@ namespace ai
         time_t asOfTime;
     };
 
-    class LootTargetList : public set<LootTarget>
+    class LootTargetList : public std::set<LootTarget>
     {
     public:
         void shrink(time_t fromTime);

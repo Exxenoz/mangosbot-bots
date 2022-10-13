@@ -195,7 +195,7 @@ class RandomItemMgr
         std::map<uint32, RandomItemCache> randomItemCache;
         std::map<RandomItemType, RandomItemPredicate*> predicates;
         BotEquipCache equipCache;
-        std::map<EquipmentSlots, set<InventoryType> > viableSlots;
+        std::map<EquipmentSlots, std::set<InventoryType> > viableSlots;
         std::map<uint32, std::map<uint32, uint32> > ammoCache;
         std::map<uint32, std::map<uint32, std::vector<uint32> > > potionCache;
         std::map<uint32, std::map<uint32, std::vector<uint32> > > foodCache;

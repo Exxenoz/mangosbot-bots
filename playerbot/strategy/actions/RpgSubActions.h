@@ -85,7 +85,7 @@ namespace ai
     public:
         RpgCancelAction(PlayerbotAI* ai, std::string name = "rpg cancel") : RpgSubAction(ai, name) {}
 
-        virtual bool Execute(Event event) { rpg->OnCancel();  AI_VALUE(set<ObjectGuid>&, "ignore rpg target").insert(AI_VALUE(GuidPosition, "rpg target")); RESET_AI_VALUE(GuidPosition, "rpg target"); rpg->AfterExecute(""); return true; };
+        virtual bool Execute(Event event) { rpg->OnCancel();  AI_VALUE(std::set<ObjectGuid>&, "ignore rpg target").insert(AI_VALUE(GuidPosition, "rpg target")); RESET_AI_VALUE(GuidPosition, "rpg target"); rpg->AfterExecute(""); return true; };
     };
 
     class RpgTaxiAction : public RpgSubAction

@@ -43,7 +43,7 @@ uint32 SpellIdValue::Calculate()
 
     int loc = bot->GetSession()->GetSessionDbcLocale();
 
-    set<uint32> spellIds;
+    std::set<uint32> spellIds;
     for (PlayerSpellMap::iterator itr = bot->GetSpellMap().begin(); itr != bot->GetSpellMap().end(); ++itr)
     {
         uint32 spellId = itr->first;
@@ -110,7 +110,7 @@ uint32 SpellIdValue::Calculate()
 
     if (saveMana <= 1)
     {
-        for (set<uint32>::reverse_iterator itr = spellIds.rbegin(); itr != spellIds.rend(); ++itr)
+        for (std::set<uint32>::reverse_iterator itr = spellIds.rbegin(); itr != spellIds.rend(); ++itr)
         {
             const SpellEntry* pSpellInfo = sServerFacade.LookupSpellInfo(*itr);
             if (!pSpellInfo)
@@ -149,7 +149,7 @@ uint32 SpellIdValue::Calculate()
     }
     else
     {
-        for (set<uint32>::reverse_iterator i = spellIds.rbegin(); i != spellIds.rend(); ++i)
+        for (std::set<uint32>::reverse_iterator i = spellIds.rbegin(); i != spellIds.rend(); ++i)
         {
             if (!highestSpellId) highestSpellId = *i;
             if (sSpellMgr.IsSpellHigherRankOfSpell(*i, highestSpellId)) highestSpellId = *i;

@@ -77,13 +77,13 @@ namespace ai
         WorldPosition Calculate();
     };
 
-    class IgnoreRpgTargetValue : public ManualSetValue<set<ObjectGuid>& >
+    class IgnoreRpgTargetValue : public ManualSetValue<std::set<ObjectGuid>& >
     {
     public:
-        IgnoreRpgTargetValue(PlayerbotAI* ai) : ManualSetValue<set<ObjectGuid>& >(ai, data, "ignore rpg targets") {}
+        IgnoreRpgTargetValue(PlayerbotAI* ai) : ManualSetValue<std::set<ObjectGuid>& >(ai, data, "ignore rpg targets") {}
 
     private:
-        set<ObjectGuid> data;
+        std::set<ObjectGuid> data;
     };
 
     class TalkTargetValue : public ManualSetValue<ObjectGuid>

@@ -16,7 +16,7 @@ namespace ai
 
     public:
         virtual Strategy* GetStrategy(std::string name) { return strategyContexts.GetObject(name, ai); }
-        virtual set<std::string> GetSiblingStrategy(std::string name) { return strategyContexts.GetSiblings(name); }
+        virtual std::set<std::string> GetSiblingStrategy(std::string name) { return strategyContexts.GetSiblings(name); }
         virtual Trigger* GetTrigger(std::string name) { return triggerContexts.GetObject(name, ai); }
         virtual Action* GetAction(std::string name) { return actionContexts.GetObject(name, ai); }
         virtual UntypedValue* GetUntypedValue(std::string name) { return valueContexts.GetObject(name, ai); }
@@ -40,17 +40,17 @@ namespace ai
             return GetValue<T>(name, out.str());
         }
 
-        set<std::string> GetValues()
+        std::set<std::string> GetValues()
         {
             return valueContexts.GetCreated();
         }
 
-        set<std::string> GetSupportedStrategies()
+        std::set<std::string> GetSupportedStrategies()
         {
             return strategyContexts.supports();
         }
 
-        set<std::string> GetSupportedActions()
+        std::set<std::string> GetSupportedActions()
         {
             return actionContexts.supports();
         }
@@ -58,8 +58,8 @@ namespace ai
         std::string FormatValues(std::string findName = "")
         {
             ostringstream out;
-            set<std::string> names = valueContexts.GetCreated();
-            for (set<std::string>::iterator i = names.begin(); i != names.end(); ++i)
+            std::set<std::string> names = valueContexts.GetCreated();
+            for (std::set<std::string>::iterator i = names.begin(); i != names.end(); ++i)
             {
                 UntypedValue* value = GetUntypedValue(*i);
                 if (!value)

@@ -12,7 +12,7 @@ class Object;
 class Item;
 
 typedef std::map<uint32, Player*> PlayerBotMap;
-typedef std::map<std::string, set<std::string> > PlayerBotErrorMap;
+typedef std::map<std::string, std::set<std::string> > PlayerBotErrorMap;
 
 class PlayerbotHolder : public PlayerbotAIBase
 {

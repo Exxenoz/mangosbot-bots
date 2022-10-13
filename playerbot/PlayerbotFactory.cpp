@@ -748,7 +748,7 @@ private:
 
 private:
     Player* bot;
-    set<uint32> keep;
+    std::set<uint32> keep;
 
 };
 

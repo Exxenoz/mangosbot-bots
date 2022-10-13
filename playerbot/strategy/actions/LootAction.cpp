@@ -463,7 +463,7 @@ bool StoreLootAction::IsLootAllowed(uint32 itemid, PlayerbotAI *ai)
     if (!proto)
         return false;
 
-    set<uint32>& lootItems = AI_VALUE(set<uint32>&, "always loot list");
+    std::set<uint32>& lootItems = AI_VALUE(std::set<uint32>&, "always loot list");
     if (lootItems.find(itemid) != lootItems.end())
         return true;
 

@@ -134,7 +134,7 @@ bool ChooseRpgTargetAction::Execute(Event event)
     std::list<ObjectGuid> possibleTargets = AI_VALUE(std::list<ObjectGuid>, "possible rpg targets");
     std::list<ObjectGuid> possibleObjects = bot->GetMap()->IsDungeon() ? AI_VALUE(std::list<ObjectGuid>, "nearest game objects") : AI_VALUE(std::list<ObjectGuid>, "nearest game objects no los"); // skip not in LOS objects in dungeons
     std::list<ObjectGuid> possiblePlayers = AI_VALUE(std::list<ObjectGuid>, "nearest friendly players");
-    set<ObjectGuid>& ignoreList = AI_VALUE(set<ObjectGuid>&, "ignore rpg target");
+    std::set<ObjectGuid>& ignoreList = AI_VALUE(std::set<ObjectGuid>&, "ignore rpg target");
 
     for (auto target : possibleTargets)
         targets[target] = 0.0f;
@@ -253,7 +253,7 @@ bool ChooseRpgTargetAction::Execute(Event event)
             ai->TellMasterNoFacing(out);
         }
         sLog.outDetail("%s can't choose RPG target: all %zu are not available", bot->GetName(), possibleTargets.size());
-        RESET_AI_VALUE(set<ObjectGuid>&,"ignore rpg target");
+        RESET_AI_VALUE(std::set<ObjectGuid>&,"ignore rpg target");
         RESET_AI_VALUE(GuidPosition, "rpg target");
         return false;
     }

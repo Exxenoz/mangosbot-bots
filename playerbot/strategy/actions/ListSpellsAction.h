@@ -15,7 +15,7 @@ namespace ai
         virtual std::list<std::pair<uint32, string> > GetSpellList(std::string filter = "");
     private:
         static std::map<uint32, SkillLineAbilityEntry const*> skillSpells;
-        static set<uint32> vendorItems;
+        static std::set<uint32> vendorItems;
     };
 
 }

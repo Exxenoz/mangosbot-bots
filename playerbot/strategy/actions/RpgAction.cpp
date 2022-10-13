@@ -153,14 +153,14 @@ bool RpgAction::AddIgnore(ObjectGuid guid)
     if (HasIgnore(guid))
         return false;
 
-    set<ObjectGuid>& ignoreList = context->GetValue<set<ObjectGuid>&>("ignore rpg target")->Get();
+    std::set<ObjectGuid>& ignoreList = context->GetValue<std::set<ObjectGuid>&>("ignore rpg target")->Get();
 
     ignoreList.insert(guid);
 
     if (ignoreList.size() > 50)
         ignoreList.erase(ignoreList.begin());
 
-    context->GetValue<set<ObjectGuid>&>("ignore rpg target")->Set(ignoreList);
+    context->GetValue<std::set<ObjectGuid>&>("ignore rpg target")->Set(ignoreList);
 
     return true;
 }
@@ -170,18 +170,18 @@ bool RpgAction::RemIgnore(ObjectGuid guid)
     if (!HasIgnore(guid))
         return false;
 
-    set<ObjectGuid>& ignoreList = context->GetValue<set<ObjectGuid>&>("ignore rpg target")->Get();
+    std::set<ObjectGuid>& ignoreList = context->GetValue<std::set<ObjectGuid>&>("ignore rpg target")->Get();
 
     ignoreList.erase(ignoreList.find(guid));
 
-    context->GetValue<set<ObjectGuid>&>("ignore rpg target")->Set(ignoreList);
+    context->GetValue<std::set<ObjectGuid>&>("ignore rpg target")->Set(ignoreList);
 
     return true;
 }
 
 bool RpgAction::HasIgnore(ObjectGuid guid)
 {
-    set<ObjectGuid>& ignoreList = context->GetValue<set<ObjectGuid>&>("ignore rpg target")->Get();
+    std::set<ObjectGuid>& ignoreList = context->GetValue<std::set<ObjectGuid>&>("ignore rpg target")->Get();
     if (ignoreList.empty())
         return false;
 

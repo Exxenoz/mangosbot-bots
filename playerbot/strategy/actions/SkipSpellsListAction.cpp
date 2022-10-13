@@ -12,7 +12,7 @@ bool SkipSpellsListAction::Execute(Event event)
 {
     std::string cmd = event.getParam();
 
-    set<uint32>& skipSpells = AI_VALUE(set<uint32>&, "skip spells list");
+    std::set<uint32>& skipSpells = AI_VALUE(std::set<uint32>&, "skip spells list");
 
     SpellIds spellIds = parseIds(cmd);
     if (!spellIds.empty()) {
@@ -43,7 +43,7 @@ bool SkipSpellsListAction::Execute(Event event)
         out << "Ignored spell list: ";
 
         bool first = true;
-        for (set<uint32>::iterator i = skipSpells.begin(); i != skipSpells.end(); i++)
+        for (std::set<uint32>::iterator i = skipSpells.begin(); i != skipSpells.end(); i++)
         {
             SpellEntry const* spell = sServerFacade.LookupSpellInfo(*i);
             if (!spell)
@@ -73,7 +73,7 @@ bool SkipSpellsListAction::Execute(Event event)
 
         if (remove)
         {
-            set<uint32>::iterator j = skipSpells.find(spellId);
+            std::set<uint32>::iterator j = skipSpells.find(spellId);
             if (j != skipSpells.end())
             {
                 skipSpells.erase(j);
@@ -85,7 +85,7 @@ bool SkipSpellsListAction::Execute(Event event)
         }
         else
         {
-            set<uint32>::iterator j = skipSpells.find(spellId);
+            std::set<uint32>::iterator j = skipSpells.find(spellId);
             if (j == skipSpells.end())
             {
                 skipSpells.insert(spellId);

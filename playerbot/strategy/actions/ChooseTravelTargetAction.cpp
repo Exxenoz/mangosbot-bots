@@ -176,7 +176,7 @@ void ChooseTravelTargetAction::setNewTarget(TravelTarget* newTarget, TravelTarge
     //If we are heading to a creature/npc clear it from the ignore list. 
     if (oldTarget && oldTarget == newTarget && newTarget->getEntry())
     {
-        set<ObjectGuid>& ignoreList = context->GetValue<set<ObjectGuid>&>("ignore rpg target")->Get();
+        std::set<ObjectGuid>& ignoreList = context->GetValue<std::set<ObjectGuid>&>("ignore rpg target")->Get();
 
         for (auto& i : ignoreList)
         {
@@ -186,7 +186,7 @@ void ChooseTravelTargetAction::setNewTarget(TravelTarget* newTarget, TravelTarge
             }
         }
 
-        context->GetValue<set<ObjectGuid>&>("ignore rpg target")->Set(ignoreList);
+        context->GetValue<std::set<ObjectGuid>&>("ignore rpg target")->Set(ignoreList);
     }
 
     //Actually apply the new target to the travel target used by the bot.

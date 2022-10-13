@@ -38,7 +38,7 @@ bool LootTarget::operator< (const LootTarget& other) const
 
 void LootTargetList::shrink(time_t fromTime)
 {
-    for (set<LootTarget>::iterator i = begin(); i != end(); )
+    for (std::set<LootTarget>::iterator i = begin(); i != end(); )
     {
         if (i->asOfTime <= fromTime)
             erase(i++);

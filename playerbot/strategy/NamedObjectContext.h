@@ -55,9 +55,9 @@ namespace ai
             return object;
         }
 
-        set<std::string> supports()
+        std::set<std::string> supports()
         {
-            set<std::string> keys;
+            std::set<std::string> keys;
             for (typename std::map<std::string, ActionCreator>::iterator it = creators.begin(); it != creators.end(); it++)
                 keys.insert(it->first);
             return keys;
@@ -116,9 +116,9 @@ namespace ai
         bool IsShared() { return shared; }
         bool IsSupportsSiblings() { return supportsSiblings; }
 
-        set<std::string> GetCreated()
+        std::set<std::string> GetCreated()
         {
-            set<std::string> keys;
+            std::set<std::string> keys;
             for (typename std::map<std::string, T*>::iterator it = created.begin(); it != created.end(); it++)
                 keys.insert(it->first);
             return keys;
@@ -175,15 +175,15 @@ namespace ai
             }
         }
 
-        set<std::string> GetSiblings(std::string name)
+        std::set<std::string> GetSiblings(std::string name)
         {
             for (typename std::list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
             {
                 if (!(*i)->IsSupportsSiblings())
                     continue;
 
-                set<std::string> supported = (*i)->supports();
-                set<std::string>::iterator found = supported.find(name);
+                std::set<std::string> supported = (*i)->supports();
+                std::set<std::string>::iterator found = supported.find(name);
                 if (found == supported.end())
                     continue;
 
@@ -191,32 +191,32 @@ namespace ai
                 return supported;
             }
 
-            return set<std::string>();
+            return std::set<std::string>();
         }
 
-        set<std::string> supports()
+        std::set<std::string> supports()
         {
-            set<std::string> result;
+            std::set<std::string> result;
 
             for (typename std::list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
             {
-                set<std::string> supported = (*i)->supports();
+                std::set<std::string> supported = (*i)->supports();
 
-                for (set<std::string>::iterator j = supported.begin(); j != supported.end(); j++)
+                for (std::set<std::string>::iterator j = supported.begin(); j != supported.end(); j++)
                     result.insert(*j);
             }
             return result;
         }
 
-        set<std::string> GetCreated()
+        std::set<std::string> GetCreated()
         {
-            set<std::string> result;
+            std::set<std::string> result;
 
             for (typename std::list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
             {
-                set<std::string> createdKeys = (*i)->GetCreated();
+                std::set<std::string> createdKeys = (*i)->GetCreated();
 
-                for (set<std::string>::iterator j = createdKeys.begin(); j != createdKeys.end(); j++)
+                for (std::set<std::string>::iterator j = createdKeys.begin(); j != createdKeys.end(); j++)
                     result.insert(*j);
             }
             return result;

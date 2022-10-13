@@ -12,9 +12,9 @@ namespace ai
         std::list<ObjectGuid> Calculate();
 
 	private:
-        void AddAttackersOf(Group* group, set<Unit*>& targets);
-        void AddAttackersOf(Player* player, set<Unit*>& targets);
-		void RemoveNonThreating(set<Unit*>& targets);
+        void AddAttackersOf(Group* group, std::set<Unit*>& targets);
+        void AddAttackersOf(Player* player, std::set<Unit*>& targets);
+		void RemoveNonThreating(std::set<Unit*>& targets);
 
     public:
         static bool IsPossibleTarget(Unit* attacker, Player *bot, float range = sPlayerbotAIConfig.sightDistance);

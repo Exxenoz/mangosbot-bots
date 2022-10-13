@@ -13,7 +13,7 @@ namespace ai
     private:
         void TellChatCommands();
         void TellStrategies();
-        std::string CombineSupported(set<std::string> commands);
+        std::string CombineSupported(std::set<std::string> commands);
 
     private:
         NamedObjectContext<Action>* chatContext;

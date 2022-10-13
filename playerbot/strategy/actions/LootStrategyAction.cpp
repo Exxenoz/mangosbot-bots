@@ -12,7 +12,7 @@ bool LootStrategyAction::Execute(Event event)
     std::string strategy = event.getParam();
 
     LootObjectStack* lootItems = AI_VALUE(LootObjectStack*, "available loot");
-    set<uint32>& alwaysLootItems = AI_VALUE(set<uint32>&, "always loot list");
+    std::set<uint32>& alwaysLootItems = AI_VALUE(std::set<uint32>&, "always loot list");
     Value<LootStrategy*>* lootStrategy = context->GetValue<LootStrategy*>("loot strategy");
 
     if (strategy == "?")
@@ -28,7 +28,7 @@ bool LootStrategyAction::Execute(Event event)
             ostringstream out;
             out << "Always loot items: ";
 
-            for (set<uint32>::iterator i = alwaysLootItems.begin(); i != alwaysLootItems.end(); i++)
+            for (std::set<uint32>::iterator i = alwaysLootItems.begin(); i != alwaysLootItems.end(); i++)
             {
                 ItemPrototype const *proto = sItemStorage.LookupEntry<ItemPrototype>(*i);
                 if (!proto)
@@ -69,7 +69,7 @@ bool LootStrategyAction::Execute(Event event)
             }
             else if (remove)
             {
-                set<uint32>::iterator j = alwaysLootItems.find(itemid);
+                std::set<uint32>::iterator j = alwaysLootItems.find(itemid);
                 if (j != alwaysLootItems.end())
                     alwaysLootItems.erase(j);
 

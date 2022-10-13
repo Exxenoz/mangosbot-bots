@@ -714,7 +714,7 @@ list<std::string> PlayerbotHolder::HandlePlayerbotCommand(char const* args, Play
     std::string cmdStr = cmd;
     std::string charnameStr = charname;
 
-    set<std::string> bots;
+    std::set<std::string> bots;
     if (charnameStr == "*" && master)
     {
         Group* group = master->GetGroup();
@@ -776,7 +776,7 @@ list<std::string> PlayerbotHolder::HandlePlayerbotCommand(char const* args, Play
         }
 	}
 
-    for (set<std::string>::iterator i = bots.begin(); i != bots.end(); ++i)
+    for (std::set<std::string>::iterator i = bots.begin(); i != bots.end(); ++i)
     {
         std::string bot = *i;
         ostringstream out;
@@ -823,7 +823,7 @@ uint32 PlayerbotHolder::GetAccountId(std::string name)
 
 string PlayerbotHolder::ListBots(Player* master)
 {
-    set<std::string> bots;
+    std::set<std::string> bots;
     std::map<uint8,string> classNames;
     classNames[CLASS_DRUID] = "Druid";
     classNames[CLASS_HUNTER] = "Hunter";
@@ -1070,7 +1070,7 @@ void PlayerbotMgr::OnPlayerLogin(Player* player)
 
 void PlayerbotMgr::TellError(std::string botName, std::string text)
 {
-    set<std::string> names = errors[text];
+    std::set<std::string> names = errors[text];
     if (names.find(botName) == names.end())
     {
         names.insert(botName);
@@ -1089,11 +1089,11 @@ void PlayerbotMgr::CheckTellErrors(uint32 elapsed)
     for (PlayerBotErrorMap::iterator i = errors.begin(); i != errors.end(); ++i)
     {
         std::string text = i->first;
-        set<std::string> names = i->second;
+        std::set<std::string> names = i->second;
 
         ostringstream out;
         bool first = true;
-        for (set<std::string>::iterator j = names.begin(); j != names.end(); ++j)
+        for (std::set<std::string>::iterator j = names.begin(); j != names.end(); ++j)
         {
             if (!first) out << ", "; else first = false;
             out << *j;

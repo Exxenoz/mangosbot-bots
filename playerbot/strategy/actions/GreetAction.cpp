@@ -27,7 +27,7 @@ bool GreetAction::Execute(Event event)
     ai->PlayEmote(TEXTEMOTE_HELLO);
     bot->SetSelectionGuid(oldSel);
 
-    set<ObjectGuid>& alreadySeenPlayers = ai->GetAiObjectContext()->GetValue<set<ObjectGuid>& >("already seen players")->Get();
+    std::set<ObjectGuid>& alreadySeenPlayers = ai->GetAiObjectContext()->GetValue<std::set<ObjectGuid>& >("already seen players")->Get();
     alreadySeenPlayers.insert(guid);
 
     std::list<ObjectGuid> nearestPlayers = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest friendly players")->Get();

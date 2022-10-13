@@ -94,7 +94,7 @@ bool OutfitAction::Execute(Event event)
             out << chat->formatItem(proto);
             if (remove)
             {
-                set<uint32>::iterator j = outfit.find(itemid);
+                std::set<uint32>::iterator j = outfit.find(itemid);
                 if (j != outfit.end())
                     outfit.erase(j);
 

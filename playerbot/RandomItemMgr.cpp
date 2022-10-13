@@ -364,7 +364,7 @@ bool RandomItemMgr::CanEquipItem(BotEquipKey key, ItemPrototype const* proto)
     if (proto->Class == ITEM_CLASS_CONTAINER)
         return true;
 
-    set<InventoryType> slots = viableSlots[(EquipmentSlots)key.slot];
+    std::set<InventoryType> slots = viableSlots[(EquipmentSlots)key.slot];
     if (slots.find((InventoryType)proto->InventoryType) == slots.end())
         return false;
 
@@ -425,9 +425,9 @@ bool RandomItemMgr::CanEquipItemNew(ItemPrototype const* proto)
         return false;
 
     bool properSlot = false;
-    for (map<EquipmentSlots, set<InventoryType> >::iterator i = viableSlots.begin(); i != viableSlots.end(); ++i)
+    for (map<EquipmentSlots, std::set<InventoryType> >::iterator i = viableSlots.begin(); i != viableSlots.end(); ++i)
     {
-        set<InventoryType> slots = viableSlots[(EquipmentSlots)i->first];
+        std::set<InventoryType> slots = viableSlots[(EquipmentSlots)i->first];
         if (slots.find((InventoryType)proto->InventoryType) != slots.end())
             properSlot = true;
     }
@@ -652,9 +652,9 @@ bool RandomItemMgr::ShouldEquipWeaponForSpec(uint8 playerclass, uint8 spec, Item
     EquipmentSlots slot_mh = EQUIPMENT_SLOT_START;
     EquipmentSlots slot_oh = EQUIPMENT_SLOT_START;
     EquipmentSlots slot_rh = EQUIPMENT_SLOT_START;
-    for (map<EquipmentSlots, set<InventoryType> >::iterator i = viableSlots.begin(); i != viableSlots.end(); ++i)
+    for (map<EquipmentSlots, std::set<InventoryType> >::iterator i = viableSlots.begin(); i != viableSlots.end(); ++i)
     {
-        set<InventoryType> slots = viableSlots[(EquipmentSlots)i->first];
+        std::set<InventoryType> slots = viableSlots[(EquipmentSlots)i->first];
         if (slots.find((InventoryType)proto->InventoryType) != slots.end())
         {
             if (i->first == EQUIPMENT_SLOT_MAINHAND)
@@ -1113,9 +1113,9 @@ void RandomItemMgr::BuildItemInfoCache()
 
         // check possible equip slots
         EquipmentSlots slot = EQUIPMENT_SLOT_END;
-        for (map<EquipmentSlots, set<InventoryType> >::iterator i = viableSlots.begin(); i != viableSlots.end(); ++i)
+        for (map<EquipmentSlots, std::set<InventoryType> >::iterator i = viableSlots.begin(); i != viableSlots.end(); ++i)
         {
-            set<InventoryType> slots = viableSlots[(EquipmentSlots)i->first];
+            std::set<InventoryType> slots = viableSlots[(EquipmentSlots)i->first];
             if (slots.find((InventoryType)proto->InventoryType) != slots.end())
                 slot = i->first;
         }
@@ -2724,7 +2724,7 @@ void RandomItemMgr::BuildEquipCache()
 
                                 if ((slot == EQUIPMENT_SLOT_BODY || slot == EQUIPMENT_SLOT_TABARD))
                                 {
-                                    set<InventoryType> slots = viableSlots[(EquipmentSlots)key.slot];
+                                    std::set<InventoryType> slots = viableSlots[(EquipmentSlots)key.slot];
                                     if (slots.find((InventoryType)proto->InventoryType) == slots.end())
                                         continue;
 

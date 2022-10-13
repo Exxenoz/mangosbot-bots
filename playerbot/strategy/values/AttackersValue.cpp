@@ -12,7 +12,7 @@ using namespace MaNGOS;
 
 list<ObjectGuid> AttackersValue::Calculate()
 {
-    set<Unit*> targets;
+    std::set<Unit*> targets;
 
     std::list<ObjectGuid> result;
 
@@ -27,7 +27,7 @@ list<ObjectGuid> AttackersValue::Calculate()
 
     RemoveNonThreating(targets);
     
-	for (set<Unit*>::iterator i = targets.begin(); i != targets.end(); i++)
+	for (std::set<Unit*>::iterator i = targets.begin(); i != targets.end(); i++)
 		result.push_back((*i)->GetObjectGuid());
 
     if (bot->duel && bot->duel->opponent)
@@ -36,7 +36,7 @@ list<ObjectGuid> AttackersValue::Calculate()
 	return result;
 }
 
-void AttackersValue::AddAttackersOf(Group* group, set<Unit*>& targets)
+void AttackersValue::AddAttackersOf(Group* group, std::set<Unit*>& targets)
 {
     Group::MemberSlotList const& groupSlot = group->GetMemberSlots();
     for (Group::member_citerator itr = groupSlot.begin(); itr != groupSlot.end(); itr++)
@@ -60,7 +60,7 @@ struct AddGuardiansHelper
     std::list<Unit*> &units;
 };
 
-void AttackersValue::AddAttackersOf(Player* player, set<Unit*>& targets)
+void AttackersValue::AddAttackersOf(Player* player, std::set<Unit*>& targets)
 {
     if (!player || !player->IsInWorld() || player->IsBeingTeleported())
         return;
@@ -100,14 +100,14 @@ void AttackersValue::AddAttackersOf(Player* player, set<Unit*>& targets)
     }
 }
 
-void AttackersValue::RemoveNonThreating(set<Unit*>& targets)
+void AttackersValue::RemoveNonThreating(std::set<Unit*>& targets)
 {
-    for(set<Unit *>::iterator tIter = targets.begin(); tIter != targets.end();)
+    for(std::set<Unit *>::iterator tIter = targets.begin(); tIter != targets.end();)
     {
         Unit* unit = *tIter;
         if (!IsValidTarget(unit, bot))
         {
-            set<Unit *>::iterator tIter2 = tIter;
+            std::set<Unit *>::iterator tIter2 = tIter;
             ++tIter;
             targets.erase(tIter2);
         }

@@ -55,8 +55,8 @@ list<std::string> AiObjectContext::Save()
 {
     std::list<std::string> result;
 
-    set<std::string> names = valueContexts.GetCreated();
-    for (set<std::string>::iterator i = names.begin(); i != names.end(); ++i)
+    std::set<std::string> names = valueContexts.GetCreated();
+    for (std::set<std::string>::iterator i = names.begin(); i != names.end(); ++i)
     {
         UntypedValue* value = GetUntypedValue(*i);
         if (!value)

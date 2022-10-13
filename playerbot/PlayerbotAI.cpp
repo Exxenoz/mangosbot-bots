@@ -518,7 +518,7 @@ void PlayerbotAI::Reset(bool full)
         }
     }
     
-    aiObjectContext->GetValue<set<ObjectGuid>&>("ignore rpg target")->Get().clear();
+    aiObjectContext->GetValue<std::set<ObjectGuid>&>("ignore rpg target")->Get().clear();
 
     if (bot->IsTaxiFlying())
     {
@@ -550,7 +550,7 @@ bool PlayerbotAI::IsAllowedCommand(std::string text)
         unsecuredCommands.insert("leave");
     }
 
-    for (set<std::string>::iterator i = unsecuredCommands.begin(); i != unsecuredCommands.end(); ++i)
+    for (std::set<std::string>::iterator i = unsecuredCommands.begin(); i != unsecuredCommands.end(); ++i)
     {
         if (text.find(*i) == 0)
         {

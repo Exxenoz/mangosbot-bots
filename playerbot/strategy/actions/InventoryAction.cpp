@@ -184,7 +184,7 @@ void InventoryAction::TellItem(ItemPrototype const * proto, int count, bool soul
 
 list<Item*> InventoryAction::parseItems(std::string text, IterateItemsMask mask)
 {
-    set<Item*> found;
+    std::set<Item*> found;
     size_t pos = text.find(" ");
     int count = pos!=string::npos ? atoi(text.substr(pos + 1).c_str()) : TRADE_SLOT_TRADED_COUNT;
     if (count < 1) count = 1;
@@ -202,7 +202,7 @@ list<Item*> InventoryAction::parseItems(std::string text, IterateItemsMask mask)
         }
 
         std::list<Item*> result;
-        for (set<Item*>::iterator i = found.begin(); i != found.end(); ++i)
+        for (std::set<Item*>::iterator i = found.begin(); i != found.end(); ++i)
             result.push_back(*i);
 
         result.sort(compare_items_by_level);
@@ -320,7 +320,7 @@ list<Item*> InventoryAction::parseItems(std::string text, IterateItemsMask mask)
     }
 
     std::list<Item*> result;
-    for (set<Item*>::iterator i = found.begin(); i != found.end(); ++i)
+    for (std::set<Item*>::iterator i = found.begin(); i != found.end(); ++i)
         result.push_back(*i);
 
     result.sort(compare_items_by_level);
@@ -351,7 +351,7 @@ ItemIds InventoryAction::FindOutfitItems(std::string name)
         if (name == parseOutfitName(outfit))
             return parseOutfitItems(outfit);
     }
-    return set<uint32>();
+    return std::set<uint32>();
 }
 
 

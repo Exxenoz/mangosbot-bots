@@ -93,7 +93,7 @@ namespace ahbot
         std::map<std::string, uint32> categoryMaxItemAuctionCount;
         std::map<std::string, uint64> categoryMultiplierExpireTimes;
         std::map<uint32, std::vector<uint32> > bidders;
-        set<uint32> allBidders;
+        std::set<uint32> allBidders;
         bool updating;
     };
 };
