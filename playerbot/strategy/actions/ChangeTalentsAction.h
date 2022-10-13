@@ -16,7 +16,7 @@ namespace ai
     private:
         std::vector<TalentPath*> getPremadePaths(std::string findName);
         std::vector<TalentPath*> getPremadePaths(TalentSpec* oldSpec);
-        TalentPath* ChangeTalentsAction::getPremadePath(int id);
+        TalentPath* getPremadePath(int id);
         void listPremadePaths(std::vector<TalentPath*> paths, std::ostringstream* out);
         TalentPath* PickPremadePath(std::vector<TalentPath*> paths, bool useProbability);
         TalentSpec* GetBestPremadeSpec(int spec);
