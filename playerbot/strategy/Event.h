@@ -1,8 +1,9 @@
 #pragma once
 
-class ObjectGuid;
+#include "ObjectGuid.h"
+#include "WorldPacket.h"
+
 class Player;
-class WorldPacket;
 
 namespace ai
 {

@@ -457,8 +457,9 @@ bool DebugAction::Execute(Event event)
     }
     else if (text.find("loot ") != std::string::npos)
     {
+        std::string textSubstr;
         std::ostringstream out;
-        for (auto itemId : chat->parseItems(text.substr(5)))
+        for (auto itemId : chat->parseItems(textSubstr = text.substr(5)))
         {
             std::list<int32> entries = GAI_VALUE2(std::list<int32>, "item drop list", itemId);
 
@@ -475,7 +476,8 @@ bool DebugAction::Execute(Event event)
 
             for (auto entry : entries)
             {
-                std::string qualifier = Qualified::MultiQualify({ to_string(entry) , to_string(itemId) });
+                std::vector<std::string> qualifiers = { to_string(entry), to_string(itemId) };
+                std::string qualifier = Qualified::MultiQualify(qualifiers);
                 float chance = GAI_VALUE2(float, "loot chance", qualifier);
                 if(chance > 0)
                     chances.push_back(std::make_pair(entry, chance));
@@ -539,8 +541,9 @@ bool DebugAction::Execute(Event event)
     }
     else if (text.find("drops ") != std::string::npos)
     {
+    std::string textSubstr;
     std::ostringstream out;
-    for (auto entry : chat->parseWorldEntries(text.substr(6)))
+    for (auto entry : chat->parseWorldEntries(textSubstr = text.substr(6)))
     {
         std::list<uint32> itemIds = GAI_VALUE2(std::list<uint32>, "entry loot list", entry);
 
@@ -557,7 +560,8 @@ bool DebugAction::Execute(Event event)
 
         for (auto itemId : itemIds)
         {
-            std::string qualifier = Qualified::MultiQualify({ to_string(entry) , to_string(itemId) });
+            std::vector<std::string> qualifiers = { to_string(entry) , to_string(itemId) };
+            std::string qualifier = Qualified::MultiQualify(qualifiers);
             float chance = GAI_VALUE2(float, "loot chance", qualifier);
             if (chance > 0 && sObjectMgr.GetItemPrototype(itemId))
             {
