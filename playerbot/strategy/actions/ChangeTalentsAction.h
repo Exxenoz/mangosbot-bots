@@ -1,7 +1,7 @@
 #pragma once
 #include "botpch.h"
 #include "../../playerbot.h"
-#include "../../talentspec.h"
+#include "../../Talentspec.h"
 #include "../Action.h"
 
 namespace ai
