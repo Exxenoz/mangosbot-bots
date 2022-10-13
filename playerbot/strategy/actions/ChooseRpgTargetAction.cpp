@@ -234,7 +234,7 @@ bool ChooseRpgTargetAction::Execute(Event event)
 
     SET_AI_VALUE(string, "next rpg action", "");
 
-    for (auto it = begin(targets); it != end(targets);)
+    for (auto it = std::begin(targets); it != std::end(targets);)
     {
         if (it->second == 0 || (hasGoodRelevance && it->second <= 1.0))
         {

@@ -2967,12 +2967,12 @@ uint32 RandomPlayerbotMgr::GetBattleMasterEntry(Player* bot, BattleGroundTypeId 
     uint32 entry = 0;
     std::vector<uint32> Bms;
 
-    for (auto i = begin(BattleMastersCache[team][bgTypeId]); i != end(BattleMastersCache[team][bgTypeId]); ++i)
+    for (auto i = std::begin(BattleMastersCache[team][bgTypeId]); i != std::end(BattleMastersCache[team][bgTypeId]); ++i)
     {
         Bms.insert(Bms.end(), *i);
     }
 
-    for (auto i = begin(BattleMastersCache[TEAM_BOTH_ALLOWED][bgTypeId]); i != end(BattleMastersCache[TEAM_BOTH_ALLOWED][bgTypeId]); ++i)
+    for (auto i = std::begin(BattleMastersCache[TEAM_BOTH_ALLOWED][bgTypeId]); i != std::end(BattleMastersCache[TEAM_BOTH_ALLOWED][bgTypeId]); ++i)
     {
         Bms.insert(Bms.end(), *i);
     }
@@ -2982,7 +2982,7 @@ uint32 RandomPlayerbotMgr::GetBattleMasterEntry(Player* bot, BattleGroundTypeId 
 
     float dist1 = FLT_MAX;
 
-    for (auto i = begin(Bms); i != end(Bms); ++i)
+    for (auto i = std::begin(Bms); i != std::end(Bms); ++i)
     {
         CreatureDataPair const* dataPair = sRandomPlayerbotMgr.GetCreatureDataByEntry(*i);
         if (!dataPair)

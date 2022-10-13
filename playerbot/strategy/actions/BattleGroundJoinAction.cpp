@@ -229,7 +229,7 @@ bool BGJoinAction::gatherArenaTeam(ArenaType type)
 
     sLog.outDetail("Bot #%d <%s>: Leader of <%s>", bot->GetGUIDLow(), bot->GetName(), arenateam->GetName().c_str());
 
-    for (auto i = begin(members); i != end(members); ++i)
+    for (auto i = std::begin(members); i != std::end(members); ++i)
     {
         if (*i == bot->GetGUIDLow())
             continue;
