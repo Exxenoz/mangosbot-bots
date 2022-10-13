@@ -8,8 +8,6 @@
 
 namespace ai
 {
-    class Action;
-
     class AiObjectContext : public PlayerbotAIAware
     {
     public:
