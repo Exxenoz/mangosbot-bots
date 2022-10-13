@@ -34,7 +34,8 @@ bool GoAction::Execute(Event event)
     
     if (param.find("travel") != string::npos && param.size()> 7)
     {
-        WorldPosition* botPos = &WorldPosition(bot);
+        WorldPosition pos = WorldPosition(bot);
+        WorldPosition* botPos = &pos;
 
         std::string destination = param.substr(7);
 
