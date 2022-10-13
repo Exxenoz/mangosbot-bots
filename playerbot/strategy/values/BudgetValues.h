@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Value.h"
+
 namespace ai
 {
     enum class NeedMoneyFor : uint32

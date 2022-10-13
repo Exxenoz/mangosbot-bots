@@ -7,6 +7,7 @@
 #include <regex>
 
 #include "ObjectMgr.h"
+#include "PlayerbotAI.h"
 #include "MoveMapSharedDefines.h"
 #include "MotionGenerators/PathFinder.h"
 #include "Entities/Transports.h"
