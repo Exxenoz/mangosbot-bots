@@ -1,5 +1,9 @@
 #pragma once
 
+class ObjectGuid;
+class Player;
+class WorldPacket;
+
 namespace ai
 {
     class Event

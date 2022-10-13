@@ -1,5 +1,8 @@
 #include "../../botpch.h"
 #include "../playerbot.h"
+#include "ObjectGuid.h"
+#include "Player.h"
+#include "WorldPacket.h"
 #include "Event.h"
 
 

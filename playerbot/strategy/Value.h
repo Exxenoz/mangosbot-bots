@@ -3,6 +3,7 @@
 #include "Event.h"
 #include "../PlayerbotAIAware.h"
 #include "../PerformanceMonitor.h"
+#include "ObjectMgr.h"
 #include "AiObject.h"
 
 namespace ai
