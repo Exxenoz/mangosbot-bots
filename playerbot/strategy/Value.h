@@ -74,8 +74,9 @@ namespace ai
 
     template <class T> class SingleCalculatedValue : public CalculatedValue<T>
     {
+        using CalculatedValue<T>::Reset;
     public:
-        SingleCalculatedValue(PlayerbotAI* ai, string name = "value") : CalculatedValue(ai, name) { Reset(); }
+        SingleCalculatedValue(PlayerbotAI* ai, string name = "value") : CalculatedValue<T>(ai, name) { Reset(); }
 
         virtual T Get()
         {
