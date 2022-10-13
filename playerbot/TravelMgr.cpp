@@ -9,6 +9,7 @@
 #include "Creature.h"
 #include "GameObject.h"
 #include "Map.h"
+#include "Object.h"
 #include "ObjectMgr.h"
 #include "Player.h"
 #include "Unit.h"
