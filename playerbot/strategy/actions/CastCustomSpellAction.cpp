@@ -147,7 +147,7 @@ bool CastCustomSpellAction::Execute(Event event)
 
 bool CastRandomSpellAction::Execute(Event event)
 {
-    std::list<pair<uint32, string>> spellMap = GetSpellList();
+    std::list<std::pair<uint32, string>> spellMap = GetSpellList();
     Player* master = GetMaster();
     
     Unit* target = nullptr;
@@ -181,7 +181,7 @@ bool CastRandomSpellAction::Execute(Event event)
     if (!got && !target)
         target = bot;
 
-    std::vector<pair<uint32, pair<uint32, WorldObject*>>> spellList;
+    std::vector<std::pair<uint32, std::pair<uint32, WorldObject*>>> spellList;
 
     for (auto & spell : spellMap)
     {
@@ -212,7 +212,7 @@ bool CastRandomSpellAction::Execute(Event event)
 
     bool isCast = false;
 
-    std::sort(spellList.begin(), spellList.end(), [](pair<uint32, pair<uint32, WorldObject*>> i, pair<uint32, pair<uint32, WorldObject*>> j) {return i.first > j.first; });
+    std::sort(spellList.begin(), spellList.end(), [](std::pair<uint32, std::pair<uint32, WorldObject*>> i, std::pair<uint32, std::pair<uint32, WorldObject*>> j) {return i.first > j.first; });
 
     uint32 rndBound = spellList.size() / 4;
 

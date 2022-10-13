@@ -260,9 +260,9 @@ bool ChooseRpgTargetAction::Execute(Event event)
 
     if (ai->HasStrategy("debug rpg", BOT_STATE_NON_COMBAT))
     {
-        std::vector<pair<ObjectGuid, uint32>> sortedTargets(targets.begin(), targets.end());
+        std::vector<std::pair<ObjectGuid, uint32>> sortedTargets(targets.begin(), targets.end());
 
-        std::sort(sortedTargets.begin(), sortedTargets.end(), [](pair<ObjectGuid, uint32>i, pair<ObjectGuid, uint32> j) {return i.second > j.second; });
+        std::sort(sortedTargets.begin(), sortedTargets.end(), [](std::pair<ObjectGuid, uint32>i, std::pair<ObjectGuid, uint32> j) {return i.second > j.second; });
 
         ai->TellMasterNoFacing("------" + to_string(targets.size()) + "------");
 

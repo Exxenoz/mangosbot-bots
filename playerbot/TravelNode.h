@@ -409,7 +409,7 @@ enum class TravelNodePathType : uint8
     private:
         std::vector<TravelNode*> m_nodes;
 
-        std::vector<pair<uint32, WorldPosition>> mapOffsets;
+        std::vector<std::pair<uint32, WorldPosition>> mapOffsets;
 
         bool hasToSave = false;
         bool hasToGen = false;

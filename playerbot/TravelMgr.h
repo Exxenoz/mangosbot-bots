@@ -24,7 +24,7 @@ namespace ai
 
     class GuidPosition;
 
-    typedef pair<int, int> mGridPair;
+    typedef std::pair<int, int> mGridPair;
 
     //Extension of WorldLocation with distance functions.
     class WorldPosition : public WorldLocation
@@ -108,14 +108,14 @@ namespace ai
         WorldPosition furtest(std::vector<WorldPosition> list) { return *std::max_element(list.begin(), list.end(), [this](WorldPosition i, WorldPosition j) {return this->distance(i) < this->distance(j); }); }
 
         template<class T>
-        pair<T, WorldPosition>  closest(std::list<pair<T, WorldPosition>> list) { return *std::min_element(list.begin(), list.end(), [this](pair<T, WorldPosition> i, pair<T, WorldPosition> j) {return this->distance(i.second) < this->distance(j.second); }); }
+        std::pair<T, WorldPosition>  closest(std::list<std::pair<T, WorldPosition>> list) { return *std::min_element(list.begin(), list.end(), [this](std::pair<T, WorldPosition> i, std::pair<T, WorldPosition> j) {return this->distance(i.second) < this->distance(j.second); }); }
         template<class T>
-        pair<T, WorldPosition> closest(std::list<T> list) { return closest(GetPosList(list)); }
+        std::pair<T, WorldPosition> closest(std::list<T> list) { return closest(GetPosList(list)); }
 
         template<class T>
-        pair<T, WorldPosition>  closest(std::vector<pair<T, WorldPosition>> list) { return *std::min_element(list.begin(), list.end(), [this](pair<T, WorldPosition> i, pair<T, WorldPosition> j) {return this->distance(i.second) < this->distance(j.second); }); }
+        std::pair<T, WorldPosition>  closest(std::vector<std::pair<T, WorldPosition>> list) { return *std::min_element(list.begin(), list.end(), [this](std::pair<T, WorldPosition> i, std::pair<T, WorldPosition> j) {return this->distance(i.second) < this->distance(j.second); }); }
         template<class T>
-        pair<T, WorldPosition> closest(std::vector<T> list) { return closest(GetPosVector(list)); }
+        std::pair<T, WorldPosition> closest(std::vector<T> list) { return closest(GetPosVector(list)); }
 
 
         //Quick square distance in 2d plane.
@@ -792,7 +792,7 @@ namespace ai
 
         std::vector<tuple<uint32, int, int>> badVmap, badMmap;
 
-        std::unordered_map<pair<uint32, uint32>, std::vector<mapTransfer>, boost::hash<pair<uint32, uint32>>> mapTransfersMap;
+        std::unordered_map<std::pair<uint32, uint32>, std::vector<mapTransfer>, boost::hash<std::pair<uint32, uint32>>> mapTransfersMap;
     };
 }
 

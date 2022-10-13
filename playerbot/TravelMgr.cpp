@@ -431,7 +431,7 @@ vector<WorldPosition> WorldPosition::gridFromCellPair(CellPair cellPair)
     return fromGridPair(GridPair(c.GridX(), c.GridY()));
 }
 
-vector<pair<int,int>> WorldPosition::getmGridPairs(WorldPosition secondPos)
+vector<std::pair<int,int>> WorldPosition::getmGridPairs(WorldPosition secondPos)
 {
     std::vector<mGridPair> retVec;
 
@@ -2807,7 +2807,7 @@ void TravelMgr::LoadQuestTravelTable()
     {
         for (auto container : quests)
         {
-            std::vector<pair<uint32, QuestTravelDestination*>> printQuestMap;
+            std::vector<std::pair<uint32, QuestTravelDestination*>> printQuestMap;
 
             for (auto dest : container.second->questGivers)
                 printQuestMap.push_back(make_pair(0, dest));
@@ -2926,9 +2926,9 @@ void TravelMgr::LoadQuestTravelTable()
                 0, LOCALE_enUS, accountName.c_str(), 0);
 #endif
 
-            std::vector <pair<pair<uint32, uint32>, uint32>> classSpecLevel;
+            std::vector <std::pair<std::pair<uint32, uint32>, uint32>> classSpecLevel;
 
-            std::unordered_map<std::string, std::vector<pair<pair<uint32, uint32>, uint32>>> actions;
+            std::unordered_map<std::string, std::vector<std::pair<std::pair<uint32, uint32>, uint32>>> actions;
 
             ostringstream out;
 
@@ -3095,7 +3095,7 @@ void TravelMgr::LoadQuestTravelTable()
                 {
                     classSpecLevel = actions.find(actionkey)->second;
                     
-                    std::vector<pair<pair<uint32, uint32>,pair<uint32, uint32>>> classs;
+                    std::vector<std::pair<std::pair<uint32, uint32>,pair<uint32, uint32>>> classs;
 
                     for (auto cl : classSpecLevel)
                     {
@@ -3104,7 +3104,7 @@ void TravelMgr::LoadQuestTravelTable()
                         uint32 cls = cl.first.first;
                         uint32 tb = cl.first.second;
 
-                        if (std::find_if(classs.begin(), classs.end(), [cls,tb](pair<pair<uint32, uint32>, pair<uint32, uint32>> i){return i.first.first ==cls && i.first.second == tb;}) == classs.end())
+                        if (std::find_if(classs.begin(), classs.end(), [cls,tb](std::pair<std::pair<uint32, uint32>, std::pair<uint32, uint32>> i){return i.first.first ==cls && i.first.second == tb;}) == classs.end())
                         {
                             for (auto cll : classSpecLevel)
                             {
@@ -3131,12 +3131,12 @@ void TravelMgr::LoadQuestTravelTable()
                             uint32 min[3] = { 0,0,0 };
                             uint32 max[3] = { 0,0,0 };
 
-                            if (std::find_if(classs.begin(), classs.end(), [cls](pair<pair<uint32, uint32>, pair<uint32, uint32>> i) {return i.first.first == cls; }) == classs.end())
+                            if (std::find_if(classs.begin(), classs.end(), [cls](std::pair<std::pair<uint32, uint32>, std::pair<uint32, uint32>> i) {return i.first.first == cls; }) == classs.end())
                                 continue;
 
                             for (uint32 tb = 0; tb < 3; tb++)
                             {
-                                auto tcl = std::find_if(classs.begin(), classs.end(), [cls, tb](pair<pair<uint32, uint32>, pair<uint32, uint32>> i) {return i.first.first == cls && i.first.second == tb; });
+                                auto tcl = std::find_if(classs.begin(), classs.end(), [cls, tb](std::pair<std::pair<uint32, uint32>, std::pair<uint32, uint32>> i) {return i.first.first == cls && i.first.second == tb; });
                                 if (tcl == classs.end())
                                     continue;
 

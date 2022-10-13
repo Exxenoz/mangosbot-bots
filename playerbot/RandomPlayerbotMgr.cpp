@@ -2614,7 +2614,7 @@ void RandomPlayerbotMgr::PrintStats()
 
     int dps = 0, heal = 0, tank = 0, active = 0, update = 0, randomize = 0, teleport = 0, changeStrategy = 0, dead = 0, combat = 0, revive = 0, taxi = 0, moving = 0, mounted = 0, afk = 0;
     int stateCount[MAX_TRAVEL_STATE + 1] = { 0 };
-    std::vector<pair<Quest const*, int32>> questCount;
+    std::vector<std::pair<Quest const*, int32>> questCount;
     for (PlayerBotMap::iterator i = playerBots.begin(); i != playerBots.end(); ++i)
     {
         Player* bot = i->second;
@@ -2793,7 +2793,7 @@ void RandomPlayerbotMgr::PrintStats()
     sLog.outString("    Completing quests: %d", stateCount[TRAVEL_STATE_TRAVEL_HAND_IN_QUEST] + stateCount[TRAVEL_STATE_WORK_HAND_IN_QUEST]);
     sLog.outString("    Idling: %d", stateCount[TRAVEL_STATE_IDLE]);
 
-    /*sort(questCount.begin(), questCount.end(), [](pair<Quest const*, int32> i, pair<Quest const*, int32> j) {return i.second > j.second; });
+    /*sort(questCount.begin(), questCount.end(), [](std::pair<Quest const*, int32> i, std::pair<Quest const*, int32> j) {return i.second > j.second; });
 
     sLog.outString("Bots top quests:");
 

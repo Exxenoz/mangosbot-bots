@@ -601,13 +601,13 @@ void PlayerbotAI::HandleCommand(uint32 type, const string& text, Player& fromPla
         chatMap["#a "] = CHAT_MSG_ADDON;
         chatMap["#g "] = CHAT_MSG_GUILD;
     }
-    currentChat = pair<ChatMsg, time_t>(CHAT_MSG_WHISPER, 0);
+    currentChat = std::pair<ChatMsg, time_t>(CHAT_MSG_WHISPER, 0);
     for (map<std::string,ChatMsg>::iterator i = chatMap.begin(); i != chatMap.end(); ++i)
     {
         if (filtered.find(i->first) == 0)
         {
             filtered = filtered.substr(3);
-            currentChat = pair<ChatMsg, time_t>(i->second, time(0) + 2);
+            currentChat = std::pair<ChatMsg, time_t>(i->second, time(0) + 2);
             break;
         }
     }
@@ -3331,7 +3331,7 @@ bool PlayerbotAI::AllowActive(ActivityType activityType)
     //END ALWAYS ACTIVE
 
     bool shouldDetailMove = true;
-    pair<uint8, uint8> priorityBracket = GetPriorityBracket(shouldDetailMove);
+    std::pair<uint8, uint8> priorityBracket = GetPriorityBracket(shouldDetailMove);
 
     if (activityType == DETAILED_MOVE_ACTIVITY && !shouldDetailMove)
         return false;   

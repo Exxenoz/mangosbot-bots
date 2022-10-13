@@ -119,11 +119,11 @@ namespace ai
         LogCalculatedValue(PlayerbotAI* ai, std::string name = "value", int checkInterval = 1) : MemoryCalculatedValue<T>(ai, name, checkInterval) {};
         virtual bool UpdateChange() { if (this->UpdateChange()) return false; valueLog.push_back(make_pair(this->value, time(0))); if (valueLog.size() > logLength) valueLog.pop_front(); return true; }
 
-        std::list<pair<T, time_t>> ValueLog() { return valueLog; }
+        std::list<std::pair<T, time_t>> ValueLog() { return valueLog; }
 
         virtual void Reset() { this->Reset(); valueLog.clear(); }
     protected:
-        std::list<pair<T, time_t>> valueLog;
+        std::list<std::pair<T, time_t>> valueLog;
         uint8 logLength = 10; //Maxium number of values recorded.
     };    
 

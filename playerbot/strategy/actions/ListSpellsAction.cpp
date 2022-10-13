@@ -9,7 +9,7 @@ using namespace ai;
 map<uint32, SkillLineAbilityEntry const*> ListSpellsAction::skillSpells;
 set<uint32> ListSpellsAction::vendorItems;
 
-bool CompareSpells(pair<uint32, string>& s1, pair<uint32, string>& s2)
+bool CompareSpells(std::pair<uint32, string>& s1, std::pair<uint32, string>& s2)
 {
     const SpellEntry* const si1 = sServerFacade.LookupSpellInfo(s1.first);
     const SpellEntry* const si2 = sServerFacade.LookupSpellInfo(s2.first);
@@ -53,7 +53,7 @@ bool CompareSpells(pair<uint32, string>& s1, pair<uint32, string>& s2)
     return p1 > p2;
 }
 
-list<pair<uint32, string> > ListSpellsAction::GetSpellList(std::string filter)
+list<std::pair<uint32, string> > ListSpellsAction::GetSpellList(std::string filter)
 {    
     if (skillSpells.empty())
     {
@@ -125,7 +125,7 @@ list<pair<uint32, string> > ListSpellsAction::GetSpellList(std::string filter)
     if (slot != EQUIPMENT_SLOT_END)
         filter = "";
 
-    std::list<pair<uint32, string> > spells;
+    std::list<std::pair<uint32, string> > spells;
     for (PlayerSpellMap::iterator itr = bot->GetSpellMap().begin(); itr != bot->GetSpellMap().end(); ++itr) {
         const uint32 spellId = itr->first;
 
@@ -252,7 +252,7 @@ list<pair<uint32, string> > ListSpellsAction::GetSpellList(std::string filter)
         if (out.str().empty())
             continue;
 
-        spells.push_back(pair<uint32, string>(spellId, out.str()));
+        spells.push_back(std::pair<uint32, string>(spellId, out.str()));
         alreadySeenList += pSpellInfo->SpellName[0];
         alreadySeenList += ",";
     }
@@ -268,13 +268,13 @@ bool ListSpellsAction::Execute(Event event)
 
     std::string filter = event.getParam();
 
-    std::list<pair<uint32, string> > spells = GetSpellList(filter);
+    std::list<std::pair<uint32, string> > spells = GetSpellList(filter);
 
     ai->TellMaster("=== Spells ===");
     spells.sort(CompareSpells);
 
     int count = 0;
-    for (std::list<pair<uint32, string> >::iterator i = spells.begin(); i != spells.end(); ++i)
+    for (std::list<std::pair<uint32, string> >::iterator i = spells.begin(); i != spells.end(); ++i)
     {
         ai->TellMasterNoFacing(i->second);
         if (++count >= 50)

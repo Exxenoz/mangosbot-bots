@@ -396,7 +396,7 @@ public:
     bool HasPlayerNearby(WorldPosition* pos, float range = sPlayerbotAIConfig.reactDistance);
     bool HasPlayerNearby(float range = sPlayerbotAIConfig.reactDistance) { WorldPosition botPos(bot);  return HasPlayerNearby(&botPos, range); };
     bool HasManyPlayersNearby(uint32 trigerrValue = 20, float range = sPlayerbotAIConfig.sightDistance);
-    pair<uint32,uint32> GetPriorityBracket(bool& shouldDetailMove);
+    std::pair<uint32,uint32> GetPriorityBracket(bool& shouldDetailMove);
     bool AllowActive(ActivityType activityType);
     bool AllowActivity(ActivityType activityType = ALL_ACTIVITY, bool checkNow = false);
 
@@ -437,7 +437,7 @@ protected:
     CompositeChatFilter chatFilter;
     PlayerbotSecurity security;
     std::map<std::string, time_t> whispers;
-    pair<ChatMsg, time_t> currentChat;
+    std::pair<ChatMsg, time_t> currentChat;
     static set<std::string> unsecuredCommands;
     bool allowActive[MAX_ACTIVITY_TYPE];
     time_t allowActiveCheckTimer[MAX_ACTIVITY_TYPE];

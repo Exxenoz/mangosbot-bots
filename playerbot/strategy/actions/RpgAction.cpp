@@ -107,12 +107,12 @@ bool RpgAction::SetNextRpgAction()
 
     if (ai->HasStrategy("debug rpg", BOT_STATE_NON_COMBAT))
     {
-        std::vector<pair<Action*, uint32>> sortedActions;
+        std::vector<std::pair<Action*, uint32>> sortedActions;
         
         for (int i = 0; i < actions.size(); i++)
             sortedActions.push_back(make_pair(actions[i], relevances[i]));
 
-        std::sort(sortedActions.begin(), sortedActions.end(), [](pair<Action*, uint32>i, pair<Action*, uint32> j) {return i.second > j.second; });
+        std::sort(sortedActions.begin(), sortedActions.end(), [](std::pair<Action*, uint32>i, std::pair<Action*, uint32> j) {return i.second > j.second; });
 
         ai->TellMasterNoFacing("------" + chat->formatWorldobject(AI_VALUE(GuidPosition, "rpg target").GetWorldObject()) + "------");
 

@@ -17,7 +17,7 @@ namespace ai
 
     //                   itemId, entry
     typedef unordered_multimap<uint32, int32> DropMap;
-    typedef std::unordered_map<pair<uint32, int32> , float > ChanceMap;
+    typedef std::unordered_map<std::pair<uint32, int32> , float > ChanceMap;
 
     //Returns the loot map of all entries
     class DropMapValue : public SingleCalculatedValue<DropMap*>

@@ -471,7 +471,7 @@ bool DebugAction::Execute(Event event)
             out.str("");
             out.clear();
 
-            std::vector<pair<int32, float>> chances;
+            std::vector<std::pair<int32, float>> chances;
 
             for (auto entry : entries)
             {
@@ -553,7 +553,7 @@ bool DebugAction::Execute(Event event)
         out.str("");
         out.clear();
 
-        std::vector<pair<uint32, float>> chances;
+        std::vector<std::pair<uint32, float>> chances;
 
         for (auto itemId : itemIds)
         {

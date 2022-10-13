@@ -140,7 +140,7 @@ bool RandomPlayerbotFactory::CreateRandomBot(uint8 cls, std::unordered_map<uint8
         return false;
 
     std::vector<uint8> skinColors, facialHairTypes;
-    std::vector<pair<uint8,uint8>> faces, hairs;
+    std::vector<std::pair<uint8,uint8>> faces, hairs;
     for (CharSectionsMap::const_iterator itr = sCharSectionMap.begin(); itr != sCharSectionMap.end(); ++itr)
     {
         CharSectionsEntry const* entry = itr->second;
@@ -154,13 +154,13 @@ bool RandomPlayerbotFactory::CreateRandomBot(uint8 cls, std::unordered_map<uint8
             skinColors.push_back(entry->ColorIndex);
             break;
         case SECTION_TYPE_FACE:
-            faces.push_back(pair<uint8,uint8>(entry->VariationIndex, entry->ColorIndex));
+            faces.push_back(std::pair<uint8,uint8>(entry->VariationIndex, entry->ColorIndex));
             break;
         case SECTION_TYPE_FACIAL_HAIR:
             facialHairTypes.push_back(entry->ColorIndex);
             break;
         case SECTION_TYPE_HAIR:
-            hairs.push_back(pair<uint8,uint8>(entry->VariationIndex, entry->ColorIndex));
+            hairs.push_back(std::pair<uint8,uint8>(entry->VariationIndex, entry->ColorIndex));
             break;
         }
 #else
@@ -170,21 +170,21 @@ bool RandomPlayerbotFactory::CreateRandomBot(uint8 cls, std::unordered_map<uint8
             skinColors.push_back(entry->Color);
             break;
         case SECTION_TYPE_FACE:
-            faces.push_back(pair<uint8, uint8>(entry->VariationIndex, entry->Color));
+            faces.push_back(std::pair<uint8, uint8>(entry->VariationIndex, entry->Color));
             break;
         case SECTION_TYPE_FACIAL_HAIR:
             facialHairTypes.push_back(entry->Color);
             break;
         case SECTION_TYPE_HAIR:
-            hairs.push_back(pair<uint8, uint8>(entry->VariationIndex, entry->Color));
+            hairs.push_back(std::pair<uint8, uint8>(entry->VariationIndex, entry->Color));
             break;
         }
 #endif
     }
 
     uint8 skinColor = skinColors[urand(0, skinColors.size() - 1)];
-    pair<uint8,uint8> face = faces[urand(0, faces.size() - 1)];
-    pair<uint8,uint8> hair = hairs[urand(0, hairs.size() - 1)];
+    std::pair<uint8,uint8> face = faces[urand(0, faces.size() - 1)];
+    std::pair<uint8,uint8> hair = hairs[urand(0, hairs.size() - 1)];
 
 	bool excludeCheck = (race == RACE_TAUREN) || (gender == GENDER_FEMALE && race != RACE_NIGHTELF && race != RACE_UNDEAD);
 #ifndef MANGOSBOT_TWO

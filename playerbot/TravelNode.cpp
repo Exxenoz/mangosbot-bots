@@ -469,7 +469,7 @@ bool TravelNode::cropUselessLinks()
 
     /*
 
-    //vector<pair<TravelNode*, TravelNode*>> toRemove;
+    //vector<std::pair<TravelNode*, TravelNode*>> toRemove;
     for (auto& firstLink : getLinks())
     {
 
@@ -484,7 +484,7 @@ bool TravelNode::cropUselessLinks()
             if (firstNode == secondNode)
                 continue;
 
-            if (std::find(toRemove.begin(), toRemove.end(), [firstNode, secondNode](pair<TravelNode*, TravelNode*> pair) {return pair.first == firstNode || pair.first == secondNode;}) != toRemove.end())
+            if (std::find(toRemove.begin(), toRemove.end(), [firstNode, secondNode](std::pair<TravelNode*, TravelNode*> pair) {return pair.first == firstNode || pair.first == secondNode;}) != toRemove.end())
                 continue;
 
             if (firstNode->hasLinkTo(secondNode))
@@ -532,7 +532,7 @@ bool TravelNode::cropUselessLinks()
                 if (this == secondNode)
                     continue;
 
-                if (std::find(toRemove.begin(), toRemove.end(), [firstNode, secondNode](pair<TravelNode*, TravelNode*> pair) {return pair.first == firstNode || pair.first == secondNode; }) != toRemove.end())
+                if (std::find(toRemove.begin(), toRemove.end(), [firstNode, secondNode](std::pair<TravelNode*, TravelNode*> pair) {return pair.first == firstNode || pair.first == secondNode; }) != toRemove.end())
                     continue;
 
                 if (firstNode->hasLinkTo(secondNode))

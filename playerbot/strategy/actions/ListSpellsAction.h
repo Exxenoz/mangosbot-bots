@@ -12,7 +12,7 @@ namespace ai
 
         virtual bool Execute(Event event);
 
-        virtual std::list<pair<uint32, string> > GetSpellList(std::string filter = "");
+        virtual std::list<std::pair<uint32, string> > GetSpellList(std::string filter = "");
     private:
         static std::map<uint32, SkillLineAbilityEntry const*> skillSpells;
         static set<uint32> vendorItems;

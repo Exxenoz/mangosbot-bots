@@ -65,8 +65,8 @@ namespace ai
         bool operator()(GameObjectDataPair const& dataPair);
         questGuidpMap GetResult() const { return data; };
     private:
-        std::unordered_map<int32, std::vector<pair<uint32, QuestRelationFlag>>> entryMap;
-        std::unordered_map<uint32, std::vector<pair<uint32, QuestRelationFlag>>> itemMap;
+        std::unordered_map<int32, std::vector<std::pair<uint32, QuestRelationFlag>>> entryMap;
+        std::unordered_map<uint32, std::vector<std::pair<uint32, QuestRelationFlag>>> itemMap;
 
         entryQuestRelationMap relationMap;
 

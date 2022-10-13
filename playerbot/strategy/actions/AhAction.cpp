@@ -158,7 +158,7 @@ bool AhBidAction::Execute(std::string text, Unit* auctioneer)
 
     AuctionEntry* auction = nullptr;
 
-    std::vector<pair<AuctionEntry*, uint32>> auctionPowers;
+    std::vector<std::pair<AuctionEntry*, uint32>> auctionPowers;
 
     if (text == "vendor")
     {
