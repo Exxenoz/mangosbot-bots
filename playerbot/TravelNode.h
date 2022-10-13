@@ -359,10 +359,10 @@ using namespace ai;
         //Find nearest node.
         TravelNode* getNode(TravelNode* sameNode) { for (auto& node : m_nodes) { if (node->getName() == sameNode->getName() && node->getPosition() == sameNode->getPosition()) return node; } return nullptr; }
         TravelNode* getNode(WorldPosition pos, std::vector<WorldPosition>& ppath, Unit* bot = nullptr, float range = -1);
-        TravelNode* getNode(WorldPosition pos, Unit* bot = nullptr, float range = -1) {vector<WorldPosition> ppath; return getNode(pos, ppath, bot, range);}
+        TravelNode* getNode(WorldPosition pos, Unit* bot = nullptr, float range = -1) {std::vector<WorldPosition> ppath; return getNode(pos, ppath, bot, range);}
 
         //Get Random Node
-        TravelNode* getRandomNode(WorldPosition pos) {vector<TravelNode*> rNodes = getNodes(pos); if (rNodes.empty()) return nullptr; return  rNodes[urand(0, rNodes.size() - 1)]; }
+        TravelNode* getRandomNode(WorldPosition pos) {std::vector<TravelNode*> rNodes = getNodes(pos); if (rNodes.empty()) return nullptr; return  rNodes[urand(0, rNodes.size() - 1)]; }
 
         //Finds the best nodePath between two nodes
         TravelNodeRoute getRoute(TravelNode* start, TravelNode* goal, Player* bot = nullptr);
