@@ -133,7 +133,7 @@ bool RandomPlayerbotFactory::CreateRandomBot(uint8 cls, std::unordered_map<uint8
             return false;
         uint32 i = urand(0, names[gender].size() - 1);
         name = names[gender][i];
-        swap(names[gender][i], names[gender].back());
+        std::swap(names[gender][i], names[gender].back());
         names[gender].pop_back();
     }
     if (name.empty())

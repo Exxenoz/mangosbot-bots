@@ -736,8 +736,8 @@ namespace ai
 
                 if (i)
                 {
-                    swap(*first, *std::next(first, i));
-                    swap(*first_weight, *std::next(first_weight, i));
+                    std::swap(*first, *std::next(first, i));
+                    std::swap(*first_weight, *std::next(first_weight, i));
                 }
                 ++first;
                 ++first_weight;
