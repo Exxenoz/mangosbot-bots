@@ -134,7 +134,7 @@ namespace ai
 
             ObjectGuid pullTarget = context->GetValue<ObjectGuid>("pull target")->Get();
             std::list<ObjectGuid> possible = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("possible targets no los")->Get();
-            if (pullTarget && find(possible.begin(), possible.end(), pullTarget) == possible.end())
+            if (pullTarget && std::find(possible.begin(), possible.end(), pullTarget) == possible.end())
             {
                 context->GetValue<ObjectGuid>("pull target")->Set(ObjectGuid());
             }

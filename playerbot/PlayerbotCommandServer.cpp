@@ -25,7 +25,7 @@ bool ReadLine(socket_ptr sock, string* buffer, string* line)
 {
     // Do the real reading from fd until buffer has '\n'.
     string::iterator pos;
-    while ((pos = find(buffer->begin(), buffer->end(), '\n')) == buffer->end())
+    while ((pos = std::find(buffer->begin(), buffer->end(), '\n')) == buffer->end())
     {
         char buf[1025];
         boost::system::error_code error;
@@ -104,7 +104,7 @@ bool ReadLine(ACE_SOCK_Stream& client_stream, string* buffer, string* line)
 {
     // Do the real reading from fd until buffer has '\n'.
     string::iterator pos;
-    while ((pos = find(buffer->begin(), buffer->end(), '\n')) == buffer->end())
+    while ((pos = std::find(buffer->begin(), buffer->end(), '\n')) == buffer->end())
     {
         char buf[33];
         size_t n = client_stream.recv_n(buf, 1, 0);

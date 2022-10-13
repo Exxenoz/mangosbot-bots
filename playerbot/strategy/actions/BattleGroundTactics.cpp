@@ -3383,7 +3383,7 @@ bool BGTactics::selectObjective(bool reset)
                             {
                                 float const distance = sqrt(bot->GetDistance(pGO));
                                 // do not pick if already in list
-                                std::vector<GameObject*>::iterator f = find(objectives.begin(), objectives.end(), pGO);
+                                std::vector<GameObject*>::iterator f = std::find(objectives.begin(), objectives.end(), pGO);
                                 if (f != objectives.end())
                                     continue;
 
@@ -3394,7 +3394,7 @@ bool BGTactics::selectObjective(bool reset)
                                 //if (attackObjectiveDistance > distance)
                                 //{
                                 //    // do not pick if already in list
-                                //    std::vector<GameObject*>::iterator f = find(objectives.begin(), objectives.end(), pGO);
+                                //    std::vector<GameObject*>::iterator f = std::find(objectives.begin(), objectives.end(), pGO);
                                 //    if (f != objectives.end())
                                 //        continue;
 
@@ -3435,7 +3435,7 @@ bool BGTactics::selectObjective(bool reset)
                         {
                             float const distance = sqrt(bot->GetDistance(pGO));
                             // do not pick if already in list
-                            std::vector<GameObject*>::iterator f = find(objectives.begin(), objectives.end(), pGO);
+                            std::vector<GameObject*>::iterator f = std::find(objectives.begin(), objectives.end(), pGO);
                             if (f != objectives.end())
                                 continue;
 
@@ -3447,7 +3447,7 @@ bool BGTactics::selectObjective(bool reset)
                             //if (attackObjectiveDistance > distance)
                             //{
                             //    // do not pick if already in list
-                            //    std::vector<GameObject*>::iterator f = find(objectives.begin(), objectives.end(), pGO);
+                            //    std::vector<GameObject*>::iterator f = std::find(objectives.begin(), objectives.end(), pGO);
                             //    if (f != objectives.end())
                             //        continue;
 
@@ -4642,7 +4642,7 @@ bool BGTactics::atFlag(std::vector<BattleBotPath*> const& vPaths, std::vector<ui
         if (!go)
             continue;
 
-        std::vector<uint32>::const_iterator f = find(vFlagIds.begin(), vFlagIds.end(), go->GetEntry());
+        std::vector<uint32>::const_iterator f = std::find(vFlagIds.begin(), vFlagIds.end(), go->GetEntry());
         if (f == vFlagIds.end())
             continue;
 

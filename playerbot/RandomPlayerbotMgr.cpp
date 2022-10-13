@@ -1560,7 +1560,7 @@ void RandomPlayerbotMgr::RandomTeleport(Player* bot, std::vector<WorldLocation> 
         tlocs.push_back(WorldPosition(loc));
 
     //Do not teleport to maps disabled in config
-    tlocs.erase(std::remove_if(tlocs.begin(), tlocs.end(), [bot](WorldPosition l) {std::vector<uint32>::iterator i = find(sPlayerbotAIConfig.randomBotMaps.begin(), sPlayerbotAIConfig.randomBotMaps.end(), l.getMapId()); return i == sPlayerbotAIConfig.randomBotMaps.end(); }), tlocs.end());
+    tlocs.erase(std::remove_if(tlocs.begin(), tlocs.end(), [bot](WorldPosition l) {std::vector<uint32>::iterator i = std::find(sPlayerbotAIConfig.randomBotMaps.begin(), sPlayerbotAIConfig.randomBotMaps.end(), l.getMapId()); return i == sPlayerbotAIConfig.randomBotMaps.end(); }), tlocs.end());
 
     //Random shuffle based on distance. Closer distances are more likely (but not exclusivly) to be at the begin of the list.
     tlocs = sTravelMgr.getNextPoint(WorldPosition(bot), tlocs, 0);
@@ -2470,7 +2470,7 @@ void RandomPlayerbotMgr::OnPlayerLogout(Player* player)
         }
     }
 
-    std::vector<Player*>::iterator i = find(players.begin(), players.end(), player);
+    std::vector<Player*>::iterator i = std::find(players.begin(), players.end(), player);
     if (i != players.end())
         players.erase(i);
 }
@@ -2865,7 +2865,7 @@ uint32 RandomPlayerbotMgr::GetTradeDiscount(Player* bot, Player* master)
 
 string RandomPlayerbotMgr::HandleRemoteCommand(std::string request)
 {
-    string::iterator pos = find(request.begin(), request.end(), ',');
+    string::iterator pos = std::find(request.begin(), request.end(), ',');
     if (pos == request.end())
     {
         std::ostringstream out; out << "invalid request: " << request;

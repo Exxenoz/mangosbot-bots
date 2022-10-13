@@ -81,7 +81,7 @@ bool BGJoinAction::Execute(Event event)
         {
             isArena = true;
 
-            std::vector<uint32>::iterator i = find(ratedList.begin(), ratedList.end(), queueTypeId);
+            std::vector<uint32>::iterator i = std::find(ratedList.begin(), ratedList.end(), queueTypeId);
             if (i != ratedList.end())
                 isRated = true;
 

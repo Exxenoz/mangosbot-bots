@@ -362,17 +362,17 @@ bool PlayerbotAIConfig::Initialize()
 
 bool PlayerbotAIConfig::IsInRandomAccountList(uint32 id)
 {
-    return find(randomBotAccounts.begin(), randomBotAccounts.end(), id) != randomBotAccounts.end();
+    return std::find(randomBotAccounts.begin(), randomBotAccounts.end(), id) != randomBotAccounts.end();
 }
 
 bool PlayerbotAIConfig::IsInRandomQuestItemList(uint32 id)
 {
-    return find(randomBotQuestItems.begin(), randomBotQuestItems.end(), id) != randomBotQuestItems.end();
+    return std::find(randomBotQuestItems.begin(), randomBotQuestItems.end(), id) != randomBotQuestItems.end();
 }
 
 bool PlayerbotAIConfig::IsInPvpProhibitedZone(uint32 id)
 {
-	return find(pvpProhibitedZoneIds.begin(), pvpProhibitedZoneIds.end(), id) != pvpProhibitedZoneIds.end();
+	return std::find(pvpProhibitedZoneIds.begin(), pvpProhibitedZoneIds.end(), id) != pvpProhibitedZoneIds.end();
 }
 
 string PlayerbotAIConfig::GetValue(std::string name)
