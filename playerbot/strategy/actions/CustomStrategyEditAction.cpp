@@ -47,7 +47,7 @@ bool CustomStrategyEditAction::PrintHelp()
 
 bool CustomStrategyEditAction::Print(std::string name)
 {
-    ostringstream out; out << "=== " << name << " ===";
+    std::ostringstream out; out << "=== " << name << " ===";
     ai->TellMaster(out.str());
 
     uint32 owner = (uint32)ai->GetBot()->GetGUIDLow();
@@ -96,7 +96,7 @@ bool CustomStrategyEditAction::Edit(std::string name, uint32 idx, std::string co
 
     PrintActionLine(idx, command);
 
-    ostringstream ss; ss << "custom::" << name;
+    std::ostringstream ss; ss << "custom::" << name;
     Strategy* strategy = ai->GetAiObjectContext()->GetStrategy(ss.str());
     if (strategy)
     {
@@ -112,7 +112,7 @@ bool CustomStrategyEditAction::Edit(std::string name, uint32 idx, std::string co
 
 bool CustomStrategyEditAction::PrintActionLine(uint32 idx, std::string command)
 {
-    ostringstream out; out << "#" << idx << " " << command;
+    std::ostringstream out; out << "#" << idx << " " << command;
     ai->TellMaster(out.str());
     return true;
 }

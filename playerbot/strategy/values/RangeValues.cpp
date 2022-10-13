@@ -11,7 +11,7 @@ RangeValue::RangeValue(PlayerbotAI* ai)
 
 string RangeValue::Save()
 {
-    ostringstream out; out << value; return out.str();
+    std::ostringstream out; out << value; return out.str();
 }
 
 bool RangeValue::Load(std::string text)

@@ -10,7 +10,7 @@ bool AutoLearnSpellAction::Execute(Event event)
 {
     std::string param = event.getParam();
 
-    ostringstream out;
+    std::ostringstream out;
 
     LearnSpells(&out);
 
@@ -29,7 +29,7 @@ bool AutoLearnSpellAction::Execute(Event event)
 }
 
 
-void AutoLearnSpellAction::LearnSpells(ostringstream* out)
+void AutoLearnSpellAction::LearnSpells(std::ostringstream* out)
 {
     if (sPlayerbotAIConfig.autoLearnTrainerSpells)// || (!ai->GetMaster() && sRandomPlayerbotMgr.IsRandomBot(bot)))    
         LearnTrainerSpells(out);
@@ -38,7 +38,7 @@ void AutoLearnSpellAction::LearnSpells(ostringstream* out)
         LearnQuestSpells(out);
 }
 
-void AutoLearnSpellAction::LearnTrainerSpells(ostringstream* out)
+void AutoLearnSpellAction::LearnTrainerSpells(std::ostringstream* out)
 {
     bot->learnDefaultSpells();
 
@@ -108,7 +108,7 @@ void AutoLearnSpellAction::LearnTrainerSpells(ostringstream* out)
     }
 }
 
-void AutoLearnSpellAction::LearnQuestSpells(ostringstream* out)
+void AutoLearnSpellAction::LearnQuestSpells(std::ostringstream* out)
 {
     //CreatureInfo const* co = sCreatureStorage.LookupEntry<CreatureInfo>(id);
     ObjectMgr::QuestMap const& questTemplates = sObjectMgr.GetQuestTemplates();
@@ -138,7 +138,7 @@ void AutoLearnSpellAction::LearnQuestSpells(ostringstream* out)
 
 string formatSpell(SpellEntry const* sInfo)
 {
-    ostringstream out;
+    std::ostringstream out;
     std::string rank = sInfo->Rank[0];
     
     if(rank.empty())
@@ -148,7 +148,7 @@ string formatSpell(SpellEntry const* sInfo)
     return out.str();
 }
 
-void AutoLearnSpellAction::LearnSpell(uint32 spellId, ostringstream* out)
+void AutoLearnSpellAction::LearnSpell(uint32 spellId, std::ostringstream* out)
 {
     SpellEntry const* proto = sServerFacade.LookupSpellInfo(spellId);
 

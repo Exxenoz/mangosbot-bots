@@ -22,14 +22,14 @@ PricingStrategy* Category::GetPricingStrategy()
     if (pricingStrategy)
         return pricingStrategy;
 
-    ostringstream out; out << "AhBot.PricingStrategy." << GetName();
+    std::ostringstream out; out << "AhBot.PricingStrategy." << GetName();
     std::string name = sAhBotConfig.GetStringDefault(out.str().c_str(), "default");
     return pricingStrategy = PricingStrategyFactory::Create(name, this);
 }
 
 QualityCategoryWrapper::QualityCategoryWrapper(Category* category, uint32 quality) : Category(), quality(quality), category(category)
 {
-    ostringstream out; out << category->GetName() << ".";
+    std::ostringstream out; out << category->GetName() << ".";
     switch (quality)
     {
     case ITEM_QUALITY_POOR:

@@ -26,7 +26,7 @@ bool GoAction::Execute(Event event)
         float x = bot->GetPositionX();
         float y = bot->GetPositionY();
         Map2ZoneCoordinates(x, y, bot->GetZoneId());
-        ostringstream out;
+        std::ostringstream out;
         out << "I am at " << x << "," << y;
         ai->TellMaster(out.str());
         return true;
@@ -51,7 +51,7 @@ bool GoAction::Execute(Event event)
             target->setTarget(dest, points.front());
             target->setForced(true);
 
-            ostringstream out; out << "Traveling to " << dest->getTitle();
+            std::ostringstream out; out << "Traveling to " << dest->getTitle();
             ai->TellMasterNoFacing(out.str());
 
             return true;
@@ -79,7 +79,7 @@ bool GoAction::Execute(Event event)
                     return false;
                 }
 
-                ostringstream out; out << "Moving to " << ChatHelper::formatGameobject(go);
+                std::ostringstream out; out << "Moving to " << ChatHelper::formatGameobject(go);
                 ai->TellMasterNoFacing(out.str());
                 return MoveNear(bot->GetMapId(), go->GetPositionX(), go->GetPositionY(), go->GetPositionZ() + 0.5f, sPlayerbotAIConfig.followDistance);
             }
@@ -97,7 +97,7 @@ bool GoAction::Execute(Event event)
         Unit* unit = ai->GetUnit(*i);
         if (unit && strstri(unit->GetName(), param.c_str()))
         {
-            ostringstream out; out << "Moving to " << unit->GetName();
+            std::ostringstream out; out << "Moving to " << unit->GetName();
             ai->TellMasterNoFacing(out.str());
             return MoveNear(bot->GetMapId(), unit->GetPositionX(), unit->GetPositionY(), unit->GetPositionZ() + 0.5f, sPlayerbotAIConfig.followDistance);
         }
@@ -127,7 +127,7 @@ bool GoAction::Execute(Event event)
             PointsArray& points = path.getPath();
             PathType type = path.getPathType();
 
-            ostringstream out;
+            std::ostringstream out;
 
             out << x << ";" << y << ";" << z << " =";
 
@@ -198,7 +198,7 @@ bool GoAction::Execute(Event event)
 
         float x1 = x, y1 = y;
         Map2ZoneCoordinates(x1, y1, bot->GetZoneId());
-        ostringstream out; out << "Moving to " << x1 << "," << y1;
+        std::ostringstream out; out << "Moving to " << x1 << "," << y1;
         ai->TellMasterNoFacing(out.str());
         return MoveNear(bot->GetMapId(), x, y, z + 0.5f, sPlayerbotAIConfig.followDistance);
     }
@@ -212,7 +212,7 @@ bool GoAction::Execute(Event event)
             return false;
         }
 
-        ostringstream out; out << "Moving to position " << param;
+        std::ostringstream out; out << "Moving to position " << param;
         ai->TellMasterNoFacing(out.str());
         return MoveNear(bot->GetMapId(), pos.x, pos.y, pos.z + 0.5f, sPlayerbotAIConfig.followDistance);
     }

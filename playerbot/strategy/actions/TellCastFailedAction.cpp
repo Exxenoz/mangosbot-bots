@@ -19,7 +19,7 @@ bool TellCastFailedAction::Execute(Event event)
         return false;
 
     const SpellEntry *const pSpellInfo =  sServerFacade.LookupSpellInfo(spellId);
-    ostringstream out; out << chat->formatSpell(pSpellInfo) << ": ";
+    std::ostringstream out; out << chat->formatSpell(pSpellInfo) << ": ";
     switch (result)
     {
     case SPELL_FAILED_NOT_READY:
@@ -66,7 +66,7 @@ bool TellSpellAction::Execute(Event event)
     if (!spellInfo)
         return false;
 
-    ostringstream out; out << chat->formatSpell(spellInfo);
+    std::ostringstream out; out << chat->formatSpell(spellInfo);
     ai->TellError(out.str());
     return true;
 }

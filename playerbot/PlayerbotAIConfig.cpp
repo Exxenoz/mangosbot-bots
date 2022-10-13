@@ -188,25 +188,25 @@ bool PlayerbotAIConfig::Initialize()
         classSpecs[cls] = ClassSpecs(1 << (cls - 1));
         for (uint32 spec = 0; spec < MAX_LEVEL; ++spec)
         {
-            ostringstream os; os << "AiPlayerbot.PremadeSpecName." << cls << "." << spec;
+            std::ostringstream os; os << "AiPlayerbot.PremadeSpecName." << cls << "." << spec;
             std::string specName = config.GetStringDefault(os.str().c_str(), "");
             if (!specName.empty())
             {
-                ostringstream os; os << "AiPlayerbot.PremadeSpecProb." << cls << "." << spec;
+                std::ostringstream os; os << "AiPlayerbot.PremadeSpecProb." << cls << "." << spec;
                 int probability = config.GetIntDefault(os.str().c_str(), 100);
 
                 TalentPath talentPath(spec, specName, probability);
 
                 for (int level = 10; level <= 100; level++)
                 {
-                    ostringstream os; os << "AiPlayerbot.PremadeSpecLink." << cls << "." << spec << "." << level;
+                    std::ostringstream os; os << "AiPlayerbot.PremadeSpecLink." << cls << "." << spec << "." << level;
                     std::string specLink = config.GetStringDefault(os.str().c_str(), "");
                     specLink = specLink.substr(0, specLink.find("#", 0));;
                     specLink = specLink.substr(0, specLink.find(" ", 0));;
 
                     if (!specLink.empty())
                     {
-                        ostringstream out;
+                        std::ostringstream out;
 
                         //Ignore bad specs.
                         if (!classSpecs[cls].baseSpec.CheckTalentLink(specLink, &out))
@@ -377,7 +377,7 @@ bool PlayerbotAIConfig::IsInPvpProhibitedZone(uint32 id)
 
 string PlayerbotAIConfig::GetValue(std::string name)
 {
-    ostringstream out;
+    std::ostringstream out;
 
     if (name == "GlobalCooldown")
         out << globalCoolDown;
@@ -456,7 +456,7 @@ void PlayerbotAIConfig::loadWorldBuf(Config* config, uint32 factionId1, uint32 c
 {
     std::list<uint32> buffs;
 
-    ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1 << "." << classId1 << "." << specId1 << "." << minLevel1 << "." << maxLevel1;
+    std::ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1 << "." << classId1 << "." << specId1 << "." << minLevel1 << "." << maxLevel1;
 
     LoadList<std::list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
 
@@ -468,7 +468,7 @@ void PlayerbotAIConfig::loadWorldBuf(Config* config, uint32 factionId1, uint32 c
 
     if (maxLevel1 == 0)
     {
-        ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1 << "." << classId1 << "." << specId1 << "." << minLevel1;
+        std::ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1 << "." << classId1 << "." << specId1 << "." << minLevel1;
 
         LoadList<std::list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
 
@@ -481,7 +481,7 @@ void PlayerbotAIConfig::loadWorldBuf(Config* config, uint32 factionId1, uint32 c
 
     if (maxLevel1 == 0 && minLevel1 == 0)
     {
-        ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1 << "." << classId1 << "." << specId1;
+        std::ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1 << "." << classId1 << "." << specId1;
 
         LoadList<std::list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
 
@@ -494,7 +494,7 @@ void PlayerbotAIConfig::loadWorldBuf(Config* config, uint32 factionId1, uint32 c
 
     if (specId1 == 0 && maxLevel1 == 0 && minLevel1 == 0)
     {
-        ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1 << "." << classId1;
+        std::ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1 << "." << classId1;
 
         LoadList<std::list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
 
@@ -507,7 +507,7 @@ void PlayerbotAIConfig::loadWorldBuf(Config* config, uint32 factionId1, uint32 c
 
     if (specId1 == 0 && classId1 == 0 && maxLevel1 == 0 && minLevel1 == 0)
     {
-        ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1;
+        std::ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1;
 
         LoadList<std::list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
 
@@ -520,7 +520,7 @@ void PlayerbotAIConfig::loadWorldBuf(Config* config, uint32 factionId1, uint32 c
 
     if (factionId1 == 0 && specId1 == 0 && classId1 == 0 && maxLevel1 == 0 && minLevel1 == 0)
     {
-        ostringstream os; os << "AiPlayerbot.WorldBuff";
+        std::ostringstream os; os << "AiPlayerbot.WorldBuff";
 
         LoadList<std::list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
 

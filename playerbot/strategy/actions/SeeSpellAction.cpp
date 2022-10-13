@@ -88,7 +88,7 @@ bool SeeSpellAction::Execute(Event event)
         float y = spellPosition.getY();
         float z = spellPosition.getZ();
 
-        ostringstream out;
+        std::ostringstream out;
 
         if (spellPosition.isOutside())
             out << "[outside]";

@@ -13,7 +13,7 @@ namespace ai
     public:
         virtual bool CanLoot(ItemPrototype const *proto, AiObjectContext *context)
         {
-            ostringstream out; out << proto->ItemId;
+            std::ostringstream out; out << proto->ItemId;
             ItemUsage usage = AI_VALUE2(ItemUsage, "item usage", out.str());
             return usage != ITEM_USAGE_NONE;
         }

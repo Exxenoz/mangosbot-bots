@@ -104,7 +104,7 @@ void SuggestWhatToDoAction::instance()
     std::map<std::string, string> placeholders;
     placeholders["%role"] = chat->formatClass(bot, AiFactory::GetPlayerSpecTab(bot));
 
-    ostringstream itemout;
+    std::ostringstream itemout;
     //itemout << "|c00b000b0" << allowedInstances[urand(0, allowedInstances.size() - 1)] << "|r";
     itemout << allowedInstances[urand(0, allowedInstances.size() - 1)];
     placeholders["%instance"] = itemout.str();
@@ -177,7 +177,7 @@ void SuggestWhatToDoAction::grindMaterials()
                 {
                     std::string item = category->GetLabel();
                     transform(item.begin(), item.end(), item.begin(), ::tolower);
-                    ostringstream itemout;
+                    std::ostringstream itemout;
                     itemout << "|c0000b000" << item << "|r";
                     item = itemout.str();
 
@@ -252,10 +252,10 @@ void SuggestWhatToDoAction::grindReputation()
     std::map<std::string, string> placeholders;
     placeholders["%role"] = chat->formatClass(bot, AiFactory::GetPlayerSpecTab(bot));
     placeholders["%level"] = levels[urand(0, 2)];
-    ostringstream rnd; rnd << urand(1, 5) << "K";
+    std::ostringstream rnd; rnd << urand(1, 5) << "K";
     placeholders["%rndK"] = rnd.str();
 
-    ostringstream itemout;
+    std::ostringstream itemout;
     //itemout << "|c004040b0" << allowedFactions[urand(0, allowedFactions.size() - 1)] << "|r";
     itemout << allowedFactions[urand(0, allowedFactions.size() - 1)];
     placeholders["%faction"] = itemout.str();
@@ -272,7 +272,7 @@ void SuggestWhatToDoAction::something()
     if (!entry)
         return;
 
-    ostringstream out;
+    std::ostringstream out;
     //out << "|cffb04040" << entry->area_name[_locale] << "|r";
     out << entry->area_name[_locale];
     placeholders["%zone"] = out.str();

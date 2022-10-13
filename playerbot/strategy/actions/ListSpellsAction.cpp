@@ -149,7 +149,7 @@ list<std::pair<uint32, string> > ListSpellsAction::GetSpellList(std::string filt
 
         bool first = true;
         int craftCount = -1;
-        ostringstream materials;
+        std::ostringstream materials;
         for (uint32 x = 0; x < MAX_SPELL_REAGENTS; ++x)
         {
             if (pSpellInfo->Reagent[x] <= 0)
@@ -188,7 +188,7 @@ list<std::pair<uint32, string> > ListSpellsAction::GetSpellList(std::string filt
 
         if (craftCount < 0) craftCount = 0;
 
-        ostringstream out;
+        std::ostringstream out;
         bool filtered = false;
         if (skillLine)
         {
@@ -279,7 +279,7 @@ bool ListSpellsAction::Execute(Event event)
         ai->TellMasterNoFacing(i->second);
         if (++count >= 50)
         {
-            ostringstream msg; msg << (spells.size() - 50) << " more...";
+            std::ostringstream msg; msg << (spells.size() - 50) << " more...";
             ai->TellMasterNoFacing(msg.str());
             break;
         }

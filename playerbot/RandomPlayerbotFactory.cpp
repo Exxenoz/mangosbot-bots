@@ -315,7 +315,7 @@ void RandomPlayerbotFactory::CreateRandomBots()
 
         for (uint32 accountNumber = 0; accountNumber < sPlayerbotAIConfig.randomBotAccountCount; ++accountNumber)
         {
-            ostringstream out; out << sPlayerbotAIConfig.randomBotAccountPrefix << accountNumber;
+            std::ostringstream out; out << sPlayerbotAIConfig.randomBotAccountPrefix << accountNumber;
             std::string accountName = out.str();
 
             QueryResult* results = LoginDatabase.PQuery("SELECT id FROM account where username = '%s'", accountName.c_str());
@@ -420,7 +420,7 @@ void RandomPlayerbotFactory::CreateRandomBots()
     BarGoLink bar(totalAccCount);
     for (uint32 accountNumber = 0; accountNumber < sPlayerbotAIConfig.randomBotAccountCount; ++accountNumber)
     {
-        ostringstream out; out << sPlayerbotAIConfig.randomBotAccountPrefix << accountNumber;
+        std::ostringstream out; out << sPlayerbotAIConfig.randomBotAccountPrefix << accountNumber;
         std::string accountName = out.str();
         QueryResult* results = LoginDatabase.PQuery("SELECT id FROM account where username = '%s'", accountName.c_str());
         if (results)
@@ -535,7 +535,7 @@ void RandomPlayerbotFactory::CreateRandomBots()
 	BarGoLink bar1(totalCharCount);
     for (uint32 accountNumber = 0; accountNumber < sPlayerbotAIConfig.randomBotAccountCount; ++accountNumber)
     {
-        ostringstream out; out << sPlayerbotAIConfig.randomBotAccountPrefix << accountNumber;
+        std::ostringstream out; out << sPlayerbotAIConfig.randomBotAccountPrefix << accountNumber;
         std::string accountName = out.str();
 
         QueryResult* results = LoginDatabase.PQuery("SELECT id FROM account where username = '%s'", accountName.c_str());

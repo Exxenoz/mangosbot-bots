@@ -46,7 +46,7 @@ bool GossipHelloAction::Execute(Event event)
         bot->GetSession()->HandleGossipHelloOpcode(p1);
         sServerFacade.SetFacingTo(bot, pCreature);
 
-        ostringstream out; out << "--- " << pCreature->GetName() << " ---";
+        std::ostringstream out; out << "--- " << pCreature->GetName() << " ---";
         ai->TellMasterNoFacing(out.str());
 
         TellGossipMenus();
@@ -101,7 +101,7 @@ void GossipHelloAction::TellGossipMenus()
     for (int i = 0; i < menu.MenuItemCount(); i++)
     {
         GossipMenuItem const& item = menu.GetItem(i);
-        ostringstream out; out << "[" << (i+1) << "] " << item.m_gMessage;
+        std::ostringstream out; out << "[" << (i+1) << "] " << item.m_gMessage;
         ai->TellMasterNoFacing(out.str());
     }
 }

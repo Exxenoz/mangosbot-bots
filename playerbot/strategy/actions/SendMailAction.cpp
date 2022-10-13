@@ -76,7 +76,7 @@ bool SendMailAction::Execute(Event event)
             return false;
         }
 
-        ostringstream body;
+        std::ostringstream body;
         body << "Hello, " << receiver->GetName() << ",\n";
         body << "\n";
         body << "Here is the money you asked for";
@@ -90,12 +90,12 @@ bool SendMailAction::Execute(Event event)
         bot->SetMoney(bot->GetMoney() - money);
         draft.SendMailTo(MailReceiver(receiver), MailSender(bot));
 
-        ostringstream out; out << "Sending mail to " << receiver->GetName();
+        std::ostringstream out; out << "Sending mail to " << receiver->GetName();
         ai->TellMaster(out.str());
         return true;
     }
 
-    ostringstream body;
+    std::ostringstream body;
     body << "Hello, " << receiver->GetName() << ",\n";
     body << "\n";
     body << "Here are the item(s) you asked for";
@@ -114,7 +114,7 @@ bool SendMailAction::Execute(Event event)
             Item* item = *i;
             if (item->IsSoulBound() || item->IsConjuredConsumable())
             {
-                ostringstream out;
+                std::ostringstream out;
                 out << "Cannot send " << ChatHelper::formatItem(item->GetProto());
                 bot->Whisper(out.str(), LANG_UNIVERSAL, tellTo->GetObjectGuid());
                 continue;
@@ -131,7 +131,7 @@ bool SendMailAction::Execute(Event event)
                 uint32 price = item->GetCount() * auctionbot.GetSellPrice(proto);
                 if (!price)
                 {
-                    ostringstream out;
+                    std::ostringstream out;
                     out << ChatHelper::formatItem(item->GetProto()) << ": it is not for sale";
                     bot->Whisper(out.str(), LANG_UNIVERSAL, tellTo->GetObjectGuid());
                     return false;
@@ -140,7 +140,7 @@ bool SendMailAction::Execute(Event event)
             }
             draft.SendMailTo(MailReceiver(receiver), MailSender(bot));
 
-            ostringstream out; out << "Sent mail to " << receiver->GetName();
+            std::ostringstream out; out << "Sent mail to " << receiver->GetName();
             bot->Whisper(out.str(), LANG_UNIVERSAL, tellTo->GetObjectGuid());
             return true;
         }

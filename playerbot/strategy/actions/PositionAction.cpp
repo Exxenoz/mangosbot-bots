@@ -7,7 +7,7 @@ using namespace ai;
 
 void TellPosition(PlayerbotAI* ai, std::string name, ai::PositionEntry pos)
 {
-    ostringstream out; out << "Position " << name;
+    std::ostringstream out; out << "Position " << name;
     if (pos.isSet())
     {
         float x = pos.x, y = pos.y;
@@ -62,7 +62,7 @@ bool PositionAction::Execute(Event event)
         pos.Set(atoi(coords[0].c_str()), atoi(coords[1].c_str()), atoi(coords[2].c_str()), ai->GetBot()->GetMapId());
         posMap[name] = pos;
 
-        ostringstream out; out << "Position " << name << " is set";
+        std::ostringstream out; out << "Position " << name << " is set";
         ai->TellMaster(out);
         return true;
     }
@@ -72,7 +72,7 @@ bool PositionAction::Execute(Event event)
         pos.Set(bot->GetPositionX(), bot->GetPositionY(), bot->GetPositionZ(), ai->GetBot()->GetMapId());
 	    posMap[name] = pos;
 
-	    ostringstream out; out << "Position " << name << " is set";
+	    std::ostringstream out; out << "Position " << name << " is set";
 	    ai->TellMaster(out);
 	    return true;
 	}
@@ -82,7 +82,7 @@ bool PositionAction::Execute(Event event)
 	    pos.Reset();
 	    posMap[name] = pos;
 
-	    ostringstream out; out << "Position " << name << " is reset";
+	    std::ostringstream out; out << "Position " << name << " is reset";
 	    ai->TellMaster(out);
 	    return true;
 	}
@@ -95,7 +95,7 @@ bool MoveToPositionAction::Execute(Event event)
 	ai::PositionEntry pos = context->GetValue<ai::PositionMap&>("position")->Get()[qualifier];
     if (!pos.isSet())
     {
-        ostringstream out; out << "Position " << qualifier << " is not set";
+        std::ostringstream out; out << "Position " << qualifier << " is not set";
         ai->TellMaster(out);
         return false;
     }

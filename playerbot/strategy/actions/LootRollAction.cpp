@@ -78,7 +78,7 @@ bool LootRollAction::Execute(Event event)
 
 RollVote LootRollAction::CalculateRollVote(ItemPrototype const *proto)
 {
-    ostringstream out; out << proto->ItemId;
+    std::ostringstream out; out << proto->ItemId;
     ItemUsage usage = AI_VALUE2(ItemUsage, "item usage", out.str());
 
     RollVote needVote = ROLL_PASS;

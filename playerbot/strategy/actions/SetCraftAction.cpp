@@ -120,7 +120,7 @@ void SetCraftAction::TellCraft()
     if (!proto)
         return;
 
-    ostringstream out;
+    std::ostringstream out;
     out << "I will craft " << chat->formatItem(proto) << " using reagents: ";
     bool first = true;
     for (map<uint32, int>::iterator i = data.required.begin(); i != data.required.end(); ++i)

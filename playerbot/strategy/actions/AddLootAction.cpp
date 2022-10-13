@@ -106,7 +106,7 @@ bool AddGatheringLootAction::AddLoot(ObjectGuid guid)
         Cell::VisitAllObjects(wo, searcher, sPlayerbotAIConfig.spellDistance * 1.5);
         if (!targets.empty())
         {
-            ostringstream out;
+            std::ostringstream out;
             out << "Kill that " << targets.front()->GetName() << " so I can loot freely";
             ai->TellError(out.str());
             return false;

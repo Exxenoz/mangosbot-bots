@@ -51,7 +51,7 @@ bool MoveToTravelTargetAction::Execute(Event event)
 
             if (!urand(0, 5))
             {
-                ostringstream out;
+                std::ostringstream out;
                 if (ai->GetMaster() && !bot->GetGroup()->IsMember(ai->GetMaster()->GetObjectGuid()))
                     out << "Waiting a bit for ";
                 else

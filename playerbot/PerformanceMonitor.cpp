@@ -25,7 +25,7 @@ PerformanceMonitorOperation* PerformanceMonitor::start(PerformanceMetric metric,
     {
         if (!stack->empty())
         {
-            ostringstream out; out << stackName << " [";
+            std::ostringstream out; out << stackName << " [";
             for (std::vector<std::string>::reverse_iterator i = stack->rbegin(); i != stack->rend(); ++i) 
                 out << *i << (std::next(i)==stack->rend()? "":"|");
             out << "]";

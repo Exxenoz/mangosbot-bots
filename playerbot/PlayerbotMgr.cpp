@@ -779,7 +779,7 @@ list<std::string> PlayerbotHolder::HandlePlayerbotCommand(char const* args, Play
     for (std::set<std::string>::iterator i = bots.begin(); i != bots.end(); ++i)
     {
         std::string bot = *i;
-        ostringstream out;
+        std::ostringstream out;
         out << cmdStr << ": " << bot << " - ";
 
         ObjectGuid member = sObjectMgr.GetPlayerGuidByName(bot);
@@ -895,7 +895,7 @@ string PlayerbotHolder::ListBots(Player* master)
         }
     }
 
-    ostringstream out;
+    std::ostringstream out;
     bool first = true;
     out << "Bot roster: ";
     for (std::list<std::string>::iterator i = names.begin(); i != names.end(); ++i)
@@ -1053,7 +1053,7 @@ void PlayerbotMgr::OnPlayerLogin(Player* player)
         accountId);
     if (results)
     {
-        ostringstream out; out << "add ";
+        std::ostringstream out; out << "add ";
         bool first = true;
         do
         {
@@ -1091,7 +1091,7 @@ void PlayerbotMgr::CheckTellErrors(uint32 elapsed)
         std::string text = i->first;
         std::set<std::string> names = i->second;
 
-        ostringstream out;
+        std::ostringstream out;
         bool first = true;
         for (std::set<std::string>::iterator j = names.begin(); j != names.end(); ++j)
         {

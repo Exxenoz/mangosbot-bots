@@ -533,7 +533,7 @@ bool SetFormationAction::Execute(Event event)
     FormationValue* value = (FormationValue*)context->GetValue<Formation*>("formation");
     if (formation == "?" || formation.empty())
     {
-        ostringstream str; str << "Formation: |cff00ff00" << value->Get()->getName();
+        std::ostringstream str; str << "Formation: |cff00ff00" << value->Get()->getName();
         ai->TellMaster(str);
         return true;
     }
@@ -549,13 +549,13 @@ bool SetFormationAction::Execute(Event event)
 
     if (!value->Load(formation))
     {
-        ostringstream str; str << "Invalid formation: |cffff0000" << formation;
+        std::ostringstream str; str << "Invalid formation: |cffff0000" << formation;
         ai->TellMaster(str);
         ai->TellMaster("Please set to any of:|cffffffff near (default), queue, chaos, circle, line, shield, arrow, melee, far");
         return false;
     }
 
-    ostringstream str; str << "Formation set to: " << formation;
+    std::ostringstream str; str << "Formation set to: " << formation;
     ai->TellMaster(str);
     return true;
 }

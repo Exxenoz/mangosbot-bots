@@ -13,7 +13,7 @@ bool TellTargetAction::Execute(Event event)
     Unit* target = context->GetValue<Unit*>("current target")->Get();
     if (target)
     {
-        ostringstream out;
+        std::ostringstream out;
 		out << "Attacking " << target->GetName();
         ai->TellMaster(out);
 
@@ -47,7 +47,7 @@ bool TellAttackersAction::Execute(Event event)
         Unit *unit = threatManager->getOwner();
         float threat = ref->getThreat();
 
-        ostringstream out; out << unit->GetName() << " (" << threat << ")";
+        std::ostringstream out; out << unit->GetName() << " (" << threat << ")";
         ai->TellMaster(out);
 
         ref = ref->next();

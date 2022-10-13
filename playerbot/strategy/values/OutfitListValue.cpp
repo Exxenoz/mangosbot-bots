@@ -7,7 +7,7 @@ using namespace std;
 
 string OutfitListValue::Save()
 {
-    ostringstream out;
+    std::ostringstream out;
     bool first = true;
     for (Outfit::iterator i = value.begin(); i != value.end(); ++i)
     {

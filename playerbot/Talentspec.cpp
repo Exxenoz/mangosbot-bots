@@ -5,7 +5,7 @@
 using namespace std::placeholders;
 
 //Checks a talent link on basic validity.
-bool TalentSpec::CheckTalentLink(std::string link, ostringstream* out) {
+bool TalentSpec::CheckTalentLink(std::string link, std::ostringstream* out) {
 
     std::string validChar = "-";
     std::string validNums = "012345";
@@ -41,7 +41,7 @@ uint32 TalentSpec::PointstoLevel(int points) const
 }
 
 //Check the talentspec for errors.
-bool TalentSpec::CheckTalents(int level, ostringstream* out)
+bool TalentSpec::CheckTalents(int level, std::ostringstream* out)
 {
     for (auto& entry : talents)
     {
@@ -104,7 +104,7 @@ bool TalentSpec::CheckTalents(int level, ostringstream* out)
 }
 
 //Set the talents for the bots to the current spec.
-void TalentSpec::ApplyTalents(Player* bot, ostringstream* out)
+void TalentSpec::ApplyTalents(Player* bot, std::ostringstream* out)
 {
     for (auto& entry : talents)
         for (int rank = 0; rank < MAX_TALENT_RANK; ++rank)
@@ -357,7 +357,7 @@ string TalentSpec::formatSpec(Player* bot)
 {
     uint8 cls = bot->getClass();
 
-    ostringstream out;
+    std::ostringstream out;
     //out << chathelper:: specs[cls][highestTree()] << " (";
 
     int c0 = GetTalentPoints(0);

@@ -61,7 +61,7 @@ bool TalkToQuestGiverAction::ProcessQuest(Quest const* quest, WorldObject* quest
     return isCompleted;
 }
 
-void TalkToQuestGiverAction::TurnInQuest(Quest const* quest, WorldObject* questGiver, ostringstream& out) 
+void TalkToQuestGiverAction::TurnInQuest(Quest const* quest, WorldObject* questGiver, std::ostringstream& out) 
 {
     uint32 questID = quest->GetQuestId();
         
@@ -81,7 +81,7 @@ void TalkToQuestGiverAction::TurnInQuest(Quest const* quest, WorldObject* questG
     }
 }
 
-void TalkToQuestGiverAction::RewardNoItem(Quest const* quest, WorldObject* questGiver, ostringstream& out) 
+void TalkToQuestGiverAction::RewardNoItem(Quest const* quest, WorldObject* questGiver, std::ostringstream& out) 
 {
     if (bot->CanRewardQuest(quest, false))
     {
@@ -94,7 +94,7 @@ void TalkToQuestGiverAction::RewardNoItem(Quest const* quest, WorldObject* quest
     }
 }
 
-void TalkToQuestGiverAction::RewardSingleItem(Quest const* quest, WorldObject* questGiver, ostringstream& out) 
+void TalkToQuestGiverAction::RewardSingleItem(Quest const* quest, WorldObject* questGiver, std::ostringstream& out) 
 {
     int index = 0;
     ItemPrototype const *item = sObjectMgr.GetItemPrototype(quest->RewChoiceItemId[index]);
@@ -140,11 +140,11 @@ ItemIds TalkToQuestGiverAction::BestRewards(Quest const* quest)
     }
 }
 
-void TalkToQuestGiverAction::RewardMultipleItem(Quest const* quest, WorldObject* questGiver, ostringstream& out)
+void TalkToQuestGiverAction::RewardMultipleItem(Quest const* quest, WorldObject* questGiver, std::ostringstream& out)
 {
     std::set<uint32> bestIds;
 
-    ostringstream outid;
+    std::ostringstream outid;
     if (!ai->IsAlt() || sPlayerbotAIConfig.autoPickReward == "yes")
     {
         //Pick the first item of the best rewards.
@@ -175,9 +175,9 @@ void TalkToQuestGiverAction::RewardMultipleItem(Quest const* quest, WorldObject*
     }
 }
 
-void TalkToQuestGiverAction::AskToSelectReward(Quest const* quest, ostringstream& out, bool forEquip) 
+void TalkToQuestGiverAction::AskToSelectReward(Quest const* quest, std::ostringstream& out, bool forEquip) 
 {
-    ostringstream msg;
+    std::ostringstream msg;
     msg << "Choose reward: ";
     for (uint8 i=0; i < quest->GetRewChoiceItemsCount(); ++i)
     {

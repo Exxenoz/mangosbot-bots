@@ -12,11 +12,11 @@ namespace ai
         Qualified(std::string qualifier) : qualifier(qualifier) {}
         Qualified(int32 qualifier1) { Qualify(qualifier1); }
     public:
-        virtual void Qualify(int32 qualifier) { ostringstream out; out << qualifier; this->qualifier = out.str(); }
+        virtual void Qualify(int32 qualifier) { std::ostringstream out; out << qualifier; this->qualifier = out.str(); }
         virtual void Qualify(std::string qualifier) { this->qualifier = qualifier; }
         std::string getQualifier() { return qualifier; }
 
-        static std::string MultiQualify(std::vector<std::string> qualifiers) { ostringstream out; for (auto& qualifier : qualifiers) out << qualifier << (&qualifier != &qualifiers.back() ? " " : ""); return out.str();}
+        static std::string MultiQualify(std::vector<std::string> qualifiers) { std::ostringstream out; for (auto& qualifier : qualifiers) out << qualifier << (&qualifier != &qualifiers.back() ? " " : ""); return out.str();}
         static std::vector<std::string> getMultiQualifiers(std::string qualifier1) { istringstream iss(qualifier1);   return { istream_iterator<std::string>{iss}, istream_iterator<std::string>{} }; }
         static int32 getMultiQualifier(std::string qualifier1, uint32 pos) { return stoi(getMultiQualifiers(qualifier1)[pos]); }
     protected:

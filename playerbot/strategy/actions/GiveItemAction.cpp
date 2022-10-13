@@ -41,13 +41,13 @@ bool GiveItemAction::Execute(Event event)
             receiver->MoveItemToInventory(dest, item, true);
             moved = true;
 
-            ostringstream out;
+            std::ostringstream out;
             out << "Got " << chat->formatItem(item->GetProto(), item->GetCount()) << " from " << bot->GetName();
             receiverAi->TellMasterNoFacing(out.str(), PLAYERBOT_SECURITY_ALLOW_ALL, false);
         }
         else
         {
-            ostringstream out;
+            std::ostringstream out;
             out << "Cannot get " << chat->formatItem(item->GetProto(), item->GetCount()) << " from " << bot->GetName() << "- my bags are full";
             receiverAi->TellError(out.str());
         }

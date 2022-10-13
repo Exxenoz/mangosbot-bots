@@ -80,7 +80,7 @@ bool CastCustomSpellAction::Execute(Event event)
 
     uint32 spell = AI_VALUE2(uint32, "spell id", text);
 
-    ostringstream msg;
+    std::ostringstream msg;
     if (!spell)
     {
         msg << "Unknown spell " << text;
@@ -105,7 +105,7 @@ bool CastCustomSpellAction::Execute(Event event)
         return true;
     }
 
-    ostringstream spellName;
+    std::ostringstream spellName;
     spellName << ChatHelper::formatSpell(pSpellInfo) << " on ";
     if (bot->GetTrader()) spellName << "trade item";
     else if (itemTarget) spellName << chat->formatItem(itemTarget->GetProto());
@@ -128,7 +128,7 @@ bool CastCustomSpellAction::Execute(Event event)
 
         if (castCount > 1)
         {
-            ostringstream cmd;
+            std::ostringstream cmd;
             cmd << castString(target) << " " << text << " " << (castCount - 1);
             ai->HandleCommand(CHAT_MSG_WHISPER, cmd.str(), *master);
             msg << "|cffffff00(x" << (castCount - 1) << " left)|r";
@@ -234,7 +234,7 @@ bool CastRandomSpellAction::Execute(Event event)
         {
             if (MultiCast && ((wo && sServerFacade.IsInFront(bot, wo, sPlayerbotAIConfig.sightDistance, CAST_ANGLE_IN_FRONT))))
             {               
-                ostringstream cmd;
+                std::ostringstream cmd;
 
                 cmd << "castnc " << chat->formatWorldobject(wo) + " " << spellId << " " << 19;
 

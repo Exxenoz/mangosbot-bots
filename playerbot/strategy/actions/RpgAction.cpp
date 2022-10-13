@@ -118,7 +118,7 @@ bool RpgAction::SetNextRpgAction()
 
         for (auto action : sortedActions)
         {
-            ostringstream out;
+            std::ostringstream out;
 
             out << " " << action.first->getName() << " " << action.second;
 
@@ -134,7 +134,7 @@ bool RpgAction::SetNextRpgAction()
 
     if ((ai->HasStrategy("debug", BOT_STATE_NON_COMBAT) || ai->HasStrategy("debug rpg", BOT_STATE_NON_COMBAT)))
     {
-        ostringstream out;
+        std::ostringstream out;
         out << "do: ";
         out << chat->formatWorldobject(AI_VALUE(GuidPosition, "rpg target").GetWorldObject());
 

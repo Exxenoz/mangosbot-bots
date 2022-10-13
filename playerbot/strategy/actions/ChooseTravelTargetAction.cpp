@@ -77,7 +77,7 @@ void ChooseTravelTargetAction::getNewTarget(TravelTarget* newTarget, TravelTarge
                 target->setTarget(dest, points.front());
                 target->setForced(true);
 
-                ostringstream out; out << "Traveling to " << dest->getTitle();
+                std::ostringstream out; out << "Traveling to " << dest->getTitle();
                 ai->TellMasterNoFacing(out.str(), PLAYERBOT_SECURITY_ALLOW_ALL, false);
                 foundTarget = true;
             }
@@ -211,7 +211,7 @@ void ChooseTravelTargetAction::ReportTravelTarget(TravelTarget* newTarget, Trave
 
     TravelDestination* oldDestination = oldTarget->getDestination();
 
-    ostringstream out;
+    std::ostringstream out;
 
     if (newTarget->isForced())
         out << "(Forced) ";
@@ -348,7 +348,7 @@ void ChooseTravelTargetAction::ReportTravelTarget(TravelTarget* newTarget, Trave
         WorldPosition botPos(bot);
         WorldPosition destPos = *newTarget->getPosition();
 
-        ostringstream out;
+        std::ostringstream out;
         out << sPlayerbotAIConfig.GetTimestampStr() << "+00,";
         out << bot->GetName() << ",";
         out << std::fixed << std::setprecision(2);
@@ -377,7 +377,7 @@ void ChooseTravelTargetAction::ReportTravelTarget(TravelTarget* newTarget, Trave
 
         if (lastPos)
         {
-            ostringstream out;
+            std::ostringstream out;
             out << sPlayerbotAIConfig.GetTimestampStr() << "+00,";
             out << bot->GetName() << ",";
             out << std::fixed << std::setprecision(2);

@@ -57,7 +57,7 @@ namespace ai
 
         std::string FormatValues(std::string findName = "")
         {
-            ostringstream out;
+            std::ostringstream out;
             std::set<std::string> names = valueContexts.GetCreated();
             for (std::set<std::string>::iterator i = names.begin(); i != names.end(); ++i)
             {

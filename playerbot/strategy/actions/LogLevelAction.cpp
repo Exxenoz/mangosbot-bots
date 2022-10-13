@@ -10,7 +10,7 @@ bool LogLevelAction::Execute(Event event)
     std::string param = event.getParam();
     Value<LogLevel> *value = ai->GetAiObjectContext()->GetValue<LogLevel>("log level");
 
-    ostringstream out; 
+    std::ostringstream out; 
     if (param != "?")
     {
         value->Set(string2logLevel(param));

@@ -54,7 +54,7 @@ bool TaxiAction::Execute(Event event)
                 TaxiNodesEntry const* dest = sTaxiNodesStore.LookupEntry(entry->to);
                 if (!dest) continue;
 
-                ostringstream out;
+                std::ostringstream out;
                 out << index++ << ": " << dest->name[0];
                 ai->TellMasterNoFacing(out.str());
             }

@@ -76,7 +76,7 @@ bool RevealGatheringItemAction::Execute(Event event)
     GameObject *go = result[urand(0, result.size() - 1)];
     if (!go) return false;
 
-    ostringstream msg;
+    std::ostringstream msg;
     msg << "I see a " << ChatHelper::formatGameobject(go) << ". ";
     switch (go->GetGoType())
     {

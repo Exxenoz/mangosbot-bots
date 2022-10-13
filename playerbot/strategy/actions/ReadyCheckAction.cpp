@@ -13,7 +13,7 @@ using namespace ai;
 
 string formatPercent(std::string name, uint8 value, float percent)
 {
-    ostringstream out;
+    std::ostringstream out;
 
     std::string color;
     if (percent > 75)
@@ -177,7 +177,7 @@ bool ReadyCheckAction::ReadyCheck()
         result = result && ok;
     }
 
-    ostringstream out;
+    std::ostringstream out;
 
     uint32 hp = AI_VALUE2(uint32, "item count", "healing potion");
     out << formatPercent("Hp", hp, 100.0 * hp / 5);

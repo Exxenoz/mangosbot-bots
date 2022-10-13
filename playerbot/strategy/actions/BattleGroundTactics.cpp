@@ -2950,7 +2950,7 @@ bool BGTactics::selectObjective(bool reset)
                 {
                     BgObjective = pVanndar;
                     endBoss = true;
-                    ostringstream out; out << "Attacking Vanndar!";
+                    std::ostringstream out; out << "Attacking Vanndar!";
                     //bot->Say(out.str(), LANG_UNIVERSAL);
                 }
             }
@@ -2965,7 +2965,7 @@ bool BGTactics::selectObjective(bool reset)
                     if (bot->IsWithinDist(pGO, VISIBILITY_DISTANCE_LARGE))
                     {
                         BgObjective = pGO;
-                        ostringstream out; out << "Attacking Snowfall GY!";
+                        std::ostringstream out; out << "Attacking Snowfall GY!";
                         //bot->Say(out.str(), LANG_UNIVERSAL);
                     }
             }
@@ -2985,12 +2985,12 @@ bool BGTactics::selectObjective(bool reset)
                             // get in position to attack Captain
                             pos.Set(AV_STONEHEARTH_WAITING_HORDE.x, AV_STONEHEARTH_WAITING_HORDE.y, AV_STONEHEARTH_WAITING_HORDE.z, bg->GetMapId());
 
-                            ostringstream out; out << "Taking position at Stonehearth!";
+                            std::ostringstream out; out << "Taking position at Stonehearth!";
                             //bot->Say(out.str(), LANG_UNIVERSAL);
                         }
                         else
                         {
-                            ostringstream out; out << "Attacking Balinda!";
+                            std::ostringstream out; out << "Attacking Balinda!";
                             //bot->Say(out.str(), LANG_UNIVERSAL);
                         }
                         BgObjective = pBalinda;
@@ -3092,7 +3092,7 @@ bool BGTactics::selectObjective(bool reset)
                 {
                     BgObjective = pDrek;
                     endBoss = true;
-                    ostringstream out; out << "Attacking DrekThar!";
+                    std::ostringstream out; out << "Attacking DrekThar!";
                     //bot->Say(out.str(), LANG_UNIVERSAL);
                 }
             }
@@ -3107,7 +3107,7 @@ bool BGTactics::selectObjective(bool reset)
                     if (bot->IsWithinDist(pGO, VISIBILITY_DISTANCE_LARGE))
                     {
                         BgObjective = pGO;
-                        ostringstream out; out << "Attacking Snowfall GY!";
+                        std::ostringstream out; out << "Attacking Snowfall GY!";
                         //bot->Say(out.str(), LANG_UNIVERSAL);
                     }
             }
@@ -3127,12 +3127,12 @@ bool BGTactics::selectObjective(bool reset)
                             // get in position to attack Captain
                             pos.Set(AV_ICEBLOOD_GARRISON_WAITING_ALLIANCE.x, AV_ICEBLOOD_GARRISON_WAITING_ALLIANCE.y, AV_ICEBLOOD_GARRISON_WAITING_ALLIANCE.z, bg->GetMapId());
 
-                            ostringstream out; out << "Taking position at Stonehearth!";
+                            std::ostringstream out; out << "Taking position at Stonehearth!";
                             //bot->Say(out.str(), LANG_UNIVERSAL);
                         }
                         else
                         {
-                            ostringstream out; out << "Attacking Balinda!";
+                            std::ostringstream out; out << "Attacking Balinda!";
                             //bot->Say(out.str(), LANG_UNIVERSAL);
                         }
                         BgObjective = pGalvangar;

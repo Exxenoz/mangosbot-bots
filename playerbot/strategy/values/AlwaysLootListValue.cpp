@@ -8,7 +8,7 @@ using namespace ai;
 
 string AlwaysLootListValue::Save()
 {
-    ostringstream out;
+    std::ostringstream out;
     bool first = true;
     for (std::set<uint32>::iterator i = value.begin(); i != value.end(); ++i)
     {

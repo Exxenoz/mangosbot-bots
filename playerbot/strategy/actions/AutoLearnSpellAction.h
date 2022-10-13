@@ -14,9 +14,9 @@ namespace ai
         virtual bool Execute(Event event);
 
     private: 
-        void LearnSpells(ostringstream* out);
-        void LearnTrainerSpells(ostringstream* out);
-        void LearnQuestSpells(ostringstream* out);
-        void LearnSpell(uint32 spellId, ostringstream* out);
+        void LearnSpells(std::ostringstream* out);
+        void LearnTrainerSpells(std::ostringstream* out);
+        void LearnQuestSpells(std::ostringstream* out);
+        void LearnSpell(uint32 spellId, std::ostringstream* out);
     };
 }

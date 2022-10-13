@@ -321,7 +321,7 @@ void RandomPlayerbotMgr::LogPlayerLocation()
                 Player* bot = i.second;
                 if (!bot)
                     continue;
-                ostringstream out;
+                std::ostringstream out;
                 out << sPlayerbotAIConfig.GetTimestampStr() << "+00,";
                 out << "RND" << ",";
                 out << bot->GetName() << ",";
@@ -363,7 +363,7 @@ void RandomPlayerbotMgr::LogPlayerLocation()
             Player* bot = i;
             if (!bot)
                 continue;
-            ostringstream out;
+            std::ostringstream out;
             out << sPlayerbotAIConfig.GetTimestampStr() << "+00,";
             out << "PLR" << ",";
             out << bot->GetName() << ",";
@@ -438,7 +438,7 @@ void RandomPlayerbotMgr::UpdateAIInternal(uint32 elapsed, bool minimal)
     {
         WorldPosition dummy;
 
-        ostringstream out;
+        std::ostringstream out;
         out << sPlayerbotAIConfig.GetTimestampStr() << "+00,";
         out << std::fixed << std::setprecision(2);
 
@@ -2850,7 +2850,7 @@ void RandomPlayerbotMgr::SetTradeDiscount(Player* bot, Player* master, uint32 va
     if (!master) return;
     uint32 botId =  bot->GetGUIDLow();
     uint32 masterId =  master->GetGUIDLow();
-    ostringstream name; name << "trade_discount_" << masterId;
+    std::ostringstream name; name << "trade_discount_" << masterId;
     SetEventValue(botId, name.str(), value, sPlayerbotAIConfig.maxRandomBotInWorldTime);
 }
 
@@ -2859,7 +2859,7 @@ uint32 RandomPlayerbotMgr::GetTradeDiscount(Player* bot, Player* master)
     if (!master) return 0;
     uint32 botId =  bot->GetGUIDLow();
     uint32 masterId = master->GetGUIDLow();
-    ostringstream name; name << "trade_discount_" << masterId;
+    std::ostringstream name; name << "trade_discount_" << masterId;
     return GetEventValue(botId, name.str());
 }
 
@@ -2868,7 +2868,7 @@ string RandomPlayerbotMgr::HandleRemoteCommand(std::string request)
     string::iterator pos = find(request.begin(), request.end(), ',');
     if (pos == request.end())
     {
-        ostringstream out; out << "invalid request: " << request;
+        std::ostringstream out; out << "invalid request: " << request;
         return out.str();
     }
 

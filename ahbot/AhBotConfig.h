@@ -82,7 +82,7 @@ private:
     {
         if (cache.find(category) == cache.end())
         {
-            ostringstream out; out << "AhBot."<< type << "." << category;
+            std::ostringstream out; out << "AhBot."<< type << "." << category;
             cache[category] = config.GetFloatDefault(out.str().c_str(), defaultValue);
         }
 

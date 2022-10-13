@@ -9,7 +9,7 @@ bool ChangeTalentsAction::Execute(Event event)
 {
     std::string param = event.getParam();
 
-    ostringstream out;
+    std::ostringstream out;
 
     TalentSpec botSpec(bot);
 
@@ -171,7 +171,7 @@ TalentPath* ChangeTalentsAction::getPremadePath(int id)
     return &sPlayerbotAIConfig.classSpecs[bot->getClass()].talentPath[0];
 }
 
-void ChangeTalentsAction::listPremadePaths(std::vector<TalentPath*> paths, ostringstream* out)
+void ChangeTalentsAction::listPremadePaths(std::vector<TalentPath*> paths, std::ostringstream* out)
 {
     if (paths.size() == 0)
     {
@@ -212,7 +212,7 @@ TalentPath* ChangeTalentsAction::PickPremadePath(std::vector<TalentPath*> paths,
     return paths[0];
 }
 
-bool ChangeTalentsAction::AutoSelectTalents(ostringstream* out)
+bool ChangeTalentsAction::AutoSelectTalents(std::ostringstream* out)
 {
     //Does the bot have talentpoints?
     if (bot->GetLevel() < 10)
@@ -315,7 +315,7 @@ bool AutoSetTalentsAction::Execute(Event event)
 {
     sTravelMgr.logEvent(ai, "AutoSetTalentsAction", to_string(bot->m_Played_time[PLAYED_TIME_LEVEL]), to_string(bot->m_Played_time[PLAYED_TIME_TOTAL]));
 
-    ostringstream out;
+    std::ostringstream out;
 
     if (sPlayerbotAIConfig.autoPickTalents == "no" && !sRandomPlayerbotMgr.IsRandomBot(bot))
         return false;

@@ -2866,7 +2866,7 @@ void PlayerbotFactory::InitImmersive()
     for (int i = STAT_STRENGTH; i < MAX_STATS; ++i)
     {
         Stats type = (Stats)i;
-        ostringstream name; name << "immersive_stat_" << i;
+        std::ostringstream name; name << "immersive_stat_" << i;
         uint32 value = sRandomPlayerbotMgr.GetValue(owner, name.str());
         if (value) initialized = true;
         percentMap[type] = value;
@@ -2936,7 +2936,7 @@ void PlayerbotFactory::InitImmersive()
         for (int i = STAT_STRENGTH; i < MAX_STATS; ++i)
         {
             Stats type = (Stats)i;
-            ostringstream name; name << "immersive_stat_" << i;
+            std::ostringstream name; name << "immersive_stat_" << i;
             sRandomPlayerbotMgr.SetValue(owner, name.str(), percentMap[type]);
         }
     }

@@ -78,7 +78,7 @@ void Run()
         return;
     }
 
-    ostringstream s; s << "Starting Playerbot Command Server on port " << sPlayerbotAIConfig.commandServerPort;
+    std::ostringstream s; s << "Starting Playerbot Command Server on port " << sPlayerbotAIConfig.commandServerPort;
     sLog.outString("%s",s.str().c_str());
 
     try
@@ -128,7 +128,7 @@ public:
             return 0;
         }
 
-        ostringstream s; s << "Starting Playerbot Command Server on port " << sPlayerbotAIConfig.commandServerPort;
+        std::ostringstream s; s << "Starting Playerbot Command Server on port " << sPlayerbotAIConfig.commandServerPort;
         sLog.outString(s.str().c_str());
 
         ACE_INET_Addr server(sPlayerbotAIConfig.commandServerPort);

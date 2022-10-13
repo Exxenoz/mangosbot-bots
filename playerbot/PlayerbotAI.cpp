@@ -1088,7 +1088,7 @@ void PlayerbotAI::DoNextAction(bool min)
             {                
                 WorldPosition botPos(bot);
 
-                ostringstream out;
+                std::ostringstream out;
                 out << sPlayerbotAIConfig.GetTimestampStr() << "+00,";
                 out << bot->GetName() << ",";
                 out << std::fixed << std::setprecision(2);
@@ -1507,7 +1507,7 @@ bool PlayerbotAI::DoSpecificAction(std::string name, Event event, bool silent, s
 {
     for (int i = 0 ; i < BOT_STATE_MAX; i++)
     {
-        ostringstream out;
+        std::ostringstream out;
         ActionResult res = engines[i]->ExecuteAction(name, event, qualifier);
         switch (res)
         {
@@ -1546,7 +1546,7 @@ bool PlayerbotAI::DoSpecificAction(std::string name, Event event, bool silent, s
     }
     if (!silent)
     {
-        ostringstream out;
+        std::ostringstream out;
         out << name << ": unknown action";
         TellError(out.str());
     }
@@ -2491,7 +2491,7 @@ bool PlayerbotAI::CastSpell(uint32 spellId, Unit* target, Item* itemTarget)
 
     if (HasStrategy("debug spell", BOT_STATE_NON_COMBAT))
     {
-        ostringstream out;
+        std::ostringstream out;
         out << "Casting " <<ChatHelper::formatSpell(pSpellInfo);
         TellMasterNoFacing(out);
     }
@@ -2519,7 +2519,7 @@ bool PlayerbotAI::CastSpell(uint32 spellId, float x, float y, float z, Item* ite
         }
 
         pet->ToggleAutocast(spellId, !autocast);
-        ostringstream out;
+        std::ostringstream out;
         out << (autocast ? "|cffff0000|Disabling" : "|cFF00ff00|Enabling") << " pet auto-cast for ";
         out << chatHelper.formatSpell(pSpellInfo);
         TellMaster(out);
@@ -2634,7 +2634,7 @@ bool PlayerbotAI::CastSpell(uint32 spellId, float x, float y, float z, Item* ite
 
     if (HasStrategy("debug spell", BOT_STATE_NON_COMBAT))
     {
-        ostringstream out;
+        std::ostringstream out;
         out << "Casting " << ChatHelper::formatSpell(pSpellInfo);
         TellMasterNoFacing(out);
     }
@@ -2886,7 +2886,7 @@ bool PlayerbotAI::CastVehicleSpell(uint32 spellId, Unit* target)
 
     if (HasStrategy("debug spell", BOT_STATE_NON_COMBAT))
     {
-        ostringstream out;
+        std::ostringstream out;
         out << "Casting Vehicle Spell" << ChatHelper::formatSpell(pSpellInfo);
         TellMasterNoFacing(out);
     }
@@ -3599,7 +3599,7 @@ string PlayerbotAI::HandleRemoteCommand(std::string command)
     }
     else if (command == "position")
     {
-        ostringstream out; out << bot->GetPositionX() << " " << bot->GetPositionY() << " " << bot->GetPositionZ() << " " << bot->GetMapId() << " " << bot->GetOrientation();
+        std::ostringstream out; out << bot->GetPositionX() << " " << bot->GetPositionY() << " " << bot->GetPositionZ() << " " << bot->GetMapId() << " " << bot->GetOrientation();
         uint32 area = sServerFacade.GetAreaId(bot);
         if (const AreaTableEntry* areaEntry = GetAreaEntryByAreaID(area))
         {
@@ -3615,13 +3615,13 @@ string PlayerbotAI::HandleRemoteCommand(std::string command)
             return "";
         }
 
-        ostringstream out; out << target->GetPositionX() << " " << target->GetPositionY() << " " << target->GetPositionZ() << " " << target->GetMapId() << " " << target->GetOrientation();
+        std::ostringstream out; out << target->GetPositionX() << " " << target->GetPositionY() << " " << target->GetPositionZ() << " " << target->GetMapId() << " " << target->GetOrientation();
         return out.str();
     }
     else if (command == "movement")
     {
         LastMovement& data = *GetAiObjectContext()->GetValue<LastMovement&>("last movement");
-        ostringstream out; out << data.lastMoveShort.getX() << " " << data.lastMoveShort.getY() << " " << data.lastMoveShort.getZ() << " " << data.lastMoveShort.getMapId() << " " << data.lastMoveShort.getO();
+        std::ostringstream out; out << data.lastMoveShort.getX() << " " << data.lastMoveShort.getY() << " " << data.lastMoveShort.getZ() << " " << data.lastMoveShort.getMapId() << " " << data.lastMoveShort.getO();
         return out.str();
     }
     else if (command == "target")
@@ -3636,7 +3636,7 @@ string PlayerbotAI::HandleRemoteCommand(std::string command)
     else if (command == "hp")
     {
         int pct = (int)((static_cast<float> (bot->GetHealth()) / bot->GetMaxHealth()) * 100);
-        ostringstream out; out << pct << "%";
+        std::ostringstream out; out << pct << "%";
 
         Unit* target = *GetAiObjectContext()->GetValue<Unit*>("current target");
         if (!target) {
@@ -3661,7 +3661,7 @@ string PlayerbotAI::HandleRemoteCommand(std::string command)
     }
     else if (command == "travel")
     {
-        ostringstream out;
+        std::ostringstream out;
 
         TravelTarget* target = GetAiObjectContext()->GetValue<TravelTarget*>("travel target")->Get();
         if (target->getDestination()) {
@@ -3701,7 +3701,7 @@ string PlayerbotAI::HandleRemoteCommand(std::string command)
     }
     else if (command == "budget")
     {
-        ostringstream out;
+        std::ostringstream out;
 
         AiObjectContext* context = GetAiObjectContext();
 
@@ -3744,7 +3744,7 @@ string PlayerbotAI::HandleRemoteCommand(std::string command)
 
         return out.str();
     }
-    ostringstream out; out << "invalid command: " << command;
+    std::ostringstream out; out << "invalid command: " << command;
     return out.str();
 }
 

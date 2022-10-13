@@ -248,7 +248,7 @@ bool ChooseRpgTargetAction::Execute(Event event)
     {
         if (ai->HasStrategy("debug rpg", BOT_STATE_NON_COMBAT))
         {
-            ostringstream out;
+            std::ostringstream out;
             out << "found: no targets, " << checked << " checked.";
             ai->TellMasterNoFacing(out);
         }
@@ -275,7 +275,7 @@ bool ChooseRpgTargetAction::Execute(Event event)
             if (!guidP.GetWorldObject())
                 continue;
 
-            ostringstream out;
+            std::ostringstream out;
             out << chat->formatWorldobject(guidP.GetWorldObject());
 
             out << " " << rgpActionReason[guidP] << " " << target.second;
@@ -286,7 +286,7 @@ bool ChooseRpgTargetAction::Execute(Event event)
 
             if (checked >= 10)
             {
-                ostringstream out;
+                std::ostringstream out;
                 out << "and " << (sortedTargets.size()-checked) << " more...";
                 ai->TellMasterNoFacing(out);
                 break;
@@ -317,7 +317,7 @@ bool ChooseRpgTargetAction::Execute(Event event)
 
     if ((ai->HasStrategy("debug", BOT_STATE_NON_COMBAT) || ai->HasStrategy("debug rpg", BOT_STATE_NON_COMBAT)) && guidP.GetWorldObject())
     {
-        ostringstream out;
+        std::ostringstream out;
         out << "found: ";
         out << chat->formatWorldobject(guidP.GetWorldObject());
 

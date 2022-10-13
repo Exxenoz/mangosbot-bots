@@ -79,7 +79,7 @@ void CheckMailAction::ProcessMail(Mail* mail, Player* owner)
 
         if (!sGuildTaskMgr.CheckItemTask(i->item_template, item->GetCount(), owner, bot, true))
         {
-            ostringstream body;
+            std::ostringstream body;
             body << "Hello, " << owner->GetName() << ",\n";
             body << "\n";
             body << "Here are the item(s) you've sent me by mistake";

@@ -25,7 +25,7 @@ namespace ai
         std::string QueryItemPower(uint32 itemId);
 
     private:
-        ostringstream out;
+        std::ostringstream out;
 
     };
 }

@@ -293,7 +293,7 @@ enum class TravelNodePathType : uint8
         bool shouldMoveToNextPoint(WorldPosition startPos, std::vector<PathNodePoint>::iterator beg, std::vector<PathNodePoint>::iterator ed, std::vector<PathNodePoint>::iterator p, float &moveDist, float maxDist);
         WorldPosition getNextPoint(WorldPosition startPos, float maxDist, TravelNodePathType& pathType, uint32& entry);
 
-        ostringstream print();
+        std::ostringstream print();
     private:
         std::vector<PathNodePoint> fullPath;
     };
@@ -318,7 +318,7 @@ enum class TravelNodePathType : uint8
        
         TravelPath buildPath(std::vector<WorldPosition> pathToStart = {}, std::vector<WorldPosition> pathToEnd = {}, Unit* bot = nullptr);
 
-        ostringstream print();
+        std::ostringstream print();
     private:
         std::vector<TravelNode*>::iterator findNode(TravelNode* node) { return std::find(nodes.begin(), nodes.end(), node); }
         std::vector<TravelNode*> nodes;

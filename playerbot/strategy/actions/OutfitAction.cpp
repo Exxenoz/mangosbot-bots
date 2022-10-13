@@ -24,7 +24,7 @@ bool OutfitAction::Execute(Event event)
         if (!name.empty())
         {
             Save(name, items);
-            ostringstream out;
+            std::ostringstream out;
             out << "Setting outfit " << name << " as " << param;
             ai->TellMaster(out);
             return true;
@@ -41,7 +41,7 @@ bool OutfitAction::Execute(Event event)
         std::string command = param.substr(space + 1);
         if (command == "equip")
         {
-            ostringstream out;
+            std::ostringstream out;
             out << "Equipping outfit " << name;
             ai->TellMaster(out);
             EquipItems(outfit);
@@ -49,7 +49,7 @@ bool OutfitAction::Execute(Event event)
         }
         else if (command == "replace")
         {
-            ostringstream out;
+            std::ostringstream out;
             out << "Replacing current equip with outfit " << name;
             ai->TellMaster(out);
             for (uint8 slot = EQUIPMENT_SLOT_START; slot < EQUIPMENT_SLOT_END; slot++)
@@ -70,7 +70,7 @@ bool OutfitAction::Execute(Event event)
         }
         else if (command == "reset")
         {
-            ostringstream out;
+            std::ostringstream out;
             out << "Resetting outfit " << name;
             ai->TellMaster(out);
             Save(name, ItemIds());
@@ -78,7 +78,7 @@ bool OutfitAction::Execute(Event event)
         }
         else if (command == "update")
         {
-            ostringstream out;
+            std::ostringstream out;
             out << "Updating with current items outfit " << name;
             ai->TellMaster(out);
             Update(name);
@@ -90,7 +90,7 @@ bool OutfitAction::Execute(Event event)
         {
             uint32 itemid = *i;
             ItemPrototype const *proto = sItemStorage.LookupEntry<ItemPrototype>(*i);
-            ostringstream out;
+            std::ostringstream out;
             out << chat->formatItem(proto);
             if (remove)
             {
@@ -129,7 +129,7 @@ void OutfitAction::Save(std::string name, ItemIds items)
 
     if (items.empty()) return;
 
-    ostringstream out;
+    std::ostringstream out;
     out << name << "=";
     bool first = true;
     for (ItemIds::iterator i = items.begin(); i != items.end(); i++)
@@ -150,7 +150,7 @@ void OutfitAction::List()
         std::string name = parseOutfitName(outfit);
         ItemIds items = parseOutfitItems(outfit);
 
-        ostringstream out;
+        std::ostringstream out;
         out << name << ": ";
         for (ItemIds::iterator j = items.begin(); j != items.end(); ++j)
         {

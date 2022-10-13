@@ -12,12 +12,12 @@ namespace ai
 
     public:
         virtual bool Execute(Event event);
-        virtual bool AutoSelectTalents(ostringstream* out);
+        virtual bool AutoSelectTalents(std::ostringstream* out);
     private:
         std::vector<TalentPath*> getPremadePaths(std::string findName);
         std::vector<TalentPath*> getPremadePaths(TalentSpec* oldSpec);
         TalentPath* ChangeTalentsAction::getPremadePath(int id);
-        void listPremadePaths(std::vector<TalentPath*> paths, ostringstream* out);
+        void listPremadePaths(std::vector<TalentPath*> paths, std::ostringstream* out);
         TalentPath* PickPremadePath(std::vector<TalentPath*> paths, bool useProbability);
         TalentSpec* GetBestPremadeSpec(int spec);
     };

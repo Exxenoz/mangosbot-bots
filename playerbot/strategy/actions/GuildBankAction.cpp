@@ -62,7 +62,7 @@ bool GuildBankAction::MoveFromCharToBank(Item* item, GameObject* bank)
 #ifndef MANGOSBOT_ZERO
     uint32 playerSlot = item->GetSlot();
     uint32 playerBag = item->GetBagSlot();
-    ostringstream out;
+    std::ostringstream out;
 
     Guild* guild = sGuildMgr.GetGuildById(bot->GetGuildId());
     //guild->SwapItems(bot, 0, playerSlot, 0, INVENTORY_SLOT_BAG_0, 0);

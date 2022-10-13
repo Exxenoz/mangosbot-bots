@@ -8,7 +8,7 @@
 
 using namespace ahbot;
 
-double PricingStrategy::CalculatePrice(ostringstream *explain, ...)
+double PricingStrategy::CalculatePrice(std::ostringstream *explain, ...)
 {
     va_list vl;
     va_start(vl, explain);
@@ -34,7 +34,7 @@ double PricingStrategy::CalculatePrice(ostringstream *explain, ...)
     return result;
 }
 
-uint32 PricingStrategy::GetSellPrice(ItemPrototype const* proto, uint32 auctionHouse, bool ignoreMarket, ostringstream *explain)
+uint32 PricingStrategy::GetSellPrice(ItemPrototype const* proto, uint32 auctionHouse, bool ignoreMarket, std::ostringstream *explain)
 {
     double marketPrice = GetMarketPrice(proto->ItemId, auctionHouse);
 
@@ -85,7 +85,7 @@ double PricingStrategy::GetMarketPrice(uint32 itemId, uint32 auctionHouse)
     return RoundPrice(marketPrice);
 }
 
-uint32 PricingStrategy::GetBuyPrice(ItemPrototype const* proto, uint32 auctionHouse, ostringstream *explain)
+uint32 PricingStrategy::GetBuyPrice(ItemPrototype const* proto, uint32 auctionHouse, std::ostringstream *explain)
 {
     uint32 untilTime = time(0) - 3600 * 12;
     double price = CalculatePrice(explain,
@@ -221,7 +221,7 @@ uint32 PricingStrategy::GetDefaultSellPrice(ItemPrototype const* proto)
 }
 
 
-uint32 BuyOnlyRarePricingStrategy::GetBuyPrice(ItemPrototype const* proto, uint32 auctionHouse, ostringstream *explain)
+uint32 BuyOnlyRarePricingStrategy::GetBuyPrice(ItemPrototype const* proto, uint32 auctionHouse, std::ostringstream *explain)
 {
     if (proto->Quality < ITEM_QUALITY_RARE)
     {
@@ -232,7 +232,7 @@ uint32 BuyOnlyRarePricingStrategy::GetBuyPrice(ItemPrototype const* proto, uint3
     return PricingStrategy::GetBuyPrice(proto, auctionHouse, explain);
 }
 
-uint32 BuyOnlyRarePricingStrategy::GetSellPrice(ItemPrototype const* proto, uint32 auctionHouse, bool ignoreMarket, ostringstream *explain)
+uint32 BuyOnlyRarePricingStrategy::GetSellPrice(ItemPrototype const* proto, uint32 auctionHouse, bool ignoreMarket, std::ostringstream *explain)
 {
     return PricingStrategy::GetSellPrice(proto, auctionHouse, ignoreMarket, explain);
 }

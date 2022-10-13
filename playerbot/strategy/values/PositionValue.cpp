@@ -11,7 +11,7 @@ PositionValue::PositionValue(PlayerbotAI* ai, std::string name)
 
 string PositionValue::Save()
 {
-    ostringstream out;
+    std::ostringstream out;
     bool first = true;
     for (ai::PositionMap::iterator i = value.begin(); i != value.end(); ++i)
     {

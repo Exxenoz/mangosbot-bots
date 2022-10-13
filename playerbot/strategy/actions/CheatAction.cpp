@@ -75,7 +75,7 @@ string CheatAction::GetCheatName(BotCheatMask cheatMask)
 
 void CheatAction::ListCheats()
 {
-    ostringstream out;
+    std::ostringstream out;
     for (int i = 0; i < log2((uint32)BotCheatMask::maxMask); i++)
     {
         BotCheatMask cheatMask = BotCheatMask(1 << i);

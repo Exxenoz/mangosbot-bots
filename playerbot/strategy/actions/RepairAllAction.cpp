@@ -69,7 +69,7 @@ bool RepairAllAction::Execute(Event event)
 
         if (totalCost > 0)
         {
-            ostringstream out;
+            std::ostringstream out;
             out << "Repair: " << chat->formatMoney(totalCost) << " (" << unit->GetName() << ")";
             ai->TellMasterNoFacing(out.str(),PLAYERBOT_SECURITY_ALLOW_ALL, false);
             bot->PlayDistanceSound(1116);

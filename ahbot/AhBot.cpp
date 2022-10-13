@@ -712,7 +712,7 @@ void AhBot::HandleCommand(std::string command)
             if (find(items.begin(), items.end(), proto->ItemId) == items.end())
                 continue;
 
-            ostringstream out;
+            std::ostringstream out;
             out << proto->Name1 << " (" << category->GetDisplayName() << "), "
                     << category->GetMaxAllowedAuctionCount() << "x" << category->GetMaxAllowedItemAuctionCount(proto)
                     << "x" << category->GetStackCount(proto) << " max"
@@ -724,11 +724,11 @@ void AhBot::HandleCommand(std::string command)
                     << GetAvailableMoney(auctionIds[auction])
                     << ") ---\n";
 
-                ostringstream exp1;
+                std::ostringstream exp1;
                 out << "sell: " << ChatHelper::formatMoney(category->GetPricingStrategy()->GetSellPrice(proto, auctionIds[auction], true, &exp1));
                 out << " ("  << exp1.str().c_str() << ")\n";
 
-                ostringstream exp2;
+                std::ostringstream exp2;
                 out << "buy: " << ChatHelper::formatMoney(category->GetPricingStrategy()->GetBuyPrice(proto, auctionIds[auction], &exp2));
                 out << " ("  << exp2.str().c_str() << ")\n";
 
@@ -1160,7 +1160,7 @@ void AhBot::CheckSendMail(uint32 bidder, uint32 price, AuctionEntry *entry)
         }
     }
 
-    ostringstream body;
+    std::ostringstream body;
     body << "Hello,\n";
     body << "\n";
     Item *item = sAuctionMgr.GetAItem(entry->itemGuidLow);
@@ -1178,7 +1178,7 @@ void AhBot::CheckSendMail(uint32 bidder, uint32 price, AuctionEntry *entry)
 
     body << name << "\n";
 
-    ostringstream title; title << "AH Proposition: " << item->GetProto()->Name1;
+    std::ostringstream title; title << "AH Proposition: " << item->GetProto()->Name1;
     MailDraft draft(title.str(), body.str());
     ObjectGuid receiverGuid(HIGHGUID_PLAYER, entry->owner);
     draft.SendMailTo(MailReceiver(receiverGuid), MailSender(MAIL_NORMAL, bidder));
@@ -1204,7 +1204,7 @@ void AhBot::Dump()
                 if (find(items.begin(), items.end(), proto->ItemId) == items.end())
                     continue;
 
-                ostringstream out;
+                std::ostringstream out;
                 if (first)
                 {
                     out << proto->ItemId << " (" << proto->Name1 << ") x" << category->GetStackCount(proto) << " - ";
@@ -1252,7 +1252,7 @@ void AhBot::CleanupPropositions()
 
 void AhBot::DeleteMail(std::list<uint32> buffer)
 {
-    ostringstream sql;
+    std::ostringstream sql;
     sql << "delete from mail where id in ( ";
     bool first = true;
     for (std::list<uint32>::iterator j = buffer.begin(); j != buffer.end(); ++j)

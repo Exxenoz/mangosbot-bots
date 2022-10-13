@@ -56,7 +56,7 @@ bool UseItemAction::UseGameObject(ObjectGuid guid)
         return false;
 
    go->Use(bot);
-   ostringstream out; out << "Using " << chat->formatGameobject(go);
+   std::ostringstream out; out << "Using " << chat->formatGameobject(go);
    ai->TellMasterNoFacing(out.str(), PLAYERBOT_SECURITY_ALLOW_ALL, false);
    return true;
 }
@@ -232,7 +232,7 @@ bool UseItemAction::UseItem(Item* item, ObjectGuid goGuid, Item* itemTarget, Uni
 #endif
 
    bool targetSelected = false;
-   ostringstream out; out << "Using " << chat->formatItem(item->GetProto());
+   std::ostringstream out; out << "Using " << chat->formatItem(item->GetProto());
    if ((int)item->GetProto()->Stackable > 1)
    {
       uint32 count = item->GetCount();
@@ -348,7 +348,7 @@ bool UseItemAction::UseItem(Item* item, ObjectGuid goGuid, Item* itemTarget, Uni
          packet << questid;
          packet << uint32(0);
          bot->GetSession()->HandleQuestgiverAcceptQuestOpcode(packet);
-         ostringstream out; out << "Got quest " << chat->formatQuest(qInfo);
+         std::ostringstream out; out << "Got quest " << chat->formatQuest(qInfo);
          ai->TellMasterNoFacing(out.str(), PLAYERBOT_SECURITY_ALLOW_ALL, false);
          return true;
       }
@@ -430,7 +430,7 @@ bool UseItemAction::UseItem(Item* item, ObjectGuid goGuid, Item* itemTarget, Uni
 
 void UseItemAction::TellConsumableUse(Item* item, std::string action, float percent)
 {
-    ostringstream out;
+    std::ostringstream out;
     out << action << " " << chat->formatItem(item->GetProto());
     if ((int)item->GetProto()->Stackable > 1) out << "/x" << item->GetCount();
     out << " (" << round(percent) << "%)";
@@ -486,7 +486,7 @@ bool UseItemAction::SocketItem(Item* item, Item* gem, bool replace)
 
    if (fits)
    {
-      ostringstream out; out << "Socketing " << chat->formatItem(item->GetProto());
+      std::ostringstream out; out << "Socketing " << chat->formatItem(item->GetProto());
       out << " with " << chat->formatItem(gem->GetProto());
       ai->TellMaster(out, PLAYERBOT_SECURITY_ALLOW_ALL, false);
 

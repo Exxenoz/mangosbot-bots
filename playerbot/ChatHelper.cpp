@@ -180,7 +180,7 @@ ChatHelper::ChatHelper(PlayerbotAI* ai) : PlayerbotAIAware(ai)
 
 string ChatHelper::formatMoney(uint32 copper)
 {
-    ostringstream out;
+    std::ostringstream out;
 	if (!copper)
 	{
 		out << "0";
@@ -276,7 +276,7 @@ ItemIds ChatHelper::parseItems(string& text)
 
 string ChatHelper::formatQuest(Quest const* quest)
 {
-    ostringstream out;
+    std::ostringstream out;
     int loc_idx = sPlayerbotTextMgr.GetLocalePriority();
     std::string title = quest->GetTitle();
     sObjectMgr.GetQuestLocaleStrings(quest->GetQuestId(), loc_idx, &title);
@@ -286,7 +286,7 @@ string ChatHelper::formatQuest(Quest const* quest)
 
 string ChatHelper::formatGameobject(GameObject* go)
 {
-    ostringstream out;
+    std::ostringstream out;
     int loc_idx = sPlayerbotTextMgr.GetLocalePriority();
     std::string name = go->GetGOInfo()->name;
     if (loc_idx >= 0)
@@ -304,7 +304,7 @@ string ChatHelper::formatGameobject(GameObject* go)
 
 string ChatHelper::formatWorldobject(WorldObject* wo)
 {
-    ostringstream out;
+    std::ostringstream out;
     int loc_idx = sPlayerbotTextMgr.GetLocalePriority();
     std::string name = (wo->IsGameObject() ? ((GameObject*)wo)->GetGOInfo()->name : wo->GetName());
     if (loc_idx >= 0 && wo->IsGameObject())
@@ -330,7 +330,7 @@ string ChatHelper::formatWorldEntry(int32 entry)
     else
         gInfo = ObjectMgr::GetGameObjectInfo(entry * -1);
 
-    ostringstream out;
+    std::ostringstream out;
     out << "|cFFFFFF00|Hentry:" << abs(entry) << ":" << "|h[";
 
     int loc_idx = sPlayerbotTextMgr.GetLocalePriority();
@@ -369,7 +369,7 @@ string ChatHelper::formatWorldEntry(int32 entry)
 
 string ChatHelper::formatSpell(SpellEntry const *sInfo)
 {
-    ostringstream out;
+    std::ostringstream out;
     out << "|cffffffff|Hspell:" << sInfo->Id << "|h[" << sInfo->SpellName[LOCALE_enUS] << "]|h|r";
     return out.str();
 }
@@ -379,7 +379,7 @@ string ChatHelper::formatItem(ItemPrototype const * proto, int count, int total)
     char color[32];
     sprintf(color, "%x", ItemQualityColors[proto->Quality]);
 
-    ostringstream out;
+    std::ostringstream out;
     int loc_idx = sPlayerbotTextMgr.GetLocalePriority();
     std::string name = proto->Name1;
     if (loc_idx >= 0)
@@ -407,7 +407,7 @@ string ChatHelper::formatQItem(uint32 itemId)
     char color[32];
     sprintf(color, "%x", ItemQualityColors[0]);
 
-    ostringstream out;
+    std::ostringstream out;
     out << "|c" << color << "|Hitem:" << itemId
         << ":0:0:0:0:0:0:0" << "|h[item"
         << "]|h|r";
@@ -518,7 +518,7 @@ list<int32> ChatHelper::parseWorldEntries(string& text)
 
 string ChatHelper::formatQuestObjective(std::string name, int available, int required)
 {
-    ostringstream out;
+    std::ostringstream out;
     out << "|cFFFFFFFF" << name << (available >= required ? "|c0000FF00: " : "|c00FF0000: ")
         << available << "/" << required << "|r";
 
@@ -593,7 +593,7 @@ string ChatHelper::formatClass(Player* player, int spec)
 {
     uint8 cls = player->getClass();
 
-    ostringstream out;
+    std::ostringstream out;
     out << specs[cls][spec] << " (";
 
     std::map<uint32, int32> tabs = AiFactory::GetPlayerSpecTabs(player);

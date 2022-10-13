@@ -22,7 +22,7 @@ bool WhoAction::Execute(Event event)
     if (!owner)
         return false;
 
-    ostringstream out;
+    std::ostringstream out;
     std::string text = event.getParam();
     if (!text.empty())
     {
@@ -62,7 +62,7 @@ bool WhoAction::Execute(Event event)
 
 string WhoAction::QueryTrade(std::string text)
 {
-    ostringstream out;
+    std::ostringstream out;
 
     std::list<Item*> items = InventoryAction::parseItems(text);
     for (std::list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
@@ -81,7 +81,7 @@ string WhoAction::QueryTrade(std::string text)
 
 string WhoAction::QuerySkill(std::string text)
 {
-    ostringstream out;
+    std::ostringstream out;
     uint32 skill = chat->parseSkill(text);
     if (!skill || !ai->HasSkill((SkillType)skill))
         return "";
@@ -109,7 +109,7 @@ string WhoAction::QuerySkill(std::string text)
 
 string WhoAction::QuerySpec(std::string text)
 {
-    ostringstream out;
+    std::ostringstream out;
 
     int spec = AiFactory::GetPlayerSpecTab(bot);
     out << "|h|cffffffff" << chat->formatClass(bot, spec);

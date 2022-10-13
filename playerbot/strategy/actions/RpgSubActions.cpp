@@ -254,7 +254,7 @@ bool RpgTradeUsefulAction::Execute(Event event)
 
     Item* item = items.front();
 
-    ostringstream param;
+    std::ostringstream param;
 
     param << chat->formatWorldobject(player);
     param << " ";

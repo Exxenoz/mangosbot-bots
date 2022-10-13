@@ -152,7 +152,7 @@ bool Engine::DoNextAction(Unit* unit, int depth, bool minimal)
             {
                 if (ai->HasStrategy("debug action", BOT_STATE_NON_COMBAT))
                 {
-                    ostringstream out;
+                    std::ostringstream out;
                     out << "try: ";
                     out << actionNode->getName();
                     out << " unknown (";
@@ -215,7 +215,7 @@ bool Engine::DoNextAction(Unit* unit, int depth, bool minimal)
                 {
                     if (ai->HasStrategy("debug action", BOT_STATE_NON_COMBAT))
                     {
-                        ostringstream out;
+                        std::ostringstream out;
                         out << "try: ";
                         out << action->getName();
                         out << " impossible (";
@@ -236,7 +236,7 @@ bool Engine::DoNextAction(Unit* unit, int depth, bool minimal)
             {
                 if (ai->HasStrategy("debug action", BOT_STATE_NON_COMBAT))
                 {
-                    ostringstream out;
+                    std::ostringstream out;
                     out << "try: ";
                     out << action->getName();
                     out << " useless (";
@@ -579,7 +579,7 @@ bool Engine::ListenAndExecute(Action* action, Event event)
 
     if (ai->HasStrategy("debug", BOT_STATE_NON_COMBAT))
     {
-        ostringstream out;
+        std::ostringstream out;
         out << "do: ";
         out << action->getName();
         if (actionExecuted)

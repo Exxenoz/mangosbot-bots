@@ -63,7 +63,7 @@ void PlayerbotDbStore::Save(PlayerbotAI *ai)
 
 string PlayerbotDbStore::FormatStrategies(std::string type, std::list<std::string> strategies)
 {
-    ostringstream out;
+    std::ostringstream out;
     for(std::list<std::string>::iterator i = strategies.begin(); i != strategies.end(); ++i)
         out << "+" << (*i).c_str() << ",";
 

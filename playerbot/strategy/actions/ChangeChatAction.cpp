@@ -12,13 +12,13 @@ bool ChangeChatAction::Execute(Event event)
     ChatMsg parsed = chat->parseChat(text);
     if (parsed == CHAT_MSG_SYSTEM)
     {
-        ostringstream out; out << "Current chat is " << chat->formatChat(*context->GetValue<ChatMsg>("chat"));
+        std::ostringstream out; out << "Current chat is " << chat->formatChat(*context->GetValue<ChatMsg>("chat"));
         ai->TellMaster(out);
     }
     else
     {
         context->GetValue<ChatMsg>("chat")->Set(parsed);
-        ostringstream out; out << "Chat set to " << chat->formatChat(parsed);
+        std::ostringstream out; out << "Chat set to " << chat->formatChat(parsed);
         ai->TellMaster(out);
     }
     

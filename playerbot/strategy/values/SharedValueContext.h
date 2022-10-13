@@ -64,7 +64,7 @@ namespace ai
         template<class T>
         Value<T>* getGlobalValue(std::string name, uint32 param)
         {
-            ostringstream out; out << param;
+            std::ostringstream out; out << param;
             return getGlobalValue<T>(name, out.str());
         }
     };

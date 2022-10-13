@@ -34,7 +34,7 @@ bool QueryQuestAction::Execute(Event event)
         if(questId != bot->GetQuestSlotQuestId(slot))
             continue;
 
-        ostringstream out;
+        std::ostringstream out;
         out << "--- " << chat->formatQuest(sObjectMgr.GetQuestTemplate(questId)) << " ";
         if (bot->GetQuestStatus(questId) == QUEST_STATUS_COMPLETE)
         {
@@ -59,7 +59,7 @@ bool QueryQuestAction::Execute(Event event)
                 if (limit > 50)
                     continue;
 
-                ostringstream out;
+                std::ostringstream out;
 
                 uint32 tpoints = dest->getPoints(true).size();
                 uint32 apoints = dest->getPoints().size();

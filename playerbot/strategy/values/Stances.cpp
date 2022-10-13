@@ -218,7 +218,7 @@ bool SetStanceAction::Execute(Event event)
     StanceValue* value = (StanceValue*)context->GetValue<Stance*>("stance");
     if (stance == "?" || stance.empty())
     {
-        ostringstream str; str << "Stance: |cff00ff00" << value->Get()->getName();
+        std::ostringstream str; str << "Stance: |cff00ff00" << value->Get()->getName();
         ai->TellMaster(str);
         return true;
     }
@@ -234,13 +234,13 @@ bool SetStanceAction::Execute(Event event)
 
     if (!value->Load(stance))
     {
-        ostringstream str; str << "Invalid stance: |cffff0000" << stance;
+        std::ostringstream str; str << "Invalid stance: |cffff0000" << stance;
         ai->TellMaster(str);
         ai->TellMaster("Please set to any of:|cffffffff near (default), tank, turnback, behind");
         return false;
     }
 
-    ostringstream str; str << "Stance set to: " << stance;
+    std::ostringstream str; str << "Stance set to: " << stance;
     ai->TellMaster(str);
     return true;
 }

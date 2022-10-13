@@ -159,7 +159,7 @@ bool PlayerbotSecurity::CheckLevelFor(PlayerbotSecurityLevel level, bool silent,
     if (master && bot->GetPlayerbotAI() && bot->GetPlayerbotAI()->IsOpposing(master) && master->GetSession()->GetSecurity() < SEC_GAMEMASTER)
         return false;
 
-    ostringstream out;
+    std::ostringstream out;
     switch (realLevel)
     {
     case PLAYERBOT_SECURITY_DENY_ALL:

@@ -6,7 +6,7 @@
 
 using namespace ai;
 
-void TrainerAction::Learn(uint32 cost, TrainerSpell const* tSpell, ostringstream& msg)
+void TrainerAction::Learn(uint32 cost, TrainerSpell const* tSpell, std::ostringstream& msg)
 {
     if (sPlayerbotAIConfig.autoTrainSpells != "free" &&  !ai->HasCheat(BotCheatMask::gold))
     {
@@ -103,7 +103,7 @@ void TrainerAction::Iterate(Creature* creature, TrainerSpellAction action, Spell
         uint32 cost = uint32(floor(tSpell->spellCost *  fDiscountMod));
         totalCost += cost;
 
-        ostringstream out;
+        std::ostringstream out;
         out << chat->formatSpell(pSpellInfo) << chat->formatMoney(cost);
 
         if (action)
@@ -174,7 +174,7 @@ bool TrainerAction::Execute(Event event)
 
 void TrainerAction::TellHeader(Creature* creature)
 {
-    ostringstream out; out << "--- Can learn from " << creature->GetName() << " ---";
+    std::ostringstream out; out << "--- Can learn from " << creature->GetName() << " ---";
     ai->TellMaster(out, PLAYERBOT_SECURITY_ALLOW_ALL, false);
 }
 
@@ -182,7 +182,7 @@ void TrainerAction::TellFooter(uint32 totalCost)
 {
     if (totalCost)
     {
-        ostringstream out; out << "Total cost: " << chat->formatMoney(totalCost);
+        std::ostringstream out; out << "Total cost: " << chat->formatMoney(totalCost);
         ai->TellMaster(out, PLAYERBOT_SECURITY_ALLOW_ALL, false);
     }
 }

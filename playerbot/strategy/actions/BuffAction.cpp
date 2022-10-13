@@ -105,7 +105,7 @@ bool BuffAction::Execute(Event event)
         for (std::list<Item*>::iterator j = items.begin(); j != items.end(); ++j)
         {
             Item* item = *j;
-            ostringstream out;
+            std::ostringstream out;
             out << chat->formatItem(item->GetProto(), item->GetCount());
             ai->TellMaster(out);
         }

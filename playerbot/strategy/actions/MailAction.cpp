@@ -23,7 +23,7 @@ public:
         Player* bot = ai->GetBot();
         time_t cur_time = time(0);
         int days = (cur_time - mail->deliver_time) / 3600 / 24;
-        ostringstream out;
+        std::ostringstream out;
         out << "#" << (index+1) << " ";
         if (!mail->money && !mail->has_items)
             out << "|cffffffff" << mail->subject;
@@ -82,7 +82,7 @@ public:
         ObjectGuid mailbox = FindMailbox(ai);
         if (mail->money)
         {
-            ostringstream out;
+            std::ostringstream out;
             out << mail->subject << ", |cffffff00" << ChatHelper::formatMoney(mail->money) << "|cff00ff00 processed";
             ai->TellMaster(out.str(), PLAYERBOT_SECURITY_ALLOW_ALL, false);
 
@@ -111,7 +111,7 @@ public:
                 packet << *i;
 #endif
                 Item* item = bot->GetMItem(*i);
-                ostringstream out;
+                std::ostringstream out;
                 out << mail->subject << ", " << ChatHelper::formatItem(item->GetProto()) << "|cff00ff00 processed";
 
                 bot->GetSession()->HandleMailTakeItem(packet);
@@ -155,7 +155,7 @@ class DeleteMailProcessor : public MailProcessor
 public:
     virtual bool Process(int index, Mail* mail, PlayerbotAI* ai)
     {
-        ostringstream out;
+        std::ostringstream out;
         out << "|cffffffff" << mail->subject << "|cffff0000 deleted";
         RemoveMail(ai->GetBot(), mail->messageID, FindMailbox(ai));
         ai->TellMaster(out.str(), PLAYERBOT_SECURITY_ALLOW_ALL, false);
@@ -170,7 +170,7 @@ class ReadMailProcessor : public MailProcessor
 public:
     virtual bool Process(int index, Mail* mail, PlayerbotAI* ai)
     {
-        ostringstream out, body;
+        std::ostringstream out, body;
         out << "|cffffffff" << mail->subject;
         ai->TellMaster(out.str(), PLAYERBOT_SECURITY_ALLOW_ALL, false);
 #ifdef MANGOSBOT_TWO
@@ -225,7 +225,7 @@ bool MailAction::Execute(Event event)
     MailProcessor* processor = processors[action];
     if (!processor)
     {
-        ostringstream out; out << action << ": I don't know how to do that";
+        std::ostringstream out; out << action << ": I don't know how to do that";
         ai->TellMaster(out.str());
         return false;
     }

@@ -135,7 +135,7 @@ namespace ai
 
         virtual std::string Format()
         {
-            ostringstream out; out << (int)this->Calculate();
+            std::ostringstream out; out << (int)this->Calculate();
             return out.str();
         }
     };
@@ -148,7 +148,7 @@ namespace ai
 
         virtual std::string Format()
         {
-            ostringstream out; out << (int)this->Calculate();
+            std::ostringstream out; out << (int)this->Calculate();
             return out.str();
         }
     };
@@ -161,7 +161,7 @@ namespace ai
 
         virtual std::string Format()
         {
-            ostringstream out; out << this->Calculate();
+            std::ostringstream out; out << this->Calculate();
             return out.str();
         }
     };
@@ -213,7 +213,7 @@ namespace ai
 
         virtual std::string Format()
         {
-            ostringstream out; out << "{";
+            std::ostringstream out; out << "{";
             std::list<CreatureDataPair const*> cdPairs = this->Calculate();
             for (std::list<CreatureDataPair const*>::iterator i = cdPairs.begin(); i != cdPairs.end(); ++i)
             {
@@ -246,7 +246,7 @@ namespace ai
 
         virtual std::string Format()
         {
-            ostringstream out; out << "{";
+            std::ostringstream out; out << "{";
             std::list<ObjectGuid> guids = this->Calculate();
             for (std::list<ObjectGuid>::iterator i = guids.begin(); i != guids.end(); ++i)
             {

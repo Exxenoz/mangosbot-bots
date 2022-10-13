@@ -175,7 +175,7 @@ void InventoryAction::TellItems(map<uint32, int> itemMap, std::map<uint32, bool>
 
 void InventoryAction::TellItem(ItemPrototype const * proto, int count, bool soulbound)
 {
-    ostringstream out;
+    std::ostringstream out;
     out << chat->formatItem(proto, count);
     if (soulbound)
         out << " (soulbound)";

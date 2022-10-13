@@ -98,7 +98,7 @@ void EquipAction::EquipItem(Item& item)
 
     sTravelMgr.logEvent(ai, "EquipAction", item.GetProto()->Name1, to_string(item.GetProto()->ItemId));
 
-    ostringstream out; out << "equipping " << chat->formatItem(item.GetProto());
+    std::ostringstream out; out << "equipping " << chat->formatItem(item.GetProto());
     ai->TellMaster(out, PLAYERBOT_SECURITY_ALLOW_ALL, false);
 }
 

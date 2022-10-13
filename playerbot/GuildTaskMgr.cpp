@@ -256,7 +256,7 @@ bool GuildTaskMgr::SendAdvertisement(uint32 owner, uint32 guildId)
 
 string formatTime(uint32 secs)
 {
-    ostringstream out;
+    std::ostringstream out;
     if (secs < 3600)
     {
         out << secs / 60 << " min";
@@ -288,7 +288,7 @@ string formatDateTime(uint32 secs)
 
 string GetHelloText(uint32 owner)
 {
-    ostringstream body;
+    std::ostringstream body;
     body << "Hello";
     std::string playerName;
     sObjectMgr.GetPlayerNameByGUID(ObjectGuid(HIGHGUID_PLAYER, owner), playerName);
@@ -306,7 +306,7 @@ bool GuildTaskMgr::SendItemAdvertisement(uint32 itemId, uint32 owner, uint32 gui
     if (!proto)
         return false;
 
-    ostringstream body;
+    std::ostringstream body;
     body << GetHelloText(owner);
     body << "We are in a great need of " << proto->Name1 << ". If you could sell us ";
     uint32 count = GetTaskValue(owner, guildId, "itemCount");
@@ -321,7 +321,7 @@ bool GuildTaskMgr::SendItemAdvertisement(uint32 itemId, uint32 owner, uint32 gui
     body << guild->GetName() << "\n";
     body << leader->GetName() << "\n";
 
-    ostringstream subject;
+    std::ostringstream subject;
     subject << "Guild Task: " << proto->Name1;
     if (count > 1) subject << " (x" << count << ")";
     MailDraft(subject.str(), body.str()).SendMailTo(MailReceiver(ObjectGuid(HIGHGUID_PLAYER, owner)), MailSender(leader));
@@ -361,7 +361,7 @@ bool GuildTaskMgr::SendKillAdvertisement(uint32 creatureId, uint32 owner, uint32
     } while (result->NextRow());
     delete result;
 
-    ostringstream body;
+    std::ostringstream body;
     body << GetHelloText(owner);
     body << "As you probably know " << proto->Name << " is wanted dead for the crimes it did against our guild. If you should kill it ";
     body << "we'd really appreciate that.\n\n";
@@ -373,7 +373,7 @@ bool GuildTaskMgr::SendKillAdvertisement(uint32 creatureId, uint32 owner, uint32
     body << guild->GetName() << "\n";
     body << leader->GetName() << "\n";
 
-    ostringstream subject;
+    std::ostringstream subject;
     subject << "Guild Task: ";
     if (proto->Rank == CREATURE_ELITE_ELITE || proto->Rank == CREATURE_ELITE_RAREELITE || proto->Rank == CREATURE_ELITE_WORLDBOSS)
         subject << "(Elite) ";
@@ -403,7 +403,7 @@ bool GuildTaskMgr::SendThanks(uint32 owner, uint32 guildId, uint32 payment)
         if (!proto)
             return false;
 
-        ostringstream body;
+        std::ostringstream body;
         body << GetHelloText(owner);
         body << "One of our guild members wishes to thank you for the " << proto->Name1 << "!";
         uint32 count = GetTaskValue(owner, guildId, "itemCount");
@@ -624,7 +624,7 @@ bool GuildTaskMgr::HandleConsoleCommand(ChatHandler* handler, char const* args)
                 if (!guild)
                     continue;
 
-                ostringstream name;
+                std::ostringstream name;
                 if (value == GUILD_TASK_TYPE_ITEM)
                 {
                     name << "ItemTask";
@@ -859,7 +859,7 @@ bool GuildTaskMgr::Reward(uint32 owner, uint32 guildId)
     if (!itemTask && !killTask)
         return false;
 
-    ostringstream body;
+    std::ostringstream body;
     body << GetHelloText(owner);
 
     RandomItemType rewardType;
@@ -948,7 +948,7 @@ void GuildTaskMgr::CheckKillTask(Player* player, Unit* victim)
 
 void GuildTaskMgr::SendCompletionMessage(Player* player, std::string verb)
 {
-    ostringstream out; out << player->GetName() << " has " << verb << " a guild task";
+    std::ostringstream out; out << player->GetName() << " has " << verb << " a guild task";
 
     Group* group = player->GetGroup();
     if (group)
@@ -967,7 +967,7 @@ void GuildTaskMgr::SendCompletionMessage(Player* player, std::string verb)
             ChatHandler(ai->GetMaster()->GetSession()).PSendSysMessage("%s",out.str().c_str());
     }
 
-    ostringstream self; self << "You have " << verb << " a guild task";
+    std::ostringstream self; self << "You have " << verb << " a guild task";
     ChatHandler(player->GetSession()).PSendSysMessage("%s",self.str().c_str());
 }
 
@@ -1070,7 +1070,7 @@ void GuildTaskMgr::RemoveDuplicatedAdverts()
 
 void GuildTaskMgr::DeleteMail(std::list<uint32> buffer)
 {
-    ostringstream sql;
+    std::ostringstream sql;
     sql << "delete from mail where id in ( ";
     bool first = true;
     for (std::list<uint32>::iterator j = buffer.begin(); j != buffer.end(); ++j)

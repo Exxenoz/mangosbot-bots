@@ -240,7 +240,7 @@ G3D::Vector3 WorldPosition::getVector3()
 
 string WorldPosition::print()
 {
-    ostringstream out;
+    std::ostringstream out;
     out << mapid << std::fixed << std::setprecision(2);
     out << ';'<< coord_x;
     out << ';' << coord_y;
@@ -250,7 +250,7 @@ string WorldPosition::print()
     return out.str();
 }
 
-void WorldPosition::printWKT(std::vector<WorldPosition> points, ostringstream& out, uint32 dim, bool loop)
+void WorldPosition::printWKT(std::vector<WorldPosition> points, std::ostringstream& out, uint32 dim, bool loop)
 {
     switch (dim) {
     case 0:
@@ -490,7 +490,7 @@ void WorldPosition::loadMapAndVMap(uint32 mapId, uint32 instanceId, int x, int y
 #endif
             if (sPlayerbotAIConfig.hasLog(fileName))
             {
-                ostringstream out;
+                std::ostringstream out;
                 out << sPlayerbotAIConfig.GetTimestampStr();
                 out << "+00,\"mmap\", " << x << "," << y << "," << (sTravelMgr.isBadMmap(mapId, x, y) ? "0" : "1") << ",";
                 printWKT(fromGridPair(GridPair(x, y)), out, 1, true);
@@ -539,7 +539,7 @@ void WorldPosition::loadMapAndVMap(uint32 mapId, uint32 instanceId, int x, int y
 
                 if (sPlayerbotAIConfig.hasLog(fileName))
                 {
-                    ostringstream out;
+                    std::ostringstream out;
                     out << sPlayerbotAIConfig.GetTimestampStr();
                     out << "+00,\"vmap\", " << x << "," << y << ", " << (sTravelMgr.isBadVmap(mapId, x, y) ? "0" : "1") << ",";
                     printWKT(fromGridPair(GridPair(x, y)), out, 1, true);
@@ -563,7 +563,7 @@ void WorldPosition::loadMapAndVMap(uint32 mapId, uint32 instanceId, int x, int y
 
             if (sPlayerbotAIConfig.hasLog(fileName))
             {
-                ostringstream out;
+                std::ostringstream out;
                 out << sPlayerbotAIConfig.GetTimestampStr();
                 out << "+00,\"mmap\", " << x << "," << y << "," << (sTravelMgr.isBadMmap(mapId, x, y) ? "0" : "1") << ",";
                 printWKT(frommGridPair(mGridPair(x, y)), out, 1, true);
@@ -637,7 +637,7 @@ vector<WorldPosition> WorldPosition::getPathStepFrom(WorldPosition startPos, Uni
 
     if (sPlayerbotAIConfig.hasLog("pathfind_attempt_point.csv"))
     {
-        ostringstream out;
+        std::ostringstream out;
         out << std::fixed << std::setprecision(1);
         printWKT({ startPos, *this }, out);
         sPlayerbotAIConfig.log("pathfind_attempt_point.csv", out.str().c_str());
@@ -645,7 +645,7 @@ vector<WorldPosition> WorldPosition::getPathStepFrom(WorldPosition startPos, Uni
 
     if (sPlayerbotAIConfig.hasLog("pathfind_attempt.csv") && (type == PATHFIND_INCOMPLETE || type == PATHFIND_NORMAL))
     {
-        ostringstream out;
+        std::ostringstream out;
         out << sPlayerbotAIConfig.GetTimestampStr() << "+00,";
         out << std::fixed << std::setprecision(1) << type << ",";
         printWKT(fromPointsArray(points), out, 1);
@@ -905,7 +905,7 @@ bool GuidPosition::IsEventUnspawned()
 
 string GuidPosition::print()
 {
-    ostringstream out;
+    std::ostringstream out;
     out << this;
     out << mapid << std::fixed << std::setprecision(2);
     out << ';' << coord_x;
@@ -1083,7 +1083,7 @@ bool QuestRelationTravelDestination::isActive(Player* bot) {
 }
 
 string QuestRelationTravelDestination::getTitle() {
-    ostringstream out;
+    std::ostringstream out;
 
     if (relation == 0)
         out << "questgiver";
@@ -1175,7 +1175,7 @@ bool QuestObjectiveTravelDestination::isActive(Player* bot) {
 }
 
 string QuestObjectiveTravelDestination::getTitle() {
-    ostringstream out;
+    std::ostringstream out;
 
     out << "objective " << objective;
 
@@ -1228,7 +1228,7 @@ bool RpgTravelDestination::isActive(Player* bot)
 }
 
 string RpgTravelDestination::getTitle() {
-    ostringstream out;
+    std::ostringstream out;
 
     out << "rpg npc ";
 
@@ -1295,7 +1295,7 @@ bool GrindTravelDestination::isActive(Player* bot)
 }
 
 string GrindTravelDestination::getTitle() {
-    ostringstream out;
+    std::ostringstream out;
 
     out << "grind mob ";
 
@@ -1372,7 +1372,7 @@ bool BossTravelDestination::isActive(Player* bot)
 }
 
 string BossTravelDestination::getTitle() {
-    ostringstream out;
+    std::ostringstream out;
 
     out << "boss mob ";
 
@@ -1643,7 +1643,7 @@ void TravelMgr::logEvent(PlayerbotAI* ai, std::string eventName, std::string inf
     {
         Player* bot = ai->GetBot();
 
-        ostringstream out;
+        std::ostringstream out;
         out << sPlayerbotAIConfig.GetTimestampStr() << "+00,";
         out << bot->GetName() << ",";
         out << eventName << ",";
@@ -2288,7 +2288,7 @@ void TravelMgr::LoadQuestTravelTable()
             name.erase(remove(name.begin(), name.end(), ','), name.end());
             name.erase(remove(name.begin(), name.end(), '\"'), name.end());
 
-            ostringstream out;
+            std::ostringstream out;
             out << name << ",";
             point.printWKT(out);
             out << cInfo->MaxLevel << ",";
@@ -2340,7 +2340,7 @@ void TravelMgr::LoadQuestTravelTable()
                 pos.push_back(WorldPosition(mapId, topNorthSouthLimit[i], topNorthSouthLimit[i + 1], 0));
             }
 
-            ostringstream out;
+            std::ostringstream out;
             out << "topNorthSouthLimit" << ",";
             WorldPosition().printWKT(pos,out,1);
             out << std::fixed;
@@ -2731,7 +2731,7 @@ void TravelMgr::LoadQuestTravelTable()
             name.erase(remove(name.begin(), name.end(), ','), name.end());
             name.erase(remove(name.begin(), name.end(), '\"'), name.end());
 
-            ostringstream out;
+            std::ostringstream out;
             out << name << ",";
             point.printWKT(out);
             out << data->type << ",";
@@ -2769,7 +2769,7 @@ void TravelMgr::LoadQuestTravelTable()
 
             std::vector<WorldPosition> points = loc.second;;
            
-            ostringstream out; 
+            std::ostringstream out; 
 
             WorldPosition pos = WorldPosition(points, WP_MEAN_CENTROID);
 
@@ -2820,7 +2820,7 @@ void TravelMgr::LoadQuestTravelTable()
 
             for (auto dest : printQuestMap)
             {
-                ostringstream out;
+                std::ostringstream out;
 
                 out << std::fixed << std::setprecision(2);
                 out << to_string(dest.first) << ",";
@@ -2909,7 +2909,7 @@ void TravelMgr::LoadQuestTravelTable()
 #endif
 
         //Use randombot 0.
-        ostringstream cout; cout << sPlayerbotAIConfig.randomBotAccountPrefix << 0;
+        std::ostringstream cout; cout << sPlayerbotAIConfig.randomBotAccountPrefix << 0;
         std::string accountName = cout.str();
 
         QueryResult* results = LoginDatabase.PQuery("SELECT id FROM account where username = '%s'", accountName.c_str());
@@ -2930,7 +2930,7 @@ void TravelMgr::LoadQuestTravelTable()
 
             std::unordered_map<std::string, std::vector<std::pair<std::pair<uint32, uint32>, uint32>>> actions;
 
-            ostringstream out;
+            std::ostringstream out;
 
             for (uint8 race = RACE_HUMAN; race < MAX_RACES; race++)
             {
@@ -2969,7 +2969,7 @@ void TravelMgr::LoadQuestTravelTable()
                                 {
                                     player->SetLevel(lvl);
 
-                                    ostringstream tout;
+                                    std::ostringstream tout;
                                     newSpec.ApplyTalents(player, &tout);
 
                                     PlayerbotAI* ai = new PlayerbotAI(player);
@@ -3007,7 +3007,7 @@ void TravelMgr::LoadQuestTravelTable()
                                             {
                                                 NextAction* nextAction = strat->getDefaultActions()[i];
 
-                                                ostringstream aout;
+                                                std::ostringstream aout;
 
                                                 aout << nextAction->getRelevance() << "," << nextAction->getName() << ",,S:" << stratName;
 
@@ -3041,7 +3041,7 @@ void TravelMgr::LoadQuestTravelTable()
                                                     NextAction* nextAction = nextActions[i];
                                                     //out << " A:" << nextAction->getName() << "(" << nextAction->getRelevance() << ")";
 
-                                                    ostringstream aout;
+                                                    std::ostringstream aout;
 
                                                     aout << nextAction->getRelevance() << "," << nextAction->getName() << "," << triggerNode->getName() << "," << stratName;
 
@@ -3214,7 +3214,7 @@ void TravelMgr::LoadQuestTravelTable()
                 WorldPosition  npos = WorldPosition(pos->getMapId(), nx, ny, nz, 0.0);
                 uint32 area = path.getArea(npos.getMapId(), npos.getX(), npos.getY(), npos.getZ());
 
-                ostringstream out;
+                std::ostringstream out;
                 out << std::fixed << area << "," << npos.getDisplayX() << "," << npos.getDisplayY();
                 sPlayerbotAIConfig.log(7, out.str().c_str());
             }
@@ -3232,7 +3232,7 @@ void TravelMgr::LoadQuestTravelTable()
     {
         for (auto j : i.second->getPoints())
         {
-            ostringstream out;
+            std::ostringstream out;
             std::string name = i.second->getTitle();
             name.erase(remove(name.begin(), name.end(), '\"'), name.end());
             out << std::fixed << std::setprecision(2) << name.c_str() << "," << i.first << "," << j->getDisplayX() << "," << j->getDisplayY() << "," << j->getX() << "," << j->getY() << "," << j->getZ();
@@ -3746,7 +3746,7 @@ void TravelMgr::printGrid(uint32 mapId, int x, int y, std::string type)
     {
         WorldPosition p = WorldPosition(mapId, 0, 0, 0, 0);
 
-        ostringstream out;
+        std::ostringstream out;
         out << sPlayerbotAIConfig.GetTimestampStr();
         out << "+00, " << 0 << 0 << x << "," << y << ", " << type << ",";
         p.printWKT(p.fromGridPair(GridPair(x, y)), out, 1, true);
@@ -3769,7 +3769,7 @@ void TravelMgr::printObj(WorldObject* obj, std::string type)
         vgrid = p.gridFromCellPair(p.getCellPair());
 
         {
-            ostringstream out;
+            std::ostringstream out;
             out << sPlayerbotAIConfig.GetTimestampStr();
             out << "+00, " << obj->GetObjectGuid().GetEntry() << "," << obj->GetObjectGuid().GetCounter() << "," << cell.GridX() << "," << cell.GridY() << ", " << type << ",";
 
@@ -3778,7 +3778,7 @@ void TravelMgr::printObj(WorldObject* obj, std::string type)
         }
 
         {
-            ostringstream out;
+            std::ostringstream out;
             out << sPlayerbotAIConfig.GetTimestampStr();
             out << "+00, " << obj->GetObjectGuid().GetEntry() << "," << obj->GetObjectGuid().GetCounter() << "," << cell.GridX() << "," << cell.GridY() << ", " << type << ",";
 
@@ -3796,7 +3796,7 @@ void TravelMgr::printObj(WorldObject* obj, std::string type)
         Cell const& cell = obj->GetCurrentCell();
 
         {
-            ostringstream out;
+            std::ostringstream out;
             out << sPlayerbotAIConfig.GetTimestampStr();
             out << "+00, " << obj->GetObjectGuid().GetEntry() << "," << obj->GetObjectGuid().GetCounter() << "," << cell.GridX() << "," << cell.GridY() << ", " << type << ",";
 

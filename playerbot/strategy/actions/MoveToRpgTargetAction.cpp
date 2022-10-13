@@ -177,14 +177,14 @@ bool MoveToRpgTargetAction::Execute(Event event)
     {
         if (couldMove)
         {
-            ostringstream out;
+            std::ostringstream out;
             out << "Heading to: ";
             out << chat->formatWorldobject(guidP.GetWorldObject());
             ai->TellMasterNoFacing(out);
         }
         else
         {
-            ostringstream out;
+            std::ostringstream out;
             out << "Near: ";
             out << chat->formatWorldobject(guidP.GetWorldObject());
             ai->TellMasterNoFacing(out);

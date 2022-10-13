@@ -113,7 +113,7 @@ uint32 QueryItemUsageAction::GetCount(ItemPrototype const *item)
 
 string QueryItemUsageAction::QueryItem(ItemPrototype const *item, uint32 count, uint32 total)
 {
-    ostringstream out;
+    std::ostringstream out;
 #ifdef CMANGOS
     std::string usage = QueryItemUsage(item);
 #endif
@@ -147,7 +147,7 @@ string QueryItemUsageAction::QueryItemUsage(ItemPrototype const *item)
 bool QueryItemUsageAction::QueryItemUsage(ItemPrototype const *item)
 #endif
 {
-    ostringstream out; out << item->ItemId;
+    std::ostringstream out; out << item->ItemId;
     ItemUsage usage = AI_VALUE2(ItemUsage, "item usage", out.str());
     switch (usage)
     {
@@ -188,7 +188,7 @@ string QueryItemUsageAction::QueryItemPrice(ItemPrototype const *item)
     if (item->Bonding == BIND_WHEN_PICKED_UP)
         return "";
 
-    ostringstream msg;
+    std::ostringstream msg;
     std::list<Item*> items = InventoryAction::parseItems(item->Name1);
     int32 sellPrice = 0;
     if (!items.empty())
@@ -203,7 +203,7 @@ string QueryItemUsageAction::QueryItemPrice(ItemPrototype const *item)
             msg << "Sell: " << chat->formatMoney(sellPrice);
     }
 
-    ostringstream out; out << item->ItemId;
+    std::ostringstream out; out << item->ItemId;
     ItemUsage usage = AI_VALUE2(ItemUsage, "item usage", out.str());
     if (usage == ITEM_USAGE_NONE)
         return msg.str();
@@ -270,7 +270,7 @@ string QueryItemUsageAction::QueryItemPower(uint32 itemId)
     if (power)
         if (proto)
         {
-            ostringstream out;
+            std::ostringstream out;
             char color[32];
             sprintf(color, "%x", ItemQualityColors[proto->Quality]);
             out << "power: |h|c" << color << "|h" << to_string(power) << "|h|cffffffff";

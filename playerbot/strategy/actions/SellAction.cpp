@@ -95,7 +95,7 @@ void SellAction::Sell(FindItemVisitor* visitor)
 
 void SellAction::Sell(Item* item)
 {
-    ostringstream out;
+    std::ostringstream out;
     std::list<ObjectGuid> vendors = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest npcs")->Get();
 
     for (std::list<ObjectGuid>::iterator i = vendors.begin(); i != vendors.end(); ++i)

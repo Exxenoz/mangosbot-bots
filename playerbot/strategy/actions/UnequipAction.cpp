@@ -57,7 +57,7 @@ void UnequipAction::UnequipItem(Item& item)
     packet << bagIndex << slot << dstBag;
     bot->GetSession()->HandleAutoStoreBagItemOpcode(packet);
 
-    ostringstream out; out << chat->formatItem(item.GetProto()) << " unequipped";
+    std::ostringstream out; out << chat->formatItem(item.GetProto()) << " unequipped";
     ai->TellMaster(out, PLAYERBOT_SECURITY_ALLOW_ALL, false);
 }
 

@@ -68,7 +68,7 @@ bool RewardAction::Reward(uint32 itemId, Object* questGiver)
                     std::string questTitle  = pQuest->GetTitle();
                     std::string itemName = pRewardItem->Name1;
 
-                    ostringstream out; out << chat->formatItem(pRewardItem) << " rewarded";
+                    std::ostringstream out; out << chat->formatItem(pRewardItem) << " rewarded";
                     ai->TellMaster(out);
 
                     return true;

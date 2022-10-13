@@ -19,7 +19,7 @@ using namespace MaNGOS;
 //TravelNodePath(float distance = 0.1f, float extraCost = 0, TravelNodePathType pathType = TravelNodePathType::walk, uint64 pathObject = 0, bool calculated = false, std::vector<uint8> maxLevelCreature = { 0,0,0 }, float swimDistance = 0)
 string TravelNodePath::print()
 {
-    ostringstream out;
+    std::ostringstream out;
     out << std::fixed << std::setprecision(1);
     out << distance << "f,";
     out << extraCost << "f,";
@@ -438,7 +438,7 @@ bool TravelNode::cropUselessLinks()
 
             if (sPlayerbotAIConfig.hasLog("crop.csv"))
             {
-                ostringstream out;
+                std::ostringstream out;
                 out << getName() << ",";
                 out << farNode->getName() << ",";
                 WorldPosition().printWKT({ *getPosition(),*farNode->getPosition() },out,1);
@@ -454,7 +454,7 @@ bool TravelNode::cropUselessLinks()
 
             if (sPlayerbotAIConfig.hasLog("crop.csv"))
             {
-                ostringstream out;
+                std::ostringstream out;
                 out << getName() << ",";
                 out << farNode->getName() << ",";
                 WorldPosition().printWKT({ *getPosition(),*farNode->getPosition() }, out,1);
@@ -605,7 +605,7 @@ void TravelNode::print(bool printFailed)
 
     uint32 mapSize = getNodeMap(true).size();
 
-    ostringstream out;
+    std::ostringstream out;
     std::string name = getName();
     name.erase(remove(name.begin(), name.end(), '\"'), name.end());
     out << name.c_str() << ",";
@@ -643,7 +643,7 @@ void TravelNode::print(bool printFailed)
 
         if (ppath.size() > 1)
         {
-            ostringstream out;
+            std::ostringstream out;
 
             uint32 pathType = 1;
             if (!hasLinkTo(endNode))
@@ -902,7 +902,7 @@ WorldPosition TravelPath::getNextPoint(WorldPosition startPos, float maxDist, Tr
 
 ostringstream TravelPath::print()
 {
-    ostringstream out;
+    std::ostringstream out;
 
     out << sPlayerbotAIConfig.GetTimestampStr();
     out << "+00," << "1,";
@@ -1018,7 +1018,7 @@ TravelPath TravelNodeRoute::buildPath(std::vector<WorldPosition> pathToStart, st
 
 ostringstream TravelNodeRoute::print()
 {
-    ostringstream out;
+    std::ostringstream out;
 
     out << sPlayerbotAIConfig.GetTimestampStr();
     out << "+00" << ",0," << "\"LINESTRING(";
@@ -2235,7 +2235,7 @@ void TravelNodeMap::printNodeStore()
     {
         TravelNode* node = anodes[i];
 
-        ostringstream out;
+        std::ostringstream out;
 
         std::string name = node->getName();
         name.erase(remove(name.begin(), name.end(), '\"'), name.end());
@@ -2267,7 +2267,7 @@ void TravelNodeMap::printNodeStore()
 
         for (auto& Link : *node->getLinks())
         {
-            ostringstream out;
+            std::ostringstream out;
 
             //        struct linkNode { uint32 node1; uint32 node2; float distance; float extraCost; bool isPortal; bool isTransport; uint32 maxLevelMob; uint32 maxLevelAlliance; uint32 maxLevelHorde; float swimDistance; };
 

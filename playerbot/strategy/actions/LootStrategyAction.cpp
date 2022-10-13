@@ -18,14 +18,14 @@ bool LootStrategyAction::Execute(Event event)
     if (strategy == "?")
     {
         {
-            ostringstream out;
+            std::ostringstream out;
             out << "Loot strategy: ";
             out << lootStrategy->Get()->GetName();
             ai->TellMaster(out);
         }
 
         {
-            ostringstream out;
+            std::ostringstream out;
             out << "Always loot items: ";
 
             for (std::set<uint32>::iterator i = alwaysLootItems.begin(); i != alwaysLootItems.end(); i++)
@@ -46,7 +46,7 @@ bool LootStrategyAction::Execute(Event event)
         if (items.size() == 0)
         {
             lootStrategy->Set(LootStrategyValue::instance(strategy));
-            ostringstream out;
+            std::ostringstream out;
             out << "Loot strategy set to " << lootStrategy->Get()->GetName();
             ai->TellMaster(out);
             return true;
@@ -62,7 +62,7 @@ bool LootStrategyAction::Execute(Event event)
                 ItemPrototype const *proto = sObjectMgr.GetItemPrototype(itemid);
                 if (proto)
                 {
-                    ostringstream out;
+                    std::ostringstream out;
                     out << (StoreLootAction::IsLootAllowed(itemid, ai) ? "|cFF000000Will loot " : "|c00FF0000Won't loot ") << ChatHelper::formatItem(proto);
                     ai->TellMaster(out.str());
                 }

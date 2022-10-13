@@ -33,7 +33,7 @@ bool SkipSpellsListAction::Execute(Event event)
 
     if (cmd.empty() || cmd == "?")
     {
-        ostringstream out;
+        std::ostringstream out;
         if (skipSpells.empty())
         {
             ai->TellMaster("Ignored spell list is empty");
@@ -77,7 +77,7 @@ bool SkipSpellsListAction::Execute(Event event)
             if (j != skipSpells.end())
             {
                 skipSpells.erase(j);
-                ostringstream out;
+                std::ostringstream out;
                 out << chat->formatSpell(spell) << " removed from ignored spells";
                 ai->TellMaster(out);
                 return true;
@@ -89,7 +89,7 @@ bool SkipSpellsListAction::Execute(Event event)
             if (j == skipSpells.end())
             {
                 skipSpells.insert(spellId);
-                ostringstream out;
+                std::ostringstream out;
                 out << chat->formatSpell(spell) << " added to ignored spells";
                 ai->TellMaster(out);
                 return true;

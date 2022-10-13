@@ -24,7 +24,7 @@ bool RangeAction::Execute(Event event)
     if (value == "?")
     {
         float curVal = AI_VALUE2(float, "range", qualifier);
-        ostringstream out;
+        std::ostringstream out;
         out << qualifier << " range: ";
         if (abs(curVal) >= 0.1f) out << curVal;
         else out << ai->GetRange(qualifier) << " (default)";
@@ -35,7 +35,7 @@ bool RangeAction::Execute(Event event)
 
     float newVal = (float) atof(value.c_str());
     context->GetValue<float>("range", qualifier)->Set(newVal);
-    ostringstream out;
+    std::ostringstream out;
     out << qualifier << " range set to: " << newVal;
     ai->TellMaster(out.str());
     return true;
@@ -45,7 +45,7 @@ void RangeAction::PrintRange(std::string type)
 {
     float curVal = AI_VALUE2(float, "range", type);
 
-    ostringstream out;
+    std::ostringstream out;
     out << type << " range: ";
     if (abs(curVal) >= 0.1f) out << curVal;
     else out << ai->GetRange(type) << " (default)";

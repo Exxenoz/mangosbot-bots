@@ -29,7 +29,7 @@ bool DebugAction::Execute(Event event)
             const uint32 zoneId = sTerrainMgr.GetZoneId(pos.getMapId(), pos.getX(), pos.getY(), pos.getZ());
             const uint32 areaId = sTerrainMgr.GetAreaId(pos.getMapId(), pos.getX(), pos.getY(), pos.getZ());
 
-            ostringstream out;
+            std::ostringstream out;
             out << zoneId << "," << areaId << "," << pos.getAreaFlag() << "," << (pos.getAreaName().empty() ? "none" : pos.getAreaName()) << ",";
 
             pos.printWKT(out);
@@ -110,7 +110,7 @@ bool DebugAction::Execute(Event event)
     }
     else if (text.find("npc") != std::string::npos)
     {
-        ostringstream out;
+        std::ostringstream out;
 
         GuidPosition guidP = ai->GetMaster()->GetSelectionGuid();
 
@@ -224,7 +224,7 @@ bool DebugAction::Execute(Event event)
         
         if (guidP.GetUnit())
         {
-            ostringstream out;
+            std::ostringstream out;
             out << "unit to bot:" << reaction[guidP.GetUnit()->GetReactionTo(bot)];
 
             Unit* ubot = bot;
@@ -260,7 +260,7 @@ bool DebugAction::Execute(Event event)
             std::vector<WorldPosition> beginPath, endPath;
             TravelNodeRoute route = sTravelNodeMap.getRoute(botPos, *points.front(), beginPath, bot);
 
-            ostringstream out; out << "Traveling to " << dest->getTitle() << ": ";
+            std::ostringstream out; out << "Traveling to " << dest->getTitle() << ": ";
 
             for (auto node : route.getNodes())
             {
@@ -290,7 +290,7 @@ bool DebugAction::Execute(Event event)
             return false;
         }
 
-        ostringstream out;
+        std::ostringstream out;
 
         out << quest->GetTitle() << ": ";
 
@@ -307,7 +307,7 @@ bool DebugAction::Execute(Event event)
 
         for (auto g : dests)
         {
-            ostringstream out;
+            std::ostringstream out;
 
             if (g->isActive(bot))
                 out << "(ACTIVE)";
@@ -341,7 +341,7 @@ bool DebugAction::Execute(Event event)
 
             for (auto g : dests)
             {
-                ostringstream out;
+                std::ostringstream out;
 
                 if (g->isActive(bot))
                     out << "(ACTIVE)";
@@ -373,7 +373,7 @@ bool DebugAction::Execute(Event event)
 
         for (auto g : dests)
         {
-            ostringstream out;
+            std::ostringstream out;
 
             if (g->isActive(bot))
                 out << "(ACTIVE)";
@@ -394,7 +394,7 @@ bool DebugAction::Execute(Event event)
     }
     else if (text.find("quest") != std::string::npos)
     {
-        ostringstream out;
+        std::ostringstream out;
         out << sTravelMgr.quests.size() << " quests ";
 
         uint32 noT = 0, noG = 0, noO = 0;
@@ -419,7 +419,7 @@ bool DebugAction::Execute(Event event)
     }
     else if (text.find("bquest") != std::string::npos)
     {
-        ostringstream out;
+        std::ostringstream out;
         out << "bad quests:";
 
         uint32 noT = 0, noG = 0, noO = 0;
@@ -457,7 +457,7 @@ bool DebugAction::Execute(Event event)
     }
     else if (text.find("loot ") != std::string::npos)
     {
-        ostringstream out;
+        std::ostringstream out;
         for (auto itemId : chat->parseItems(text.substr(5)))
         {
             std::list<int32> entries = GAI_VALUE2(std::list<int32>, "item drop list", itemId);
@@ -539,7 +539,7 @@ bool DebugAction::Execute(Event event)
     }
     else if (text.find("drops ") != std::string::npos)
     {
-    ostringstream out;
+    std::ostringstream out;
     for (auto entry : chat->parseWorldEntries(text.substr(6)))
     {
         std::list<uint32> itemIds = GAI_VALUE2(std::list<uint32>, "entry loot list", entry);
@@ -865,7 +865,7 @@ bool DebugAction::Execute(Event event)
 
                 if (wpCreature)
                 {
-                    ostringstream out;
+                    std::ostringstream out;
                     out << "effect ";
                     out << effect;
 

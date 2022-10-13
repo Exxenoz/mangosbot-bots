@@ -60,7 +60,7 @@ bool AttackAction::Attack(Unit* target)
         return false;
     }
 
-    ostringstream msg;
+    std::ostringstream msg;
     msg << target->GetName();
     if (sServerFacade.IsFriendlyTo(bot, target))
     {

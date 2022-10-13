@@ -212,6 +212,6 @@ void InAuctionItemsBag::Load()
 
 string InAuctionItemsBag::GetName()
 {
-    ostringstream out; out << "auction house " << auctionId;
+    std::ostringstream out; out << "auction house " << auctionId;
     return out.str();
 }

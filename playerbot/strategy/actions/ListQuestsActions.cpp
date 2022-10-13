@@ -89,7 +89,7 @@ int ListQuestsAction::ListQuests(bool completed, bool silent, QuestTravelDetail 
 
                 if (QuestDestination->GetQuestTemplate()->GetQuestId() == questId)
                 {
-                    ostringstream out;
+                    std::ostringstream out;
 
                     out << "[Active] traveling " << target->getPosition()->distance(botPos);
 
@@ -119,7 +119,7 @@ int ListQuestsAction::ListQuests(bool completed, bool silent, QuestTravelDetail 
             for (auto dest : availDestinations)
                 apoints += dest->getPoints().size();
 
-            ostringstream out;
+            std::ostringstream out;
 
             out << desAvail << "/" << desTot << " destinations " << apoints << "/" << tpoints << " points. ";
             if (desFull > 0)
@@ -140,7 +140,7 @@ int ListQuestsAction::ListQuests(bool completed, bool silent, QuestTravelDetail 
                     if (limit > 5)
                         continue;
 
-                    ostringstream out;
+                    std::ostringstream out;
 
                     uint32 tpoints = dest->getPoints(true).size();
                     uint32 apoints = dest->getPoints().size();
