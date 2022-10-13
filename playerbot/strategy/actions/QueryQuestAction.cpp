@@ -1,7 +1,7 @@
 #include "botpch.h"
 #include "../../playerbot.h"
 #include "QueryQuestAction.h"
-#include "../../Travelmgr.h"
+#include "../../TravelMgr.h"
 
 
 using namespace ai;
