@@ -26,7 +26,7 @@
 #include "MotionGenerators/TargetedMovementGenerator.h"
 #include "BattleGround.h"
 #include "BattleGroundMgr.h"
-#include "BattlegroundJoinAction.h"
+#include "BattleGroundJoinAction.h"
 #ifndef MANGOSBOT_ZERO
 #ifdef CMANGOS
 #include "Arena/ArenaTeam.h"
