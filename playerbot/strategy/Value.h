@@ -124,7 +124,7 @@ namespace ai
     {
     public:
         LogCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) : MemoryCalculatedValue<T>(ai, name, checkInterval) {};
-        virtual bool UpdateChange() { if (MemoryCalculatedValue::UpdateChange()) return false; valueLog.push_back(make_pair(value, time(0))); if (valueLog.size() > logLength) valueLog.pop_front(); return true; }
+        virtual bool UpdateChange() { if (MemoryCalculatedValue<T>::UpdateChange()) return false; valueLog.push_back(make_pair(MemoryCalculatedValue<T>::value, time(0))); if (valueLog.size() > logLength) valueLog.pop_front(); return true; }
 
         list<pair<T, time_t>> ValueLog() { return valueLog; }
 
