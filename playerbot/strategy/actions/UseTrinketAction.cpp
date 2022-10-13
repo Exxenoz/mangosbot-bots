@@ -1,6 +1,9 @@
 #include "botpch.h"
 #include "../../playerbot.h"
 #include "UseTrinketAction.h"
+#include "Item.h"
+#include "ItemPrototype.h"
+#include "Player.h"
 
 using namespace ai;
 
