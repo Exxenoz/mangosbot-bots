@@ -14,7 +14,7 @@ bool UseTrinketAction::Execute(Event event)
 	if (trinkets.empty())
 		return false;
 
-	for each (Item * item in trinkets)
+	for (Item * item : trinkets)
 	{
 		ItemPrototype const* proto = item->GetProto();
 
