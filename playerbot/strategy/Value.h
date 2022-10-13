@@ -74,7 +74,12 @@ namespace ai
 
     template <class T> class SingleCalculatedValue : public CalculatedValue<T>
     {
+        using CalculatedValue<T>::Calculate;
+        using CalculatedValue<T>::context;
+        using CalculatedValue<T>::getName;
+        using CalculatedValue<T>::lastCheckTime;
         using CalculatedValue<T>::Reset;
+        using CalculatedValue<T>::value;
     public:
         SingleCalculatedValue(PlayerbotAI* ai, string name = "value") : CalculatedValue<T>(ai, name) { Reset(); }
 
@@ -95,6 +100,7 @@ namespace ai
     
     template<class T> class MemoryCalculatedValue : public CalculatedValue<T>
     {
+        using CalculatedValue<T>::value;
     public:
         MemoryCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) : CalculatedValue<T>(ai, name,checkInterval) { lastChangeTime = time(0); }
         virtual bool EqualToLast(T value) = 0;
@@ -107,7 +113,7 @@ namespace ai
         time_t LastChangeOn() {Get(); UpdateChange(); return lastChangeTime;}
         uint32 LastChangeDelay() { return time(0) - LastChangeOn(); }
 
-        virtual void Reset() { CalculatedValue::Reset(); lastChangeTime = time(0); }
+        virtual void Reset() { CalculatedValue<T>::Reset(); lastChangeTime = time(0); }
     protected:
         T lastValue;
         uint32 minChangeInterval = 0; //Change will not be checked untill this interval has passed.
@@ -122,7 +128,7 @@ namespace ai
 
         list<pair<T, time_t>> ValueLog() { return valueLog; }
 
-        virtual void Reset() { MemoryCalculatedValue::Reset(); valueLog.clear(); }
+        virtual void Reset() { MemoryCalculatedValue<T>::Reset(); valueLog.clear(); }
     protected:
         list<pair<T, time_t>> valueLog;
         uint8 logLength = 10; //Maxium number of values recorded.
@@ -136,7 +142,7 @@ namespace ai
 
         virtual string Format()
         {
-            ostringstream out; out << (int)Calculate();
+            ostringstream out; out << (int)CalculatedValue<uint8>::Calculate();
             return out.str();
         }
     };
@@ -149,7 +155,7 @@ namespace ai
 
         virtual string Format()
         {
-            ostringstream out; out << (int)Calculate();
+            ostringstream out; out << (int)CalculatedValue<uint32>::Calculate();
             return out.str();
         }
     };
@@ -162,7 +168,7 @@ namespace ai
 
         virtual string Format()
         {
-            ostringstream out; out << Calculate();
+            ostringstream out; out << CalculatedValue<float>::Calculate();
             return out.str();
         }
     };
@@ -175,7 +181,7 @@ namespace ai
 
         virtual string Format()
         {
-            return Calculate() ? "true" : "false";
+            return CalculatedValue<bool>::Calculate() ? "true" : "false";
         }
     };
 
@@ -183,11 +189,11 @@ namespace ai
     {
     public:
         UnitCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
-            CalculatedValue<Unit*>(ai, name, checkInterval) { lastCheckTime = time(0) - checkInterval / 2; }
+            CalculatedValue<Unit*>(ai, name, checkInterval) { CalculatedValue<Unit*>::lastCheckTime = time(0) - checkInterval / 2; }
 
         virtual string Format()
         {
-            Unit* unit = Calculate();
+            Unit* unit = CalculatedValue<Unit*>::Calculate();
             return unit ? unit->GetName() : "<none>";
         }
     };
@@ -196,11 +202,11 @@ namespace ai
     {
     public:
         CDPairCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
-            CalculatedValue<CreatureDataPair const*>(ai, name, checkInterval) { lastCheckTime = time(0) - checkInterval / 2; }
+            CalculatedValue<CreatureDataPair const*>(ai, name, checkInterval) { CalculatedValue<CreatureDataPair const*>::lastCheckTime = time(0) - checkInterval / 2; }
 
         virtual string Format()
         {
-            CreatureDataPair const* creatureDataPair = Calculate();
+            CreatureDataPair const* creatureDataPair = CalculatedValue<CreatureDataPair const*>::Calculate();
             CreatureInfo const* bmTemplate = ObjectMgr::GetCreatureTemplate(creatureDataPair->second.id);
             return creatureDataPair ? bmTemplate->Name : "<none>";
         }
@@ -210,12 +216,12 @@ namespace ai
     {
     public:
         CDPairListCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
-            CalculatedValue<list<CreatureDataPair const*>>(ai, name, checkInterval) { lastCheckTime = time(0) - checkInterval / 2; }
+            CalculatedValue<list<CreatureDataPair const*>>(ai, name, checkInterval) { CalculatedValue<list<CreatureDataPair const*>>::lastCheckTime = time(0) - checkInterval / 2; }
 
         virtual string Format()
         {
             ostringstream out; out << "{";
-            list<CreatureDataPair const*> cdPairs = Calculate();
+            list<CreatureDataPair const*> cdPairs = CalculatedValue<list<CreatureDataPair const*>>::Calculate();
             for (list<CreatureDataPair const*>::iterator i = cdPairs.begin(); i != cdPairs.end(); ++i)
             {
                 CreatureDataPair const* cdPair = *i;
@@ -230,11 +236,11 @@ namespace ai
     {
     public:
         ObjectGuidCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
-            CalculatedValue<ObjectGuid>(ai, name, checkInterval) { lastCheckTime = time(0) - checkInterval / 2; }
+            CalculatedValue<ObjectGuid>(ai, name, checkInterval) { CalculatedValue<ObjectGuid>::lastCheckTime = time(0) - checkInterval / 2; }
 
         virtual string Format()
         {
-            ObjectGuid guid = Calculate();
+            ObjectGuid guid = CalculatedValue<ObjectGuid>::Calculate();
             return guid ? to_string(guid.GetRawValue()) : "<none>";
         }
     };
@@ -243,12 +249,12 @@ namespace ai
     {
     public:
         ObjectGuidListCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
-            CalculatedValue<list<ObjectGuid> >(ai, name, checkInterval) { lastCheckTime = time(0) - checkInterval/2; }
+            CalculatedValue<list<ObjectGuid> >(ai, name, checkInterval) { CalculatedValue<list<ObjectGuid> >::lastCheckTime = time(0) - checkInterval/2; }
 
         virtual string Format()
         {
             ostringstream out; out << "{";
-            list<ObjectGuid> guids = Calculate();
+            list<ObjectGuid> guids = CalculatedValue<list<ObjectGuid> >::Calculate();
             for (list<ObjectGuid>::iterator i = guids.begin(); i != guids.end(); ++i)
             {
                 ObjectGuid guid = *i;
