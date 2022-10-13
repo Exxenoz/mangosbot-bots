@@ -10,7 +10,7 @@ namespace ai
 
         virtual bool EqualToLast(WorldPosition value) { return value == lastValue; };
 
-        WorldPosition Calculate() { return CalculatedValue<WorldPosition>::value; }
+        WorldPosition Calculate() { return this->value; }
     };
 
     class RTSCSelectedValue : public ManualSetValue<bool>
@@ -29,7 +29,7 @@ namespace ai
     {
     public:
         RTSCSavedLocationValue(PlayerbotAI* ai, WorldPosition defaultvalue = WorldPosition(), string name = "RTSC saved location") : ManualSetValue<WorldPosition>(ai, defaultvalue, name) {};
-        virtual string Save() { return ManualSetValue<WorldPosition>::value.to_string(); }
-        virtual bool Load(string text) { ManualSetValue<WorldPosition>::value = WorldPosition(text); return true; }
+        virtual string Save() { return this->value.to_string(); }
+        virtual bool Load(string text) { this->value = WorldPosition(text); return true; }
     };
 }
