@@ -53,6 +53,8 @@ enum class TravelNodePathType : uint8
     teleportSpell = 5
 };
 
+using namespace ai;
+
     //A connection between two nodes. 
     class TravelNodePath
     {

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "PlayerbotAI.h"
+
 namespace ai
 {
     class PlayerbotAIAware 
