@@ -10,6 +10,7 @@
 #include "GameObject.h"
 #include "Map.h"
 #include "Object.h"
+#include "ObjectGuid.h"
 #include "ObjectMgr.h"
 #include "Player.h"
 #include "Unit.h"

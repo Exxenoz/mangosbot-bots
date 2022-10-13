@@ -3,6 +3,7 @@
 #include "MoveSplineInitArgs.h"
 #include <boost/functional/hash.hpp>
 #include "GridDefines.h"
+#include "SharedDefines.h"
 
 namespace G3D
 {
