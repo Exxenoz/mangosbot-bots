@@ -88,7 +88,7 @@ namespace ai
                 this->value = this->Calculate();
                 if (pmo) pmo->finish();
             }
-            return value;
+            return this->value;
         }
     };
     
