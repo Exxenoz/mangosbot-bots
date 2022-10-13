@@ -5,7 +5,7 @@
 #include "../../ServerFacade.h"
 #include "../values/Formations.h"
 #include "../values/PositionValue.h"
-#include "travelMgr.h"
+#include "TravelMgr.h"
 #include "MotionGenerators/PathFinder.h"
 #include "ChooseTravelTargetAction.h"
 
