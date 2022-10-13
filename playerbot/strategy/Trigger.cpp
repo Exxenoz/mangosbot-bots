@@ -2,6 +2,7 @@
 #include "../playerbot.h"
 #include "Trigger.h"
 #include "Action.h"
+#include "Unit.h"
 
 using namespace ai;
 

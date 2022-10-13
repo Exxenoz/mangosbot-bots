@@ -1,10 +1,15 @@
 #pragma once
 #include "Action.h"
 #include "Event.h"
+#include "Value.h"
 #include "../PlayerbotAIAware.h"
+
+class Unit;
 
 namespace ai
 {
+    class NextAction;
+
     class Trigger : public AiNamedObject
 	{
 	public:

@@ -1,6 +1,8 @@
 #pragma once
 #include "Action.h"
 
+class Action;
+
 namespace ai
 {
     class Multiplier : public AiNamedObject
