@@ -478,7 +478,7 @@ bool DebugAction::Execute(Event event)
                 std::string qualifier = Qualified::MultiQualify({ to_string(entry) , to_string(itemId) });
                 float chance = GAI_VALUE2(float, "loot chance", qualifier);
                 if(chance > 0)
-                    chances.push_back(make_pair(entry, chance));
+                    chances.push_back(std::make_pair(entry, chance));
             }
 
             std::sort(chances.begin(), chances.end(), [](std::pair<int32, float> i, std::pair<int32, float> j) {return i.second > j.second; });
@@ -561,7 +561,7 @@ bool DebugAction::Execute(Event event)
             float chance = GAI_VALUE2(float, "loot chance", qualifier);
             if (chance > 0 && sObjectMgr.GetItemPrototype(itemId))
             {
-                chances.push_back(make_pair(itemId, chance));
+                chances.push_back(std::make_pair(itemId, chance));
             }
         }
 

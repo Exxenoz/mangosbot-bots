@@ -2738,7 +2738,7 @@ void RandomPlayerbotMgr::PrintStats()
                 }
 
                 if (!found)
-                    questCount.push_back(make_pair(quest, 1));
+                    questCount.push_back(std::make_pair(quest, 1));
             }
         }
     }

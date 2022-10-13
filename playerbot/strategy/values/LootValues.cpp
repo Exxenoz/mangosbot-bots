@@ -74,7 +74,7 @@ DropMap* DropMapValue::Calculate()
 
 		if(lTemplateA)
 			for (LootStoreItem const& lItem : lTemplateA->Entries)
-				dropMap->insert(make_pair(lItem.itemid,sEntry));
+				dropMap->insert(std::make_pair(lItem.itemid,sEntry));
 	}
 
 	for (uint32 entry = 0; entry < sGOStorage.GetMaxEntry(); entry++)
@@ -85,7 +85,7 @@ DropMap* DropMapValue::Calculate()
 
 		if(lTemplateA)
 			for (LootStoreItem const& lItem : lTemplateA->Entries)
-				dropMap->insert(make_pair(lItem.itemid, -sEntry));
+				dropMap->insert(std::make_pair(lItem.itemid, -sEntry));
 	}
 
 	return dropMap;

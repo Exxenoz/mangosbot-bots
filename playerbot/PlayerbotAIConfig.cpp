@@ -556,7 +556,7 @@ bool PlayerbotAIConfig::openLog(std::string fileName, char const* mode)
     auto logFileIt = logFiles.find(fileName);
     if (logFileIt == logFiles.end())
     {
-        logFiles.insert(make_pair(fileName, make_pair(nullptr, false)));
+        logFiles.insert(std::make_pair(fileName, std::make_pair(nullptr, false)));
         logFileIt = logFiles.find(fileName);
     }
 

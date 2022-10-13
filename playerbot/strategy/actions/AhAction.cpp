@@ -221,7 +221,7 @@ bool AhBidAction::Execute(std::string text, Unit* auctioneer)
             power *= 1000;
             power /= cost;
 
-            auctionPowers.push_back(make_pair(auction, power));
+            auctionPowers.push_back(std::make_pair(auction, power));
         }
 
         std::sort(auctionPowers.begin(), auctionPowers.end(), [](std::pair<AuctionEntry*, uint32> i, std::pair<AuctionEntry*, uint32> j) {return i > j; });
@@ -296,7 +296,7 @@ bool AhBidAction::Execute(std::string text, Unit* auctioneer)
         power *= 1000;
         power /= cost;
 
-        auctionPowers.push_back(make_pair(auction, power));
+        auctionPowers.push_back(std::make_pair(auction, power));
     }
 
     if (auctionPowers.empty())

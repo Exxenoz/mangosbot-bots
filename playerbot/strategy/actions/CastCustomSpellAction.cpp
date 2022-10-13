@@ -199,11 +199,11 @@ bool CastRandomSpellAction::Execute(Event event)
             uint32 spellPriority = GetSpellPriority(pSpellInfo);
 
             if (target && ai->CanCastSpell(spellId, target, true))
-                spellList.push_back(make_pair(spellId,make_pair(spellPriority, target)));
+                spellList.push_back(std::make_pair(spellId,std::make_pair(spellPriority, target)));
             if (got && ai->CanCastSpell(spellId, got->GetPositionX(), got->GetPositionY(), got->GetPositionZ(), true))
-                spellList.push_back(make_pair(spellId, make_pair(spellPriority, got)));
+                spellList.push_back(std::make_pair(spellId, std::make_pair(spellPriority, got)));
             if (ai->CanCastSpell(spellId, bot, true))
-                spellList.push_back(make_pair(spellId, make_pair(spellPriority, bot)));
+                spellList.push_back(std::make_pair(spellId, std::make_pair(spellPriority, bot)));
         }
     }
 

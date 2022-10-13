@@ -182,7 +182,7 @@ namespace ai
         std::vector<WorldPosition> gridFromCellPair(CellPair cellPair);
 
         mGridPair getmGridPair() {
-            return make_pair((int)(32 - getX() / SIZE_OF_GRIDS), (int)(32 - getY() / SIZE_OF_GRIDS)); }
+            return std::make_pair((int)(32 - getX() / SIZE_OF_GRIDS), (int)(32 - getY() / SIZE_OF_GRIDS)); }
 
         std::vector<mGridPair> getmGridPairs(WorldPosition secondPos);
         std::vector<WorldPosition> frommGridPair(mGridPair gridPair);
@@ -365,10 +365,10 @@ namespace ai
     }
 
     template<class T>
-    std::list<std::pair<T, WorldPosition>> GetPosList(std::list<T> oList) { std::list<std::pair<T, WorldPosition>> retList; for (auto& obj : oList) retList.push_back(make_pair(obj, WorldPosition(obj))); return retList; };
+    std::list<std::pair<T, WorldPosition>> GetPosList(std::list<T> oList) { std::list<std::pair<T, WorldPosition>> retList; for (auto& obj : oList) retList.push_back(std::make_pair(obj, WorldPosition(obj))); return retList; };
 
     template<class T>
-    std::vector<std::pair<T, WorldPosition>> GetPosVector(std::vector<T> oList) { std::vector<std::pair<T, WorldPosition>> retList; for (auto& obj : oList) retList.push_back(make_pair(obj, WorldPosition(obj))); return retList; };
+    std::vector<std::pair<T, WorldPosition>> GetPosVector(std::vector<T> oList) { std::vector<std::pair<T, WorldPosition>> retList; for (auto& obj : oList) retList.push_back(std::make_pair(obj, WorldPosition(obj))); return retList; };
 
     class mapTransfer
     {

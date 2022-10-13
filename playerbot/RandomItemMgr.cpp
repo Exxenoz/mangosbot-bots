@@ -1027,7 +1027,7 @@ void RandomItemMgr::BuildItemInfoCache()
 
         if (lTemplateA)
             for (LootStoreItem const& lItem : lTemplateA->Entries)
-                dropMap->insert(make_pair(lItem.itemid, sEntry));
+                dropMap->insert(std::make_pair(lItem.itemid, sEntry));
     }
 
     for (uint32 entry = 0; entry < sGOStorage.GetMaxEntry(); entry++)
@@ -1038,7 +1038,7 @@ void RandomItemMgr::BuildItemInfoCache()
 
         if (lTemplateA)
             for (LootStoreItem const& lItem : lTemplateA->Entries)
-                dropMap->insert(make_pair(lItem.itemid, -sEntry));
+                dropMap->insert(std::make_pair(lItem.itemid, -sEntry));
     }
 
     sLog.outString("Loaded %d loot templates...", dropMap->size());

@@ -60,11 +60,11 @@ void TravelNodePath::calculateCost(bool distanceOnly)
                     FactionTemplateEntry const* factionEntry = sFactionTemplateStore.LookupEntry(cInfo->Faction);
 
                     if (aReact.find(factionEntry) == aReact.end())
-                        aReact.insert(make_pair(factionEntry, PlayerbotAI::friendToAlliance(factionEntry)));
+                        aReact.insert(std::make_pair(factionEntry, PlayerbotAI::friendToAlliance(factionEntry)));
                     aFriend = aReact.find(factionEntry)->second;
 
                     if (hReact.find(factionEntry) == hReact.end())
-                        hReact.insert(make_pair(factionEntry, PlayerbotAI::friendToHorde(factionEntry)));
+                        hReact.insert(std::make_pair(factionEntry, PlayerbotAI::friendToHorde(factionEntry)));
                     hFriend = hReact.find(factionEntry)->second;
 
                     if (maxLevelCreature[0] < cInfo->MaxLevel && !aFriend && !hFriend)
@@ -495,7 +495,7 @@ bool TravelNode::cropUselessLinks()
                     if (secondNode->hasLinkTo(this) && !firstNode->hasLinkTo(this))
                         continue;
 
-                    toRemove.push_back(make_pair(this, secondNode));
+                    toRemove.push_back(std::make_pair(this, secondNode));
                 }
             }
             else
@@ -514,7 +514,7 @@ bool TravelNode::cropUselessLinks()
                     if (secondNode->hasLinkTo(this) && !firstNode->hasLinkTo(this))
                         continue;
 
-                    toRemove.push_back(make_pair(this, secondNode));
+                    toRemove.push_back(std::make_pair(this, secondNode));
                 }
             }
         }
@@ -543,7 +543,7 @@ bool TravelNode::cropUselessLinks()
                         if (secondNode->hasLinkTo(this) && !firstNode->hasLinkTo(this))
                             continue;
 
-                        toRemove.push_back(make_pair(this, secondNode));
+                        toRemove.push_back(std::make_pair(this, secondNode));
                     }
                 }
                 else
@@ -562,7 +562,7 @@ bool TravelNode::cropUselessLinks()
                         if (secondNode->hasLinkTo(this) && !firstNode->hasLinkTo(this))
                             continue;
 
-                        toRemove.push_back(make_pair(this, secondNode));
+                        toRemove.push_back(std::make_pair(this, secondNode));
                     }
                 }
             }
@@ -1184,7 +1184,7 @@ TravelNodeRoute TravelNodeMap::getRoute(TravelNode* start, TravelNode* goal, Pla
     //Basic A* algoritm
     std::unordered_map<TravelNode*, TravelNodeStub> m_stubs;
 
-    TravelNodeStub* startStub = &m_stubs.insert(make_pair(start, TravelNodeStub(start))).first->second;
+    TravelNodeStub* startStub = &m_stubs.insert(std::make_pair(start, TravelNodeStub(start))).first->second;
 
     TravelNodeStub* currentNode, * childNode;
 
@@ -1219,7 +1219,7 @@ TravelNodeRoute TravelNodeMap::getRoute(TravelNode* start, TravelNode* goal, Pla
                 portNode = new PortalNode(start);
                 portNode->SetPortal(start, homeNode, 8690);
 
-                childNode = &m_stubs.insert(make_pair(portNode, TravelNodeStub(portNode))).first->second;
+                childNode = &m_stubs.insert(std::make_pair(portNode, TravelNodeStub(portNode))).first->second;
 
                 childNode->m_g = std::min((uint32)0, (10- AI_VALUE(uint32, "death count")) * MINUTE);
                 childNode->m_h = childNode->dataNode->fDist(goal) / botSpeed;
@@ -1283,7 +1283,7 @@ TravelNodeRoute TravelNodeMap::getRoute(TravelNode* start, TravelNode* goal, Pla
             if (linkCost <= 0)
                 continue;
 
-            childNode = &m_stubs.insert(make_pair(linkNode, TravelNodeStub(linkNode))).first->second;
+            childNode = &m_stubs.insert(std::make_pair(linkNode, TravelNodeStub(linkNode))).first->second;
 
             g = currentNode->m_g + linkCost; // stance from start + distance between the two nodes
             if ((childNode->open || childNode->close) && childNode->m_g <= g) // n' is already in opend or closed with a lower cost g(n')
@@ -2258,7 +2258,7 @@ void TravelNodeMap::printNodeStore()
                 */
         sPlayerbotAIConfig.log(nodeStore, out.str().c_str());
 
-        saveNodes.insert(make_pair(node, i));
+        saveNodes.insert(std::make_pair(node, i));
     }
 
     for (uint32 i = 0; i < anodes.size(); i++)
@@ -2313,7 +2313,7 @@ void TravelNodeMap::saveNodeStore()
         PlayerbotDatabase.PExecute("INSERT INTO `ai_playerbot_travelnode` (`id`, `name`, `map_id`, `x`, `y`, `z`, `linked`) VALUES ('%lu', '%s', '%d', '%f', '%f', '%f', '%d%')"
             , i, name.c_str(), node->getMapId(), node->getX(), node->getY(), node->getZ(), (node->isLinked() ? 1 : 0));
 
-        saveNodes.insert(make_pair(node, i));
+        saveNodes.insert(std::make_pair(node, i));
 
         bar.step();
     }
@@ -2395,7 +2395,7 @@ void TravelNodeMap::loadNodeStore()
                 else
                     hasToGen = true;
 
-                saveNodes.insert(make_pair(fields[0].GetUInt32(), node));
+                saveNodes.insert(std::make_pair(fields[0].GetUInt32(), node));
 
             } while (result->NextRow());
 
@@ -2495,10 +2495,10 @@ void TravelNodeMap::loadNodeStore()
 
 void TravelNodeMap::calcMapOffset()
 {
-    mapOffsets.push_back(make_pair(0, WorldPosition(0, 0, 0, 0, 0)));
-    mapOffsets.push_back(make_pair(1, WorldPosition(1, -3680.0, 13670.0, 0, 0)));
-    mapOffsets.push_back(make_pair(530, WorldPosition(530, 15000.0, -20000.0, 0, 0)));
-    mapOffsets.push_back(make_pair(571, WorldPosition(571, 10000.0, 5000.0, 0, 0)));
+    mapOffsets.push_back(std::make_pair(0, WorldPosition(0, 0, 0, 0, 0)));
+    mapOffsets.push_back(std::make_pair(1, WorldPosition(1, -3680.0, 13670.0, 0, 0)));
+    mapOffsets.push_back(std::make_pair(530, WorldPosition(530, 15000.0, -20000.0, 0, 0)));
+    mapOffsets.push_back(std::make_pair(571, WorldPosition(571, 10000.0, 5000.0, 0, 0)));
 
     std::vector<uint32> mapIds;
 
@@ -2545,7 +2545,7 @@ void TravelNodeMap::calcMapOffset()
     //+X -> -Y
     for (auto& mapId : mapIds)
     {
-        mapOffsets.push_back(make_pair(mapId, WorldPosition(mapId, curPos.getX() - min[i].getX(), curPos.getY() - max[i].getY(), 0, 0)));
+        mapOffsets.push_back(std::make_pair(mapId, WorldPosition(mapId, curPos.getX() - min[i].getX(), curPos.getY() - max[i].getY(), 0, 0)));
 
         maxY = std::max(maxY, (max[i].getY() - min[i].getY() + 500));
         curPos.setX(curPos.getX() + (max[i].getX() - min[i].getX() + 500));

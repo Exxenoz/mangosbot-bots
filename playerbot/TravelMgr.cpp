@@ -457,7 +457,7 @@ vector<std::pair<int,int>> WorldPosition::getmGridPairs(WorldPosition secondPos)
     {
         for (int y = ly - border; y <= uy + border; y++)
         {
-            retVec.push_back(make_pair(x, y));
+            retVec.push_back(std::make_pair(x, y));
         }
     }
 
@@ -2094,7 +2094,7 @@ void TravelMgr::LoadQuestTravelTable()
 
                     for (auto& guidP : e.second)
                     {
-                        pointsMap.insert(make_pair(guidP.GetRawValue(), guidP));
+                        pointsMap.insert(std::make_pair(guidP.GetRawValue(), guidP));
 
                         for (auto tLoc : locs)
                         {
@@ -2106,7 +2106,7 @@ void TravelMgr::LoadQuestTravelTable()
 
             if (!container->questTakers.empty())
             {
-                quests.insert(make_pair(questId, container));
+                quests.insert(std::make_pair(questId, container));
 
                 for (auto loc : container->questGivers)
                     questGivers.push_back(loc);
@@ -2817,13 +2817,13 @@ void TravelMgr::LoadQuestTravelTable()
             std::vector<std::pair<uint32, QuestTravelDestination*>> printQuestMap;
 
             for (auto dest : container.second->questGivers)
-                printQuestMap.push_back(make_pair(0, dest));
+                printQuestMap.push_back(std::make_pair(0, dest));
 
             for (auto dest : container.second->questObjectives)
-                printQuestMap.push_back(make_pair(1, dest));
+                printQuestMap.push_back(std::make_pair(1, dest));
 
             for (auto dest : container.second->questTakers)
-                printQuestMap.push_back(make_pair(2, dest));
+                printQuestMap.push_back(std::make_pair(2, dest));
 
             for (auto dest : printQuestMap)
             {
@@ -3023,7 +3023,7 @@ void TravelMgr::LoadQuestTravelTable()
                                                 else
                                                     classSpecLevel.clear();
 
-                                                classSpecLevel.push_back(make_pair(make_pair(cls, tab), lvl));
+                                                classSpecLevel.push_back(std::make_pair(make_pair(cls, tab), lvl));
 
                                                 actions.insert_or_assign(aout.str().c_str(), classSpecLevel);
                                             }
@@ -3057,7 +3057,7 @@ void TravelMgr::LoadQuestTravelTable()
                                                     else
                                                         classSpecLevel.clear();
 
-                                                    classSpecLevel.push_back(make_pair(make_pair(cls, tab), lvl));
+                                                    classSpecLevel.push_back(std::make_pair(make_pair(cls, tab), lvl));
 
                                                     actions.insert_or_assign(aout.str().c_str(), classSpecLevel);
                                                 }
@@ -3122,7 +3122,7 @@ void TravelMgr::LoadQuestTravelTable()
                                 }
                             }
 
-                            classs.push_back(make_pair(cl.first, make_pair(minLevel, maxLevel)));
+                            classs.push_back(std::make_pair(cl.first, std::make_pair(minLevel, maxLevel)));
                         }
                     }
 
@@ -3674,7 +3674,7 @@ void TravelMgr::addMapTransfer(WorldPosition start, WorldPosition end, float por
         }
 
     //Add actual transfer.
-    auto mapTransfers = mapTransfersMap.find(make_pair(start.getMapId(), end.getMapId()));
+    auto mapTransfers = mapTransfersMap.find(std::make_pair(start.getMapId(), end.getMapId()));
     
     if (mapTransfers == mapTransfersMap.end())
         mapTransfersMap.insert({ { sMap, eMap }, {mapTransfer(start, end, portalDistance)} });
