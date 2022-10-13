@@ -70,7 +70,7 @@ void ChooseTravelTargetAction::getNewTarget(TravelTarget* newTarget, TravelTarge
         TravelDestination* dest = ChooseTravelTargetAction::FindDestination(bot, "Tarren Mill");
         if (dest)
         {
-            vector <WorldPosition*> points = dest->nextPoint(botPos, true);
+            std::vector <WorldPosition*> points = dest->nextPoint(botPos, true);
 
             if (!points.empty())
             {
@@ -407,14 +407,14 @@ void ChooseTravelTargetAction::ReportTravelTarget(TravelTarget* newTarget, Trave
 }
 
 //Select only those points that are in sight distance or failing that a multiplication of the sight distance.
-vector<WorldPosition*> ChooseTravelTargetAction::getLogicalPoints(vector<WorldPosition*>& travelPoints)
+vector<WorldPosition*> ChooseTravelTargetAction::getLogicalPoints(std::vector<WorldPosition*>& travelPoints)
 {
     PerformanceMonitorOperation* pmo = sPerformanceMonitor.start(PERF_MON_VALUE, "getLogicalPoints", &context->performanceStack);
-    vector<WorldPosition*> retvec;
+    std::vector<WorldPosition*> retvec;
 
-    static vector<float> distanceLimits = { sPlayerbotAIConfig.sightDistance, 4 * sPlayerbotAIConfig.sightDistance, 10 * sPlayerbotAIConfig.sightDistance, 20 * sPlayerbotAIConfig.sightDistance, 50 * sPlayerbotAIConfig.sightDistance, 100 * sPlayerbotAIConfig.sightDistance, 10000 * sPlayerbotAIConfig.sightDistance };
+    static std::vector<float> distanceLimits = { sPlayerbotAIConfig.sightDistance, 4 * sPlayerbotAIConfig.sightDistance, 10 * sPlayerbotAIConfig.sightDistance, 20 * sPlayerbotAIConfig.sightDistance, 50 * sPlayerbotAIConfig.sightDistance, 100 * sPlayerbotAIConfig.sightDistance, 10000 * sPlayerbotAIConfig.sightDistance };
 
-    vector<vector<WorldPosition*>> partitions;
+    std::vector<std::vector<WorldPosition*>> partitions;
 
     for (uint8 l = 0; l < distanceLimits.size(); l++)
         partitions.push_back({});
@@ -492,19 +492,19 @@ vector<WorldPosition*> ChooseTravelTargetAction::getLogicalPoints(vector<WorldPo
 }
 
 //Sets the target to the best destination.
-bool ChooseTravelTargetAction::SetBestTarget(TravelTarget* target, vector<TravelDestination*>& TravelDestinations)
+bool ChooseTravelTargetAction::SetBestTarget(TravelTarget* target, std::vector<TravelDestination*>& TravelDestinations)
 {
     if (TravelDestinations.empty())
         return false;
 
     WorldPosition botLocation(bot);
 
-    vector<WorldPosition*> travelPoints;
+    std::vector<WorldPosition*> travelPoints;
 
     //Select all points from the selected destinations
     for (auto& activeTarget : TravelDestinations)
     {
-        vector<WorldPosition*> points = activeTarget->getPoints(true);
+        std::vector<WorldPosition*> points = activeTarget->getPoints(true);
         if (!points.empty())
             travelPoints.insert(travelPoints.end(), points.begin(), points.end());
     }
@@ -550,10 +550,10 @@ bool ChooseTravelTargetAction::SetBestTarget(TravelTarget* target, vector<Travel
 
 bool ChooseTravelTargetAction::SetGroupTarget(TravelTarget* target)
 {
-    vector<TravelDestination*> activeDestinations;
-    vector<WorldPosition*> activePoints;
+    std::vector<TravelDestination*> activeDestinations;
+    std::vector<WorldPosition*> activePoints;
 
-    list<ObjectGuid> groupPlayers;
+    std::list<ObjectGuid> groupPlayers;
 
     Group* group = bot->GetGroup();
     if (!group)
@@ -627,7 +627,7 @@ bool ChooseTravelTargetAction::SetCurrentTarget(TravelTarget* target, TravelTarg
     if (!oldDestination->isActive(bot)) //Is the destination still valid?
         return false;
 
-    vector<TravelDestination*> TravelDestinations = { oldDestination };
+    std::vector<TravelDestination*> TravelDestinations = { oldDestination };
 
     if (!SetBestTarget(target, TravelDestinations))
         return false;
@@ -640,7 +640,7 @@ bool ChooseTravelTargetAction::SetCurrentTarget(TravelTarget* target, TravelTarg
 
 bool ChooseTravelTargetAction::SetQuestTarget(TravelTarget* target, bool newQuests, bool activeQuests, bool completedQuests)
 {
-    vector<TravelDestination*> TravelDestinations;
+    std::vector<TravelDestination*> TravelDestinations;
 
     if (newQuests)
     {
@@ -673,7 +673,7 @@ bool ChooseTravelTargetAction::SetQuestTarget(TravelTarget* target, bool newQues
 
             //Find quest takers or objectives
             PerformanceMonitorOperation* pmo = sPerformanceMonitor.start(PERF_MON_VALUE, "getQuestTravelDestinations2", &context->performanceStack);
-            vector<TravelDestination*> questDestinations = sTravelMgr.getQuestTravelDestinations(bot, questId, true, false,0);
+            std::vector<TravelDestination*> questDestinations = sTravelMgr.getQuestTravelDestinations(bot, questId, true, false,0);
             pmo->finish();
 
             TravelDestinations.insert(TravelDestinations.end(), questDestinations.begin(), questDestinations.end());
@@ -689,7 +689,7 @@ bool ChooseTravelTargetAction::SetQuestTarget(TravelTarget* target, bool newQues
 bool ChooseTravelTargetAction::SetRpgTarget(TravelTarget* target)
 {
     //Find rpg npcs
-    vector<TravelDestination*> TravelDestinations = sTravelMgr.getRpgTravelDestinations(bot, true, false);
+    std::vector<TravelDestination*> TravelDestinations = sTravelMgr.getRpgTravelDestinations(bot, true, false);
 
     if (ai->HasStrategy("debug travel", BOT_STATE_NON_COMBAT))
         ai->TellMasterNoFacing(to_string(TravelDestinations.size()) + " rpg destinations found.");
@@ -700,7 +700,7 @@ bool ChooseTravelTargetAction::SetRpgTarget(TravelTarget* target)
 bool ChooseTravelTargetAction::SetGrindTarget(TravelTarget* target)
 {
     //Find grind mobs.
-    vector<TravelDestination*> TravelDestinations = sTravelMgr.getGrindTravelDestinations(bot, true, false, 600+bot->GetLevel()*400);
+    std::vector<TravelDestination*> TravelDestinations = sTravelMgr.getGrindTravelDestinations(bot, true, false, 600+bot->GetLevel()*400);
 
     if (ai->HasStrategy("debug travel", BOT_STATE_NON_COMBAT))
         ai->TellMasterNoFacing(to_string(TravelDestinations.size()) + " grind destinations found.");
@@ -711,7 +711,7 @@ bool ChooseTravelTargetAction::SetGrindTarget(TravelTarget* target)
 bool ChooseTravelTargetAction::SetBossTarget(TravelTarget* target)
 {
     //Find boss mobs.
-    vector<TravelDestination*> TravelDestinations = sTravelMgr.getBossTravelDestinations(bot, true);
+    std::vector<TravelDestination*> TravelDestinations = sTravelMgr.getBossTravelDestinations(bot, true);
 
     if (ai->HasStrategy("debug travel", BOT_STATE_NON_COMBAT))
         ai->TellMasterNoFacing(to_string(TravelDestinations.size()) + " boss destinations found.");
@@ -722,7 +722,7 @@ bool ChooseTravelTargetAction::SetBossTarget(TravelTarget* target)
 bool ChooseTravelTargetAction::SetExploreTarget(TravelTarget* target)
 {
     //Find exploration loctions (middle of a sub-zone).
-    vector<TravelDestination*> TravelDestinations = sTravelMgr.getExploreTravelDestinations(bot, true, false);
+    std::vector<TravelDestination*> TravelDestinations = sTravelMgr.getExploreTravelDestinations(bot, true, false);
 
     if (ai->HasStrategy("debug travel", BOT_STATE_NON_COMBAT))
         ai->TellMasterNoFacing(to_string(TravelDestinations.size()) + " explore destinations found.");
@@ -732,11 +732,11 @@ bool ChooseTravelTargetAction::SetExploreTarget(TravelTarget* target)
 
 char* strstri(const char* haystack, const char* needle);
 
-bool ChooseTravelTargetAction::SetNpcFlagTarget(TravelTarget* target, vector<NPCFlags> flags, string name, vector<uint32> items)
+bool ChooseTravelTargetAction::SetNpcFlagTarget(TravelTarget* target, std::vector<NPCFlags> flags, string name, std::vector<uint32> items)
 {
     WorldPosition* botPos = &WorldPosition(bot);
 
-    vector<TravelDestination*> TravelDestinations;
+    std::vector<TravelDestination*> TravelDestinations;
 
     //Loop over all npcs.
     for (auto& d : sTravelMgr.getRpgTravelDestinations(bot, true, true))
@@ -839,7 +839,7 @@ TravelDestination* ChooseTravelTargetAction::FindDestination(Player* bot, string
 
     AiObjectContext* context = ai->GetAiObjectContext();
 
-    vector<TravelDestination*> dests;
+    std::vector<TravelDestination*> dests;
 
     //Zones
     for (auto& d : sTravelMgr.getExploreTravelDestinations(bot, true, true))

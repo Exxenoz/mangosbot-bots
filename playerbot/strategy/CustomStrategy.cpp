@@ -9,7 +9,7 @@ map<string, string> CustomStrategy::actionLinesCache;
 
 NextAction* toNextAction(string action)
 {
-    vector<string> tokens = split(action, '!');
+    std::vector<string> tokens = split(action, '!');
     if (tokens.size() == 2 && !tokens[0].empty())
         return new NextAction(tokens[0], atof(tokens[1].c_str()));
     else if (tokens.size() == 1 && !tokens[0].empty())
@@ -21,10 +21,10 @@ NextAction* toNextAction(string action)
 
 NextAction** toNextActionArray(string actions)
 {
-    vector<string> tokens = split(actions, ',');
+    std::vector<string> tokens = split(actions, ',');
     NextAction** res = new NextAction*[tokens.size() + 1];
     int index = 0;
-    for (vector<string>::iterator i = tokens.begin(); i != tokens.end(); ++i)
+    for (std::vector<string>::iterator i = tokens.begin(); i != tokens.end(); ++i)
     {
         NextAction* na = toNextAction(*i);
         if (na)
@@ -36,7 +36,7 @@ NextAction** toNextActionArray(string actions)
 
 TriggerNode* toTriggerNode(string actionLine)
 {
-    vector<string> tokens = split(actionLine, '>');
+    std::vector<string> tokens = split(actionLine, '>');
     if (tokens.size() == 2)
         return new TriggerNode(tokens[0], toNextActionArray(tokens[1]));
 
@@ -56,9 +56,9 @@ void CustomStrategy::InitTriggers(std::list<TriggerNode*> &triggers)
         }
         else
         {
-            vector<string> tokens = split(actionLinesCache[qualifier], '\n');
+            std::vector<string> tokens = split(actionLinesCache[qualifier], '\n');
             regex tpl("\\(NULL,\\s*'.+',\\s*'(.+)'\\)(,|;)");
-            for (vector<string>::iterator i = tokens.begin(); i != tokens.end(); ++i)
+            for (std::vector<string>::iterator i = tokens.begin(); i != tokens.end(); ++i)
             {
                 string line = *i;
                 for (sregex_iterator j = sregex_iterator(line.begin(), line.end(), tpl); j != sregex_iterator(); ++j)
@@ -72,7 +72,7 @@ void CustomStrategy::InitTriggers(std::list<TriggerNode*> &triggers)
         }
     }
 
-    for (list<string>::iterator i = actionLines.begin(); i != actionLines.end(); ++i)
+    for (std::list<string>::iterator i = actionLines.begin(); i != actionLines.end(); ++i)
     {
         TriggerNode* tn = toTriggerNode(*i);
         if (tn)

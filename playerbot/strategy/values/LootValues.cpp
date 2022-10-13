@@ -154,7 +154,7 @@ itemUsageMap EntryLootUsageValue::Calculate()
 {
 	itemUsageMap items;
 
-	for (auto itemId : GAI_VALUE2(list<uint32>, "entry loot list", getQualifier()))
+	for (auto itemId : GAI_VALUE2(std::list<uint32>, "entry loot list", getQualifier()))
 	{
 		items[AI_VALUE2(ItemUsage, "item usage", itemId)].push_back(itemId);
 	}

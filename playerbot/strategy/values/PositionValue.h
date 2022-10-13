@@ -17,7 +17,7 @@ namespace ai
         uint32 mapId;
     };
 
-    typedef map<string, PositionEntry> PositionMap;
+    typedef std::map<string, PositionEntry> PositionMap;
 
     class PositionValue : public ManualSetValue<PositionMap&>
 	{

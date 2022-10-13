@@ -32,14 +32,14 @@ bool PositionValue::Load(string text)
 {
     value.clear();
 
-    vector<string> ss = split(text, '^');
-    for (vector<string>::iterator i = ss.begin(); i != ss.end(); ++i)
+    std::vector<string> ss = split(text, '^');
+    for (std::vector<string>::iterator i = ss.begin(); i != ss.end(); ++i)
     {
-        vector<string> s1 = split(*i, '=');
+        std::vector<string> s1 = split(*i, '=');
         if (s1.size() != 2) continue;
         string name = s1[0];
 
-        vector<string> s2 = split(s1[1], ',');
+        std::vector<string> s2 = split(s1[1], ',');
         if (s2.size() != 4) continue;
         double x = atof(s2[0].c_str());
         double y = atof(s2[1].c_str());

@@ -55,7 +55,7 @@ public:
 
     virtual bool After(PlayerbotAI* ai)
     {
-        for (list<string>::iterator i = tells.begin(); i != tells.end(); ++i)
+        for (std::list<string>::iterator i = tells.begin(); i != tells.end(); ++i)
             ai->TellMaster(*i, PLAYERBOT_SECURITY_ALLOW_ALL, false);
 
         return true;
@@ -64,7 +64,7 @@ public:
     static TellMailProcessor instance;
 
 private:
-    list<string> tells;
+    std::list<string> tells;
 };
 
 class TakeMailProcessor : public MailProcessor
@@ -94,7 +94,7 @@ public:
         }
         else if (!mail->items.empty())
         {
-            list<uint32> guids;
+            std::list<uint32> guids;
             for (MailItemInfoVec::iterator i = mail->items.begin(); i != mail->items.end(); ++i)
             {
                 ItemPrototype const *proto = sObjectMgr.GetItemPrototype(i->item_template);
@@ -102,7 +102,7 @@ public:
                     guids.push_back(i->item_guid);
             }
 
-            for (list<uint32>::iterator i = guids.begin(); i != guids.end(); ++i)
+            for (std::list<uint32>::iterator i = guids.begin(); i != guids.end(); ++i)
             {
                 WorldPacket packet;
                 packet << mailbox;
@@ -219,7 +219,7 @@ bool MailAction::Execute(Event event)
         return false;
     }
 
-    vector<string> ss = split(text, ' ');
+    std::vector<string> ss = split(text, ' ');
     string action = ss[0];
     string filter = ss.size() > 1 ? ss[1] : "";
     MailProcessor* processor = processors[action];
@@ -233,7 +233,7 @@ bool MailAction::Execute(Event event)
     if (!processor->Before(ai))
         return false;
 
-    vector<Mail*> mailList;
+    std::vector<Mail*> mailList;
     time_t cur_time = time(0);
     for (PlayerMails::iterator itr = bot->GetMailBegin(); itr != bot->GetMailEnd(); ++itr)
     {
@@ -244,7 +244,7 @@ bool MailAction::Execute(Event event)
         mailList.push_back(mail);
     }
 
-    map<int, Mail*> filtered = filterList(mailList, filter);
+    std::map<int, Mail*> filtered = filterList(mailList, filter);
     for (map<int, Mail*>::iterator i = filtered.begin(); i != filtered.end(); ++i)
     {
         if (!processor->Process(i->first, i->second, ai))
@@ -267,9 +267,9 @@ void MailProcessor::RemoveMail(Player* bot, uint32 id, ObjectGuid mailbox)
 
 ObjectGuid MailProcessor::FindMailbox(PlayerbotAI* ai)
 {
-    list<ObjectGuid> gos = *ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("nearest game objects");
+    std::list<ObjectGuid> gos = *ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest game objects");
     ObjectGuid mailbox;
-    for (list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); ++i)
+    for (std::list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); ++i)
     {
         GameObject* go = ai->GetGameObject(*i);
         if (go && go->GetGoType() == GAMEOBJECT_TYPE_MAILBOX)

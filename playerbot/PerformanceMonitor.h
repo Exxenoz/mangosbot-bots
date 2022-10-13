@@ -11,7 +11,7 @@
 
 using namespace std;
 
-typedef vector<string> PerformanceStack;
+typedef std::vector<string> PerformanceStack;
 
 struct PerformanceData
 {
@@ -62,7 +62,7 @@ class PerformanceMonitor
         void Reset();
 
 	private:
-        map<PerformanceMetric, map<string, PerformanceData*> > data;
+        std::map<PerformanceMetric, std::map<string, PerformanceData*> > data;
 #ifdef CMANGOS
 		std::mutex lock;
 #endif

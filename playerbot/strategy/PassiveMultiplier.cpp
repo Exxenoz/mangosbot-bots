@@ -31,13 +31,13 @@ float PassiveMultiplier::GetValue(Action* action) {
 
     string name = action->getName();
 
-    for (list<string>::iterator i = allowedActions.begin(); i != allowedActions.end(); i++)
+    for (std::list<string>::iterator i = allowedActions.begin(); i != allowedActions.end(); i++)
     {
         if (name == *i)
             return 1.0f;
     }
 
-    for (list<string>::iterator i = allowedParts.begin(); i != allowedParts.end(); i++)
+    for (std::list<string>::iterator i = allowedParts.begin(); i != allowedParts.end(); i++)
     {
         if (name.find(*i) != string::npos)
             return 1.0f;

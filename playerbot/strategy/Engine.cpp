@@ -19,7 +19,7 @@ Engine::Engine(PlayerbotAI* ai, AiObjectContext *factory) : PlayerbotAIAware(ai)
 bool ActionExecutionListeners::Before(Action* action, Event event)
 {
     bool result = true;
-    for (list<ActionExecutionListener*>::iterator i = listeners.begin(); i!=listeners.end(); i++)
+    for (std::list<ActionExecutionListener*>::iterator i = listeners.begin(); i!=listeners.end(); i++)
     {
         result &= (*i)->Before(action, event);
     }
@@ -28,7 +28,7 @@ bool ActionExecutionListeners::Before(Action* action, Event event)
 
 void ActionExecutionListeners::After(Action* action, bool executed, Event event)
 {
-    for (list<ActionExecutionListener*>::iterator i = listeners.begin(); i!=listeners.end(); i++)
+    for (std::list<ActionExecutionListener*>::iterator i = listeners.begin(); i!=listeners.end(); i++)
     {
         (*i)->After(action, executed, event);
     }
@@ -37,7 +37,7 @@ void ActionExecutionListeners::After(Action* action, bool executed, Event event)
 bool ActionExecutionListeners::OverrideResult(Action* action, bool executed, Event event)
 {
     bool result = executed;
-    for (list<ActionExecutionListener*>::iterator i = listeners.begin(); i!=listeners.end(); i++)
+    for (std::list<ActionExecutionListener*>::iterator i = listeners.begin(); i!=listeners.end(); i++)
     {
         result = (*i)->OverrideResult(action, result, event);
     }
@@ -47,7 +47,7 @@ bool ActionExecutionListeners::OverrideResult(Action* action, bool executed, Eve
 bool ActionExecutionListeners::AllowExecution(Action* action, Event event)
 {
     bool result = true;
-    for (list<ActionExecutionListener*>::iterator i = listeners.begin(); i!=listeners.end(); i++)
+    for (std::list<ActionExecutionListener*>::iterator i = listeners.begin(); i!=listeners.end(); i++)
     {
         result &= (*i)->AllowExecution(action, event);
     }
@@ -56,7 +56,7 @@ bool ActionExecutionListeners::AllowExecution(Action* action, Event event)
 
 ActionExecutionListeners::~ActionExecutionListeners()
 {
-    for (list<ActionExecutionListener*>::iterator i = listeners.begin(); i!=listeners.end(); i++)
+    for (std::list<ActionExecutionListener*>::iterator i = listeners.begin(); i!=listeners.end(); i++)
     {
         delete *i;
     }
@@ -81,14 +81,14 @@ void Engine::Reset()
         delete action;
     } while (true);
 
-    for (list<TriggerNode*>::iterator i = triggers.begin(); i != triggers.end(); i++)
+    for (std::list<TriggerNode*>::iterator i = triggers.begin(); i != triggers.end(); i++)
     {
         TriggerNode* trigger = *i;
         delete trigger;
     }
     triggers.clear();
 
-    for (list<Multiplier*>::iterator i = multipliers.begin(); i != multipliers.end(); i++)
+    for (std::list<Multiplier*>::iterator i = multipliers.begin(); i != multipliers.end(); i++)
     {
         Multiplier* multiplier = *i;
         delete multiplier;
@@ -169,7 +169,7 @@ bool Engine::DoNextAction(Unit* unit, int depth, bool minimal)
             }
             else if (action->isUseful())
             {
-                for (list<Multiplier*>::iterator i = multipliers.begin(); i!= multipliers.end(); i++)
+                for (std::list<Multiplier*>::iterator i = multipliers.begin(); i!= multipliers.end(); i++)
                 {
                     Multiplier* multiplier = *i;
                     relevance *= multiplier->GetValue(action);
@@ -423,7 +423,7 @@ void Engine::addStrategies(string first, ...)
 
 bool Engine::removeStrategy(string name)
 {
-    map<string, Strategy*>::iterator i = strategies.find(name);
+    std::map<string, Strategy*>::iterator i = strategies.find(name);
     if (i == strategies.end())
         return false;
 
@@ -452,8 +452,8 @@ bool Engine::HasStrategy(string name)
 
 void Engine::ProcessTriggers(bool minimal)
 {
-    map<Trigger*, Event> fires;
-    for (list<TriggerNode*>::iterator i = triggers.begin(); i != triggers.end(); i++)
+    std::map<Trigger*, Event> fires;
+    for (std::list<TriggerNode*>::iterator i = triggers.begin(); i != triggers.end(); i++)
     {
         TriggerNode* node = *i;
         if (!node)
@@ -484,7 +484,7 @@ void Engine::ProcessTriggers(bool minimal)
         }
     }
 
-    for (list<TriggerNode*>::iterator i = triggers.begin(); i != triggers.end(); i++)
+    for (std::list<TriggerNode*>::iterator i = triggers.begin(); i != triggers.end(); i++)
     {
         TriggerNode* node = *i;
         Trigger* trigger = node->getTrigger();
@@ -495,7 +495,7 @@ void Engine::ProcessTriggers(bool minimal)
         MultiplyAndPush(node->getHandlers(), 0.0f, false, event, "trigger");
     }
 
-    for (list<TriggerNode*>::iterator i = triggers.begin(); i != triggers.end(); i++)
+    for (std::list<TriggerNode*>::iterator i = triggers.begin(); i != triggers.end(); i++)
     {
         Trigger* trigger = (*i)->getTrigger();
         if (trigger) trigger->Reset();
@@ -529,7 +529,7 @@ string Engine::ListStrategies()
 
 list<string> Engine::GetStrategies()
 {
-    list<string> result;
+    std::list<string> result;
     for (map<string, Strategy*>::iterator i = strategies.begin(); i != strategies.end(); i++)
     {
         result.push_back(i->first);
@@ -637,8 +637,8 @@ void Engine::LogAction(const char* format, ...)
 
 void Engine::ChangeStrategy(string names)
 {
-    vector<string> splitted = split(names, ',');
-    for (vector<string>::iterator i = splitted.begin(); i != splitted.end(); i++)
+    std::vector<string> splitted = split(names, ',');
+    for (std::vector<string>::iterator i = splitted.begin(); i != splitted.end(); i++)
     {
         const char* name = i->c_str();
         switch (name[0])

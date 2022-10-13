@@ -13,9 +13,9 @@ bool SendMailAction::Execute(Event event)
     uint32 account = sObjectMgr.GetPlayerAccountIdByGUID(bot->GetObjectGuid());
     bool randomBot = sPlayerbotAIConfig.IsInRandomAccountList(account);
 
-    list<ObjectGuid> gos = *context->GetValue<list<ObjectGuid> >("nearest game objects");
+    std::list<ObjectGuid> gos = *context->GetValue<std::list<ObjectGuid> >("nearest game objects");
     bool mailboxFound = false;
-    for (list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); ++i)
+    for (std::list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); ++i)
     {
         GameObject* go = ai->GetGameObject(*i);
         if (go && go->GetGoType() == GAMEOBJECT_TYPE_MAILBOX)
@@ -28,7 +28,7 @@ bool SendMailAction::Execute(Event event)
     string text = event.getParam();
     Player* receiver = GetMaster();
     Player* tellTo = receiver;
-    vector<string> ss = split(text, ' ');
+    std::vector<string> ss = split(text, ' ');
     if (ss.size() > 1)
     {
         Player* p = sObjectMgr.GetPlayer(ss[ss.size() - 1].c_str());
@@ -108,8 +108,8 @@ bool SendMailAction::Execute(Event event)
     {
         FindItemByIdVisitor visitor(*i);
         IterateItems(&visitor, ITERATE_ITEMS_IN_BAGS);
-        list<Item*> items = visitor.GetResult();
-        for (list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
+        std::list<Item*> items = visitor.GetResult();
+        for (std::list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
         {
             Item* item = *i;
             if (item->IsSoulBound() || item->IsConjuredConsumable())

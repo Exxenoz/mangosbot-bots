@@ -30,14 +30,14 @@ private:
 
 list<ObjectGuid> NearestGameObjects::Calculate()
 {
-    list<GameObject*> targets;
+    std::list<GameObject*> targets;
 
     AnyGameObjectInObjectRangeCheck u_check(bot, range);
     GameObjectListSearcher<AnyGameObjectInObjectRangeCheck> searcher(targets, u_check);
     Cell::VisitAllObjects((const WorldObject*)bot, searcher, range);
 
-    list<ObjectGuid> result;
-    for(list<GameObject*>::iterator tIter = targets.begin(); tIter != targets.end(); ++tIter)
+    std::list<ObjectGuid> result;
+    for(std::list<GameObject*>::iterator tIter = targets.begin(); tIter != targets.end(); ++tIter)
     {
 		GameObject* go = *tIter;
         if(ignoreLos || sServerFacade.IsWithinLOSInMap(bot, go))

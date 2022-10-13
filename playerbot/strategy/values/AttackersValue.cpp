@@ -14,7 +14,7 @@ list<ObjectGuid> AttackersValue::Calculate()
 {
     set<Unit*> targets;
 
-    list<ObjectGuid> result;
+    std::list<ObjectGuid> result;
 
     if (!ai->AllowActivity(ALL_ACTIVITY))
         return result;
@@ -51,13 +51,13 @@ void AttackersValue::AddAttackersOf(Group* group, set<Unit*>& targets)
 
 struct AddGuardiansHelper
 {
-    explicit AddGuardiansHelper(list<Unit*> &units) : units(units) {}
+    explicit AddGuardiansHelper(std::list<Unit*> &units) : units(units) {}
     void operator()(Unit* target) const
     {
         units.push_back(target);
     }
 
-    list<Unit*> &units;
+    std::list<Unit*> &units;
 };
 
 void AttackersValue::AddAttackersOf(Player* player, set<Unit*>& targets)
@@ -70,7 +70,7 @@ void AttackersValue::AddAttackersOf(Player* player, set<Unit*>& targets)
     //MaNGOS::UnitListSearcher<MaNGOS::AnyUnfriendlyUnitInObjectRangeCheck> searcher(units, u_check);
     //Cell::VisitAllObjects(player, searcher, sPlayerbotAIConfig.sightDistance);
 
-    list<ObjectGuid> unitGuids = AI_VALUE(list<ObjectGuid>, "possible targets");
+    std::list<ObjectGuid> unitGuids = AI_VALUE(std::list<ObjectGuid>, "possible targets");
 
     for (auto unitGuid : unitGuids)
     {
@@ -79,7 +79,7 @@ void AttackersValue::AddAttackersOf(Player* player, set<Unit*>& targets)
             units.push_back(unit);
     }
 
-	for (list<Unit*>::iterator i = units.begin(); i != units.end(); i++)
+	for (std::list<Unit*>::iterator i = units.begin(); i != units.end(); i++)
     {
 		if (!player->GetGroup())
 		{
@@ -215,10 +215,10 @@ bool AttackersValue::IsValidTarget(Unit *attacker, Player *bot)
 bool PossibleAddsValue::Calculate()
 {
     PlayerbotAI *ai = bot->GetPlayerbotAI();
-    list<ObjectGuid> possible = ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("possible targets no los")->Get();
-    list<ObjectGuid> attackers = ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("attackers")->Get();
+    std::list<ObjectGuid> possible = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("possible targets no los")->Get();
+    std::list<ObjectGuid> attackers = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("attackers")->Get();
 
-    for (list<ObjectGuid>::iterator i = possible.begin(); i != possible.end(); ++i)
+    for (std::list<ObjectGuid>::iterator i = possible.begin(); i != possible.end(); ++i)
     {
         ObjectGuid guid = *i;
         if (find(attackers.begin(), attackers.end(), guid) != attackers.end()) continue;
@@ -226,7 +226,7 @@ bool PossibleAddsValue::Calculate()
         Unit* add = ai->GetUnit(guid);
         if (add && !add->GetGuidValue(UNIT_FIELD_TARGET) && !sServerFacade.GetThreatManager(add).getCurrentVictim() && sServerFacade.IsHostileTo(add, bot))
         {
-            for (list<ObjectGuid>::iterator j = attackers.begin(); j != attackers.end(); ++j)
+            for (std::list<ObjectGuid>::iterator j = attackers.begin(); j != attackers.end(); ++j)
             {
                 Unit* attacker = ai->GetUnit(*j);
                 if (!attacker) continue;

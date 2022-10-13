@@ -17,7 +17,7 @@ namespace ai
 
     //                   itemId, entry
     typedef unordered_multimap<uint32, int32> DropMap;
-    typedef unordered_map<pair<uint32, int32> , float > ChanceMap;
+    typedef std::unordered_map<pair<uint32, int32> , float > ChanceMap;
 
     //Returns the loot map of all entries
     class DropMapValue : public SingleCalculatedValue<DropMap*>
@@ -31,21 +31,21 @@ namespace ai
     };
 
     //Returns the entries that drop a specific item
-    class ItemDropListValue : public SingleCalculatedValue<list<int32>>, public Qualified
+    class ItemDropListValue : public SingleCalculatedValue<std::list<int32>>, public Qualified
     {
     public:
         ItemDropListValue(PlayerbotAI* ai) : SingleCalculatedValue(ai, "item drop list") {}
 
-        virtual list<int32> Calculate();
+        virtual std::list<int32> Calculate();
     };
 
     //Returns the items a specific entry can drop
-    class EntryLootListValue : public SingleCalculatedValue<list<uint32>>, public Qualified
+    class EntryLootListValue : public SingleCalculatedValue<std::list<uint32>>, public Qualified
     {
     public:
         EntryLootListValue(PlayerbotAI* ai) : SingleCalculatedValue(ai, "entry loot list") {}
 
-        virtual list<uint32> Calculate();
+        virtual std::list<uint32> Calculate();
     };
 
     class LootChanceValue : public SingleCalculatedValue<float>, public Qualified
@@ -56,7 +56,7 @@ namespace ai
         virtual float Calculate();
     };
 
-    typedef unordered_map<ItemUsage, vector<uint32>> itemUsageMap;
+    typedef std::unordered_map<ItemUsage, std::vector<uint32>> itemUsageMap;
 
     class EntryLootUsageValue : public CalculatedValue<itemUsageMap>, public Qualified
     {

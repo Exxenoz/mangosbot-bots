@@ -23,8 +23,8 @@ bool DestroyItemAction::Execute(Event event)
 void DestroyItemAction::DestroyItem(FindItemVisitor* visitor)
 {
     IterateItems(visitor);
-    list<Item*> items = visitor->GetResult();
-	for (list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
+    std::list<Item*> items = visitor->GetResult();
+	for (std::list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
     {
 		Item* item = *i;
         ostringstream out; out << chat->formatItem(item->GetProto()) << " destroyed";
@@ -61,7 +61,7 @@ bool SmartDestroyItemAction::Execute(Event event)
         return true;
     }
 
-    vector<uint32> bestToDestroy = { ITEM_USAGE_NONE }; //First destroy anything useless.
+    std::vector<uint32> bestToDestroy = { ITEM_USAGE_NONE }; //First destroy anything useless.
 
     if (!AI_VALUE(bool, "can sell") && AI_VALUE(bool, "should get money")) //We need money so quest items are less important since they can't directly be sold.
         bestToDestroy.push_back(ITEM_USAGE_QUEST);
@@ -78,7 +78,7 @@ bool SmartDestroyItemAction::Execute(Event event)
     for (auto& usage : bestToDestroy)
     {
 
-        list<uint32> items = AI_VALUE2(list<uint32>, "inventory item ids", "usage " + to_string(usage));
+        std::list<uint32> items = AI_VALUE2(std::list<uint32>, "inventory item ids", "usage " + to_string(usage));
 
         items.reverse();
 

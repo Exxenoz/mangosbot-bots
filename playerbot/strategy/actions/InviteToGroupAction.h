@@ -35,9 +35,9 @@ namespace ai
         FindGuildMembers() {};
 
         void operator()(Player* player) { data.push_back(player); };
-        vector<Player*> const GetResult() { return data; };
+        std::vector<Player*> const GetResult() { return data; };
     private:
-        vector<Player*> data;
+        std::vector<Player*> data;
     };
 
     class InviteGuildToGroupAction : public InviteNearbyToGroupAction
@@ -48,6 +48,6 @@ namespace ai
         virtual bool Execute(Event event);
         virtual bool isUseful() { return bot->GetGuildId() && InviteNearbyToGroupAction::isUseful(); };
     private:
-        vector<Player*> getGuildMembers();
+        std::vector<Player*> getGuildMembers();
     };
 }

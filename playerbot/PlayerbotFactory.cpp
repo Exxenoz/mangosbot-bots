@@ -67,7 +67,7 @@ void PlayerbotFactory::Init()
 			classQuestIds.remove(questId);
 			classQuestIds.push_back(questId);
 		}
-        for (list<uint32>::iterator i = sPlayerbotAIConfig.randomBotQuestIds.begin(); i != sPlayerbotAIConfig.randomBotQuestIds.end(); ++i)
+        for (std::list<uint32>::iterator i = sPlayerbotAIConfig.randomBotQuestIds.begin(); i != sPlayerbotAIConfig.randomBotQuestIds.end(); ++i)
         {
             uint32 questId = *i;
             AddPrevQuests(questId, specialQuestIds);
@@ -636,7 +636,7 @@ void PlayerbotFactory::ClearSkills()
 void PlayerbotFactory::ClearSpells()
 {
 #ifdef MANGOS
-    list<uint32> spells;
+    std::list<uint32> spells;
     for(PlayerSpellMap::iterator itr = bot->GetSpellMap().begin(); itr != bot->GetSpellMap().end(); ++itr)
     {
         uint32 spellId = itr->first;
@@ -646,7 +646,7 @@ void PlayerbotFactory::ClearSpells()
         spells.push_back(spellId);
     }
 
-    for (list<uint32>::iterator i = spells.begin(); i != spells.end(); ++i)
+    for (std::list<uint32>::iterator i = spells.begin(); i != spells.end(); ++i)
     {
         bot->removeSpell(*i, false, false);
     }
@@ -1068,9 +1068,9 @@ void PlayerbotFactory::InitEquipment(bool incremental)
     //map<uint32, bool> upgradeSlots;
     //if (incremental)
     //{
-    //    vector<uint32> emptySlots;
-    //    vector<uint32> itemIds;
-    //    map<uint32, uint32> itemSlots;
+    //    std::vector<uint32> emptySlots;
+    //    std::vector<uint32> itemIds;
+    //    std::map<uint32, uint32> itemSlots;
     //    uint32 maxSlots = urand(1, 4);
     //    for (uint8 slot = 0; slot < EQUIPMENT_SLOT_END; ++slot)
     //        upgradeSlots[slot] = false;
@@ -1128,7 +1128,7 @@ void PlayerbotFactory::InitEquipment(bool incremental)
     uint32 newGS = 0;
 
     // unavailable legendaries list
-    vector<uint32> lockedItems;
+    std::vector<uint32> lockedItems;
     lockedItems.push_back(30311); // Warp Slicer
     lockedItems.push_back(30312); // Infinity Blade
     lockedItems.push_back(30313); // Staff of Disentagration
@@ -1235,7 +1235,7 @@ void PlayerbotFactory::InitEquipment(bool incremental)
             // pick random shirt
             if (slot == EQUIPMENT_SLOT_BODY || slot == EQUIPMENT_SLOT_TABARD)
             {
-                vector<uint32> ids = sRandomItemMgr.Query(60, 1, 1, slot, 1);
+                std::vector<uint32> ids = sRandomItemMgr.Query(60, 1, 1, slot, 1);
                 sLog.outDetail("Bot #%d %s:%d <%s>: %u possible items for slot %d", bot->GetGUIDLow(), bot->GetTeam() == ALLIANCE ? "A" : "H", bot->GetLevel(), bot->GetName(), ids.size(), slot);
 
                 if (!ids.empty()) ahbot::Shuffle(ids);
@@ -1281,17 +1281,17 @@ void PlayerbotFactory::InitEquipment(bool incremental)
             }
             else
             {
-                vector<uint32> ids;
+                std::vector<uint32> ids;
                 for (uint32 q = quality; q < ITEM_QUALITY_ARTIFACT; ++q)
                 {
-                    vector<uint32> newItems = sRandomItemMgr.Query(level, bot->getClass(), uint8(specId), slot, q);
+                    std::vector<uint32> newItems = sRandomItemMgr.Query(level, bot->getClass(), uint8(specId), slot, q);
                     if (newItems.size())
                         ids.insert(ids.begin(), newItems.begin(), newItems.end());
 
                     // add one hand weapons for tanks
                     if ((specId == 3 || specId == 5) && slot == EQUIPMENT_SLOT_MAINHAND)
                     {
-                        vector<uint32> oneHanded = sRandomItemMgr.Query(level, bot->getClass(), uint8(specId), EQUIPMENT_SLOT_OFFHAND, q);
+                        std::vector<uint32> oneHanded = sRandomItemMgr.Query(level, bot->getClass(), uint8(specId), EQUIPMENT_SLOT_OFFHAND, q);
                         if (oneHanded.size())
                             ids.insert(ids.begin(), oneHanded.begin(), oneHanded.end());
                     }
@@ -1299,7 +1299,7 @@ void PlayerbotFactory::InitEquipment(bool incremental)
                     // add one hand weapons for casters
                     if ((specId == 4 || (bot->getClass() == CLASS_DRUID || bot->getClass() == CLASS_PRIEST || bot->getClass() == CLASS_MAGE || bot->getClass() == CLASS_WARLOCK || (specId == 20 || specId == 22))) && slot == EQUIPMENT_SLOT_MAINHAND)
                     {
-                        vector<uint32> oneHanded = sRandomItemMgr.Query(level, bot->getClass(), uint8(specId), EQUIPMENT_SLOT_OFFHAND, q);
+                        std::vector<uint32> oneHanded = sRandomItemMgr.Query(level, bot->getClass(), uint8(specId), EQUIPMENT_SLOT_OFFHAND, q);
                         if (oneHanded.size())
                             ids.insert(ids.begin(), oneHanded.begin(), oneHanded.end());
                     }
@@ -1307,7 +1307,7 @@ void PlayerbotFactory::InitEquipment(bool incremental)
                     // add weapons for dual wield
                     if (slot == EQUIPMENT_SLOT_MAINHAND && (bot->getClass() == CLASS_ROGUE || specId == 2 || specId == 21))
                     {
-                        vector<uint32> oneHanded = sRandomItemMgr.Query(level, bot->getClass(), uint8(specId), EQUIPMENT_SLOT_OFFHAND, q);
+                        std::vector<uint32> oneHanded = sRandomItemMgr.Query(level, bot->getClass(), uint8(specId), EQUIPMENT_SLOT_OFFHAND, q);
                         if (oneHanded.size())
                             ids.insert(ids.begin(), oneHanded.begin(), oneHanded.end());
                     }
@@ -1518,7 +1518,7 @@ void PlayerbotFactory::InitSecondEquipmentSet()
     if (bot->getClass() == CLASS_MAGE || bot->getClass() == CLASS_WARLOCK || bot->getClass() == CLASS_PRIEST)
         return;
 
-    map<uint32, vector<uint32> > items;
+    std::map<uint32, std::vector<uint32> > items;
 
     uint32 desiredQuality = ITEM_QUALITY_NORMAL;
     if (level < 10)
@@ -1610,12 +1610,12 @@ void PlayerbotFactory::InitSecondEquipmentSet()
 
     int maxCount = urand(0, 5);
     int count = 0;
-    for (map<uint32, vector<uint32> >::iterator i = items.begin(); i != items.end(); ++i)
+    for (map<uint32, std::vector<uint32> >::iterator i = items.begin(); i != items.end(); ++i)
     {
         if (count++ >= maxCount)
             break;
 
-        vector<uint32>& ids = i->second;
+        std::vector<uint32>& ids = i->second;
         if (ids.empty())
         {
             sLog.outDebug(  "%s: no items to make second equipment set for slot %d", bot->GetName(), i->first);
@@ -1690,7 +1690,7 @@ void PlayerbotFactory::AddGems(Item* item)
         if (!hasSockets)
             return;
 
-        vector<uint32> gems = sRandomItemMgr.GetGemsList();
+        std::vector<uint32> gems = sRandomItemMgr.GetGemsList();
         if (gems.empty())
             return;
 
@@ -1707,7 +1707,7 @@ void PlayerbotFactory::AddGems(Item* item)
                 break;
             default:
             {
-                for (vector<uint32>::const_iterator itr = gems.begin(); itr != gems.end(); itr++)
+                for (std::vector<uint32>::const_iterator itr = gems.begin(); itr != gems.end(); itr++)
                 {
                     if (ItemPrototype const* gemProto = sObjectMgr.GetItemPrototype(*itr))
                     {
@@ -1804,8 +1804,8 @@ void PlayerbotFactory::InitTradeSkills()
     uint16 secondSkill = sRandomPlayerbotMgr.GetValue(bot, "secondSkill");
     if (!firstSkill || !secondSkill)
     {
-        vector<uint32> firstSkills;
-        vector<uint32> secondSkills;
+        std::vector<uint32> firstSkills;
+        std::vector<uint32> secondSkills;
         switch (bot->getClass())
         {
         case CLASS_WARRIOR:
@@ -2100,7 +2100,7 @@ void PlayerbotFactory::InitAvailableSpells()
     // add book spells
     if (bot->GetLevel() == 60)
     {
-        vector<uint32> bookSpells;
+        std::vector<uint32> bookSpells;
         switch (bot->getClass())
         {
         case CLASS_WARRIOR:
@@ -2162,7 +2162,7 @@ void PlayerbotFactory::InitAvailableSpells()
 
 void PlayerbotFactory::InitSpecialSpells()
 {
-    for (list<uint32>::iterator i = sPlayerbotAIConfig.randomBotSpellIds.begin(); i != sPlayerbotAIConfig.randomBotSpellIds.end(); ++i)
+    for (std::list<uint32>::iterator i = sPlayerbotAIConfig.randomBotSpellIds.begin(); i != sPlayerbotAIConfig.randomBotSpellIds.end(); ++i)
     {
         uint32 spellId = *i;
 
@@ -2177,7 +2177,7 @@ void PlayerbotFactory::InitTalents(uint32 specNo)
 {
     uint32 classMask = bot->getClassMask();
 
-    map<uint32, vector<TalentEntry const*> > spells;
+    std::map<uint32, std::vector<TalentEntry const*> > spells;
     for (uint32 i = 0; i < sTalentStore.GetNumRows(); ++i)
     {
         TalentEntry const *talentInfo = sTalentStore.LookupEntry(i);
@@ -2195,9 +2195,9 @@ void PlayerbotFactory::InitTalents(uint32 specNo)
     }
 
     uint32 freePoints = bot->GetFreeTalentPoints();
-    for (map<uint32, vector<TalentEntry const*> >::iterator i = spells.begin(); i != spells.end(); ++i)
+    for (map<uint32, std::vector<TalentEntry const*> >::iterator i = spells.begin(); i != spells.end(); ++i)
     {
-        vector<TalentEntry const*> &spells = i->second;
+        std::vector<TalentEntry const*> &spells = i->second;
         if (spells.empty())
         {
             sLog.outError("%s: No spells for talent row %d", bot->GetName(), i->first);
@@ -2227,8 +2227,8 @@ void PlayerbotFactory::InitTalents(uint32 specNo)
 
 ObjectGuid PlayerbotFactory::GetRandomBot()
 {
-    vector<ObjectGuid> guids;
-    for (list<uint32>::iterator i = sPlayerbotAIConfig.randomBotAccounts.begin(); i != sPlayerbotAIConfig.randomBotAccounts.end(); i++)
+    std::vector<ObjectGuid> guids;
+    for (std::list<uint32>::iterator i = sPlayerbotAIConfig.randomBotAccounts.begin(); i != sPlayerbotAIConfig.randomBotAccounts.end(); i++)
     {
         uint32 accountId = *i;
         if (!sAccountMgr.GetCharactersCount(accountId))
@@ -2257,7 +2257,7 @@ ObjectGuid PlayerbotFactory::GetRandomBot()
 }
 
 
-void PlayerbotFactory::AddPrevQuests(uint32 questId, list<uint32>& questIds)
+void PlayerbotFactory::AddPrevQuests(uint32 questId, std::list<uint32>& questIds)
 {
     Quest const *quest = sObjectMgr.GetQuestTemplate(questId);
     for (Quest::PrevQuests::const_iterator iter = quest->prevQuests.begin(); iter != quest->prevQuests.end(); ++iter)
@@ -2269,10 +2269,10 @@ void PlayerbotFactory::AddPrevQuests(uint32 questId, list<uint32>& questIds)
     }
 }
 
-void PlayerbotFactory::InitQuests(list<uint32>& questMap)
+void PlayerbotFactory::InitQuests(std::list<uint32>& questMap)
 {
     int count = 0;
-    for (list<uint32>::iterator i = questMap.begin(); i != questMap.end(); ++i)
+    for (std::list<uint32>::iterator i = questMap.begin(); i != questMap.end(); ++i)
     {
         uint32 questId = *i;
         Quest const *quest = sObjectMgr.GetQuestTemplate(questId);
@@ -2400,8 +2400,8 @@ void PlayerbotFactory::InitMounts()
     if (bot->GetLevel() < firstmount)
         return;
 
-    map<uint8, map<uint32, vector<uint32> > > mounts;
-    vector<uint32> slow, fast, fslow, ffast;
+    std::map<uint8, std::map<uint32, std::vector<uint32> > > mounts;
+    std::vector<uint32> slow, fast, fslow, ffast;
     switch (bot->getRace())
     {
     case RACE_HUMAN:
@@ -2537,7 +2537,7 @@ void PlayerbotFactory::InitFood()
 
 void PlayerbotFactory::InitReagents()
 {
-    list<uint32> items;
+    std::list<uint32> items;
     uint32 regCount = 1;
     switch (bot->getClass())
     {
@@ -2604,7 +2604,7 @@ void PlayerbotFactory::InitReagents()
         break;
     }
 
-    for (list<uint32>::iterator i = items.begin(); i != items.end(); ++i)
+    for (std::list<uint32>::iterator i = items.begin(); i != items.end(); ++i)
     {
         ItemPrototype const* proto = sObjectMgr.GetItemPrototype(*i);
         if (!proto)
@@ -2735,7 +2735,7 @@ void PlayerbotFactory::InitInventoryTrade()
 
 void PlayerbotFactory::InitInventoryEquip()
 {
-    vector<uint32> ids;
+    std::vector<uint32> ids;
 
     uint32 desiredQuality = ITEM_QUALITY_NORMAL;
     if (level < 10)
@@ -2815,8 +2815,8 @@ void PlayerbotFactory::InitGuild()
     if (sPlayerbotAIConfig.randomBotGuilds.size() < sPlayerbotAIConfig.randomBotGuildCount)
         RandomPlayerbotFactory::CreateRandomGuilds();
 
-    vector<uint32> guilds;
-    for (list<uint32>::iterator i = sPlayerbotAIConfig.randomBotGuilds.begin(); i != sPlayerbotAIConfig.randomBotGuilds.end(); ++i)
+    std::vector<uint32> guilds;
+    for (std::list<uint32>::iterator i = sPlayerbotAIConfig.randomBotGuilds.begin(); i != sPlayerbotAIConfig.randomBotGuilds.end(); ++i)
     {
         Guild* guild = sGuildMgr.GetGuildById(*i);
         if (!guild)
@@ -2860,7 +2860,7 @@ void PlayerbotFactory::InitGuild()
 void PlayerbotFactory::InitImmersive()
 {
     uint32 owner = bot->GetObjectGuid().GetCounter();
-    map<Stats, int32> percentMap;
+    std::map<Stats, int32> percentMap;
 
     bool initialized = false;
     for (int i = STAT_STRENGTH; i < MAX_STATS; ++i)
@@ -3064,7 +3064,7 @@ void PlayerbotFactory::LoadEnchantContainer()
 void PlayerbotFactory::InitGems() //WIP
 {
 #ifndef MANGOSBOT_ZERO
-    vector<uint32> gems = sRandomItemMgr.GetGemsList();
+    std::vector<uint32> gems = sRandomItemMgr.GetGemsList();
     if (!gems.empty()) ahbot::Shuffle(gems);
 
     for (int slot = EQUIPMENT_SLOT_START; slot < EQUIPMENT_SLOT_END; slot++)
@@ -3101,7 +3101,7 @@ void PlayerbotFactory::InitGems() //WIP
                         break;
                     default:
                     {
-                        for (vector<uint32>::const_iterator itr = gems.begin(); itr != gems.end(); itr++)
+                        for (std::vector<uint32>::const_iterator itr = gems.begin(); itr != gems.end(); itr++)
                         {
                             if (ItemPrototype const* gemProto = sObjectMgr.GetItemPrototype(*itr))
                             {

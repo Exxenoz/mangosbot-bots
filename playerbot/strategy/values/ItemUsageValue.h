@@ -43,7 +43,7 @@ namespace ai
 
     public:
         static bool HasItemsNeededForSpell(uint32 spellId, ItemPrototype const* proto, Player* bot);
-        static vector<uint32> SpellsUsingItem(uint32 itemId, Player* bot);
+        static std::vector<uint32> SpellsUsingItem(uint32 itemId, Player* bot);
         static bool SpellGivesSkillUp(uint32 spellId, Player* bot);
 
         static string GetConsumableType(ItemPrototype const* proto, bool hasMana);

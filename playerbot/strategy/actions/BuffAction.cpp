@@ -44,7 +44,7 @@ public:
                 return true;
         
             if (items.find(proto->SubClass) == items.end())
-                items[proto->SubClass] = list<Item*>();
+                items[proto->SubClass] = std::list<Item*>();
 
             items[proto->SubClass].push_back(item);
             break;
@@ -54,7 +54,7 @@ public:
     }
 
 public:
-    map<uint32, list<Item*> > items;
+    std::map<uint32, std::list<Item*> > items;
 
 private:
     Player* bot;
@@ -91,9 +91,9 @@ bool BuffAction::Execute(Event event)
     IterateItems(&visitor);
 
     uint32 oldSubClass = -1;
-    for (map<uint32, list<Item*> >::iterator i = visitor.items.begin(); i != visitor.items.end(); ++i)
+    for (map<uint32, std::list<Item*> >::iterator i = visitor.items.begin(); i != visitor.items.end(); ++i)
     {
-        list<Item*> items = i->second;
+        std::list<Item*> items = i->second;
 
         uint32 subClass = i->first;
         if (oldSubClass != subClass)
@@ -102,7 +102,7 @@ bool BuffAction::Execute(Event event)
                 TellHeader(subClass);
             oldSubClass = subClass;
         }
-        for (list<Item*>::iterator j = items.begin(); j != items.end(); ++j)
+        for (std::list<Item*>::iterator j = items.begin(); j != items.end(); ++j)
         {
             Item* item = *j;
             ostringstream out;

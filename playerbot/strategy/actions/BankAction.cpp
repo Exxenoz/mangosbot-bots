@@ -11,8 +11,8 @@ bool BankAction::Execute(Event event)
 {
     string text = event.getParam();
 
-    list<ObjectGuid> npcs = AI_VALUE(list<ObjectGuid>, "nearest npcs");
-    for (list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
+    std::list<ObjectGuid> npcs = AI_VALUE(std::list<ObjectGuid>, "nearest npcs");
+    for (std::list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
     {
         Unit* npc = ai->GetUnit(*i);
         if (!npc || !npc->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_BANKER))
@@ -36,8 +36,8 @@ bool BankAction::Execute(string text, Unit* bank)
     bool result = false;
     if (text[0] == '-')
     {
-        list<Item*> found = parseItems(text.substr(1), ITERATE_ITEMS_IN_BANK);
-        for (list<Item*>::iterator i = found.begin(); i != found.end(); i++)
+        std::list<Item*> found = parseItems(text.substr(1), ITERATE_ITEMS_IN_BANK);
+        for (std::list<Item*>::iterator i = found.begin(); i != found.end(); i++)
         {
             Item* item = *i;
             result &= Withdraw(item->GetProto()->ItemId);
@@ -45,11 +45,11 @@ bool BankAction::Execute(string text, Unit* bank)
     }
     else
     {
-        list<Item*> found = parseItems(text, ITERATE_ITEMS_IN_BAGS);
+        std::list<Item*> found = parseItems(text, ITERATE_ITEMS_IN_BAGS);
         if (found.empty())
             return false;
 
-        for (list<Item*>::iterator i = found.begin(); i != found.end(); i++)
+        for (std::list<Item*>::iterator i = found.begin(); i != found.end(); i++)
         {
             Item* item = *i;
             if (!item)
@@ -109,8 +109,8 @@ void BankAction::ListItems()
 {
     ai->TellMaster("=== Bank ===");
 
-    map<uint32, int> items;
-    map<uint32, bool> soulbound;
+    std::map<uint32, int> items;
+    std::map<uint32, bool> soulbound;
     for (int i = BANK_SLOT_ITEM_START; i < BANK_SLOT_ITEM_END; ++i)
         if (Item* pItem = bot->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
             if (pItem)

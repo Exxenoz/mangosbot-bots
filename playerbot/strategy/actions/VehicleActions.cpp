@@ -16,8 +16,8 @@ bool EnterVehicleAction::Execute(Event event)
     if (transportInfo && transportInfo->IsOnVehicle())
         return false;
 
-    list<ObjectGuid> npcs = AI_VALUE(list<ObjectGuid>, "nearest vehicles");
-    for (list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
+    std::list<ObjectGuid> npcs = AI_VALUE(std::list<ObjectGuid>, "nearest vehicles");
+    for (std::list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
     {
         Unit* vehicle = ai->GetUnit(*i);
         if (!vehicle)

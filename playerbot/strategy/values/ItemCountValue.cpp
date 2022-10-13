@@ -6,12 +6,12 @@ using namespace ai;
 
 list<Item*> InventoryItemValueBase::Find(string qualifier)
 {
-    list<Item*> result;
+    std::list<Item*> result;
 
     Player* bot = InventoryAction::ai->GetBot();
 
-    list<Item*> items = InventoryAction::parseItems(qualifier);
-    for (list<Item*>::iterator i = items.begin(); i != items.end(); i++)
+    std::list<Item*> items = InventoryAction::parseItems(qualifier);
+    for (std::list<Item*>::iterator i = items.begin(); i != items.end(); i++)
         result.push_back(*i);
 
     return result;
@@ -21,8 +21,8 @@ list<Item*> InventoryItemValueBase::Find(string qualifier)
 uint32 ItemCountValue::Calculate()
 {
     uint32 count = 0;
-    list<Item*> items = Find(qualifier);
-    for (list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
+    std::list<Item*> items = Find(qualifier);
+    for (std::list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
     {
         Item* item = *i;
         count += item->GetCount();

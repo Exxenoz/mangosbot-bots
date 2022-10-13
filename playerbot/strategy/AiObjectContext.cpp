@@ -53,7 +53,7 @@ void AiObjectContext::Reset()
 
 list<string> AiObjectContext::Save()
 {
-    list<string> result;
+    std::list<string> result;
 
     set<string> names = valueContexts.GetCreated();
     for (set<string>::iterator i = names.begin(); i != names.end(); ++i)
@@ -76,12 +76,12 @@ list<string> AiObjectContext::Save()
     return result;
 }
 
-void AiObjectContext::Load(list<string> data)
+void AiObjectContext::Load(std::list<string> data)
 {
-    for (list<string>::iterator i = data.begin(); i != data.end(); ++i)
+    for (std::list<string>::iterator i = data.begin(); i != data.end(); ++i)
     {
         string row = *i;
-        vector<string> parts = split(row, '>');
+        std::vector<string> parts = split(row, '>');
         if (parts.size() != 2) continue;
 
         string name = parts[0];

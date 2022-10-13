@@ -11,8 +11,8 @@ bool ChangeCombatStrategyAction::Execute(Event event)
     ai->ChangeStrategy(text.empty() ? getName() : text, BOT_STATE_COMBAT);
     if (event.getSource() == "co")
     {
-        vector<string> splitted = split(text, ',');
-        for (vector<string>::iterator i = splitted.begin(); i != splitted.end(); i++)
+        std::vector<string> splitted = split(text, ',');
+        for (std::vector<string>::iterator i = splitted.begin(); i != splitted.end(); i++)
         {
             const char* name = i->c_str();
             switch (name[0])
@@ -48,8 +48,8 @@ bool ChangeNonCombatStrategyAction::Execute(Event event)
 
     if (event.getSource() == "nc")
     {
-        vector<string> splitted = split(text, ',');
-        for (vector<string>::iterator i = splitted.begin(); i != splitted.end(); i++)
+        std::vector<string> splitted = split(text, ',');
+        for (std::vector<string>::iterator i = splitted.begin(); i != splitted.end(); i++)
         {
             const char* name = i->c_str();
             switch (name[0])

@@ -9,7 +9,7 @@ namespace ai
 
         virtual void InitTriggers(std::list<TriggerNode*> &triggers)
         {
-            for (list<string>::iterator i = supported.begin(); i != supported.end(); i++)
+            for (std::list<string>::iterator i = supported.begin(); i != supported.end(); i++)
             {
                 string s = i->c_str();
 
@@ -20,7 +20,7 @@ namespace ai
         }
 
     protected:
-        list<string> supported;
+        std::list<string> supported;
         float relevance;
     };
 }

@@ -69,7 +69,7 @@ bool OutNumberedTrigger::IsActive()
     int32 botLevel = bot->GetLevel();
     float healthMod = bot->GetHealthPercent() / 100.0f;
     uint32 friendPower = 100 + 100 * healthMod, foePower = 0;
-    for (auto &attacker : ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("attackers")->Get())
+    for (auto &attacker : ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("attackers")->Get())
     {
         Creature* creature = ai->GetCreature(attacker);
         if (!creature)
@@ -86,7 +86,7 @@ bool OutNumberedTrigger::IsActive()
     if (!foePower)
         return false;
 
-    for (auto & helper : ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("nearest friendly players")->Get())
+    for (auto & helper : ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest friendly players")->Get())
     {
         Unit* player = ai->GetUnit(helper);
 
@@ -349,7 +349,7 @@ bool NoMovementTrigger::IsActive()
 
 bool NoPossibleTargetsTrigger::IsActive()
 {
-    list<ObjectGuid> targets = AI_VALUE(list<ObjectGuid>, "possible targets");
+    std::list<ObjectGuid> targets = AI_VALUE(std::list<ObjectGuid>, "possible targets");
     return !targets.size();
 }
 
@@ -394,7 +394,7 @@ bool IsSwimmingTrigger::IsActive()
 
 bool HasNearestAddsTrigger::IsActive()
 {
-    list<ObjectGuid> targets = AI_VALUE(list<ObjectGuid>, "nearest adds");
+    std::list<ObjectGuid> targets = AI_VALUE(std::list<ObjectGuid>, "nearest adds");
     return targets.size();
 }
 

@@ -12,7 +12,7 @@ bool TradeAction::Execute(Event event)
 
     if (!bot->GetTrader())
     {
-        list<ObjectGuid> guids = chat->parseGameobjects(text);
+        std::list<ObjectGuid> guids = chat->parseGameobjects(text);
         Player* player = nullptr;
 
         for(auto& guid: guids)
@@ -46,12 +46,12 @@ bool TradeAction::Execute(Event event)
 
     size_t pos = text.rfind(" ");
     int count = pos!=string::npos ? atoi(text.substr(pos + 1).c_str()) : 1;
-    list<Item*> found = parseItems(text);
+    std::list<Item*> found = parseItems(text);
     if (found.empty())
         return false;
 
     int traded = 0;
-    for (list<Item*>::iterator i = found.begin(); i != found.end(); i++)
+    for (std::list<Item*>::iterator i = found.begin(); i != found.end(); i++)
     {
         Item* item = *i;
 

@@ -26,7 +26,7 @@ PerformanceMonitorOperation* PerformanceMonitor::start(PerformanceMetric metric,
         if (!stack->empty())
         {
             ostringstream out; out << stackName << " [";
-            for (vector<string>::reverse_iterator i = stack->rbegin(); i != stack->rend(); ++i) 
+            for (std::vector<string>::reverse_iterator i = stack->rbegin(); i != stack->rend(); ++i) 
                 out << *i << (std::next(i)==stack->rend()? "":"|");
             out << "]";
             stackName = out.str().c_str();
@@ -67,9 +67,9 @@ void PerformanceMonitor::PrintStats(bool perTick, bool fullStack)
         sLog.outString("percentage   time    |   min  ..    max (     avg  of     count ) - type : name                        ");
 
 
-        for (map<PerformanceMetric, map<string, PerformanceData*> >::iterator i = data.begin(); i != data.end(); ++i)
+        for (map<PerformanceMetric, std::map<string, PerformanceData*> >::iterator i = data.begin(); i != data.end(); ++i)
         {
-            map<string, PerformanceData*> pdMap = i->second;
+            std::map<string, PerformanceData*> pdMap = i->second;
 
             string key;
             switch (i->first)
@@ -82,7 +82,7 @@ void PerformanceMonitor::PrintStats(bool perTick, bool fullStack)
             default: key = "?";
             }
 
-            list<string> names;
+            std::list<string> names;
 
             for (map<string, PerformanceData*>::iterator j = pdMap.begin(); j != pdMap.end(); ++j)
             {
@@ -131,9 +131,9 @@ void PerformanceMonitor::PrintStats(bool perTick, bool fullStack)
         sLog.outString("---------------------------------------[PER TICK]------------------------------------------------------");
         sLog.outString("percentage   time    |   min  ..    max (     avg  of     count ) - type : name                        ");
 
-        for (map<PerformanceMetric, map<string, PerformanceData*> >::iterator i = data.begin(); i != data.end(); ++i)
+        for (map<PerformanceMetric, std::map<string, PerformanceData*> >::iterator i = data.begin(); i != data.end(); ++i)
         {
-            map<string, PerformanceData*> pdMap = i->second;
+            std::map<string, PerformanceData*> pdMap = i->second;
 
             string key;
             switch (i->first)
@@ -146,7 +146,7 @@ void PerformanceMonitor::PrintStats(bool perTick, bool fullStack)
             default: key = "?";
             }
 
-            list<string> names;
+            std::list<string> names;
 
             for (map<string, PerformanceData*>::iterator j = pdMap.begin(); j != pdMap.end(); ++j)
             {
@@ -187,9 +187,9 @@ void PerformanceMonitor::PrintStats(bool perTick, bool fullStack)
 
 void PerformanceMonitor::Reset()
 {
-    for (map<PerformanceMetric, map<string, PerformanceData*> >::iterator i = data.begin(); i != data.end(); ++i)
+    for (map<PerformanceMetric, std::map<string, PerformanceData*> >::iterator i = data.begin(); i != data.end(); ++i)
     {
-        map<string, PerformanceData*> pdMap = i->second;
+        std::map<string, PerformanceData*> pdMap = i->second;
         for (map<string, PerformanceData*>::iterator j = pdMap.begin(); j != pdMap.end(); ++j)
         {
 #ifdef CMANGOS

@@ -24,8 +24,8 @@ bool GiveItemAction::Execute(Event event)
         return true;
 
     bool moved = false;
-    list<Item*> items = InventoryAction::parseItems(item, ITERATE_ITEMS_IN_BAGS);
-    for (list<Item*>::iterator j = items.begin(); j != items.end(); j++)
+    std::list<Item*> items = InventoryAction::parseItems(item, ITERATE_ITEMS_IN_BAGS);
+    for (std::list<Item*>::iterator j = items.begin(); j != items.end(); j++)
     {
         Item* item = *j;
 

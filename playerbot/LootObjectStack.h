@@ -69,7 +69,7 @@ namespace ai
         LootObject GetLoot(float maxDistance = 0);
 
     private:
-        vector<LootObject> OrderByDistance(float maxDistance = 0);
+        std::vector<LootObject> OrderByDistance(float maxDistance = 0);
 
     private:
         Player* bot;

@@ -8,8 +8,8 @@ using namespace ai;
 
 bool TeleportAction::Execute(Event event)
 {
-    list<ObjectGuid> gos = *context->GetValue<list<ObjectGuid> >("nearest game objects");
-    for (list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); i++)
+    std::list<ObjectGuid> gos = *context->GetValue<std::list<ObjectGuid> >("nearest game objects");
+    for (std::list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); i++)
     {
         GameObject* go = ai->GetGameObject(*i);
         if (!go)

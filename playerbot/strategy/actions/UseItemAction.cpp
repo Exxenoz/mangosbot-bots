@@ -15,14 +15,14 @@ bool UseItemAction::Execute(Event event)
    if (name.empty())
       name = getName();
 
-   list<Item*> items = AI_VALUE2(list<Item*>, "inventory items", name);
-   list<ObjectGuid> gos = chat->parseGameobjects(name);
+   std::list<Item*> items = AI_VALUE2(std::list<Item*>, "inventory items", name);
+   std::list<ObjectGuid> gos = chat->parseGameobjects(name);
 
    if (gos.empty())
    {
       if (items.size() > 1)
       {
-         list<Item*>::iterator i = items.begin();
+         std::list<Item*>::iterator i = items.begin();
          Item* itemTarget = *i++;
          Item* item = *i;
          if(item->IsPotion() || item->GetProto()->Class == ITEM_CLASS_CONSUMABLE)
@@ -541,7 +541,7 @@ bool UseRandomRecipe::isUseful()
 
 bool UseRandomRecipe::Execute(Event event)
 {
-    list<Item*> recipes = AI_VALUE2(list<Item*>, "inventory items", "recipe");   
+    std::list<Item*> recipes = AI_VALUE2(std::list<Item*>, "inventory items", "recipe");   
 
     string recipeName = "";
 
@@ -571,7 +571,7 @@ bool UseRandomQuestItem::Execute(Event event)
     Unit* unitTarget = nullptr;
     ObjectGuid goTarget = ObjectGuid();
 
-    list<Item*> questItems = AI_VALUE2(list<Item*>, "inventory items", "quest");
+    std::list<Item*> questItems = AI_VALUE2(std::list<Item*>, "inventory items", "quest");
 
     Item* item = nullptr;
     uint32 delay = 0;
@@ -603,7 +603,7 @@ bool UseRandomQuestItem::Execute(Event event)
         {
             SpellEntry const* spellInfo = sServerFacade.LookupSpellInfo(spellId);
 
-            list<ObjectGuid> npcs = AI_VALUE(list<ObjectGuid>, ("nearest npcs"));
+            std::list<ObjectGuid> npcs = AI_VALUE(std::list<ObjectGuid>, ("nearest npcs"));
             for (auto& npc : npcs)
             {
                 Unit* unit = ai->GetUnit(npc);
@@ -615,7 +615,7 @@ bool UseRandomQuestItem::Execute(Event event)
                 }
             }
 
-            list<ObjectGuid> gos = AI_VALUE(list<ObjectGuid>, ("nearest game objects"));
+            std::list<ObjectGuid> gos = AI_VALUE(std::list<ObjectGuid>, ("nearest game objects"));
             for (auto& go : gos)
             {
                 GameObject* gameObject = ai->GetGameObject(go);

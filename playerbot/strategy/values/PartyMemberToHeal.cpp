@@ -42,8 +42,8 @@ Unit* PartyMemberToHeal::Calculate()
 
     IsTargetOfHealingSpell predicate;
 
-    vector<Unit*> needHeals;
-    vector<Unit*> tankTargets;
+    std::vector<Unit*> needHeals;
+    std::vector<Unit*> tankTargets;
 
     if (bot->GetSelectionGuid())
     {
@@ -159,10 +159,10 @@ Unit* PartyMemberToProtect::Calculate()
     if (!group)
         return NULL;
 
-    vector<Unit*> needProtect;
+    std::vector<Unit*> needProtect;
 
-    list<ObjectGuid> attackers = ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("attackers")->Get();
-    for (list<ObjectGuid>::iterator i = attackers.begin(); i != attackers.end(); ++i)
+    std::list<ObjectGuid> attackers = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("attackers")->Get();
+    for (std::list<ObjectGuid>::iterator i = attackers.begin(); i != attackers.end(); ++i)
     {
         Unit* unit = ai->GetUnit(*i);
         if (!unit)

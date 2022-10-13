@@ -67,7 +67,7 @@ namespace ahbot
         uint32 GetRandomBidder(uint32 auctionHouse);
         void LoadRandomBots();
         uint32 GetAnswerCount(uint32 itemId, uint32 auctionHouse, uint32 withinTime);
-        vector<AuctionEntry*> LoadAuctions(const AuctionHouseObject::AuctionEntryMap& auctionEntryMap, Category*& category,
+        std::vector<AuctionEntry*> LoadAuctions(const AuctionHouseObject::AuctionEntryMap& auctionEntryMap, Category*& category,
                 int& auction);
         void FindMinPrice(const AuctionHouseObject::AuctionEntryMap& auctionEntryMap, AuctionEntry*& entry, Item*& item, uint32* minBid,
                 uint32* minBuyout);
@@ -78,21 +78,21 @@ namespace ahbot
         void CheckSendMail(uint32 bidder, uint32 price, AuctionEntry *entry);
         void Dump();
         void CleanupPropositions();
-        void DeleteMail(list<uint32> buffer);
+        void DeleteMail(std::list<uint32> buffer);
 
     public:
         static uint32 auctionIds[MAX_AUCTIONS];
         static uint32 auctioneers[MAX_AUCTIONS];
-        static map<uint32, uint32> factions;
+        static std::map<uint32, uint32> factions;
 
     private:
         AvailableItemsBag availableItems;
         time_t nextAICheckTime;
-        map<string, double> categoryMultipliers;
-        map<string, uint32> categoryMaxAuctionCount;
-        map<string, uint32> categoryMaxItemAuctionCount;
-        map<string, uint64> categoryMultiplierExpireTimes;
-        map<uint32, vector<uint32> > bidders;
+        std::map<string, double> categoryMultipliers;
+        std::map<string, uint32> categoryMaxAuctionCount;
+        std::map<string, uint32> categoryMaxItemAuctionCount;
+        std::map<string, uint64> categoryMultiplierExpireTimes;
+        std::map<uint32, std::vector<uint32> > bidders;
         set<uint32> allBidders;
         bool updating;
     };

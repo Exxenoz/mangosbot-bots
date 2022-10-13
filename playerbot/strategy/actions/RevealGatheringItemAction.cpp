@@ -35,13 +35,13 @@ bool RevealGatheringItemAction::Execute(Event event)
     if (!bot->GetGroup())
         return false;
 
-    list<GameObject*> targets;
+    std::list<GameObject*> targets;
     AnyGameObjectInObjectRangeCheck u_check(bot, sPlayerbotAIConfig.grindDistance);
     GameObjectListSearcher<AnyGameObjectInObjectRangeCheck> searcher(targets, u_check);
     Cell::VisitAllObjects((const WorldObject*)bot, searcher, sPlayerbotAIConfig.reactDistance);
 
-    vector<GameObject*> result;
-    for(list<GameObject*>::iterator tIter = targets.begin(); tIter != targets.end(); ++tIter)
+    std::vector<GameObject*> result;
+    for(std::list<GameObject*>::iterator tIter = targets.begin(); tIter != targets.end(); ++tIter)
     {
         GameObject* go = *tIter;
         if (!go || !sServerFacade.isSpawned(go) ||

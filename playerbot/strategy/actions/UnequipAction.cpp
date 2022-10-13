@@ -15,8 +15,8 @@ bool UnequipAction::Execute(Event event)
     ItemIds ids = chat->parseItems(text);
     if (ids.empty())
     {
-        vector<string> names = split(text, ',');
-        for (vector<string>::iterator i = names.begin(); i != names.end(); ++i)
+        std::vector<string> names = split(text, ',');
+        for (std::vector<string>::iterator i = names.begin(); i != names.end(); ++i)
         {
             uint32 slot = chat->parseSlot(*i);
             if (slot != EQUIPMENT_SLOT_END)
@@ -42,7 +42,7 @@ bool UnequipAction::Execute(Event event)
 void UnequipAction::UnequipItem(FindItemVisitor* visitor)
 {
     IterateItems(visitor, ITERATE_ALL_ITEMS);
-    list<Item*> items = visitor->GetResult();
+    std::list<Item*> items = visitor->GetResult();
 	if (!items.empty()) UnequipItem(**items.begin());
 }
 

@@ -150,7 +150,7 @@ bool MovementAction::FlyDirect(WorldPosition &startPosition, WorldPosition &endP
 
     if (movePosition.getMapId() != startPosition.getMapId() || !movePosition.isOutside()) //We can not fly to the end directly.
     {
-        vector<WorldPosition> path;
+        std::vector<WorldPosition> path;
         if (movePath.empty()) //Make a path starting at the end backwards to see if we can walk to some better place.
         {
             path = endPosition.getPathTo(startPosition, bot);
@@ -514,8 +514,8 @@ bool MovementAction::MoveTo(uint32 mapId, float x, float y, float z, bool idle, 
 
                 if (!bot->m_taxi.IsTaximaskNodeKnown(tEntry->from))
                 {
-                    list<ObjectGuid> npcs = AI_VALUE(list<ObjectGuid>, "nearest npcs");
-                    for (list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
+                    std::list<ObjectGuid> npcs = AI_VALUE(std::list<ObjectGuid>, "nearest npcs");
+                    for (std::list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
                     {
                         Creature* unit = bot->GetNPCIfCanInteractWith(*i, UNIT_NPC_FLAG_FLIGHTMASTER);
                         if (!unit)
@@ -595,7 +595,7 @@ bool MovementAction::MoveTo(uint32 mapId, float x, float y, float z, bool idle, 
 
     if (!bot->IsInCombat() && !bot->IsDead()) //Stop the path when we might get aggro.
     {
-        list<ObjectGuid> targets = AI_VALUE_LAZY(list<ObjectGuid>, "all targets");
+        std::list<ObjectGuid> targets = AI_VALUE_LAZY(std::list<ObjectGuid>, "all targets");
 
         if (!targets.empty() && movePosition)
         {
@@ -1171,7 +1171,7 @@ bool MovementAction::Follow(Unit* target, float distance, float angle)
         return false;
     }
 
-    if (sServerFacade.IsFriendlyTo(target, bot) && bot->IsMounted() && AI_VALUE(list<ObjectGuid>, "all targets").empty())
+    if (sServerFacade.IsFriendlyTo(target, bot) && bot->IsMounted() && AI_VALUE(std::list<ObjectGuid>, "all targets").empty())
         distance += angle;
 
     bot->HandleEmoteState(0);
@@ -1392,7 +1392,7 @@ bool MovementAction::Flee(Unit *target)
             float fleeDistance = ai->GetRange("spell") * 1.5;
             Unit* spareTarget = nullptr;
             float spareDistance = ai->GetRange("spell") * 2;
-            vector<Unit*> possibleTargets;
+            std::vector<Unit*> possibleTargets;
 
             for (GroupReference *gref = group->GetFirstMember(); gref; gref = gref->next())
             {
@@ -1491,7 +1491,7 @@ bool MovementAction::Flee(Unit *target)
 
     if (!urand(0, 50) && ai->HasStrategy("emote", BOT_STATE_NON_COMBAT))
     {
-        vector<uint32> sounds;
+        std::vector<uint32> sounds;
         sounds.push_back(304); // guard
         sounds.push_back(306); // flee
         ai->PlayEmote(sounds[urand(0, sounds.size() - 1)]);
@@ -1683,8 +1683,8 @@ bool MoveOutOfCollisionAction::isUseful()
         return false;
 #endif
 
-    return AI_VALUE2(bool, "collision", "self target") && ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("nearest friendly players")->Get().size() < 15 &&
-        ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("nearest non bot players")->Get().size() > 0;
+    return AI_VALUE2(bool, "collision", "self target") && ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest friendly players")->Get().size() < 15 &&
+        ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest non bot players")->Get().size() > 0;
 }
 
 bool MoveRandomAction::Execute(Event event)
@@ -1704,5 +1704,5 @@ bool MoveRandomAction::Execute(Event event)
 
 bool MoveRandomAction::isUseful()
 {    
-    return !ai->HasRealPlayerMaster() && ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("nearest friendly players")->Get().size() > urand(25, 100);
+    return !ai->HasRealPlayerMaster() && ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest friendly players")->Get().size() > urand(25, 100);
 }

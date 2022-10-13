@@ -75,7 +75,7 @@ bool GuildManageNearbyAction::Execute(Event event)
     Guild* guild = sGuildMgr.GetGuildById(bot->GetGuildId());
     MemberSlot* botMember = guild->GetMemberSlot(bot->GetObjectGuid());
 
-    list<ObjectGuid> nearGuids = ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("nearest friendly players")->Get();
+    std::list<ObjectGuid> nearGuids = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest friendly players")->Get();
     for (auto& guid : nearGuids)
     {
         Player* player = sObjectMgr.GetPlayer(guid);

@@ -29,7 +29,7 @@ namespace ai
 
     bool InviteNearbyToGroupAction::Execute(Event event)
     {
-        list<ObjectGuid> nearGuids = ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("nearest friendly players")->Get();
+        std::list<ObjectGuid> nearGuids = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest friendly players")->Get();
         for (auto& i : nearGuids)
         {
             Player* player = sObjectMgr.GetPlayer(i);
@@ -106,7 +106,7 @@ namespace ai
         return true;
     }
 
-    vector<Player*> InviteGuildToGroupAction::getGuildMembers()
+    std::vector<Player*> InviteGuildToGroupAction::getGuildMembers()
     {
         Guild* guild = sGuildMgr.GetGuildById(bot->GetGuildId());
 

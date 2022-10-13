@@ -39,8 +39,8 @@ bool BlessingTrigger::IsActive()
 
 bool BlessingOnPartyTrigger::IsActive()
 {
-    vector<std::string> altBlessings;
-    vector<std::string> haveBlessings;
+    std::vector<std::string> altBlessings;
+    std::vector<std::string> haveBlessings;
     altBlessings.push_back("blessing of might");
     altBlessings.push_back("blessing of wisdom");
     altBlessings.push_back("blessing of kings");
@@ -123,8 +123,8 @@ bool RetributionAuraTrigger::IsActive()
 
 bool PaladinAuraTrigger::IsActive()
 {
-    vector<std::string> altAuras;
-    vector<std::string> haveAuras;
+    std::vector<std::string> altAuras;
+    std::vector<std::string> haveAuras;
     altAuras.push_back("devotion aura");
     altAuras.push_back("retribution aura");
     altAuras.push_back("concentration aura");

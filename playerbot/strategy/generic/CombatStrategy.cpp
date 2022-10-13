@@ -5,7 +5,7 @@
 
 using namespace ai;
 
-void CombatStrategy::InitTriggers(list<TriggerNode*> &triggers)
+void CombatStrategy::InitTriggers(std::list<TriggerNode*> &triggers)
 {
     triggers.push_back(new TriggerNode(
         "enemy out of spell",

@@ -97,12 +97,12 @@ bool SummonAction::Execute(Event event)
 
 bool SummonAction::SummonUsingGos(Player *summoner, Player *player)
 {
-    list<GameObject*> targets;
+    std::list<GameObject*> targets;
     AnyGameObjectInObjectRangeCheck u_check(summoner, sPlayerbotAIConfig.sightDistance);
     GameObjectListSearcher<AnyGameObjectInObjectRangeCheck> searcher(targets, u_check);
     Cell::VisitAllObjects((const WorldObject*)summoner, searcher, sPlayerbotAIConfig.sightDistance);
 
-    for(list<GameObject*>::iterator tIter = targets.begin(); tIter != targets.end(); ++tIter)
+    for(std::list<GameObject*>::iterator tIter = targets.begin(); tIter != targets.end(); ++tIter)
     {
         GameObject* go = *tIter;
         if (go && sServerFacade.isSpawned(go) && go->GetGoType() == GAMEOBJECT_TYPE_MEETINGSTONE)
@@ -118,11 +118,11 @@ bool SummonAction::SummonUsingNpcs(Player *summoner, Player *player)
     if (!sPlayerbotAIConfig.summonAtInnkeepersEnabled)
         return false;
 
-    list<Unit*> targets;
+    std::list<Unit*> targets;
     AnyUnitInObjectRangeCheck u_check(summoner, sPlayerbotAIConfig.sightDistance);
     UnitListSearcher<AnyUnitInObjectRangeCheck> searcher(targets, u_check);
     Cell::VisitAllObjects(summoner, searcher, sPlayerbotAIConfig.sightDistance);
-    for(list<Unit*>::iterator tIter = targets.begin(); tIter != targets.end(); ++tIter)
+    for(std::list<Unit*>::iterator tIter = targets.begin(); tIter != targets.end(); ++tIter)
     {
         Unit* unit = *tIter;
         if (unit && unit->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_INNKEEPER))

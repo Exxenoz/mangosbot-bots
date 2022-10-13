@@ -22,8 +22,8 @@ bool OutfitListValue::Load(string text)
 {
     value.clear();
 
-    vector<string> ss = split(text, '^');
-    for (vector<string>::iterator i = ss.begin(); i != ss.end(); ++i)
+    std::vector<string> ss = split(text, '^');
+    for (std::vector<string>::iterator i = ss.begin(); i != ss.end(); ++i)
     {
         value.push_back(*i);
     }

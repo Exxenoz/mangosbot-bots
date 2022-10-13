@@ -20,8 +20,8 @@ namespace ai
         void setNewTarget(TravelTarget* newTarget, TravelTarget* oldTarget);
         void ReportTravelTarget(TravelTarget* newTarget, TravelTarget* oldTarget);
 
-        vector<WorldPosition*> getLogicalPoints(vector<WorldPosition*>& travelPoints);
-        bool SetBestTarget(TravelTarget* target, vector<TravelDestination*>& activeDestinations);
+        std::vector<WorldPosition*> getLogicalPoints(std::vector<WorldPosition*>& travelPoints);
+        bool SetBestTarget(TravelTarget* target, std::vector<TravelDestination*>& activeDestinations);
 
         bool SetGroupTarget(TravelTarget* target);
         bool SetCurrentTarget(TravelTarget* target, TravelTarget* oldTarget);
@@ -30,7 +30,7 @@ namespace ai
         bool SetGrindTarget(TravelTarget* target);
         bool SetBossTarget(TravelTarget* target);
         bool SetExploreTarget(TravelTarget* target);
-        bool SetNpcFlagTarget(TravelTarget* target, vector<NPCFlags> flags, string name = "", vector<uint32> items = {});
+        bool SetNpcFlagTarget(TravelTarget* target, std::vector<NPCFlags> flags, string name = "", std::vector<uint32> items = {});
         bool SetNullTarget(TravelTarget* target);
 
     public:

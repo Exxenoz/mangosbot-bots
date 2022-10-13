@@ -17,7 +17,7 @@ namespace ai
         static bool isFollowValid(Player* bot, WorldPosition pos);
     private:        
         float getMaxRelevance(GuidPosition guidP);
-        bool HasSameTarget(ObjectGuid guid, uint32 max, list<ObjectGuid>& nearGuids);
+        bool HasSameTarget(ObjectGuid guid, uint32 max, std::list<ObjectGuid>& nearGuids);
 
         unordered_map <ObjectGuid, string> rgpActionReason;
     };

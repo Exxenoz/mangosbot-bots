@@ -11,8 +11,8 @@ bool CheatAction::Execute(Event event)
 
     uint32 cheatMask = (uint32)ai->GetCheat();
 
-    vector<string> splitted = split(param, ',');
-    for (vector<string>::iterator i = splitted.begin(); i != splitted.end(); i++)
+    std::vector<string> splitted = split(param, ',');
+    for (std::vector<string>::iterator i = splitted.begin(); i != splitted.end(); i++)
     {
         const char* name = i->c_str();
         switch (name[0])

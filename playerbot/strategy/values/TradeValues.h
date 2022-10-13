@@ -4,12 +4,12 @@
 namespace ai
 {
    
-    class ItemsUsefulToGiveValue : public CalculatedValue< list<Item*>>, public Qualified
+    class ItemsUsefulToGiveValue : public CalculatedValue< std::list<Item*>>, public Qualified
 	{
 	public:
         ItemsUsefulToGiveValue(PlayerbotAI* ai, string name = "useful to give") : CalculatedValue(ai, name) {}
 
-        list<Item*> Calculate();
+        std::list<Item*> Calculate();
     private:
         bool IsTradingItem(uint32 entry);
     };

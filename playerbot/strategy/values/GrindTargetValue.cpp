@@ -31,8 +31,8 @@ Unit* GrindTargetValue::FindTargetForGrinding(int assistCount)
     Group* group = bot->GetGroup();
     Player* master = GetMaster();
 
-    list<ObjectGuid> attackers = context->GetValue<list<ObjectGuid> >("attackers")->Get();
-    for (list<ObjectGuid>::iterator i = attackers.begin(); i != attackers.end(); i++)
+    std::list<ObjectGuid> attackers = context->GetValue<std::list<ObjectGuid> >("attackers")->Get();
+    for (std::list<ObjectGuid>::iterator i = attackers.begin(); i != attackers.end(); i++)
     {
         Unit* unit = ai->GetUnit(*i);
         if (!unit || !sServerFacade.IsAlive(unit))
@@ -41,7 +41,7 @@ Unit* GrindTargetValue::FindTargetForGrinding(int assistCount)
         return unit;
     }
 
-    list<ObjectGuid> targets = *context->GetValue<list<ObjectGuid> >("possible targets");
+    std::list<ObjectGuid> targets = *context->GetValue<std::list<ObjectGuid> >("possible targets");
 
     if (targets.empty())
         return NULL;
@@ -49,9 +49,9 @@ Unit* GrindTargetValue::FindTargetForGrinding(int assistCount)
     float distance = 0;
     Unit* result = NULL;
 
-    unordered_map<uint32, bool> needForQuestMap;
+    std::unordered_map<uint32, bool> needForQuestMap;
 
-    for (list<ObjectGuid>::iterator tIter = targets.begin(); tIter != targets.end(); tIter++)
+    for (std::list<ObjectGuid>::iterator tIter = targets.begin(); tIter != targets.end(); tIter++)
     {
         Unit* unit = ai->GetUnit(*tIter);
         if (!unit)

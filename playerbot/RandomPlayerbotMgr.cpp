@@ -463,7 +463,7 @@ void RandomPlayerbotMgr::UpdateAIInternal(uint32 elapsed, bool minimal)
             urand(sPlayerbotAIConfig.randomBotCountChangeMinInterval, sPlayerbotAIConfig.randomBotCountChangeMaxInterval));
     }
 
-    list<uint32> availableBots = GetBots();    
+    std::list<uint32> availableBots = GetBots();    
     uint32 availableBotCount = availableBots.size();
     uint32 onlineBotCount = playerBots.size();
     
@@ -592,7 +592,7 @@ uint32 RandomPlayerbotMgr::AddRandomBots()
         PlayerbotDatabase.AllowAsyncTransactions();
         PlayerbotDatabase.BeginTransaction();
 
-        for (list<uint32>::iterator i = sPlayerbotAIConfig.randomBotAccounts.begin(); i != sPlayerbotAIConfig.randomBotAccounts.end(); i++)
+        for (std::list<uint32>::iterator i = sPlayerbotAIConfig.randomBotAccounts.begin(); i != sPlayerbotAIConfig.randomBotAccounts.end(); i++)
         {
             uint32 accountId = *i;
             QueryResult* result = CharacterDatabase.PQuery("SELECT guid FROM characters WHERE account = '%u'", accountId);
@@ -754,7 +754,7 @@ void RandomPlayerbotMgr::CheckBgQueue()
         }
     }
 
-    for (vector<Player*>::iterator i = players.begin(); i != players.end(); ++i)
+    for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i)
     {
         Player* player = *i;
 
@@ -1054,7 +1054,7 @@ void RandomPlayerbotMgr::CheckLfgQueue()
     LfgDungeons[HORDE].clear();
     LfgDungeons[ALLIANCE].clear();
 
-    for (vector<Player*>::iterator i = players.begin(); i != players.end(); ++i)
+    for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i)
     {
         Player* player = *i;
 
@@ -1252,7 +1252,7 @@ void RandomPlayerbotMgr::CheckPlayers()
         playersLevel = sPlayerbotAIConfig.randombotStartingLevel;
 
 
-    for (vector<Player*>::iterator i = players.begin(); i != players.end(); ++i)
+    for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i)
     {
         Player* player = *i;
 
@@ -1471,7 +1471,7 @@ bool RandomPlayerbotMgr::ProcessBot(Player* player)
             {
                 Guild* guild = sGuildMgr.GetGuildById(player->GetGuildId());
                 if (guild->GetLeaderGuid().GetRawValue() == player->GetObjectGuid().GetRawValue()) {
-                    for (vector<Player*>::iterator i = players.begin(); i != players.end(); ++i)
+                    for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); ++i)
                         sGuildTaskMgr.Update(*i, player);
                 }
 
@@ -1531,7 +1531,7 @@ void RandomPlayerbotMgr::Revive(Player* player)
     }
 }
 
-void RandomPlayerbotMgr::RandomTeleport(Player* bot, vector<WorldLocation> &locs, bool hearth, bool activeOnly)
+void RandomPlayerbotMgr::RandomTeleport(Player* bot, std::vector<WorldLocation> &locs, bool hearth, bool activeOnly)
 {
     if (bot->IsBeingTeleported())
         return;
@@ -1554,7 +1554,7 @@ void RandomPlayerbotMgr::RandomTeleport(Player* bot, vector<WorldLocation> &locs
         return;
     }
 
-    vector<WorldPosition> tlocs;
+    std::vector<WorldPosition> tlocs;
 
     for (auto& loc : locs)
         tlocs.push_back(WorldPosition(loc));
@@ -1905,9 +1905,9 @@ void RandomPlayerbotMgr::RandomTeleport(Player* bot)
         return;
 
     PerformanceMonitorOperation *pmo = sPerformanceMonitor.start(PERF_MON_RNDBOT, "RandomTeleport");
-    vector<WorldLocation> locs;
+    std::vector<WorldLocation> locs;
 
-    list<Unit*> targets;
+    std::list<Unit*> targets;
     float range = sPlayerbotAIConfig.randomBotTeleportDistance;
     MaNGOS::AnyUnitInObjectRangeCheck u_check(bot, range);
     MaNGOS::UnitListSearcher<MaNGOS::AnyUnitInObjectRangeCheck> searcher(targets, u_check);
@@ -1915,7 +1915,7 @@ void RandomPlayerbotMgr::RandomTeleport(Player* bot)
 
     if (!targets.empty())
     {
-        for (list<Unit *>::iterator i = targets.begin(); i != targets.end(); ++i)
+        for (std::list<Unit *>::iterator i = targets.begin(); i != targets.end(); ++i)
         {
             Unit* unit = *i;
             bot->SetPosition(unit->GetPositionX(), unit->GetPositionY(), unit->GetPositionZ(), 0);
@@ -2184,7 +2184,7 @@ list<uint32> RandomPlayerbotMgr::GetBgBots(uint32 bracket)
 
     QueryResult* results = PlayerbotDatabase.PQuery(
         "select bot from ai_playerbot_random_bots where event = 'bg' AND value = '%d'", bracket);
-    list<uint32> BgBots;
+    std::list<uint32> BgBots;
     if (results)
     {
         do
@@ -2353,11 +2353,11 @@ bool RandomPlayerbotMgr::HandlePlayerbotConsoleCommand(ChatHandler* handler, cha
     if (cmd.find("pid ") != std::string::npos)
     {
         string pids = cmd.substr(4);
-        vector<string> pid = Qualified::getMultiQualifiers(pids);
+        std::vector<string> pid = Qualified::getMultiQualifiers(pids);
         sRandomPlayerbotMgr.pid.adjust(stof(pid[0]), stof(pid[1]), stof(pid[2]));
     }
 
-    map<string, ConsoleCommandHandler> handlers;
+    std::map<string, ConsoleCommandHandler> handlers;
     handlers["init"] = &RandomPlayerbotMgr::RandomizeFirst;
     handlers["upgrade"] = &RandomPlayerbotMgr::UpdateGearSpells;
     handlers["refresh"] = &RandomPlayerbotMgr::Refresh;
@@ -2373,8 +2373,8 @@ bool RandomPlayerbotMgr::HandlePlayerbotConsoleCommand(ChatHandler* handler, cha
         if (cmd.find(prefix) != 0) continue;
         string name = cmd.size() > prefix.size() + 1 ? cmd.substr(1 + prefix.size()) : "%";
 
-        list<uint32> botIds;
-        for (list<uint32>::iterator i = sPlayerbotAIConfig.randomBotAccounts.begin(); i != sPlayerbotAIConfig.randomBotAccounts.end(); ++i)
+        std::list<uint32> botIds;
+        for (std::list<uint32>::iterator i = sPlayerbotAIConfig.randomBotAccounts.begin(); i != sPlayerbotAIConfig.randomBotAccounts.end(); ++i)
         {
             uint32 account = *i;
             if (QueryResult* results = CharacterDatabase.PQuery("SELECT guid FROM characters where account = '%u' and name like '%s'",
@@ -2403,7 +2403,7 @@ bool RandomPlayerbotMgr::HandlePlayerbotConsoleCommand(ChatHandler* handler, cha
         }
 
         int processed = 0;
-        for (list<uint32>::iterator i = botIds.begin(); i != botIds.end(); ++i)
+        for (std::list<uint32>::iterator i = botIds.begin(); i != botIds.end(); ++i)
         {
             ObjectGuid guid = ObjectGuid(HIGHGUID_PLAYER, *i);
             Player* bot = sObjectMgr.GetPlayer(guid);
@@ -2419,8 +2419,8 @@ bool RandomPlayerbotMgr::HandlePlayerbotConsoleCommand(ChatHandler* handler, cha
         return true;
     }
 
-    list<string> messages = sRandomPlayerbotMgr.HandlePlayerbotCommand(args, NULL);
-    for (list<string>::iterator i = messages.begin(); i != messages.end(); ++i)
+    std::list<string> messages = sRandomPlayerbotMgr.HandlePlayerbotCommand(args, NULL);
+    for (std::list<string>::iterator i = messages.begin(); i != messages.end(); ++i)
     {
         sLog.outString("%s",i->c_str());
     }
@@ -2470,7 +2470,7 @@ void RandomPlayerbotMgr::OnPlayerLogout(Player* player)
         }
     }
 
-    vector<Player*>::iterator i = find(players.begin(), players.end(), player);
+    std::vector<Player*>::iterator i = find(players.begin(), players.end(), player);
     if (i != players.end())
         players.erase(i);
 }
@@ -2539,7 +2539,7 @@ void RandomPlayerbotMgr::OnPlayerLogin(Player* player)
         }
         else
         {
-            vector<TravelDestination*> dests = sTravelMgr.getRpgTravelDestinations(player, true, true, 200000.0f);
+            std::vector<TravelDestination*> dests = sTravelMgr.getRpgTravelDestinations(player, true, true, 200000.0f);
 
             do
             {
@@ -2595,14 +2595,14 @@ void RandomPlayerbotMgr::PrintStats()
 {
     sLog.outString("%lu Random Bots online", playerBots.size());
 
-    map<uint32, int> alliance, horde;
+    std::map<uint32, int> alliance, horde;
     for (uint32 i = 0; i < 10; ++i)
     {
         alliance[i] = 0;
         horde[i] = 0;
     }
 
-    map<uint8, int> perRace, perClass;
+    std::map<uint8, int> perRace, perClass;
     for (uint8 race = RACE_HUMAN; race < MAX_RACES; ++race)
     {
         perRace[race] = 0;
@@ -2614,7 +2614,7 @@ void RandomPlayerbotMgr::PrintStats()
 
     int dps = 0, heal = 0, tank = 0, active = 0, update = 0, randomize = 0, teleport = 0, changeStrategy = 0, dead = 0, combat = 0, revive = 0, taxi = 0, moving = 0, mounted = 0, afk = 0;
     int stateCount[MAX_TRAVEL_STATE + 1] = { 0 };
-    vector<pair<Quest const*, int32>> questCount;
+    std::vector<pair<Quest const*, int32>> questCount;
     for (PlayerBotMap::iterator i = playerBots.begin(); i != playerBots.end(); ++i)
     {
         Player* bot = i->second;
@@ -2965,7 +2965,7 @@ uint32 RandomPlayerbotMgr::GetBattleMasterEntry(Player* bot, BattleGroundTypeId 
 {
     Team team = bot->GetTeam();
     uint32 entry = 0;
-    vector<uint32> Bms;
+    std::vector<uint32> Bms;
 
     for (auto i = begin(BattleMastersCache[team][bgTypeId]); i != end(BattleMastersCache[team][bgTypeId]); ++i)
     {
@@ -3046,7 +3046,7 @@ void RandomPlayerbotMgr::Hotfix(Player* bot, uint32 version)
                     break;
                 }
 
-                for (list<uint32>::iterator i = factory.classQuestIds.begin(); i != factory.classQuestIds.end(); ++i)
+                for (std::list<uint32>::iterator i = factory.classQuestIds.begin(); i != factory.classQuestIds.end(); ++i)
                 {
                     uint32 questId = *i;
                     Quest const *quest = sObjectMgr.GetQuestTemplate(questId);

@@ -110,9 +110,9 @@ bool compare_items_by_level(const Item* item1, const Item* item2)
     return compare_items(item1->GetProto(), item2->GetProto());
 }
 
-void InventoryAction::TellItems(map<uint32, int> itemMap, map<uint32, bool> soulbound)
+void InventoryAction::TellItems(map<uint32, int> itemMap, std::map<uint32, bool> soulbound)
 {
-    list<ItemPrototype const*> items;
+    std::list<ItemPrototype const*> items;
     for (map<uint32, int>::iterator i = itemMap.begin(); i != itemMap.end(); i++)
     {
         items.push_back(sObjectMgr.GetItemPrototype(i->first));
@@ -121,7 +121,7 @@ void InventoryAction::TellItems(map<uint32, int> itemMap, map<uint32, bool> soul
     items.sort(compare_items);
 
     uint32 oldClass = -1;
-    for (list<ItemPrototype const*>::iterator i = items.begin(); i != items.end(); i++)
+    for (std::list<ItemPrototype const*>::iterator i = items.begin(); i != items.end(); i++)
     {
         ItemPrototype const *proto = *i;
 
@@ -201,7 +201,7 @@ list<Item*> InventoryAction::parseItems(string text, IterateItemsMask mask)
             found.insert(visitor.GetResult().begin(), visitor.GetResult().end());
         }
 
-        list<Item*> result;
+        std::list<Item*> result;
         for (set<Item*>::iterator i = found.begin(); i != found.end(); ++i)
             result.push_back(*i);
 
@@ -319,7 +319,7 @@ list<Item*> InventoryAction::parseItems(string text, IterateItemsMask mask)
         found.insert(visitor.GetResult().begin(), visitor.GetResult().end());
     }
 
-    list<Item*> result;
+    std::list<Item*> result;
     for (set<Item*>::iterator i = found.begin(); i != found.end(); ++i)
         result.push_back(*i);
 
@@ -332,8 +332,8 @@ uint32 InventoryAction::GetItemCount(FindItemVisitor* visitor, IterateItemsMask 
 {
     IterateItems(visitor, mask);
     uint32 count = 0;
-    list<Item*>& items = visitor->GetResult();
-    for (list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
+    std::list<Item*>& items = visitor->GetResult();
+    for (std::list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
     {
         Item* item = *i;
         count += item->GetCount();
@@ -344,8 +344,8 @@ uint32 InventoryAction::GetItemCount(FindItemVisitor* visitor, IterateItemsMask 
 
 ItemIds InventoryAction::FindOutfitItems(string name)
 {
-    list<string>& outfits = AI_VALUE(list<string>&, "outfit list");
-    for (list<string>::iterator i = outfits.begin(); i != outfits.end(); ++i)
+    std::list<string>& outfits = AI_VALUE(std::list<string>&, "outfit list");
+    for (std::list<string>::iterator i = outfits.begin(); i != outfits.end(); ++i)
     {
         string outfit = *i;
         if (name == parseOutfitName(outfit))

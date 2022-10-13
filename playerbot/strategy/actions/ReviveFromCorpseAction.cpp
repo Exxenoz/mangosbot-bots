@@ -111,7 +111,7 @@ bool FindCorpseAction::Execute(Event event)
             return false;
         else 
         {
-            list<ObjectGuid> units = AI_VALUE(list<ObjectGuid>, "possible targets no los");
+            std::list<ObjectGuid> units = AI_VALUE(std::list<ObjectGuid>, "possible targets no los");
             
             if (botPos.getUnitsAggro(units, bot) == 0) //There are no mobs near.
                 return false;
@@ -220,7 +220,7 @@ WorldSafeLocsEntry const* SpiritHealerAction::GetGrave(bool startZone)
     }
 
 
-    vector<uint32> races;
+    std::vector<uint32> races;
 
     if (bot->GetTeam() == ALLIANCE)
         races = { RACE_HUMAN, RACE_DWARF,RACE_GNOME,RACE_NIGHTELF };
@@ -276,8 +276,8 @@ bool SpiritHealerAction::Execute(Event event)
 
     if (bot->GetDistance2d(ClosestGrave->x, ClosestGrave->y) < sPlayerbotAIConfig.sightDistance)
     {
-        list<ObjectGuid> npcs = AI_VALUE(list<ObjectGuid>, "nearest npcs");
-        for (list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
+        std::list<ObjectGuid> npcs = AI_VALUE(std::list<ObjectGuid>, "nearest npcs");
+        for (std::list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
         {
             Unit* unit = ai->GetUnit(*i);
             if (unit && unit->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_SPIRITHEALER))

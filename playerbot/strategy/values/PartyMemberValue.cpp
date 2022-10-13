@@ -7,9 +7,9 @@
 using namespace ai;
 using namespace std;
 
-Unit* PartyMemberValue::FindPartyMember(list<Player*>* party, FindPlayerPredicate &predicate)
+Unit* PartyMemberValue::FindPartyMember(std::list<Player*>* party, FindPlayerPredicate &predicate)
 {
-    for (list<Player*>::iterator i = party->begin(); i != party->end(); ++i)
+    for (std::list<Player*>::iterator i = party->begin(); i != party->end(); ++i)
     {
         Player* player = *i;
 
@@ -30,11 +30,11 @@ Unit* PartyMemberValue::FindPartyMember(list<Player*>* party, FindPlayerPredicat
 Unit* PartyMemberValue::FindPartyMember(FindPlayerPredicate &predicate, bool ignoreOutOfGroup)
 {
     Player* master = GetMaster();
-    list<ObjectGuid> nearestPlayers;
+    std::list<ObjectGuid> nearestPlayers;
     if(ai->AllowActivity(OUT_OF_PARTY_ACTIVITY))
-        nearestPlayers = AI_VALUE(list<ObjectGuid>, "nearest friendly players");      
+        nearestPlayers = AI_VALUE(std::list<ObjectGuid>, "nearest friendly players");      
 
-    list<ObjectGuid> nearestGroupPlayers;
+    std::list<ObjectGuid> nearestGroupPlayers;
 
     Group* group = bot->GetGroup();
     if (group)
@@ -62,9 +62,9 @@ Unit* PartyMemberValue::FindPartyMember(FindPlayerPredicate &predicate, bool ign
 
     nearestPlayers = nearestGroupPlayers;
 
-    list<Player*> healers, tanks, others, masters;
+    std::list<Player*> healers, tanks, others, masters;
     if (master) masters.push_back(master);
-    for (list<ObjectGuid>::iterator i = nearestPlayers.begin(); i != nearestPlayers.end(); ++i)
+    for (std::list<ObjectGuid>::iterator i = nearestPlayers.begin(); i != nearestPlayers.end(); ++i)
     {
         Player* player = dynamic_cast<Player*>(ai->GetUnit(*i));
         if (!player || player == bot) continue;
@@ -77,15 +77,15 @@ Unit* PartyMemberValue::FindPartyMember(FindPlayerPredicate &predicate, bool ign
             others.push_back(player);
     }
 
-    list<list<Player*>* > lists;
+    std::list<list<Player*>* > lists;
     lists.push_back(&healers);
     lists.push_back(&tanks);
     lists.push_back(&masters);
     lists.push_back(&others);
 
-    for (list<list<Player*>* >::iterator i = lists.begin(); i != lists.end(); ++i)
+    for (std::list<std::list<Player*>* >::iterator i = lists.begin(); i != lists.end(); ++i)
     {
-        list<Player*>* party = *i;
+        std::list<Player*>* party = *i;
         Unit* target = FindPartyMember(party, predicate);
         if (target)
             return target;
@@ -102,11 +102,11 @@ bool PartyMemberValue::Check(Unit* player)
 
 bool PartyMemberValue::IsTargetOfSpellCast(Player* target, SpellEntryPredicate &predicate)
 {
-    list<ObjectGuid> nearestPlayers = AI_VALUE(list<ObjectGuid>, "nearest friendly players");
+    std::list<ObjectGuid> nearestPlayers = AI_VALUE(std::list<ObjectGuid>, "nearest friendly players");
     ObjectGuid targetGuid = target ? target->GetObjectGuid() : bot->GetObjectGuid();
     ObjectGuid corpseGuid = target && target->GetCorpse() ? target->GetCorpse()->GetObjectGuid() : ObjectGuid();
 
-    for (list<ObjectGuid>::iterator i = nearestPlayers.begin(); i != nearestPlayers.end(); ++i)
+    for (std::list<ObjectGuid>::iterator i = nearestPlayers.begin(); i != nearestPlayers.end(); ++i)
     {
         Player* player = dynamic_cast<Player*>(ai->GetUnit(*i));
         if (!player || player == bot)

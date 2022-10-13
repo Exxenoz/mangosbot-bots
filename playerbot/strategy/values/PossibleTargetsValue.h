@@ -12,7 +12,7 @@ namespace ai
           NearestUnitsValue(ai, name, range, ignoreLos) {}
 
     protected:
-        virtual void FindUnits(list<Unit*> &targets);
+        virtual void FindUnits(std::list<Unit*> &targets);
         virtual bool AcceptUnit(Unit* unit);
 
 	};

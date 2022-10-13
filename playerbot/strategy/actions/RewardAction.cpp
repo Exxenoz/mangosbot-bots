@@ -16,16 +16,16 @@ bool RewardAction::Execute(Event event)
 
     uint32 itemId = *itemIds.begin();
 
-    list<ObjectGuid> npcs = AI_VALUE(list<ObjectGuid>, "nearest npcs");
-    for (list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
+    std::list<ObjectGuid> npcs = AI_VALUE(std::list<ObjectGuid>, "nearest npcs");
+    for (std::list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
     {
         Unit* npc = ai->GetUnit(*i);
         if (npc && Reward(itemId, npc))
             return true;
     }
 
-    list<ObjectGuid> gos = AI_VALUE(list<ObjectGuid>, "nearest game objects");
-    for (list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); i++)
+    std::list<ObjectGuid> gos = AI_VALUE(std::list<ObjectGuid>, "nearest game objects");
+    for (std::list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); i++)
     {
         GameObject* go = ai->GetGameObject(*i);
         if (go && Reward(itemId, go))

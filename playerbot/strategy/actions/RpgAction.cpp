@@ -42,9 +42,9 @@ bool RpgAction::SetNextRpgAction()
     
     
 
-    vector<Action*> actions;
-    vector<uint32> relevances;
-    list<TriggerNode*> triggerNodes;
+    std::vector<Action*> actions;
+    std::vector<uint32> relevances;
+    std::list<TriggerNode*> triggerNodes;
 
     for (auto& strategy : ai->GetAiObjectContext()->GetSupportedStrategies())
     {
@@ -94,7 +94,7 @@ bool RpgAction::SetNextRpgAction()
             }
         }
 
-        for (list<TriggerNode*>::iterator i = triggerNodes.begin(); i != triggerNodes.end(); i++)
+        for (std::list<TriggerNode*>::iterator i = triggerNodes.begin(); i != triggerNodes.end(); i++)
         {
             TriggerNode* trigger = *i;
             delete trigger;
@@ -107,7 +107,7 @@ bool RpgAction::SetNextRpgAction()
 
     if (ai->HasStrategy("debug rpg", BOT_STATE_NON_COMBAT))
     {
-        vector<pair<Action*, uint32>> sortedActions;
+        std::vector<pair<Action*, uint32>> sortedActions;
         
         for (int i = 0; i < actions.size(); i++)
             sortedActions.push_back(make_pair(actions[i], relevances[i]));

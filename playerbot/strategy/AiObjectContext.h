@@ -85,10 +85,10 @@ namespace ai
         {
             valueContexts.Add(sharedValues);
         }
-        list<string> Save();
-        void Load(list<string> data);
+        std::list<string> Save();
+        void Load(std::list<string> data);
 
-        vector<string> performanceStack;
+        std::vector<string> performanceStack;
     protected:
         NamedObjectContextList<Strategy> strategyContexts;
         NamedObjectContextList<Action> actionContexts;

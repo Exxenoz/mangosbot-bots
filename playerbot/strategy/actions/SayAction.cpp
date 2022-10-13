@@ -15,7 +15,7 @@ SayAction::SayAction(PlayerbotAI* ai) : Action(ai, "say"), Qualified()
 bool SayAction::Execute(Event event)
 {
     string text = "";
-    map<string, string> placeholders;
+    std::map<string, string> placeholders;
     Unit* target = AI_VALUE(Unit*, "tank target");
     if (!target) target = AI_VALUE(Unit*, "current target");
 
@@ -54,7 +54,7 @@ bool SayAction::Execute(Event event)
     Group* group = bot->GetGroup();
     if (group)
     {
-        vector<Player*> members;
+        std::vector<Player*> members;
         for (GroupReference* ref = group->GetFirstMember(); ref; ref = ref->next())
         {
             Player* member = ref->getSource();
@@ -77,7 +77,7 @@ bool SayAction::Execute(Event event)
         }
 
         int index = 0;
-        for (vector<Player*>::iterator i = members.begin(); i != members.end(); ++i)
+        for (std::vector<Player*>::iterator i = members.begin(); i != members.end(); ++i)
         {
             PlayerbotAI* memberAi = (*i)->GetPlayerbotAI();
             if (memberAi)

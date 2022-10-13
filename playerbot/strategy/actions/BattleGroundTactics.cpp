@@ -3383,7 +3383,7 @@ bool BGTactics::selectObjective(bool reset)
                             {
                                 float const distance = sqrt(bot->GetDistance(pGO));
                                 // do not pick if already in list
-                                vector<GameObject*>::iterator f = find(objectives.begin(), objectives.end(), pGO);
+                                std::vector<GameObject*>::iterator f = find(objectives.begin(), objectives.end(), pGO);
                                 if (f != objectives.end())
                                     continue;
 
@@ -3394,7 +3394,7 @@ bool BGTactics::selectObjective(bool reset)
                                 //if (attackObjectiveDistance > distance)
                                 //{
                                 //    // do not pick if already in list
-                                //    vector<GameObject*>::iterator f = find(objectives.begin(), objectives.end(), pGO);
+                                //    std::vector<GameObject*>::iterator f = find(objectives.begin(), objectives.end(), pGO);
                                 //    if (f != objectives.end())
                                 //        continue;
 
@@ -3435,7 +3435,7 @@ bool BGTactics::selectObjective(bool reset)
                         {
                             float const distance = sqrt(bot->GetDistance(pGO));
                             // do not pick if already in list
-                            vector<GameObject*>::iterator f = find(objectives.begin(), objectives.end(), pGO);
+                            std::vector<GameObject*>::iterator f = find(objectives.begin(), objectives.end(), pGO);
                             if (f != objectives.end())
                                 continue;
 
@@ -3447,7 +3447,7 @@ bool BGTactics::selectObjective(bool reset)
                             //if (attackObjectiveDistance > distance)
                             //{
                             //    // do not pick if already in list
-                            //    vector<GameObject*>::iterator f = find(objectives.begin(), objectives.end(), pGO);
+                            //    std::vector<GameObject*>::iterator f = find(objectives.begin(), objectives.end(), pGO);
                             //    if (f != objectives.end())
                             //        continue;
 
@@ -4587,8 +4587,8 @@ bool BGTactics::atFlag(std::vector<BattleBotPath*> const& vPaths, std::vector<ui
         bgType = bg->GetTypeId(true);
 #endif
 
-    list<ObjectGuid> closeObjects;
-    list<ObjectGuid> closePlayers;
+    std::list<ObjectGuid> closeObjects;
+    std::list<ObjectGuid> closePlayers;
     float flagRange;
 
     switch (bgType)
@@ -4599,8 +4599,8 @@ bool BGTactics::atFlag(std::vector<BattleBotPath*> const& vPaths, std::vector<ui
     case BATTLEGROUND_IC:
 #endif
     {
-        closeObjects = *context->GetValue<list<ObjectGuid> >("closest game objects");
-        closePlayers = *context->GetValue<list<ObjectGuid> >("closest friendly players");
+        closeObjects = *context->GetValue<std::list<ObjectGuid> >("closest game objects");
+        closePlayers = *context->GetValue<std::list<ObjectGuid> >("closest friendly players");
         flagRange = INTERACTION_DISTANCE;
         break;
     }
@@ -4609,8 +4609,8 @@ bool BGTactics::atFlag(std::vector<BattleBotPath*> const& vPaths, std::vector<ui
     case BATTLEGROUND_EY:
 #endif
     {
-        closeObjects = *context->GetValue<list<ObjectGuid> >("nearest game objects no los");
-        closePlayers = *context->GetValue<list<ObjectGuid> >("closest friendly players");
+        closeObjects = *context->GetValue<std::list<ObjectGuid> >("nearest game objects no los");
+        closePlayers = *context->GetValue<std::list<ObjectGuid> >("closest friendly players");
         flagRange = VISIBILITY_DISTANCE_TINY;
         break;
     }
@@ -4636,13 +4636,13 @@ bool BGTactics::atFlag(std::vector<BattleBotPath*> const& vPaths, std::vector<ui
     //ostringstream out; out << "Found " << closeObjects.size() << " nearby objects";
     //bot->Say(out.str(), LANG_UNIVERSAL);
 
-    for (list<ObjectGuid>::iterator i = closeObjects.begin(); i != closeObjects.end(); ++i)
+    for (std::list<ObjectGuid>::iterator i = closeObjects.begin(); i != closeObjects.end(); ++i)
     {
         GameObject* go = ai->GetGameObject(*i);
         if (!go)
             continue;
 
-        vector<uint32>::const_iterator f = find(vFlagIds.begin(), vFlagIds.end(), go->GetEntry());
+        std::vector<uint32>::const_iterator f = find(vFlagIds.begin(), vFlagIds.end(), go->GetEntry());
         if (f == vFlagIds.end())
             continue;
 
@@ -4841,7 +4841,7 @@ bool BGTactics::useBuff()
         bgType = bg->GetTypeId(true);
 #endif
 
-    list<ObjectGuid> closeObjects = AI_VALUE(list<ObjectGuid>, "nearest game objects no los");
+    std::list<ObjectGuid> closeObjects = AI_VALUE(std::list<ObjectGuid>, "nearest game objects no los");
 
     if (closeObjects.empty())
         return false;
@@ -4854,7 +4854,7 @@ bool BGTactics::useBuff()
 #endif
     bool foundBuff = false;
 
-    for (list<ObjectGuid>::iterator i = closeObjects.begin(); i != closeObjects.end(); ++i)
+    for (std::list<ObjectGuid>::iterator i = closeObjects.begin(); i != closeObjects.end(); ++i)
     {
         GameObject* go = ai->GetGameObject(*i);
         if (!go)
@@ -4946,8 +4946,8 @@ bool BGTactics::IsLockedInsideKeep()
     if (!isInside)
         return false;
 
-    list<ObjectGuid> closeObjects;
-    closeObjects = *context->GetValue<list<ObjectGuid> >("nearest game objects no los");
+    std::list<ObjectGuid> closeObjects;
+    closeObjects = *context->GetValue<std::list<ObjectGuid> >("nearest game objects no los");
     if (closeObjects.empty())
         return moveToStart(true);
 
@@ -4987,7 +4987,7 @@ bool BGTactics::IsLockedInsideKeep()
         }
     }
 
-    for (list<ObjectGuid>::iterator i = closeObjects.begin(); i != closeObjects.end(); ++i)
+    for (std::list<ObjectGuid>::iterator i = closeObjects.begin(); i != closeObjects.end(); ++i)
     {
         GameObject* go = ai->GetGameObject(*i);
         if (!go)

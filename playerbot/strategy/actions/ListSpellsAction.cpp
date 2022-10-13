@@ -85,7 +85,7 @@ list<pair<uint32, string> > ListSpellsAction::GetSpellList(string filter)
 
     uint32 skill = 0;
 
-    vector<string> ss = split(filter, ' ');
+    std::vector<string> ss = split(filter, ' ');
     if (!ss.empty())
     {
         skill = chat->parseSkill(ss[0]);
@@ -108,7 +108,7 @@ list<pair<uint32, string> > ListSpellsAction::GetSpellList(string filter)
     int minLevel = 0, maxLevel = 0;
     if (filter.find("-") != string::npos)
     {
-        vector<string> ff = split(filter, '-');
+        std::vector<string> ff = split(filter, '-');
         minLevel = atoi(ff[0].c_str());
         maxLevel = atoi(ff[1].c_str());
         filter = "";
@@ -125,7 +125,7 @@ list<pair<uint32, string> > ListSpellsAction::GetSpellList(string filter)
     if (slot != EQUIPMENT_SLOT_END)
         filter = "";
 
-    list<pair<uint32, string> > spells;
+    std::list<pair<uint32, string> > spells;
     for (PlayerSpellMap::iterator itr = bot->GetSpellMap().begin(); itr != bot->GetSpellMap().end(); ++itr) {
         const uint32 spellId = itr->first;
 
@@ -268,13 +268,13 @@ bool ListSpellsAction::Execute(Event event)
 
     string filter = event.getParam();
 
-    list<pair<uint32, string> > spells = GetSpellList(filter);
+    std::list<pair<uint32, string> > spells = GetSpellList(filter);
 
     ai->TellMaster("=== Spells ===");
     spells.sort(CompareSpells);
 
     int count = 0;
-    for (list<pair<uint32, string> >::iterator i = spells.begin(); i != spells.end(); ++i)
+    for (std::list<pair<uint32, string> >::iterator i = spells.begin(); i != spells.end(); ++i)
     {
         ai->TellMasterNoFacing(i->second);
         if (++count >= 50)

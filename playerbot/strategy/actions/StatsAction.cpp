@@ -39,7 +39,7 @@ void StatsAction::ListPower(ostringstream& out)
 {
     uint32 totalPower = 0;
 
-    vector<uint32> qualityCount = { 0,0,0,0,0,0,0 };
+    std::vector<uint32> qualityCount = { 0,0,0,0,0,0,0 };
 
     for (int i = EQUIPMENT_SLOT_START; i < EQUIPMENT_SLOT_END; ++i)
     {

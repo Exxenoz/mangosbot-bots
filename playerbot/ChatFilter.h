@@ -20,6 +20,6 @@ namespace ai
         string Filter(string message);
 
     private:
-        list<ChatFilter*> filters;
+        std::list<ChatFilter*> filters;
     };
 };

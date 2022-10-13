@@ -43,7 +43,7 @@ bool GoAction::Execute(Event event)
         TravelDestination* dest = ChooseTravelTargetAction::FindDestination(bot, destination);
         if(dest)
         {
-            vector <WorldPosition*> points = dest->nextPoint(botPos, true);
+            std::vector <WorldPosition*> points = dest->nextPoint(botPos, true);
 
             if (points.empty())
                 return false;
@@ -65,10 +65,10 @@ bool GoAction::Execute(Event event)
         }
     }
 
-    list<ObjectGuid> gos = ChatHelper::parseGameobjects(param);
+    std::list<ObjectGuid> gos = ChatHelper::parseGameobjects(param);
     if (!gos.empty())
     {
-        for (list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); ++i)
+        for (std::list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); ++i)
         {
             GameObject* go = ai->GetGameObject(*i);
             if (go && sServerFacade.isSpawned(go))
@@ -87,12 +87,12 @@ bool GoAction::Execute(Event event)
         return false;
     }
 
-    list<ObjectGuid> units;
-    list<ObjectGuid> npcs = AI_VALUE(list<ObjectGuid>, "nearest npcs");
+    std::list<ObjectGuid> units;
+    std::list<ObjectGuid> npcs = AI_VALUE(std::list<ObjectGuid>, "nearest npcs");
     units.insert(units.end(), npcs.begin(), npcs.end());
-    list<ObjectGuid> players = AI_VALUE(list<ObjectGuid>, "nearest friendly players");
+    std::list<ObjectGuid> players = AI_VALUE(std::list<ObjectGuid>, "nearest friendly players");
     units.insert(units.end(), players.begin(), players.end());
-    for (list<ObjectGuid>::iterator i = units.begin(); i != units.end(); i++)
+    for (std::list<ObjectGuid>::iterator i = units.begin(); i != units.end(); i++)
     {
         Unit* unit = ai->GetUnit(*i);
         if (unit && strstri(unit->GetName(), param.c_str()))
@@ -105,7 +105,7 @@ bool GoAction::Execute(Event event)
 
     if (param.find(";") != string::npos)
     {
-        vector<string> coords = split(param, ';');
+        std::vector<string> coords = split(param, ';');
         float x = atof(coords[0].c_str());
         float y = atof(coords[1].c_str());
         float z;
@@ -163,7 +163,7 @@ bool GoAction::Execute(Event event)
 
     if (param.find(",") != string::npos)
     {
-        vector<string> coords = split(param, ',');
+        std::vector<string> coords = split(param, ',');
         float x = atof(coords[0].c_str());
         float y = atof(coords[1].c_str());
         Zone2MapCoordinates(x, y, bot->GetZoneId());

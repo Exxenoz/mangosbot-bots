@@ -22,8 +22,8 @@ bool GuildBankAction::Execute(Event event)
             return false;
     }
 
-    list<ObjectGuid> gos = *ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("nearest game objects");
-    for (list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); ++i)
+    std::list<ObjectGuid> gos = *ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest game objects");
+    for (std::list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); ++i)
     {
         GameObject* go = ai->GetGameObject(*i);
         if (!go || !bot->GetGameObjectIfCanInteractWith(go->GetObjectGuid(), GAMEOBJECT_TYPE_GUILD_BANK))
@@ -43,11 +43,11 @@ bool GuildBankAction::Execute(string text, GameObject* bank)
 {
     bool result = true;
 
-    list<Item*> found = parseItems(text);
+    std::list<Item*> found = parseItems(text);
     if (found.empty())
         return false;
 
-    for (list<Item*>::iterator i = found.begin(); i != found.end(); i++)
+    for (std::list<Item*>::iterator i = found.begin(); i != found.end(); i++)
     {
         Item* item = *i;
         if (item)

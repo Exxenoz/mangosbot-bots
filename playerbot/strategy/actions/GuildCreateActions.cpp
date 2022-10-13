@@ -16,9 +16,9 @@ using namespace ai;
 
 bool BuyPetitionAction::Execute(Event event)
 {
-    list<ObjectGuid> vendors = ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("nearest npcs")->Get();
+    std::list<ObjectGuid> vendors = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest npcs")->Get();
     bool vendored = false, result = false;
-    for (list<ObjectGuid>::iterator i = vendors.begin(); i != vendors.end(); ++i)
+    for (std::list<ObjectGuid>::iterator i = vendors.begin(); i != vendors.end(); ++i)
     {
         ObjectGuid vendorguid = *i;
         Creature* pCreature = bot->GetNPCIfCanInteractWith(vendorguid, UNIT_NPC_FLAG_PETITIONER);
@@ -108,7 +108,7 @@ bool BuyPetitionAction::canBuyPetition(Player* bot)
 bool PetitionOfferAction::Execute(Event event)
 {
     uint32 petitionEntry = 5863; //GUILD_CHARTER
-    list<Item*> petitions = AI_VALUE2(list<Item*>, "inventory items", chat->formatQItem(5863));
+    std::list<Item*> petitions = AI_VALUE2(std::list<Item*>, "inventory items", chat->formatQItem(5863));
 
     if (petitions.empty())
         return false;
@@ -163,7 +163,7 @@ bool PetitionOfferNearbyAction::Execute(Event event)
 {
     uint32 found = 0;
 
-    list<ObjectGuid> nearGuids = ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("nearest friendly players")->Get();
+    std::list<ObjectGuid> nearGuids = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest friendly players")->Get();
     for (auto& i : nearGuids)
     {
         Player* player = sObjectMgr.GetPlayer(i);
@@ -212,15 +212,15 @@ bool PetitionOfferNearbyAction::Execute(Event event)
 
 bool PetitionTurnInAction::Execute(Event event)
 {
-    list<ObjectGuid> vendors = ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("nearest npcs")->Get();
+    std::list<ObjectGuid> vendors = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest npcs")->Get();
     bool vendored = false, result = false;
 
-    list<Item*> petitions = AI_VALUE2(list<Item*>, "inventory items", chat->formatQItem(5863));
+    std::list<Item*> petitions = AI_VALUE2(std::list<Item*>, "inventory items", chat->formatQItem(5863));
 
     if (petitions.empty())
         return false;
 
-    for (list<ObjectGuid>::iterator i = vendors.begin(); i != vendors.end(); ++i)
+    for (std::list<ObjectGuid>::iterator i = vendors.begin(); i != vendors.end(); ++i)
     {
         ObjectGuid vendorguid = *i;
         Creature* pCreature = bot->GetNPCIfCanInteractWith(vendorguid, UNIT_NPC_FLAG_PETITIONER);

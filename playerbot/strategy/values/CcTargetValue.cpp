@@ -92,9 +92,9 @@ private:
 
 Unit* CcTargetValue::Calculate()
 {
-    list<ObjectGuid> possible = ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("possible targets no los")->Get();
+    std::list<ObjectGuid> possible = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("possible targets no los")->Get();
 
-    for (list<ObjectGuid>::iterator i = possible.begin(); i != possible.end(); ++i)
+    for (std::list<ObjectGuid>::iterator i = possible.begin(); i != possible.end(); ++i)
     {
         ObjectGuid guid = *i;
         Unit* add = ai->GetUnit(guid);

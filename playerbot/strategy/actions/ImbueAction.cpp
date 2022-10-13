@@ -55,10 +55,10 @@ bool ImbueWithPoisonAction::Execute(Event event)
           if (bot->InBattleGround())
           {
               std::string poisonName = urand(0, 1) ? "crippling poison" : "mind-numbing poison";
-              list<Item*> items = AI_VALUE2(list<Item*>, "inventory items", poisonName);
+              std::list<Item*> items = AI_VALUE2(std::list<Item*>, "inventory items", poisonName);
               if (items.size())
               {
-                  list<Item*>::iterator i = items.begin();
+                  std::list<Item*>::iterator i = items.begin();
                   Item* item = *i;
                   if (item)
                   {

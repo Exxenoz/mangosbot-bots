@@ -68,7 +68,7 @@ struct ItemInfoEntry
         itemSpec = ITEM_SPEC_NONE;
     }
 
-    map<uint32, uint32> weights;
+    std::map<uint32, uint32> weights;
     uint32 minLevel;
     uint32 itemLevel;
     uint32 source;
@@ -85,8 +85,8 @@ struct ItemInfoEntry
     ItemSpecType itemSpec;
 };
 
-typedef vector<WeightScaleStat> WeightScaleStats;
-//typedef map<WeightScaleInfo, WeightScaleStats> WeightScaleList;
+typedef std::vector<WeightScaleStat> WeightScaleStats;
+//typedef std::map<WeightScaleInfo, WeightScaleStats> WeightScaleList;
 
 struct WeightScale
 {
@@ -94,7 +94,7 @@ struct WeightScale
     WeightScaleStats stats;
 };
 
-//typedef map<uint32, WeightScale> WeightScales;
+//typedef std::map<uint32, WeightScale> WeightScales;
 
 class RandomItemPredicate
 {
@@ -103,8 +103,8 @@ public:
     virtual bool Apply(ItemPrototype const* proto) = 0;
 };
 
-typedef vector<uint32> RandomItemList;
-typedef map<RandomItemType, RandomItemList> RandomItemCache;
+typedef std::vector<uint32> RandomItemList;
+typedef std::map<RandomItemType, RandomItemList> RandomItemCache;
 
 class BotEquipKey
 {
@@ -131,7 +131,7 @@ public:
     }
 };
 
-typedef map<BotEquipKey, RandomItemList> BotEquipCache;
+typedef std::map<BotEquipKey, RandomItemList> BotEquipCache;
 
 class RandomItemMgr
 {
@@ -151,7 +151,7 @@ class RandomItemMgr
         RandomItemList Query(uint32 level, RandomItemType type, RandomItemPredicate* predicate);
         RandomItemList Query(uint32 level, uint8 clazz, uint8 specId, uint8 slot, uint32 quality);
         uint32 GetUpgrade(Player* player, std::string spec, uint8 slot, uint32 quality, uint32 itemId);
-        vector<uint32> GetUpgradeList(Player* player, uint32 specId, uint8 slot, uint32 quality, uint32 itemId, uint32 amount = 1);
+        std::vector<uint32> GetUpgradeList(Player* player, uint32 specId, uint8 slot, uint32 quality, uint32 itemId, uint32 amount = 1);
         bool HasStatWeight(uint32 itemId);
         uint32 GetMinLevelFromCache(uint32 itemId);
         uint32 GetStatWeight(Player* player, uint32 itemId);
@@ -163,7 +163,7 @@ class RandomItemMgr
         uint32 GetRandomFood(uint32 level, uint32 category);
         uint32 GetFood(uint32 level, uint32 category);
         uint32 GetRandomTrade(uint32 level);
-        vector<uint32> GetGemsList();
+        std::vector<uint32> GetGemsList();
         uint32 CalculateStatWeight(uint8 playerclass, uint8 spec, ItemPrototype const* proto, ItemSpecType &itSpec);
         uint32 CalculateSingleStatWeight(uint8 playerclass, uint8 spec, std::string stat, uint32 value);
         bool CanEquipArmor(uint8 clazz, uint8 spec, uint32 level, ItemPrototype const* proto);
@@ -173,7 +173,7 @@ class RandomItemMgr
         bool CheckItemSpec(uint8 spec, ItemSpecType itSpec);
         float GetItemRarity(uint32 itemId);
         uint32 GetQuestIdForItem(uint32 itemId);
-        vector<uint32> GetQuestIdsForItem(uint32 itemId);
+        std::vector<uint32> GetQuestIdsForItem(uint32 itemId);
         std::string GetPlayerSpecName(Player* player);
         uint32 GetPlayerSpecId(Player* player);
 
@@ -192,19 +192,19 @@ class RandomItemMgr
         bool CheckItemStats(uint8 clazz, uint8 sp, uint8 ap, uint8 tank);
 
     private:
-        map<uint32, RandomItemCache> randomItemCache;
-        map<RandomItemType, RandomItemPredicate*> predicates;
+        std::map<uint32, RandomItemCache> randomItemCache;
+        std::map<RandomItemType, RandomItemPredicate*> predicates;
         BotEquipCache equipCache;
-        map<EquipmentSlots, set<InventoryType> > viableSlots;
-        map<uint32, map<uint32, uint32> > ammoCache;
-        map<uint32, map<uint32, vector<uint32> > > potionCache;
-        map<uint32, map<uint32, vector<uint32> > > foodCache;
-        map<uint32, vector<uint32> > tradeCache;
-        map<uint32, float> rarityCache;
-        map<uint32, WeightScale> m_weightScales;
-        map<string, uint32 > weightStatLink;
-        map<string, uint32 > weightRatingLink;
-        map<uint32, ItemInfoEntry*> itemInfoCache;
+        std::map<EquipmentSlots, set<InventoryType> > viableSlots;
+        std::map<uint32, std::map<uint32, uint32> > ammoCache;
+        std::map<uint32, std::map<uint32, std::vector<uint32> > > potionCache;
+        std::map<uint32, std::map<uint32, std::vector<uint32> > > foodCache;
+        std::map<uint32, std::vector<uint32> > tradeCache;
+        std::map<uint32, float> rarityCache;
+        std::map<uint32, WeightScale> m_weightScales;
+        std::map<string, uint32 > weightStatLink;
+        std::map<string, uint32 > weightRatingLink;
+        std::map<uint32, ItemInfoEntry*> itemInfoCache;
 };
 
 #define sRandomItemMgr RandomItemMgr::instance()

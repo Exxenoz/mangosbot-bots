@@ -29,8 +29,8 @@ string GetActualBlessingOfWisdom(Unit* target, bool greater = false)
 
 Unit* CastBlessingOnPartyAction::GetTarget()
 {
-    vector<std::string> altBlessings;
-    vector<std::string> haveBlessings;
+    std::vector<std::string> altBlessings;
+    std::vector<std::string> haveBlessings;
     altBlessings.push_back("blessing of might");
     altBlessings.push_back("blessing of wisdom");
     altBlessings.push_back("blessing of kings");
@@ -48,11 +48,11 @@ Unit* CastBlessingOnPartyAction::GetTarget()
     if (haveBlessings.empty())
         return NULL;
 
-    list<ObjectGuid> nearestPlayers;
+    std::list<ObjectGuid> nearestPlayers;
     /*if (ai->AllowActivity(OUT_OF_PARTY_ACTIVITY))
-        nearestPlayers = AI_VALUE(list<ObjectGuid>, "nearest friendly players");*/
+        nearestPlayers = AI_VALUE(std::list<ObjectGuid>, "nearest friendly players");*/
 
-    list<ObjectGuid> nearestGroupPlayers;
+    std::list<ObjectGuid> nearestGroupPlayers;
 
     Group* group = bot->GetGroup();
     if (group)
@@ -154,8 +154,8 @@ bool CastBlessingOnPartyAction::Execute(Event event)
 
     if (mainTarget && mainGreaterTarget && !ai->HasMyAura(mainGreatBlessing, mainTarget->Get())*/
 
-    vector<std::string> altBlessings;
-    vector<std::string> haveBlessings;
+    std::vector<std::string> altBlessings;
+    std::vector<std::string> haveBlessings;
     altBlessings.push_back("blessing of might");
     altBlessings.push_back("blessing of wisdom");
     altBlessings.push_back("blessing of kings");
@@ -200,8 +200,8 @@ bool CastBlessingOnPartyAction::Execute(Event event)
 bool CastPaladinAuraAction::Execute(Event event)
 {
     std::string mainAura = m_name;
-    vector<std::string> altAuras;
-    vector<std::string> haveAuras;
+    std::vector<std::string> altAuras;
+    std::vector<std::string> haveAuras;
     altAuras.push_back("devotion aura");
     altAuras.push_back("retribution aura");
     altAuras.push_back("concentration aura");

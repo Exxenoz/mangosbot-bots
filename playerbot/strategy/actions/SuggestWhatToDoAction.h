@@ -13,7 +13,7 @@ namespace ai
 
     protected:
         typedef void (SuggestWhatToDoAction::*Suggestion) ();
-        vector<Suggestion> suggestions;
+        std::vector<Suggestion> suggestions;
         void instance();
         void specificQuest();
         void grindMaterials();
@@ -22,11 +22,11 @@ namespace ai
         void trade();
         void spam(string msg, uint8 flags = 0, bool worldChat = false, bool guild = false);
 
-        vector<uint32> GetIncompletedQuests();
+        std::vector<uint32> GetIncompletedQuests();
 
     private:
-        static map<string, int> instances;
-        static map<string, int> factions;
+        static std::map<string, int> instances;
+        static std::map<string, int> factions;
         int32 _locale;
     };
 

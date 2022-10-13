@@ -28,13 +28,13 @@ namespace ai
             return true;
         }
 
-        list<Item*>& GetResult() { return result; }
+        std::list<Item*>& GetResult() { return result; }
 
     protected:
         virtual bool Accept(const ItemPrototype* proto) = 0;
 
     private:
-        list<Item*> result;
+        std::list<Item*> result;
     };
 
     enum IterateItemsMask
@@ -86,7 +86,7 @@ namespace ai
             return true;
         }
 
-        list<Item*>& GetResult()
+        std::list<Item*>& GetResult()
         {
             return result;
         }
@@ -94,7 +94,7 @@ namespace ai
     private:
         uint32 quality;
         int count;
-        list<Item*> result;
+        std::list<Item*> result;
     };
 
     class FindItemsToTradeByQualityVisitor : public FindItemsByQualityVisitor
@@ -132,7 +132,7 @@ namespace ai
             return true;
         }
 
-        list<Item*>& GetResult()
+        std::list<Item*>& GetResult()
         {
             return result;
         }
@@ -141,7 +141,7 @@ namespace ai
         uint32 itemClass;
         uint32 itemSubClass;
         int count;
-        list<Item*> result;
+        std::list<Item*> result;
     };
 
     class QueryItemCountVisitor : public IterateItemsVisitor
@@ -243,8 +243,8 @@ namespace ai
     public:
         ListItemsVisitor() : IterateItemsVisitor() {}
 
-        map<uint32, int> items;
-        map<uint32, bool> soulbound;
+        std::map<uint32, int> items;
+        std::map<uint32, bool> soulbound;
 
         virtual bool Visit(Item* item)
         {
@@ -275,7 +275,7 @@ namespace ai
         }
 
     public:
-        map<uint32, int> count;
+        std::map<uint32, int> count;
     };
 
 

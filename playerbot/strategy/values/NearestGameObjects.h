@@ -11,7 +11,7 @@ namespace ai
             ObjectGuidListCalculatedValue(ai, name), range(range) , ignoreLos(ignoreLos) {}
 
     protected:
-        virtual list<ObjectGuid> Calculate();
+        virtual std::list<ObjectGuid> Calculate();
 
     private:
         float range;

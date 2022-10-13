@@ -12,7 +12,7 @@ namespace ai
           NearestUnitsValue(ai, "nearest corpses", range) {}
 
     protected:
-        void FindUnits(list<Unit*> &targets);
+        void FindUnits(std::list<Unit*> &targets);
         bool AcceptUnit(Unit* unit);
 
 	};

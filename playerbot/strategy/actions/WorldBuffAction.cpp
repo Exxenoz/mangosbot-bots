@@ -21,7 +21,7 @@ bool WorldBuffAction::Execute(Event event)
 
 vector<uint32> WorldBuffAction::NeedWorldBuffs(Unit* unit)
 {
-    vector<uint32> retVec;
+    std::vector<uint32> retVec;
 
     if (sPlayerbotAIConfig.worldBuffs.empty())
         return retVec;

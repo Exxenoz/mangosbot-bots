@@ -89,7 +89,7 @@ bool CleanQuestLogAction::Execute(Event event)
 
 void CleanQuestLogAction::DropQuestType(uint8 &numQuest, uint8 wantNum, bool isGreen, bool hasProgress, bool isComplete)
 {
-    vector<uint8> slots;
+    std::vector<uint8> slots;
 
     for (uint8 slot = 0; slot < MAX_QUEST_LOG_SIZE; ++slot)
         slots.push_back(slot);

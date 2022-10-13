@@ -26,7 +26,7 @@ void PlayerbotDbStore::Load(PlayerbotAI *ai)
         ai->ChangeStrategy("+chat", BOT_STATE_COMBAT);
         ai->ChangeStrategy("+chat", BOT_STATE_NON_COMBAT);
 
-        list<string> values;
+        std::list<string> values;
         do
         {
             Field* fields = results->Fetch();
@@ -50,8 +50,8 @@ void PlayerbotDbStore::Save(PlayerbotAI *ai)
 
     Reset(ai);
 
-    list<string> data = ai->GetAiObjectContext()->Save();
-    for (list<string>::iterator i = data.begin(); i != data.end(); ++i)
+    std::list<string> data = ai->GetAiObjectContext()->Save();
+    for (std::list<string>::iterator i = data.begin(); i != data.end(); ++i)
     {
         SaveValue(guid, "value", *i);
     }
@@ -61,10 +61,10 @@ void PlayerbotDbStore::Save(PlayerbotAI *ai)
     SaveValue(guid, "dead", FormatStrategies("dead", ai->GetStrategies(BOT_STATE_DEAD)));
 }
 
-string PlayerbotDbStore::FormatStrategies(string type, list<string> strategies)
+string PlayerbotDbStore::FormatStrategies(string type, std::list<string> strategies)
 {
     ostringstream out;
-    for(list<string>::iterator i = strategies.begin(); i != strategies.end(); ++i)
+    for(std::list<string>::iterator i = strategies.begin(); i != strategies.end(); ++i)
         out << "+" << (*i).c_str() << ",";
 
 	string res = out.str();

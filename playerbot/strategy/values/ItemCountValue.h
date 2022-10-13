@@ -12,7 +12,7 @@ namespace ai
         virtual bool Execute(Event event) { return false; }
 
     protected:
-        list<Item*> Find(string qualifier);
+        std::list<Item*> Find(string qualifier);
     };
 
     class ItemCountValue : public Uint32CalculatedValue, public Qualified, InventoryItemValueBase
@@ -24,29 +24,29 @@ namespace ai
         virtual uint32 Calculate();
 	};
 
-    class InventoryItemValue : public CalculatedValue<list<Item*> >, public Qualified, InventoryItemValueBase
+    class InventoryItemValue : public CalculatedValue<std::list<Item*> >, public Qualified, InventoryItemValueBase
     {
     public:
-        InventoryItemValue(PlayerbotAI* ai, string name = "inventory items") : CalculatedValue<list<Item*> >(ai, name), InventoryItemValueBase(ai) {}
+        InventoryItemValue(PlayerbotAI* ai, string name = "inventory items") : CalculatedValue<std::list<Item*> >(ai, name), InventoryItemValueBase(ai) {}
 
     public:
-        virtual list<Item*> Calculate();
+        virtual std::list<Item*> Calculate();
     };
 
-    class InventoryItemIdValue : public CalculatedValue<list<uint32> >, public Qualified
+    class InventoryItemIdValue : public CalculatedValue<std::list<uint32> >, public Qualified
     {
     public:
-        InventoryItemIdValue(PlayerbotAI* ai, string name = "inventory item ids") : CalculatedValue<list<uint32> >(ai, name) {}
+        InventoryItemIdValue(PlayerbotAI* ai, string name = "inventory item ids") : CalculatedValue<std::list<uint32> >(ai, name) {}
     public:
-        virtual list<uint32> Calculate() {list<uint32> retVal;  for (auto& item : AI_VALUE2(list<Item*>, "inventory items", getQualifier())) { ItemPrototype const* proto = item->GetProto();  retVal.push_back(proto->ItemId);} return retVal;};
+        virtual std::list<uint32> Calculate() {list<uint32> retVal;  for (auto& item : AI_VALUE2(std::list<Item*>, "inventory items", getQualifier())) { ItemPrototype const* proto = item->GetProto();  retVal.push_back(proto->ItemId);} return retVal;};
     };
 
-    class EquipedUsableTrinketValue : public CalculatedValue<list<Item*> >, public Qualified, InventoryItemValueBase
+    class EquipedUsableTrinketValue : public CalculatedValue<std::list<Item*> >, public Qualified, InventoryItemValueBase
     {
     public:
-        EquipedUsableTrinketValue(PlayerbotAI* ai) : CalculatedValue<list<Item*> >(ai), InventoryItemValueBase(ai) {}
+        EquipedUsableTrinketValue(PlayerbotAI* ai) : CalculatedValue<std::list<Item*> >(ai), InventoryItemValueBase(ai) {}
 
     public:
-        virtual list<Item*> Calculate();
+        virtual std::list<Item*> Calculate();
     };
 }

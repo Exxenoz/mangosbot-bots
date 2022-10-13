@@ -13,8 +13,8 @@ namespace ai
     public:
         bool Calculate()
         {
-            list<ObjectGuid> units = *context->GetValue<list<ObjectGuid> >("nearest npcs");
-            for (list<ObjectGuid>::iterator i = units.begin(); i != units.end(); i++)
+            std::list<ObjectGuid> units = *context->GetValue<std::list<ObjectGuid> >("nearest npcs");
+            for (std::list<ObjectGuid>::iterator i = units.begin(); i != units.end(); i++)
             {
                 Unit* unit = ai->GetUnit(*i);
                 if (!unit)

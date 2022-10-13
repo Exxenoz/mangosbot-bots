@@ -178,7 +178,7 @@ namespace ai
         CastPolymorphAction(PlayerbotAI* ai) : CastCrowdControlSpellAction(ai, "polymorph") {}
         virtual bool Execute(Event event)
         {
-            vector<string> polySpells;
+            std::vector<string> polySpells;
             polySpells.push_back("polymorph");
             if (bot->HasSpell(28271))
                 polySpells.push_back("polymorph: turtle");

@@ -81,7 +81,7 @@ bool BGJoinAction::Execute(Event event)
         {
             isArena = true;
 
-            vector<uint32>::iterator i = find(ratedList.begin(), ratedList.end(), queueTypeId);
+            std::vector<uint32>::iterator i = find(ratedList.begin(), ratedList.end(), queueTypeId);
             if (i != ratedList.end())
                 isRated = true;
 
@@ -136,7 +136,7 @@ bool BGJoinAction::gatherArenaTeam(ArenaType type)
         return false;
     }
 
-    vector<uint32> members;
+    std::vector<uint32> members;
 
     // search for arena team members and make them online
     for (ArenaTeam::MemberList::iterator itr = arenateam->GetMembers().begin(); itr != arenateam->GetMembers().end(); ++itr)

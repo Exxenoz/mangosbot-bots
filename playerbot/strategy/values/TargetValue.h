@@ -25,8 +25,8 @@ namespace ai
         PlayerbotAI* ai;
 
     protected:
-        map<Unit*, int> tankCountCache;
-        map<Unit*, int> dpsCountCache;
+        std::map<Unit*, int> tankCountCache;
+        std::map<Unit*, int> dpsCountCache;
     };
 
     class FindNonCcTargetStrategy : public FindTargetStrategy

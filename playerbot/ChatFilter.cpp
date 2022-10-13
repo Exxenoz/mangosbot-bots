@@ -157,7 +157,7 @@ public:
 
         bool found = false;
         bool isRti = false;
-        for (list<string>::iterator i = rtis.begin(); i != rtis.end(); i++)
+        for (std::list<string>::iterator i = rtis.begin(); i != rtis.end(); i++)
         {
             string rti = *i;
 
@@ -188,7 +188,7 @@ public:
     }
 
 private:
-    list<string> rtis;
+    std::list<string> rtis;
 };
 
 class ClassChatFilter : public ChatFilter
@@ -234,7 +234,7 @@ public:
     }
 
 private:
-    map<string, uint8> classNames;
+    std::map<string, uint8> classNames;
 };
 
 class SubGroupChatFilter : public ChatFilter
@@ -281,7 +281,7 @@ CompositeChatFilter::CompositeChatFilter(PlayerbotAI* ai) : ChatFilter(ai)
 
 CompositeChatFilter::~CompositeChatFilter()
 {
-    for (list<ChatFilter*>::iterator i = filters.begin(); i != filters.end(); i++)
+    for (std::list<ChatFilter*>::iterator i = filters.begin(); i != filters.end(); i++)
         delete (*i);
 }
 
@@ -289,7 +289,7 @@ string CompositeChatFilter::Filter(string message)
 {
     for (int j = 0; j < filters.size(); ++j)
     {
-        for (list<ChatFilter*>::iterator i = filters.begin(); i != filters.end(); i++)
+        for (std::list<ChatFilter*>::iterator i = filters.begin(); i != filters.end(); i++)
         {
             message = (*i)->Filter(message);
             if (message.empty())

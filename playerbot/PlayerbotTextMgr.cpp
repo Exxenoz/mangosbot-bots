@@ -92,7 +92,7 @@ string PlayerbotTextMgr::GetBotText(string name)
         return "";
     }
 
-    vector<BotTextEntry>& list = botTexts[name];
+    std::vector<BotTextEntry>& list = botTexts[name];
     BotTextEntry textEntry = list[urand(0, list.size() - 1)];
     int32 localePrio = GetLocalePriority();
     if (localePrio == -1)
@@ -106,7 +106,7 @@ string PlayerbotTextMgr::GetBotText(string name)
     }
 }
 
-string PlayerbotTextMgr::GetBotText(string name, map<string, string> placeholders)
+string PlayerbotTextMgr::GetBotText(string name, std::map<string, string> placeholders)
 {
     string botText = GetBotText(name);
     if (botText.empty())
@@ -120,7 +120,7 @@ string PlayerbotTextMgr::GetBotText(string name, map<string, string> placeholder
 
 // chat replies
 
-string PlayerbotTextMgr::GetBotText(ChatReplyType replyType, map<string, string> placeholders)
+string PlayerbotTextMgr::GetBotText(ChatReplyType replyType, std::map<string, string> placeholders)
 {
     if (botTexts.empty())
     {
@@ -133,8 +133,8 @@ string PlayerbotTextMgr::GetBotText(ChatReplyType replyType, map<string, string>
         return "";
     }
 
-    vector<BotTextEntry>& list = botTexts["reply"];
-    vector<BotTextEntry> proper_list;
+    std::vector<BotTextEntry>& list = botTexts["reply"];
+    std::vector<BotTextEntry> proper_list;
     for (auto text : list)
     {
         if (text.m_replyType == replyType)
@@ -162,7 +162,7 @@ string PlayerbotTextMgr::GetBotText(ChatReplyType replyType, map<string, string>
 
 string PlayerbotTextMgr::GetBotText(ChatReplyType replyType, string name)
 {
-    map<string, string> placeholders;
+    std::map<string, string> placeholders;
     placeholders["%s"] = name;
 
     return GetBotText(replyType, placeholders);
@@ -187,7 +187,7 @@ bool PlayerbotTextMgr::GetBotText(string name, string &text)
     return !text.empty();
 }
 
-bool PlayerbotTextMgr::GetBotText(string name, string& text, map<string, string> placeholders)
+bool PlayerbotTextMgr::GetBotText(string name, string& text, std::map<string, string> placeholders)
 {
     if (!rollTextChance(name))
         return false;

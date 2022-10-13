@@ -6,7 +6,7 @@ using namespace ai;
 
 bool UseTrinketAction::Execute(Event event)
 {
-	auto trinkets = AI_VALUE(list<Item*>, "trinkets on use");
+	auto trinkets = AI_VALUE(std::list<Item*>, "trinkets on use");
 
 	if (trinkets.empty())
 		return false;
@@ -29,5 +29,5 @@ bool UseTrinketAction::Execute(Event event)
 
 bool UseTrinketAction::isPossible()
 {
-	return AI_VALUE(list<Item*>, "trinkets on use").size() > 0;
+	return AI_VALUE(std::list<Item*>, "trinkets on use").size() > 0;
 }

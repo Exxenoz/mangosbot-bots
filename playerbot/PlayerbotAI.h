@@ -228,7 +228,7 @@ public:
     void AddPacket(const WorldPacket& packet);
 
 private:
-    map<uint16, string> handlers;
+    std::map<uint16, string> handlers;
     stack<WorldPacket> queue;
 };
 
@@ -279,7 +279,7 @@ public:
     virtual bool DoSpecificAction(string name, Event event = Event(), bool silent = false, string qualifier = "");
     void ChangeStrategy(string name, BotState type);
     void ClearStrategies(BotState type);
-    list<string> GetStrategies(BotState type);
+    std::list<string> GetStrategies(BotState type);
     bool ContainsStrategy(StrategyType type);
     bool HasStrategy(string name, BotState type);
     BotState GetState() { return currentState; };
@@ -436,7 +436,7 @@ protected:
     PacketHandlingHelper masterOutgoingPacketHandlers;
     CompositeChatFilter chatFilter;
     PlayerbotSecurity security;
-    map<string, time_t> whispers;
+    std::map<string, time_t> whispers;
     pair<ChatMsg, time_t> currentChat;
     static set<string> unsecuredCommands;
     bool allowActive[MAX_ACTIVITY_TYPE];

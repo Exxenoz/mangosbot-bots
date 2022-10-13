@@ -167,7 +167,7 @@ ItemUsage ItemUsageValue::QueryItemUsageForEquip(ItemPrototype const* itemProto)
 
     uint16 dest;
 
-    list<Item*> items = AI_VALUE2(list<Item*>, "inventory items", chat->formatItem(itemProto));
+    std::list<Item*> items = AI_VALUE2(std::list<Item*>, "inventory items", chat->formatItem(itemProto));
 
     InventoryResult result;
     if (!items.empty())
@@ -519,7 +519,7 @@ bool ItemUsageValue::HasItemsNeededForSpell(uint32 spellId, ItemPrototype const*
 Item* ItemUsageValue::CurrentItem(ItemPrototype const* proto)
 {
     Item* bestItem = nullptr;
-    list<Item*> found = AI_VALUE2(list < Item*>, "inventory items", chat->formatItem(proto));
+    std::list<Item*> found = AI_VALUE2(list < Item*>, "inventory items", chat->formatItem(proto));
 
     for (auto item : found)
     {
@@ -540,7 +540,7 @@ float ItemUsageValue::CurrentStacks(ItemPrototype const* proto)
 {
     uint32 maxStack = proto->GetMaxStackSize();
 
-    list<Item*> found = AI_VALUE2(list < Item*>, "inventory items", chat->formatItem(proto));
+    std::list<Item*> found = AI_VALUE2(list < Item*>, "inventory items", chat->formatItem(proto));
 
     float itemCount = 0;
 
@@ -554,7 +554,7 @@ float ItemUsageValue::CurrentStacks(ItemPrototype const* proto)
 
 float ItemUsageValue::BetterStacks(ItemPrototype const* proto, string itemType)
 {
-    list<Item*> items = AI_VALUE2(list<Item*>, "inventory items", itemType);
+    std::list<Item*> items = AI_VALUE2(std::list<Item*>, "inventory items", itemType);
 
     float stacks = 0;
 
@@ -580,7 +580,7 @@ float ItemUsageValue::BetterStacks(ItemPrototype const* proto, string itemType)
 
 vector<uint32> ItemUsageValue::SpellsUsingItem(uint32 itemId, Player* bot)
 {
-    vector<uint32> retSpells;
+    std::vector<uint32> retSpells;
 
     PlayerSpellMap const& spellMap = bot->GetSpellMap();
 

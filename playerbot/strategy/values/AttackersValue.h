@@ -9,7 +9,7 @@ namespace ai
 	{
 	public:
         AttackersValue(PlayerbotAI* ai) : ObjectGuidListCalculatedValue(ai, "attackers") {}
-        list<ObjectGuid> Calculate();
+        std::list<ObjectGuid> Calculate();
 
 	private:
         void AddAttackersOf(Group* group, set<Unit*>& targets);

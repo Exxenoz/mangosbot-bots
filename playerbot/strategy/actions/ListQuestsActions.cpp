@@ -102,8 +102,8 @@ int ListQuestsAction::ListQuests(bool completed, bool silent, QuestTravelDetail 
 
         if (travelDetail == QUEST_TRAVEL_DETAIL_SUMMARY)
         {
-            vector<TravelDestination*> allDestinations = sTravelMgr.getQuestTravelDestinations(bot, questId, true, true, -1);
-            vector<TravelDestination*> availDestinations = sTravelMgr.getQuestTravelDestinations(bot, questId, ai->GetMaster(), false, -1);
+            std::vector<TravelDestination*> allDestinations = sTravelMgr.getQuestTravelDestinations(bot, questId, true, true, -1);
+            std::vector<TravelDestination*> availDestinations = sTravelMgr.getQuestTravelDestinations(bot, questId, ai->GetMaster(), false, -1);
 
             uint32 desTot = allDestinations.size();
             uint32 desAvail = availDestinations.size();
@@ -132,7 +132,7 @@ int ListQuestsAction::ListQuests(bool completed, bool silent, QuestTravelDetail 
         else if (travelDetail == QUEST_TRAVEL_DETAIL_FULL)
         {
             uint32 limit = 0;
-            vector<TravelDestination*> allDestinations = sTravelMgr.getQuestTravelDestinations(bot, questId, true, true, -1);
+            std::vector<TravelDestination*> allDestinations = sTravelMgr.getQuestTravelDestinations(bot, questId, true, true, -1);
 
             std::sort(allDestinations.begin(), allDestinations.end(), [botPos](TravelDestination* i, TravelDestination* j) {return i->distanceTo(botPos) < j->distanceTo(botPos); });
 

@@ -93,7 +93,7 @@ void SuggestWhatToDoAction::instance()
         instances["Halls of Reflection"] = 80;
     }
 
-    vector<string> allowedInstances;
+    std::vector<string> allowedInstances;
     for (map<string, int>::iterator i = instances.begin(); i != instances.end(); ++i)
     {
         if (bot->GetLevel() >= i->second) allowedInstances.push_back(i->first);
@@ -101,7 +101,7 @@ void SuggestWhatToDoAction::instance()
 
     if (allowedInstances.empty()) return;
 
-    map<string, string> placeholders;
+    std::map<string, string> placeholders;
     placeholders["%role"] = chat->formatClass(bot, AiFactory::GetPlayerSpecTab(bot));
 
     ostringstream itemout;
@@ -114,7 +114,7 @@ void SuggestWhatToDoAction::instance()
 
 vector<uint32> SuggestWhatToDoAction::GetIncompletedQuests()
 {
-    vector<uint32> result;
+    std::vector<uint32> result;
 
     for (uint16 slot = 0; slot < MAX_QUEST_LOG_SIZE; ++slot)
     {
@@ -132,7 +132,7 @@ vector<uint32> SuggestWhatToDoAction::GetIncompletedQuests()
 
 void SuggestWhatToDoAction::specificQuest()
 {
-    vector<uint32> quests = GetIncompletedQuests();
+    std::vector<uint32> quests = GetIncompletedQuests();
     if (quests.empty())
         return;
 
@@ -140,7 +140,7 @@ void SuggestWhatToDoAction::specificQuest()
 
     Quest const* quest = sObjectMgr.GetQuestTemplate(quests[index]);
 
-    map<string, string> placeholders;
+    std::map<string, string> placeholders;
     placeholders["%role"] = chat->formatClass(bot, AiFactory::GetPlayerSpecTab(bot));
     placeholders["%quest"] = chat->formatQuest(quest);
 
@@ -156,7 +156,7 @@ void SuggestWhatToDoAction::grindMaterials()
     if (!result)
         return;
 
-    map<string, double> categories;
+    std::map<string, double> categories;
     do
     {
         Field* fields = result->Fetch();
@@ -181,7 +181,7 @@ void SuggestWhatToDoAction::grindMaterials()
                     itemout << "|c0000b000" << item << "|r";
                     item = itemout.str();
 
-                    map<string, string> placeholders;
+                    std::map<string, string> placeholders;
                     placeholders["%role"] = chat->formatClass(bot, AiFactory::GetPlayerSpecTab(bot));
                     placeholders["%category"] = item;
 
@@ -237,19 +237,19 @@ void SuggestWhatToDoAction::grindReputation()
 #endif
     }
 
-    vector<string> levels;
+    std::vector<string> levels;
     levels.push_back("honored");
     levels.push_back("revered");
     levels.push_back("exalted");
 
-    vector<string> allowedFactions;
+    std::vector<string> allowedFactions;
     for (map<string, int>::iterator i = factions.begin(); i != factions.end(); ++i) {
         if (bot->GetLevel() >= i->second) allowedFactions.push_back(i->first);
     }
 
     if (allowedFactions.empty()) return;
 
-    map<string, string> placeholders;
+    std::map<string, string> placeholders;
     placeholders["%role"] = chat->formatClass(bot, AiFactory::GetPlayerSpecTab(bot));
     placeholders["%level"] = levels[urand(0, 2)];
     ostringstream rnd; rnd << urand(1, 5) << "K";
@@ -265,7 +265,7 @@ void SuggestWhatToDoAction::grindReputation()
 
 void SuggestWhatToDoAction::something()
 {
-    map<string, string> placeholders;
+    std::map<string, string> placeholders;
     placeholders["%role"] = chat->formatClass(bot, AiFactory::GetPlayerSpecTab(bot));
 
     AreaTableEntry const* entry = GetAreaEntryByAreaID(sServerFacade.GetAreaId(bot));
@@ -285,7 +285,7 @@ void SuggestWhatToDoAction::spam(string msg, uint8 flags, bool worldChat, bool g
     if (msg.empty())
         return;
 
-    vector<string> channelNames;
+    std::vector<string> channelNames;
     ChannelMgr* cMgr = channelMgr(bot->GetTeam());
     if (!cMgr)
         return;
@@ -385,9 +385,9 @@ public:
         return true;
     }
 
-    map<uint32, int > count;
-    vector<uint32> stacks;
-    vector<uint32> items;
+    std::map<uint32, int > count;
+    std::vector<uint32> stacks;
+    std::vector<uint32> items;
 
 private:
     uint32 quality;
@@ -453,7 +453,7 @@ bool SuggestTradeAction::Execute(Event event)
     if (!price)
         return false;
 
-    map<string, string> placeholders;
+    std::map<string, string> placeholders;
     placeholders["%item"] = chat->formatItem(proto, count);
     placeholders["%gold"] = chat->formatMoney(price);
 

@@ -67,7 +67,7 @@ bool DropTargetAction::Execute(Event event)
     }
     if (!urand(0, 200))
     {
-        vector<uint32> sounds;
+        std::vector<uint32> sounds;
         sounds.push_back(TEXTEMOTE_CHEER);
         sounds.push_back(TEXTEMOTE_CONGRATULATE);
         ai->PlaySound(sounds[urand(0, sounds.size() - 1)]);

@@ -45,7 +45,7 @@ entryQuestRelationMap EntryQuestRelationMapValue::Calculate()
 			//Loot objective
 			if (quest->ReqItemId[objective])
 			{
-				for (auto& entry : GAI_VALUE2(list<int32>, "item drop list", quest->ReqItemId[objective]))
+				for (auto& entry : GAI_VALUE2(std::list<int32>, "item drop list", quest->ReqItemId[objective]))
 					rMap[entry][questId] |= relationFlag;
 			}
 		}

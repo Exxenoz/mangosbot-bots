@@ -155,7 +155,7 @@ public:
         uint32 maxLevel = 0;
     };
 
-    vector<worldBuff> worldBuffs;
+    std::vector<worldBuff> worldBuffs;
 
     int commandServerPort;
     bool perfMonEnabled;

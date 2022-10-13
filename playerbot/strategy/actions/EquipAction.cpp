@@ -27,7 +27,7 @@ void EquipAction::EquipItems(ItemIds ids)
 void EquipAction::EquipItem(FindItemVisitor* visitor)
 {
     IterateItems(visitor);
-    list<Item*> items = visitor->GetResult();
+    std::list<Item*> items = visitor->GetResult();
 	if (!items.empty()) EquipItem(**items.begin());
 }
 

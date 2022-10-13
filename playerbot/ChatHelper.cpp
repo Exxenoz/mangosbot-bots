@@ -15,12 +15,12 @@ map<string, uint32> ChatHelper::skills;
 map<string, ChatMsg> ChatHelper::chats;
 map<uint8, string> ChatHelper::classes;
 map<uint8, string> ChatHelper::races;
-map<uint8, map<uint8, string> > ChatHelper::specs;
+map<uint8, std::map<uint8, string> > ChatHelper::specs;
 
 template<class T>
-static bool substrContainsInMap(string searchTerm, map<string, T> searchIn)
+static bool substrContainsInMap(string searchTerm, std::map<string, T> searchIn)
 {
-    for (typename map<string, T>::iterator i = searchIn.begin(); i != searchIn.end(); ++i)
+    for (typename std::map<string, T>::iterator i = searchIn.begin(); i != searchIn.end(); ++i)
     {
 		string term = i->first;
 		if (term.size() > 1 && searchTerm.find(term) != string::npos)
@@ -449,7 +449,7 @@ uint32 ChatHelper::parseSpell(string& text)
 
 list<ObjectGuid> ChatHelper::parseGameobjects(string& text)
 {
-    list<ObjectGuid> gos;
+    std::list<ObjectGuid> gos;
     //    Link format
     //    |cFFFFFF00|Hfound:" << guid << ':'  << entry << ':'  <<  "|h[" << gInfo->name << "]|h|r";
     //    |cFFFFFF00|Hfound:9582:1731|h[Copper Vein]|h|r
@@ -489,7 +489,7 @@ list<ObjectGuid> ChatHelper::parseGameobjects(string& text)
 
 list<int32> ChatHelper::parseWorldEntries(string& text)
 {
-    list<int32> entries;
+    std::list<int32> entries;
     //    Link format
     //    |cFFFFFF00|Hentry:" << entry << ':'  <<  "|h[" << gInfo->name << "]|h|r";
     //    |cFFFFFF00|Hfound:9582:1731|h[Copper Vein]|h|r
@@ -596,7 +596,7 @@ string ChatHelper::formatClass(Player* player, int spec)
     ostringstream out;
     out << specs[cls][spec] << " (";
 
-    map<uint32, int32> tabs = AiFactory::GetPlayerSpecTabs(player);
+    std::map<uint32, int32> tabs = AiFactory::GetPlayerSpecTabs(player);
     int c0 = (int)tabs[0];
     int c1 = (int)tabs[1];
     int c2 = (int)tabs[2];

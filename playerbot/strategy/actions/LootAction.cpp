@@ -393,7 +393,7 @@ bool StoreLootAction::Execute(Event event)
             if (maxStack == 1)
                 continue;
 
-            list<Item*> found = parseItems(chat->formatItem(proto));
+            std::list<Item*> found = parseItems(chat->formatItem(proto));
 
             bool hasFreeStack = false;
 
@@ -514,16 +514,16 @@ bool StoreLootAction::IsLootAllowed(uint32 itemid, PlayerbotAI *ai)
 
 bool ReleaseLootAction::Execute(Event event)
 {
-    list<ObjectGuid> gos = context->GetValue<list<ObjectGuid> >("nearest game objects")->Get();
-    for (list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); i++)
+    std::list<ObjectGuid> gos = context->GetValue<std::list<ObjectGuid> >("nearest game objects")->Get();
+    for (std::list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); i++)
     {
         WorldPacket packet(CMSG_LOOT_RELEASE, 8);
         packet << *i;
         bot->GetSession()->HandleLootReleaseOpcode(packet);
     }
 
-    list<ObjectGuid> corpses = context->GetValue<list<ObjectGuid> >("nearest corpses")->Get();
-    for (list<ObjectGuid>::iterator i = corpses.begin(); i != corpses.end(); i++)
+    std::list<ObjectGuid> corpses = context->GetValue<std::list<ObjectGuid> >("nearest corpses")->Get();
+    for (std::list<ObjectGuid>::iterator i = corpses.begin(); i != corpses.end(); i++)
     {
         WorldPacket packet(CMSG_LOOT_RELEASE, 8);
         packet << *i;

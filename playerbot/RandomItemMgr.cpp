@@ -1191,12 +1191,12 @@ void RandomItemMgr::BuildItemInfoCache()
         // check quests
         if (cacheInfo->source == ITEM_SOURCE_NONE)
         {
-            vector<uint32> questIds = GetQuestIdsForItem(proto->ItemId);
+            std::vector<uint32> questIds = GetQuestIdsForItem(proto->ItemId);
             if (questIds.size())
             {
                 bool isAlly = false;
                 bool isHorde = false;
-                for (vector<uint32>::iterator i = questIds.begin(); i != questIds.end(); ++i)
+                for (std::vector<uint32>::iterator i = questIds.begin(); i != questIds.end(); ++i)
                 {
                     Quest const* quest = sObjectMgr.GetQuestTemplate(*i);
                     if (quest)
@@ -1238,7 +1238,7 @@ void RandomItemMgr::BuildItemInfoCache()
         // check vendors
         if (cacheInfo->source == ITEM_SOURCE_NONE)
         {
-            for (vector<uint32>::iterator i = vendorItems.begin(); i != vendorItems.end(); ++i)
+            for (std::vector<uint32>::iterator i = vendorItems.begin(); i != vendorItems.end(); ++i)
             {
                 if (proto->ItemId == *i)
                 {
@@ -1250,8 +1250,8 @@ void RandomItemMgr::BuildItemInfoCache()
         }
 
         // check drops
-        list<int32> creatures;
-        list<int32> gameobjects;
+        std::list<int32> creatures;
+        std::list<int32> gameobjects;
 
         auto range = dropMap->equal_range(itemId);
 
@@ -1949,7 +1949,7 @@ uint32 RandomItemMgr::CalculateStatWeight(uint8 playerclass, uint8 spec, ItemPro
             return 0;
 
         bool playerCaster = false;
-        for (vector<WeightScaleStat>::iterator i = m_weightScales[spec].stats.begin(); i != m_weightScales[spec].stats.end(); ++i)
+        for (std::vector<WeightScaleStat>::iterator i = m_weightScales[spec].stats.begin(); i != m_weightScales[spec].stats.end(); ++i)
         {
             if (i->stat == "splpwr" || i->stat == "int" || i->stat == "manargn" || i->stat == "splheal" || i->stat == "spellcritstrkrtng" || i->stat == "spellhitrtng")
             {
@@ -1968,7 +1968,7 @@ uint32 RandomItemMgr::CalculateStatWeight(uint8 playerclass, uint8 spec, ItemPro
             return 0;
 
         bool playerAttacker = false;
-        for (vector<WeightScaleStat>::iterator i = m_weightScales[spec].stats.begin(); i != m_weightScales[spec].stats.end(); ++i)
+        for (std::vector<WeightScaleStat>::iterator i = m_weightScales[spec].stats.begin(); i != m_weightScales[spec].stats.end(); ++i)
         {
             if (i->stat == "str" || i->stat == "agi" || i->stat == "atkpwr" || i->stat == "mledps" || i->stat == "rgddps" || i->stat == "hitrtng" || i->stat == "critstrkrtng")
             {
@@ -2005,7 +2005,7 @@ uint32 RandomItemMgr::CalculateStatWeight(uint8 playerclass, uint8 spec, ItemPro
 uint32 RandomItemMgr::CalculateSingleStatWeight(uint8 playerclass, uint8 spec, std::string stat, uint32 value)
 {
     uint32 statWeight = 0;
-    for (vector<WeightScaleStat>::iterator i = m_weightScales[spec].stats.begin(); i != m_weightScales[spec].stats.end(); ++i)
+    for (std::vector<WeightScaleStat>::iterator i = m_weightScales[spec].stats.begin(); i != m_weightScales[spec].stats.end(); ++i)
     {
         if (stat == i->stat)
         {
@@ -2068,7 +2068,7 @@ uint32 RandomItemMgr::GetQuestIdForItem(uint32 itemId)
 
 vector<uint32> RandomItemMgr::GetQuestIdsForItem(uint32 itemId)
 {
-    vector<uint32> questIds;
+    std::vector<uint32> questIds;
     ObjectMgr::QuestMap const& questTemplates = sObjectMgr.GetQuestTemplates();
     for (ObjectMgr::QuestMap::const_iterator i = questTemplates.begin(); i != questTemplates.end(); ++i)
     {
@@ -2229,7 +2229,7 @@ uint32 RandomItemMgr::GetUpgrade(Player* player, std::string spec, uint8 slot, u
     uint32 specId = 0;
     uint32 closestUpgrade = 0;
     uint32 closestUpgradeWeight = 0;
-    vector<uint32> classspecs;
+    std::vector<uint32> classspecs;
 
     for (uint32 specNum = 1; specNum < 5; ++specNum)
     {
@@ -2311,7 +2311,7 @@ uint32 RandomItemMgr::GetUpgrade(Player* player, std::string spec, uint8 slot, u
         // check if item stat score is the best among class specs
         uint32 bestSpecId = 0;
         uint32 bestSpecScore = 0;
-        for (vector<uint32>::iterator i = classspecs.begin(); i != classspecs.end(); ++i)
+        for (std::vector<uint32>::iterator i = classspecs.begin(); i != classspecs.end(); ++i)
         {
             if (info->weights[*i] > bestSpecScore)
             {
@@ -2345,7 +2345,7 @@ uint32 RandomItemMgr::GetUpgrade(Player* player, std::string spec, uint8 slot, u
 
 vector<uint32> RandomItemMgr::GetUpgradeList(Player* player, uint32 specId, uint8 slot, uint32 quality, uint32 itemId, uint32 amount)
 {
-    vector<uint32> listItems;
+    std::vector<uint32> listItems;
     if (!player)
         return listItems;
 
@@ -2353,7 +2353,7 @@ vector<uint32> RandomItemMgr::GetUpgradeList(Player* player, uint32 specId, uint
     uint32 oldStatWeight = 0;
     uint32 closestUpgrade = 0;
     uint32 closestUpgradeWeight = 0;
-    vector<uint32> classspecs;
+    std::vector<uint32> classspecs;
 
     if (itemId && itemInfoCache[itemId])
     {
@@ -2436,7 +2436,7 @@ vector<uint32> RandomItemMgr::GetUpgradeList(Player* player, uint32 specId, uint
         //    // check if item stat score is the best among class specs
         //    uint32 bestSpecId = 0;
         //    uint32 bestSpecScore = 0;
-        //    for (vector<uint32>::iterator i = classspecs.begin(); i != classspecs.end(); ++i)
+        //    for (std::vector<uint32>::iterator i = classspecs.begin(); i != classspecs.end(); ++i)
         //    {
         //        if (info->weights[*i] > bestSpecScore)
         //        {
@@ -2493,7 +2493,7 @@ uint32 RandomItemMgr::GetStatWeight(Player* player, uint32 itemId)
 
     uint32 statWeight = 0;
     uint32 specId = GetPlayerSpecId(player);
-    vector<uint32> classspecs;
+    std::vector<uint32> classspecs;
 
     if (specId == 0)
         return 0;
@@ -2501,7 +2501,7 @@ uint32 RandomItemMgr::GetStatWeight(Player* player, uint32 itemId)
     if (!m_weightScales[specId].info.id)
         return 0;
 
-    map<uint32, ItemInfoEntry*>::iterator itr = itemInfoCache.find(itemId);
+    std::map<uint32, ItemInfoEntry*>::iterator itr = itemInfoCache.find(itemId);
     if (itr != itemInfoCache.end())
     {
         statWeight = itr->second->weights[specId];
@@ -2519,12 +2519,12 @@ uint32 RandomItemMgr::GetStatWeight(uint32 itemId, uint32 specId)
         return 0;
 
     uint32 statWeight = 0;
-    vector<uint32> classspecs;
+    std::vector<uint32> classspecs;
 
     if (!m_weightScales[specId].info.id)
         return 0;
 
-    map<uint32, ItemInfoEntry*>::iterator itr = itemInfoCache.find(itemId);
+    std::map<uint32, ItemInfoEntry*>::iterator itr = itemInfoCache.find(itemId);
     if (itr != itemInfoCache.end())
     {
         statWeight = itr->second->weights[specId];
@@ -2987,7 +2987,7 @@ void RandomItemMgr::BuildFoodCache()
 
 uint32 RandomItemMgr::GetRandomPotion(uint32 level, uint32 effect)
 {
-    vector<uint32> potions = potionCache[(level - 1) / 10][effect];
+    std::vector<uint32> potions = potionCache[(level - 1) / 10][effect];
     if (potions.empty()) return 0;
     return potions[urand(0, potions.size() - 1)];
 }
@@ -2995,7 +2995,7 @@ uint32 RandomItemMgr::GetRandomPotion(uint32 level, uint32 effect)
 uint32 RandomItemMgr::GetFood(uint32 level, uint32 category)
 {
     initializer_list<uint32> items;
-    vector<uint32> food;
+    std::vector<uint32> food;
     if (category == 11)
     {
         if (level < 5)
@@ -3071,7 +3071,7 @@ uint32 RandomItemMgr::GetFood(uint32 level, uint32 category)
 
 uint32 RandomItemMgr::GetRandomFood(uint32 level, uint32 category)
 {
-    vector<uint32> food = foodCache[(level - 1) / 10][category];
+    std::vector<uint32> food = foodCache[(level - 1) / 10][category];
     if (food.empty()) return 0;
     return food[urand(0, food.size() - 1)];
 }
@@ -3119,14 +3119,14 @@ void RandomItemMgr::BuildTradeCache()
 
 uint32 RandomItemMgr::GetRandomTrade(uint32 level)
 {
-    vector<uint32> trade = tradeCache[(level - 1) / 10];
+    std::vector<uint32> trade = tradeCache[(level - 1) / 10];
     if (trade.empty()) return 0;
     return trade[urand(0, trade.size() - 1)];
 }
 
 vector<uint32> RandomItemMgr::GetGemsList()
 {
-    vector<uint32>_gems;
+    std::vector<uint32>_gems;
 
 #ifndef MANGOSBOT_ZERO
     if (_gems.empty())

@@ -119,9 +119,9 @@ Unit* EmoteActionBase::GetTarget()
 {
     Unit* target = NULL;
 
-    list<ObjectGuid> nfp = *context->GetValue<list<ObjectGuid> >("nearest friendly players");
-    vector<Unit*> targets;
-    for (list<ObjectGuid>::iterator i = nfp.begin(); i != nfp.end(); ++i)
+    std::list<ObjectGuid> nfp = *context->GetValue<std::list<ObjectGuid> >("nearest friendly players");
+    std::vector<Unit*> targets;
+    for (std::list<ObjectGuid>::iterator i = nfp.begin(); i != nfp.end(); ++i)
     {
         Unit* unit = ai->GetUnit(*i);
         if (unit && sServerFacade.GetDistance2d(bot, unit) < sPlayerbotAIConfig.tooCloseDistance) targets.push_back(unit);
@@ -695,7 +695,7 @@ bool EmoteAction::Execute(Event event)
             if ((pSource->GetObjectGuid() != bot->GetObjectGuid()) && (pSource->GetSelectionGuid() == bot->GetObjectGuid() || (urand(0, 1) && sServerFacade.IsInFront(pSource, bot, 10.0f, M_PI_F))))
             {
                 sLog.outDetail("Bot #%d %s:%d <%s> received SMSG_EMOTE %d from player #%d <%s>", bot->GetGUIDLow(), bot->GetTeam() == ALLIANCE ? "A" : "H", bot->GetLevel(), bot->GetName(), emoteId, pSource->GetGUIDLow(), pSource->GetName());
-                vector<uint32> types;
+                std::vector<uint32> types;
                 for (int32 i = sEmotesTextStore.GetNumRows(); i >= 0; --i)
                 {
                     EmotesTextEntry const* em = sEmotesTextStore.LookupEntry(uint32(i));
@@ -848,7 +848,7 @@ bool TalkAction::Execute(Event event)
 
 uint32 TalkAction::GetRandomEmote(Unit* unit, bool textEmote)
 {
-    vector<uint32> types;
+    std::vector<uint32> types;
     if (textEmote)
     {
         if (!urand(0, 20))

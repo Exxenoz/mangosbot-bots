@@ -30,16 +30,16 @@ list<Item*> ItemsUsefulToGiveValue::Calculate()
     
     Player* player = guidP.GetPlayer();
 
-    list<Item*> giveItems;
+    std::list<Item*> giveItems;
 
     if (ai->HasActivePlayerMaster() || !player->GetPlayerbotAI())
         return giveItems;
 
-    list<ItemUsage> myUsages = { ITEM_USAGE_NONE , ITEM_USAGE_VENDOR, ITEM_USAGE_AH, ITEM_USAGE_DISENCHANT };
+    std::list<ItemUsage> myUsages = { ITEM_USAGE_NONE , ITEM_USAGE_VENDOR, ITEM_USAGE_AH, ITEM_USAGE_DISENCHANT };
 
     for (auto& myUsage : myUsages)
     {
-        list<Item*> myItems = AI_VALUE2(list<Item*>, "inventory items", "usage " + to_string(myUsage));
+        std::list<Item*> myItems = AI_VALUE2(std::list<Item*>, "inventory items", "usage " + to_string(myUsage));
         myItems.reverse();
 
         for (auto& item : myItems)

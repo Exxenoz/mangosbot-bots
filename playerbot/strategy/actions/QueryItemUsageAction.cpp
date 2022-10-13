@@ -100,10 +100,10 @@ bool QueryItemUsageAction::Execute(Event event)
 uint32 QueryItemUsageAction::GetCount(ItemPrototype const *item)
 {
     uint32 total = 0;
-    list<Item*> items = InventoryAction::parseItems(item->Name1);
+    std::list<Item*> items = InventoryAction::parseItems(item->Name1);
     if (!items.empty())
     {
-        for (list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
+        for (std::list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
         {
             total += (*i)->GetCount();
         }
@@ -189,11 +189,11 @@ string QueryItemUsageAction::QueryItemPrice(ItemPrototype const *item)
         return "";
 
     ostringstream msg;
-    list<Item*> items = InventoryAction::parseItems(item->Name1);
+    std::list<Item*> items = InventoryAction::parseItems(item->Name1);
     int32 sellPrice = 0;
     if (!items.empty())
     {
-        for (list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
+        for (std::list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
         {
             Item* sell = *i;
             sellPrice += sell->GetCount() * auctionbot.GetSellPrice(sell->GetProto()) * sRandomPlayerbotMgr.GetSellMultiplier(bot);

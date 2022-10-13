@@ -122,7 +122,7 @@ void FormationSlot::PlaceUnits(UnitPlacer* placer)
 {
     uint32 index = 0;
     uint32 count = units.size();
-    for (vector<FormationUnit*>::iterator i = units.begin(); i != units.end(); ++i)
+    for (std::vector<FormationUnit*>::iterator i = units.begin(); i != units.end(); ++i)
     {
         FormationUnit* unit = *i;
         unit->SetLocation(placer->Place(unit, index, count));
@@ -154,7 +154,7 @@ UnitPosition SingleLineUnitPlacer::Place(FormationUnit *unit, uint32 index, uint
 
 void FormationSlot::Move(float dx, float dy)
 {
-    for (vector<FormationUnit*>::iterator i = units.begin(); i != units.end(); ++i)
+    for (std::vector<FormationUnit*>::iterator i = units.begin(); i != units.end(); ++i)
     {
         FormationUnit* unit = *i;
         unit->SetLocation(unit->GetX() + dx, unit->GetY() + dy);
@@ -163,7 +163,7 @@ void FormationSlot::Move(float dx, float dy)
 
 FormationSlot::~FormationSlot()
 {
-    for (vector<FormationUnit*>::iterator i = units.begin(); i != units.end(); ++i)
+    for (std::vector<FormationUnit*>::iterator i = units.begin(); i != units.end(); ++i)
     {
         FormationUnit* unit = *i;
         delete unit;

@@ -12,7 +12,7 @@ bool CheckMailAction::Execute(Event event)
     WorldPacket p;
     bot->GetSession()->HandleQueryNextMailTime(p);   
 
-    list<uint32> ids;
+    std::list<uint32> ids;
     for (PlayerMails::iterator i = bot->GetMailBegin(); i != bot->GetMailEnd(); ++i)
     {
         Mail* mail = *i;
@@ -33,7 +33,7 @@ bool CheckMailAction::Execute(Event event)
         mail->state = MAIL_STATE_DELETED;
     }
 
-    for (list<uint32>::iterator i = ids.begin(); i != ids.end(); ++i)
+    for (std::list<uint32>::iterator i = ids.begin(); i != ids.end(); ++i)
     {
         uint32 id = *i;
         bot->SendMailResult(id, MAIL_DELETED, MAIL_OK);

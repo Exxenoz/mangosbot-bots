@@ -123,7 +123,7 @@ bool RpgTaxiAction::Execute(Event event)
 
     uint32 node = sObjectMgr.GetNearestTaxiNode(guidP.getX(), guidP.getY(), guidP.getZ(), guidP.getMapId(), bot->GetTeam());
 
-    vector<uint32> nodes;
+    std::vector<uint32> nodes;
     for (uint32 i = 0; i < sTaxiPathStore.GetNumRows(); ++i)
     {
         TaxiPathEntry const* entry = sTaxiPathStore.LookupEntry(i);
@@ -247,7 +247,7 @@ bool RpgTradeUsefulAction::Execute(Event event)
     if (!player)
         return false;
 
-    list<Item*> items = AI_VALUE(list<Item*>, "items useful to give");
+    std::list<Item*> items = AI_VALUE(std::list<Item*>, "items useful to give");
 
     if (items.empty())
         return false;

@@ -91,11 +91,11 @@ private:
 
 private:
     Config config;
-    map<string, float> sellPriceMultipliers;
-    map<string, float> buyPriceMultipliers;
-    map<string, float> itemPriceMultipliers;
-    map<string, float> maxAuctionCount;
-    map<string, float> maxItemAuctionCount;
+    std::map<string, float> sellPriceMultipliers;
+    std::map<string, float> buyPriceMultipliers;
+    std::map<string, float> itemPriceMultipliers;
+    std::map<string, float> maxAuctionCount;
+    std::map<string, float> maxItemAuctionCount;
 };
 
 #define sAhBotConfig MaNGOS::Singleton<AhBotConfig>::Instance()

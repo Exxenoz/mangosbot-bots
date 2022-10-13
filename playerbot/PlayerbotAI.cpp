@@ -40,7 +40,7 @@
 using namespace ai;
 using namespace std;
 
-vector<string>& split(const string &s, char delim, vector<string> &elems);
+vector<string>& split(const string &s, char delim, std::vector<string> &elems);
 vector<string> split(const string &s, char delim);
 char * strstri (string str1, string str2);
 uint64 extractGuid(WorldPacket& packet);
@@ -336,7 +336,7 @@ void PlayerbotAI::UpdateAIInternal(uint32 elapsed, bool minimal)
 
     PerformanceMonitorOperation *pmo = sPerformanceMonitor.start(PERF_MON_TOTAL, "PlayerbotAI::UpdateAIInternal " + mapString);
     ExternalEventHelper helper(aiObjectContext);
-    list<ChatCommandHolder> delayed;
+    std::list<ChatCommandHolder> delayed;
     while (!chatCommands.empty())
     {
         ChatCommandHolder holder = chatCommands.front();
@@ -358,13 +358,13 @@ void PlayerbotAI::UpdateAIInternal(uint32 elapsed, bool minimal)
         chatCommands.pop();
     }
 
-    for (list<ChatCommandHolder>::iterator i = delayed.begin(); i != delayed.end(); ++i)
+    for (std::list<ChatCommandHolder>::iterator i = delayed.begin(); i != delayed.end(); ++i)
     {
         chatCommands.push(*i);
     }
 
     // chat replies
-    list<ChatQueuedReply> delayedResponses;
+    std::list<ChatQueuedReply> delayedResponses;
     while (!chatReplies.empty())
     {
         ChatQueuedReply holder = chatReplies.front();
@@ -379,7 +379,7 @@ void PlayerbotAI::UpdateAIInternal(uint32 elapsed, bool minimal)
         chatReplies.pop();
     }
 
-    for (list<ChatQueuedReply>::iterator i = delayedResponses.begin(); i != delayedResponses.end(); ++i)
+    for (std::list<ChatQueuedReply>::iterator i = delayedResponses.begin(); i != delayedResponses.end(); ++i)
     {
         chatReplies.push(*i);
     }
@@ -576,9 +576,9 @@ void PlayerbotAI::HandleCommand(uint32 type, const string& text, Player& fromPla
 
     if (text.find(sPlayerbotAIConfig.commandSeparator) != string::npos)
     {
-        vector<string> commands;
+        std::vector<string> commands;
         split(commands, text, sPlayerbotAIConfig.commandSeparator.c_str());
-        for (vector<string>::iterator i = commands.begin(); i != commands.end(); ++i)
+        for (std::vector<string>::iterator i = commands.begin(); i != commands.end(); ++i)
         {
             HandleCommand(type, *i, fromPlayer);
         }
@@ -1112,7 +1112,7 @@ void PlayerbotAI::DoNextAction(bool min)
                 else
                     out << "\"none\",0,100,";
 
-                list<ObjectGuid> targets = AI_VALUE_LAZY(list<ObjectGuid>, "all targets");
+                std::list<ObjectGuid> targets = AI_VALUE_LAZY(std::list<ObjectGuid>, "all targets");
 
                 out << "\"";
 
@@ -1498,7 +1498,7 @@ list<string> PlayerbotAI::GetStrategies(BotState type)
 {
     Engine* e = engines[type];
     if (!e)
-        return list<string>();
+        return std::list<string>();
 
     return e->GetStrategies();
 }

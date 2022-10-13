@@ -33,7 +33,7 @@ namespace ai
     typedef unordered_map <int32, questRelationMap> entryQuestRelationMap;
 
     //                      entry
-    typedef unordered_map < int32, list<GuidPosition>> questEntryGuidps;
+    typedef unordered_map < int32, std::list<GuidPosition>> questEntryGuidps;
     //                      QuestRelationFlag
     typedef unordered_map < uint32, questEntryGuidps> questRelationGuidps;
 
@@ -42,7 +42,7 @@ namespace ai
     
 
     //                      questId
-    typedef unordered_map < uint32, list<GuidPosition>> questGiverMap;
+    typedef unordered_map < uint32, std::list<GuidPosition>> questGiverMap;
     
     
     //Returns the quest relation Flags for all entries and quests
@@ -65,8 +65,8 @@ namespace ai
         bool operator()(GameObjectDataPair const& dataPair);
         questGuidpMap GetResult() const { return data; };
     private:
-        unordered_map<int32, vector<pair<uint32, QuestRelationFlag>>> entryMap;
-        unordered_map<uint32, vector<pair<uint32, QuestRelationFlag>>> itemMap;
+        std::unordered_map<int32, std::vector<pair<uint32, QuestRelationFlag>>> entryMap;
+        std::unordered_map<uint32, std::vector<pair<uint32, QuestRelationFlag>>> itemMap;
 
         entryQuestRelationMap relationMap;
 
@@ -92,30 +92,30 @@ namespace ai
     };
     
     //All questgivers that have a quest for the bot.
-    class ActiveQuestGiversValue : public CalculatedValue<list<GuidPosition>>
+    class ActiveQuestGiversValue : public CalculatedValue<std::list<GuidPosition>>
     {
     public:
         ActiveQuestGiversValue(PlayerbotAI* ai) : CalculatedValue(ai, "active quest givers", 5) {}
 
-        virtual list<GuidPosition> Calculate();
+        virtual std::list<GuidPosition> Calculate();
     };    
     
     //All quest takers that the bot has a quest for.
-    class ActiveQuestTakersValue : public CalculatedValue<list<GuidPosition>>
+    class ActiveQuestTakersValue : public CalculatedValue<std::list<GuidPosition>>
     {
     public:
         ActiveQuestTakersValue(PlayerbotAI* ai) : CalculatedValue(ai, "active quest takers", 5) {}
 
-        virtual list<GuidPosition> Calculate();
+        virtual std::list<GuidPosition> Calculate();
     };
 
     //All objectives that the bot still has to complete.
-    class ActiveQuestObjectivesValue : public CalculatedValue<list<GuidPosition>>
+    class ActiveQuestObjectivesValue : public CalculatedValue<std::list<GuidPosition>>
     {
     public:
         ActiveQuestObjectivesValue(PlayerbotAI* ai) : CalculatedValue(ai, "active quest objectives", 5) {}
 
-        virtual list<GuidPosition> Calculate();
+        virtual std::list<GuidPosition> Calculate();
     };
     
     //Free quest log slots

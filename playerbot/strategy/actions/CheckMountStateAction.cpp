@@ -109,7 +109,7 @@ bool CheckMountStateAction::Execute(Event event)
                 return Mount();
         }
 
-        if (!AI_VALUE(TravelTarget*, "travel target")->isTraveling() && ((!AI_VALUE(list<ObjectGuid>, "possible rpg targets").empty()) && noattackers && !dps && !enemy) && urand(0, 100) > 50)
+        if (!AI_VALUE(TravelTarget*, "travel target")->isTraveling() && ((!AI_VALUE(std::list<ObjectGuid>, "possible rpg targets").empty()) && noattackers && !dps && !enemy) && urand(0, 100) > 50)
             return Mount();
 
         if (AI_VALUE(TravelTarget*, "travel target")->isTraveling() && AI_VALUE(TravelTarget*, "travel target")->distance(bot) > sPlayerbotAIConfig.farDistance && !enemy && AI_VALUE(bool, "can move around"))
@@ -253,7 +253,7 @@ uint32 CheckMountStateAction::MountSpeed(const SpellEntry* const spellInfo, cons
 vector<uint32> CheckMountStateAction::GetBestMountSpells(const bool canFly)
 {
     uint32 bestMountSpeed = 1;
-    vector<uint32> spells;
+    std::vector<uint32> spells;
     for (PlayerSpellMap::iterator itr = bot->GetSpellMap().begin(); itr != bot->GetSpellMap().end(); ++itr)
     {
         uint32 spellId = itr->first;
@@ -292,10 +292,10 @@ uint32 CheckMountStateAction::MountSpeed(const ItemPrototype* proto, const bool 
 
 vector<Item*> CheckMountStateAction::GetBestMounts(const bool canFly)
 {
-    list<Item*> items = AI_VALUE2(list<Item*>, "inventory items", "mount");
+    std::list<Item*> items = AI_VALUE2(std::list<Item*>, "inventory items", "mount");
 
     uint32 bestMountSpeed = 1;
-    vector<Item*> mounts;
+    std::vector<Item*> mounts;
 
     for (auto& item : items)
     {
@@ -315,8 +315,8 @@ vector<Item*> CheckMountStateAction::GetBestMounts(const bool canFly)
 
 bool CheckMountStateAction::MountWithBestMount(const bool canFly)
 {
-    vector<uint32> mountSpells = GetBestMountSpells(canFly);
-    vector<Item*> mounts = GetBestMounts(canFly);
+    std::vector<uint32> mountSpells = GetBestMountSpells(canFly);
+    std::vector<Item*> mounts = GetBestMounts(canFly);
 
     if (mountSpells.empty() && mounts.empty())
         return false;
@@ -445,8 +445,8 @@ bool CheckMountStateAction::Mount()
         }
     }
 
-    //map<int32, vector<uint32> > spells;
-    map<uint32, map<int32, vector<uint32> > > allSpells;
+    //map<int32, std::vector<uint32> > spells;
+    std::map<uint32, std::map<int32, std::vector<uint32> > > allSpells;
 #ifdef MANGOS
     if (bot->GetPureSkillValue(SKILL_RIDING) <= 75 && bot->GetLevel() < 60)
 #endif
@@ -509,13 +509,13 @@ bool CheckMountStateAction::Mount()
 #endif
 
 
-    map<int32, vector<uint32> >& spells = allSpells[masterMountType];
+    std::map<int32, std::vector<uint32> >& spells = allSpells[masterMountType];
 
     if (hasSwiftMount)
     {
         for (auto i : spells)
         {
-            vector<uint32> ids = i.second;
+            std::vector<uint32> ids = i.second;
             for (auto itr : ids)
             {
                 const SpellEntry* spellInfo = sServerFacade.LookupSpellInfo(itr);
@@ -531,9 +531,9 @@ bool CheckMountStateAction::Mount()
         }
     }
 
-    for (map<int32, vector<uint32> >::iterator i = spells.begin(); i != spells.end(); ++i)
+    for (map<int32, std::vector<uint32> >::iterator i = spells.begin(); i != spells.end(); ++i)
     {
-        vector<uint32>& ids = i->second;
+        std::vector<uint32>& ids = i->second;
         int index = urand(0, ids.size() - 1);
         if (index >= ids.size())
             continue;
@@ -544,9 +544,9 @@ bool CheckMountStateAction::Mount()
     }
 
 #ifndef MANGOSBOT_TWO
-    list<Item*> items = AI_VALUE2(list<Item*>, "inventory items", "mount");
+    std::list<Item*> items = AI_VALUE2(std::list<Item*>, "inventory items", "mount");
 
-    vector<Item*> mounts(items.begin(), items.end());
+    std::vector<Item*> mounts(items.begin(), items.end());
     std::shuffle(mounts.begin(), mounts.end(), *GetRandomGenerator());
 
     Item* bestMount = nullptr;

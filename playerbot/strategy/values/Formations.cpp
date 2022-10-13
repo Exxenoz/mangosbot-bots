@@ -245,7 +245,7 @@ namespace ai
             float z = master->GetPositionZ();
             float orientation = master->GetOrientation();
 
-            vector<Player*> players;
+            std::vector<Player*> players;
             GroupReference *gref = group->GetFirstMember();
             while( gref )
             {
@@ -283,8 +283,8 @@ namespace ai
             float z = master->GetPositionZ();
             float orientation = master->GetOrientation();
 
-            vector<Player*> tanks;
-            vector<Player*> dps;
+            std::vector<Player*> tanks;
+            std::vector<Player*> dps;
             GroupReference *gref = group->GetFirstMember();
             while( gref )
             {
@@ -421,7 +421,7 @@ float Formation::GetFollowAngle()
     }
     else if (group)
     {
-        vector<Player*> roster;
+        std::vector<Player*> roster;
         for (GroupReference *ref = group->GetFirstMember(); ref; ref = ref->next())
         {
             Player* member = ref->getSource();
@@ -452,7 +452,7 @@ float Formation::GetFollowAngle()
             }
         }
 
-        for (vector<Player*>::iterator i = roster.begin(); i != roster.end(); ++i)
+        for (std::vector<Player*>::iterator i = roster.begin(); i != roster.end(); ++i)
         {
             if (*i == bot) break;
             index++;
@@ -561,7 +561,7 @@ bool SetFormationAction::Execute(Event event)
 }
 
 
-WorldLocation MoveFormation::MoveLine(vector<Player*> line, float diff, float cx, float cy, float cz, float orientation, float range)
+WorldLocation MoveFormation::MoveLine(std::vector<Player*> line, float diff, float cx, float cy, float cz, float orientation, float range)
 {
     if (line.size() < 5)
     {
@@ -574,7 +574,7 @@ WorldLocation MoveFormation::MoveLine(vector<Player*> line, float diff, float cx
         float radius = range * i;
         float x = cx + cos(orientation) * radius;
         float y = cy + sin(orientation) * radius;
-        vector<Player*> singleLine;
+        std::vector<Player*> singleLine;
         for (int j = 0; j < 5 && !line.empty(); j++)
         {
             singleLine.push_back(line[line.size() - 1]);
@@ -589,7 +589,7 @@ WorldLocation MoveFormation::MoveLine(vector<Player*> line, float diff, float cx
     return Formation::NullLocation;
 }
 
-WorldLocation MoveFormation::MoveSingleLine(vector<Player*> line, float diff, float cx, float cy, float cz, float orientation, float range)
+WorldLocation MoveFormation::MoveSingleLine(std::vector<Player*> line, float diff, float cx, float cy, float cz, float orientation, float range)
 {
     float count = line.size();
     float angle = orientation - M_PI / 2.0f;
@@ -597,7 +597,7 @@ WorldLocation MoveFormation::MoveSingleLine(vector<Player*> line, float diff, fl
     float y = cy + sin(angle) * (range * floor(count / 2.0f) + diff);
 
     int index = 0;
-    for (vector<Player*>::iterator i = line.begin(); i != line.end(); i++)
+    for (std::vector<Player*>::iterator i = line.begin(); i != line.end(); i++)
     {
         Player* member = *i;
 

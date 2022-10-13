@@ -16,8 +16,8 @@ bool AhAction::Execute(Event event)
 {
     string text = event.getParam();
 
-    list<ObjectGuid> npcs = AI_VALUE(list<ObjectGuid>, "nearest npcs");
-    for (list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
+    std::list<ObjectGuid> npcs = AI_VALUE(std::list<ObjectGuid>, "nearest npcs");
+    for (std::list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
     {
         Unit* npc = bot->GetNPCIfCanInteractWith(*i, UNIT_NPC_FLAG_AUCTIONEER);
         if (!npc)
@@ -52,7 +52,7 @@ bool AhAction::Execute(string text, Unit* auctioneer)
         if (!auctionHouseEntry)
             return false;
 
-        list<Item*> items = AI_VALUE2(list<Item*>, "inventory items", "usage " + to_string(ITEM_USAGE_AH));
+        std::list<Item*> items = AI_VALUE2(std::list<Item*>, "inventory items", "usage " + to_string(ITEM_USAGE_AH));
         
         bool postedItem = false;
 
@@ -86,7 +86,7 @@ bool AhAction::Execute(string text, Unit* auctioneer)
     string priceStr = text.substr(0, pos);
     uint32 price = ChatHelper::parseMoney(priceStr);
 
-    list<Item*> found = parseItems(text, ITERATE_ITEMS_IN_BAGS);
+    std::list<Item*> found = parseItems(text, ITERATE_ITEMS_IN_BAGS);
     if (found.empty())
         return false;
 
@@ -158,7 +158,7 @@ bool AhBidAction::Execute(string text, Unit* auctioneer)
 
     AuctionEntry* auction = nullptr;
 
-    vector<pair<AuctionEntry*, uint32>> auctionPowers;
+    std::vector<pair<AuctionEntry*, uint32>> auctionPowers;
 
     if (text == "vendor")
     {

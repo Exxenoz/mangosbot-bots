@@ -31,11 +31,11 @@ bool CheckValuesAction::Execute(Event event)
         sTravelNodeMap.manageNodes(bot, ai->HasStrategy("map full", BOT_STATE_NON_COMBAT));
     }
 
-    list<ObjectGuid> possible_targets = *context->GetValue<list<ObjectGuid> >("possible targets");
-    list<ObjectGuid> all_targets = *context->GetValue<list<ObjectGuid> >("all targets");
-    list<ObjectGuid> npcs = *context->GetValue<list<ObjectGuid> >("nearest npcs");
-    list<ObjectGuid> corpses = *context->GetValue<list<ObjectGuid> >("nearest corpses");
-    list<ObjectGuid> gos = *context->GetValue<list<ObjectGuid> >("nearest game objects");
-    list<ObjectGuid> nfp = *context->GetValue<list<ObjectGuid> >("nearest friendly players");
+    std::list<ObjectGuid> possible_targets = *context->GetValue<std::list<ObjectGuid> >("possible targets");
+    std::list<ObjectGuid> all_targets = *context->GetValue<std::list<ObjectGuid> >("all targets");
+    std::list<ObjectGuid> npcs = *context->GetValue<std::list<ObjectGuid> >("nearest npcs");
+    std::list<ObjectGuid> corpses = *context->GetValue<std::list<ObjectGuid> >("nearest corpses");
+    std::list<ObjectGuid> gos = *context->GetValue<std::list<ObjectGuid> >("nearest game objects");
+    std::list<ObjectGuid> nfp = *context->GetValue<std::list<ObjectGuid> >("nearest friendly players");
     return true;
 }

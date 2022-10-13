@@ -28,12 +28,12 @@ bool AddAllLootAction::Execute(Event event)
 {
     bool added = false;
 
-    list<ObjectGuid> gos = context->GetValue<list<ObjectGuid> >("nearest game objects")->Get();
-    for (list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); i++)
+    std::list<ObjectGuid> gos = context->GetValue<std::list<ObjectGuid> >("nearest game objects")->Get();
+    for (std::list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); i++)
         added |= AddLoot(*i);
 
-    list<ObjectGuid> corpses = context->GetValue<list<ObjectGuid> >("nearest corpses")->Get();
-    for (list<ObjectGuid>::iterator i = corpses.begin(); i != corpses.end(); i++)
+    std::list<ObjectGuid> corpses = context->GetValue<std::list<ObjectGuid> >("nearest corpses")->Get();
+    for (std::list<ObjectGuid>::iterator i = corpses.begin(); i != corpses.end(); i++)
         added |= AddLoot(*i);
 
     return added;
@@ -100,7 +100,7 @@ bool AddGatheringLootAction::AddLoot(ObjectGuid guid)
 
     if (sServerFacade.IsDistanceGreaterThan(sServerFacade.GetDistance2d(bot, wo), INTERACTION_DISTANCE))
     {
-        list<Unit*> targets;
+        std::list<Unit*> targets;
         MaNGOS::AnyUnfriendlyUnitInObjectRangeCheck u_check(bot, sPlayerbotAIConfig.lootDistance);
         MaNGOS::UnitListSearcher<MaNGOS::AnyUnfriendlyUnitInObjectRangeCheck> searcher(targets, u_check);
         Cell::VisitAllObjects(wo, searcher, sPlayerbotAIConfig.spellDistance * 1.5);

@@ -75,8 +75,8 @@ bool SellAction::Execute(Event event)
         return true;
     }
 
-    list<Item*> items = parseItems(text, ITERATE_ITEMS_IN_BAGS);
-    for (list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
+    std::list<Item*> items = parseItems(text, ITERATE_ITEMS_IN_BAGS);
+    for (std::list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
     {
         Sell(*i);
     }
@@ -88,17 +88,17 @@ bool SellAction::Execute(Event event)
 void SellAction::Sell(FindItemVisitor* visitor)
 {
     IterateItems(visitor);
-    list<Item*> items = visitor->GetResult();
-    for (list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
+    std::list<Item*> items = visitor->GetResult();
+    for (std::list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
         Sell(*i);
 }
 
 void SellAction::Sell(Item* item)
 {
     ostringstream out;
-    list<ObjectGuid> vendors = ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("nearest npcs")->Get();
+    std::list<ObjectGuid> vendors = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest npcs")->Get();
 
-    for (list<ObjectGuid>::iterator i = vendors.begin(); i != vendors.end(); ++i)
+    for (std::list<ObjectGuid>::iterator i = vendors.begin(); i != vendors.end(); ++i)
     {
         ObjectGuid vendorguid = *i;
         Creature *pCreature = bot->GetNPCIfCanInteractWith(vendorguid,UNIT_NPC_FLAG_VENDOR);

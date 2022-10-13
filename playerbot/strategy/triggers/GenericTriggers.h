@@ -193,7 +193,7 @@ namespace ai
         NoFoodTrigger(PlayerbotAI* ai) : Trigger(ai, "no food trigger") {}
         virtual bool IsActive()
         {
-            return AI_VALUE2(list<Item*>, "inventory items", "conjured food").empty();
+            return AI_VALUE2(std::list<Item*>, "inventory items", "conjured food").empty();
         }
     };
 
@@ -202,7 +202,7 @@ namespace ai
         NoDrinkTrigger(PlayerbotAI* ai) : Trigger(ai, "no drink trigger") {}
         virtual bool IsActive()
         {
-            return AI_VALUE2(list<Item*>, "inventory items", "conjured water").empty();
+            return AI_VALUE2(std::list<Item*>, "inventory items", "conjured water").empty();
         }
     };
 
@@ -681,7 +681,7 @@ namespace ai
         {
             return !ai->HasPlayerNearby();
             /*if (!bot->InBattleGround())
-                return AI_VALUE(list<ObjectGuid>, "nearest non bot players").empty();
+                return AI_VALUE(std::list<ObjectGuid>, "nearest non bot players").empty();
             else
                 return false;*/
         }
@@ -815,7 +815,7 @@ namespace ai
         UseTrinketTrigger(PlayerbotAI* ai) : BoostTrigger(ai, "use trinket", 3) {}
 
     public:
-        virtual bool IsActive() { return AI_VALUE(list<Item*>, "trinkets on use").size() > 0; }
+        virtual bool IsActive() { return AI_VALUE(std::list<Item*>, "trinkets on use").size() > 0; }
     };
 
     class HasAreaDebuffTrigger : public Trigger {
@@ -847,8 +847,8 @@ namespace ai
             if (AI_VALUE2(uint8, "health", "self target") > sPlayerbotAIConfig.almostFullHealth)
                 return false;
 
-            list<ObjectGuid> corpses = context->GetValue<list<ObjectGuid> >("nearest corpses")->Get();
-            for (list<ObjectGuid>::iterator i = corpses.begin(); i != corpses.end(); i++)
+            std::list<ObjectGuid> corpses = context->GetValue<std::list<ObjectGuid> >("nearest corpses")->Get();
+            for (std::list<ObjectGuid>::iterator i = corpses.begin(); i != corpses.end(); i++)
             {
                 if (!i->IsUnit())
                     continue;
@@ -971,7 +971,7 @@ namespace ai
         PerceptionTrigger(PlayerbotAI* ai) : BuffTrigger(ai, "perception") {}
         virtual bool IsActive()
         {
-            for (auto& attacker : ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("attackers")->Get())
+            for (auto& attacker : ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("attackers")->Get())
             {
                 Unit* enemy = ai->GetUnit(attacker);
                 if (!enemy)

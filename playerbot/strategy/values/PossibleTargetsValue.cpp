@@ -11,7 +11,7 @@
 using namespace ai;
 using namespace MaNGOS;
 
-void PossibleTargetsValue::FindUnits(list<Unit*> &targets)
+void PossibleTargetsValue::FindUnits(std::list<Unit*> &targets)
 {
     MaNGOS::AnyUnfriendlyUnitInObjectRangeCheck u_check(bot, range);
     MaNGOS::UnitListSearcher<MaNGOS::AnyUnfriendlyUnitInObjectRangeCheck> searcher(targets, u_check);

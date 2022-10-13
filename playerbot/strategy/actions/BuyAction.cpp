@@ -23,9 +23,9 @@ bool BuyAction::Execute(Event event)
         itemIds = chat->parseItems(link);
     }
 
-    list<ObjectGuid> vendors = ai->GetAiObjectContext()->GetValue<list<ObjectGuid> >("nearest npcs")->Get();
+    std::list<ObjectGuid> vendors = ai->GetAiObjectContext()->GetValue<std::list<ObjectGuid> >("nearest npcs")->Get();
     bool vendored = false, result = false;
-    for (list<ObjectGuid>::iterator i = vendors.begin(); i != vendors.end(); ++i)
+    for (std::list<ObjectGuid>::iterator i = vendors.begin(); i != vendors.end(); ++i)
     {
         ObjectGuid vendorguid = *i;
         Creature *pCreature = bot->GetNPCIfCanInteractWith(vendorguid, UNIT_NPC_FLAG_VENDOR);

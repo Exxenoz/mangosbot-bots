@@ -12,13 +12,13 @@ namespace ai
             ObjectGuidListCalculatedValue(ai, name, 2), range(range), ignoreLos(ignoreLos) {}
 
 	public:
-        list<ObjectGuid> Calculate()
+        std::list<ObjectGuid> Calculate()
         {
-            list<Unit*> targets;
+            std::list<Unit*> targets;
             FindUnits(targets);
 
-            list<ObjectGuid> results;
-            for(list<Unit *>::iterator i = targets.begin(); i!= targets.end(); ++i)
+            std::list<ObjectGuid> results;
+            for(std::list<Unit *>::iterator i = targets.begin(); i!= targets.end(); ++i)
             {
                 Unit* unit = *i;
                 if ((ignoreLos || sServerFacade.IsWithinLOSInMap(bot, unit)) && AcceptUnit(unit))
@@ -28,7 +28,7 @@ namespace ai
         }
 
     protected:
-        virtual void FindUnits(list<Unit*> &targets) = 0;
+        virtual void FindUnits(std::list<Unit*> &targets) = 0;
         virtual bool AcceptUnit(Unit* unit) = 0;
 
     protected:

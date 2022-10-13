@@ -142,7 +142,7 @@ Unit* EnemyPlayerValue::Calculate()
 
     // 2. Find enemy player in range.
 
-    list<ObjectGuid> players = AI_VALUE(list<ObjectGuid>, "nearest enemy players");
+    std::list<ObjectGuid> players = AI_VALUE(std::list<ObjectGuid>, "nearest enemy players");
     std::list<Player*> targetsList;
 
     for (const auto& gTarget : players)

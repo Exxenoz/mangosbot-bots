@@ -3,11 +3,11 @@
 namespace ai
 {
     //                    spell                  , trainers
-    typedef unordered_map<TrainerSpell const*, vector<CreatureInfo const*>>  spellTrainerMap;
+    typedef std::unordered_map<TrainerSpell const*, std::vector<CreatureInfo const*>>  spellTrainerMap;
     //              spellsTypes, spell
-    typedef unordered_map<uint32, spellTrainerMap>          trainableSpellList;
+    typedef std::unordered_map<uint32, spellTrainerMap>          trainableSpellList;
     //              trainerType, spellsTypes
-    typedef unordered_map<uint8, trainableSpellList>         trainableSpellMap;
+    typedef std::unordered_map<uint8, trainableSpellList>         trainableSpellMap;
 
     class TrainableSpellMapValue : public SingleCalculatedValue<trainableSpellMap>
     {
@@ -17,12 +17,12 @@ namespace ai
         virtual trainableSpellMap Calculate();
     };
 
-    class TrainableClassSpells : public CalculatedValue<vector< TrainerSpell const*>>
+    class TrainableClassSpells : public CalculatedValue<std::vector< TrainerSpell const*>>
     {
     public:
-        TrainableClassSpells(PlayerbotAI* ai) : CalculatedValue<vector<TrainerSpell const*>>(ai, "trainable class spells") {}
+        TrainableClassSpells(PlayerbotAI* ai) : CalculatedValue<std::vector<TrainerSpell const*>>(ai, "trainable class spells") {}
 
-        virtual vector<TrainerSpell const*> Calculate();
+        virtual std::vector<TrainerSpell const*> Calculate();
     };
 
     class TrainCostValue : public Uint32CalculatedValue

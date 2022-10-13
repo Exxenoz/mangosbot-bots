@@ -227,7 +227,7 @@ struct SortByPricePredicate
 vector<AuctionEntry*> AhBot::LoadAuctions(const AuctionHouseObject::AuctionEntryMap& auctionEntryMap,
         Category*& category, int& auction)
 {
-    vector<AuctionEntry*> entries;
+    std::vector<AuctionEntry*> entries;
     for (AuctionHouseObject::AuctionEntryMap::const_iterator itr = auctionEntryMap.begin();
             itr != auctionEntryMap.end(); ++itr)
     {
@@ -298,8 +298,8 @@ int AhBot::Answer(int auction, Category* category, ItemBag* inAuctionItems)
     const AuctionHouseObject::AuctionEntryMap& auctionEntryMap = auctionHouse->GetAuctions();
     int64 availableMoney = GetAvailableMoney(auctionIds[auction]);
 
-    vector<AuctionEntry*> entries = LoadAuctions(auctionEntryMap, category, auction);
-    for (vector<AuctionEntry*>::iterator itr = entries.begin(); itr != entries.end(); ++itr)
+    std::vector<AuctionEntry*> entries = LoadAuctions(auctionEntryMap, category, auction);
+    for (std::vector<AuctionEntry*>::iterator itr = entries.begin(); itr != entries.end(); ++itr)
     {
         AuctionEntry *entry = *itr;
         uint32 owner = entry->owner;
@@ -315,7 +315,7 @@ int AhBot::Answer(int auction, Category* category, ItemBag* inAuctionItems)
             continue;
 
         const ItemPrototype* proto = item->GetProto();
-        vector<uint32> items = availableItems.Get(category);
+        std::vector<uint32> items = availableItems.Get(category);
         if (find(items.begin(), items.end(), proto->ItemId) == items.end())
         {
             sLog.outDetail( "%s (x%d) in auction %d: unavailable item",
@@ -522,7 +522,7 @@ uint32 AhBot::GetSellTime(uint32 itemId, uint32 auctionHouse, Category*& categor
 
 int AhBot::AddAuctions(int auction, Category* category, ItemBag* inAuctionItems)
 {
-    vector<uint32>& inAuction = inAuctionItems->Get(category);
+    std::vector<uint32>& inAuction = inAuctionItems->Get(category);
 
     int32 maxAllowedAuctionCount = categoryMaxAuctionCount[category->GetDisplayName()];
     if (inAuctionItems->GetCount(category) >= maxAllowedAuctionCount)
@@ -530,7 +530,7 @@ int AhBot::AddAuctions(int auction, Category* category, ItemBag* inAuctionItems)
 
     int added = 0;
     int ladded = 0;
-    vector<uint32> available = availableItems.Get(category);
+    std::vector<uint32> available = availableItems.Get(category);
     for (int32 i = 0; i <= maxAllowedAuctionCount && available.size() > 0 && inAuctionItems->GetCount(category) < maxAllowedAuctionCount; ++i)
     {
         uint32 index = urand(0, available.size() - 1);
@@ -708,7 +708,7 @@ void AhBot::HandleCommand(string command)
         Category* category = CategoryList::instance[i];
         if (category->Contains(proto))
         {
-            vector<uint32> items = availableItems.Get(category);
+            std::vector<uint32> items = availableItems.Get(category);
             if (find(items.begin(), items.end(), proto->ItemId) == items.end())
                 continue;
 
@@ -855,7 +855,7 @@ uint32 AhBot::GetAvailableMoney(uint32 auctionHouse)
 {
     int64 result = sAhBotConfig.alwaysAvailableMoney;
 
-    map<uint32, uint32> data;
+    std::map<uint32, uint32> data;
     data[AHBOT_WON_PLAYER] = 0;
     data[AHBOT_WON_SELF] = 0;
 
@@ -980,12 +980,12 @@ bool AhBot::IsBotAuction(uint32 bidder)
 
 uint32 AhBot::GetRandomBidder(uint32 auctionHouse)
 {
-    vector<uint32> guids = bidders[factions[auctionHouse]];
+    std::vector<uint32> guids = bidders[factions[auctionHouse]];
     if (guids.empty())
         return 0;
 
-    vector<uint32> online;
-    for (vector<uint32>::iterator i = guids.begin(); i != guids.end(); ++i)
+    std::vector<uint32> online;
+    for (std::vector<uint32>::iterator i = guids.begin(); i != guids.end(); ++i)
     {
         uint32 guid = *i;
 		string name;
@@ -1004,7 +1004,7 @@ uint32 AhBot::GetRandomBidder(uint32 auctionHouse)
 
 void AhBot::LoadRandomBots()
 {
-    for (list<uint32>::iterator i = sPlayerbotAIConfig.randomBotAccounts.begin(); i != sPlayerbotAIConfig.randomBotAccounts.end(); i++)
+    for (std::list<uint32>::iterator i = sPlayerbotAIConfig.randomBotAccounts.begin(); i != sPlayerbotAIConfig.randomBotAccounts.end(); i++)
     {
         uint32 accountId = *i;
         if (!sAccountMgr.GetCharactersCount(accountId))
@@ -1053,7 +1053,7 @@ int32 AhBot::GetSellPrice(ItemPrototype const* proto)
         if (!category->Contains(proto))
             continue;
 
-        vector<uint32> items = availableItems.Get(category);
+        std::vector<uint32> items = availableItems.Get(category);
         if (find(items.begin(), items.end(), proto->ItemId) == items.end())
             continue;
 
@@ -1083,7 +1083,7 @@ int32 AhBot::GetBuyPrice(ItemPrototype const* proto)
         if (!category->Contains(proto))
             continue;
 
-        vector<uint32> items = availableItems.Get(category);
+        std::vector<uint32> items = availableItems.Get(category);
         if (find(items.begin(), items.end(), proto->ItemId) == items.end())
             continue;
 
@@ -1200,7 +1200,7 @@ void AhBot::Dump()
             Category* category = CategoryList::instance[i];
             if (category->Contains(proto))
             {
-                vector<uint32> items = availableItems.Get(category);
+                std::vector<uint32> items = availableItems.Get(category);
                 if (find(items.begin(), items.end(), proto->ItemId) == items.end())
                     continue;
 
@@ -1250,12 +1250,12 @@ void AhBot::CleanupPropositions()
     }
 }
 
-void AhBot::DeleteMail(list<uint32> buffer)
+void AhBot::DeleteMail(std::list<uint32> buffer)
 {
     ostringstream sql;
     sql << "delete from mail where id in ( ";
     bool first = true;
-    for (list<uint32>::iterator j = buffer.begin(); j != buffer.end(); ++j)
+    for (std::list<uint32>::iterator j = buffer.begin(); j != buffer.end(); ++j)
     {
         if (first) first = false; else sql << ",";
         sql << "'" << *j << "'";

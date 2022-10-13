@@ -19,7 +19,7 @@ class RandomPlayerbotFactory
 		virtual ~RandomPlayerbotFactory() {}
 
 	public:
-        bool CreateRandomBot(uint8 cls, unordered_map<uint8, vector<string>>& names);
+        bool CreateRandomBot(uint8 cls, std::unordered_map<uint8, std::vector<string>>& names);
         static void CreateRandomBots();
         static void CreateRandomGuilds();
         static void CreateRandomArenaTeams();
@@ -31,7 +31,7 @@ class RandomPlayerbotFactory
 
     private:
         uint32 accountId;
-        static map<uint8, vector<uint8> > availableRaces;
+        static std::map<uint8, std::vector<uint8> > availableRaces;
 };
 
 #endif

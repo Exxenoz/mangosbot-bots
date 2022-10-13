@@ -14,10 +14,10 @@ namespace ai
         void Reset();
 
     private:
-        list<string> actionLines;
+        std::list<string> actionLines;
         void LoadActionLines(uint32 owner);
 
     public:
-        static map<string, string> actionLinesCache;
+        static std::map<string, string> actionLinesCache;
     };
 }

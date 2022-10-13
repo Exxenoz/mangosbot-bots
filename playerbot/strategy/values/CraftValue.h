@@ -15,7 +15,7 @@ namespace ai
 
     public:
         uint32 itemId;
-        map<uint32, int> required, obtained;
+        std::map<uint32, int> required, obtained;
 
     public:
         bool IsEmpty() { return itemId == 0; }

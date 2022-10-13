@@ -3,7 +3,7 @@
 
 namespace ai
 {
-    typedef list<string> Outfit;
+    typedef std::list<string> Outfit;
     class OutfitListValue : public ManualSetValue<Outfit&>
 	{
 	public:

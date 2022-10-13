@@ -77,12 +77,12 @@ bool DebugAction::Execute(Event event)
         WorldPosition poiPoint = botPos;
         string name = "bot";
 
-        vector<string> args = Qualified::getMultiQualifiers(text.substr(4));
+        std::vector<string> args = Qualified::getMultiQualifiers(text.substr(4));
         TravelDestination* dest = ChooseTravelTargetAction::FindDestination(bot, args[0]);
 
         if (dest)
         {
-            vector <WorldPosition*> points = dest->nextPoint(&botPos, true);
+            std::vector <WorldPosition*> points = dest->nextPoint(&botPos, true);
 
             if (!points.empty())
             {
@@ -120,7 +120,7 @@ bool DebugAction::Execute(Event event)
 
             if (!link.empty())
             {
-                list<int32> entries = chat->parseWorldEntries(link);
+                std::list<int32> entries = chat->parseWorldEntries(link);
                 if (!entries.empty())
                 {
 
@@ -211,7 +211,7 @@ bool DebugAction::Execute(Event event)
             ai->TellMasterNoFacing("UNIT_NPC_FLAG_OUTDOORPVP");
 #endif
 
-        unordered_map<ReputationRank, string> reaction;
+        std::unordered_map<ReputationRank, string> reaction;
 
         reaction[REP_HATED] = "REP_HATED";
         reaction[REP_HOSTILE] = "REP_HOSTILE";
@@ -252,12 +252,12 @@ bool DebugAction::Execute(Event event)
         TravelDestination* dest = ChooseTravelTargetAction::FindDestination(bot, destination);
         if (dest)
         {
-            vector <WorldPosition*> points = dest->nextPoint(&botPos, true);
+            std::vector <WorldPosition*> points = dest->nextPoint(&botPos, true);
 
             if (points.empty())
                 return false;
 
-            vector<WorldPosition> beginPath, endPath;
+            std::vector<WorldPosition> beginPath, endPath;
             TravelNodeRoute route = sTravelNodeMap.getRoute(botPos, *points.front(), beginPath, bot);
 
             ostringstream out; out << "Traveling to " << dest->getTitle() << ": ";
@@ -300,7 +300,7 @@ bool DebugAction::Execute(Event event)
 
         uint32 i = 0;
 
-        vector<QuestTravelDestination*> dests = cont->questGivers;
+        std::vector<QuestTravelDestination*> dests = cont->questGivers;
 
         std::sort(dests.begin(), dests.end(), [botPos](QuestTravelDestination* i, QuestTravelDestination* j) {return i->distanceTo(botPos) < j->distanceTo(botPos); });
 
@@ -460,7 +460,7 @@ bool DebugAction::Execute(Event event)
         ostringstream out;
         for (auto itemId : chat->parseItems(text.substr(5)))
         {
-            list<int32> entries = GAI_VALUE2(list<int32>, "item drop list", itemId);
+            std::list<int32> entries = GAI_VALUE2(std::list<int32>, "item drop list", itemId);
 
             if (entries.empty())
                 out << chat->formatItem(sObjectMgr.GetItemPrototype(itemId), 0, 0) << " no sources found.";
@@ -471,7 +471,7 @@ bool DebugAction::Execute(Event event)
             out.str("");
             out.clear();
 
-            vector<pair<int32, float>> chances;
+            std::vector<pair<int32, float>> chances;
 
             for (auto entry : entries)
             {
@@ -542,7 +542,7 @@ bool DebugAction::Execute(Event event)
     ostringstream out;
     for (auto entry : chat->parseWorldEntries(text.substr(6)))
     {
-        list<uint32> itemIds = GAI_VALUE2(list<uint32>, "entry loot list", entry);
+        std::list<uint32> itemIds = GAI_VALUE2(std::list<uint32>, "entry loot list", entry);
 
         if (itemIds.empty())
             out << chat->formatWorldEntry(entry) << " no drops found.";
@@ -553,7 +553,7 @@ bool DebugAction::Execute(Event event)
         out.str("");
         out.clear();
 
-        vector<pair<uint32, float>> chances;
+        std::vector<pair<uint32, float>> chances;
 
         for (auto itemId : itemIds)
         {
@@ -664,18 +664,18 @@ bool DebugAction::Execute(Event event)
     {
         WorldPosition pos(bot);
 
-        vector<TravelNode*> nodes = sTravelNodeMap.getNodes(pos, 500);
+        std::vector<TravelNode*> nodes = sTravelNodeMap.getNodes(pos, 500);
 
         for (auto& node : nodes)
         {
             for (auto& l : *node->getLinks())
             {
                 Unit* start = nullptr;
-                list<ObjectGuid> units;
+                std::list<ObjectGuid> units;
 
                 uint32 time = 60 * IN_MILLISECONDS;
 
-                vector<WorldPosition> ppath = l.second->getPath();
+                std::vector<WorldPosition> ppath = l.second->getPath();
 
                 for (auto p : ppath)
                 {
@@ -780,7 +780,7 @@ bool DebugAction::Execute(Event event)
     {
         uint32 spellEffect = stoi(text.substr(7));
 
-        list<ObjectGuid> units;
+        std::list<ObjectGuid> units;
 
         for (float i = 0; i < 60; i++)
         {
@@ -917,7 +917,7 @@ bool DebugAction::Execute(Event event)
     }
     else if (text.find("vspellmap") != std::string::npos)
     {
-        vector<WorldPacket> datMap;
+        std::vector<WorldPacket> datMap;
         for (int32 dx = 0; dx < 10; dx++)
         {
             for (int32 dy = 0; dy < 10; dy++)
@@ -962,7 +962,7 @@ bool DebugAction::Execute(Event event)
     }
     else if (text.find("ispellmap") != std::string::npos)
     {
-        vector<WorldPacket> datMap;
+        std::vector<WorldPacket> datMap;
         for (int32 dx = 0; dx < 10; dx++)
         {
             for (int32 dy = 0; dy < 10; dy++)
@@ -1059,10 +1059,10 @@ bool DebugAction::Execute(Event event)
     }
     else if (text.find("gspellmap") != std::string::npos)
     {
-        vector<ObjectGuid> all_targets;// = { bot->GetObjectGuid(), master->GetObjectGuid() };
+        std::vector<ObjectGuid> all_targets;// = { bot->GetObjectGuid(), master->GetObjectGuid() };
         //vector<ObjectGuid> all_dummies = { bot->GetObjectGuid(), master->GetObjectGuid() };
 
-        /*list<ObjectGuid> a_targets = *context->GetValue<list<ObjectGuid> >("all targets");
+        /*list<ObjectGuid> a_targets = *context->GetValue<std::list<ObjectGuid> >("all targets");
         for (auto t : a_targets)
         {
             all_targets.push_back(t);
@@ -1100,7 +1100,7 @@ bool DebugAction::Execute(Event event)
                     uint32 effect = dx + dy * 10 + spellEffect * 100;
 
                     uint32 i = dx + dy * 10;
-                    list<ObjectGuid> hits, miss;
+                    std::list<ObjectGuid> hits, miss;
 
                     SpellEntry const* spellInfo = sServerFacade.LookupSpellInfo(effect);
 
@@ -1145,7 +1145,7 @@ bool DebugAction::Execute(Event event)
     }
     else if (text.find("mspellmap") != std::string::npos)
     {
-    vector<ObjectGuid> all_targets;
+    std::vector<ObjectGuid> all_targets;
 
     for (int32 dx = 0; dx < 10; dx++)
     {
@@ -1177,7 +1177,7 @@ bool DebugAction::Execute(Event event)
                 uint32 effect = dx + dy * 10 + spellEffect * 100;
 
                 uint32 i = dx + dy * 10;
-                list<ObjectGuid> hits, miss;
+                std::list<ObjectGuid> hits, miss;
 
                 SpellEntry const* spellInfo = sServerFacade.LookupSpellInfo(effect);
 
@@ -1277,7 +1277,7 @@ bool DebugAction::Execute(Event event)
 }
 
 
-void DebugAction::FakeSpell(uint32 spellId, Unit* truecaster, Unit* caster, ObjectGuid target, list<ObjectGuid> otherTargets, list<ObjectGuid> missTargets, WorldPosition source, WorldPosition dest, bool forceDest)
+void DebugAction::FakeSpell(uint32 spellId, Unit* truecaster, Unit* caster, ObjectGuid target, std::list<ObjectGuid> otherTargets, std::list<ObjectGuid> missTargets, WorldPosition source, WorldPosition dest, bool forceDest)
 {
     SpellEntry const* spellInfo = sServerFacade.LookupSpellInfo(spellId);
     {

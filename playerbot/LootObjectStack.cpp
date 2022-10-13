@@ -103,7 +103,7 @@ void LootObject::Refresh(Player* bot, ObjectGuid guid)
 #else
         /*if (!guid.IsEmpty())
         {
-            for (auto& entry : GAI_VALUE2(list<int32>, "item drop list", -go->GetEntry()))
+            for (auto& entry : GAI_VALUE2(std::list<int32>, "item drop list", -go->GetEntry()))
             {
                 if (IsNeededForQuest(bot, entry))
                 {
@@ -277,7 +277,7 @@ bool LootObjectStack::Add(ObjectGuid guid)
     if (availableLoot.size() < MAX_LOOT_OBJECT_COUNT)
         return true;
 
-    vector<LootObject> ordered = OrderByDistance();
+    std::vector<LootObject> ordered = OrderByDistance();
     for (size_t i = MAX_LOOT_OBJECT_COUNT; i < ordered.size(); i++)
         Remove(ordered[i].guid);
 
@@ -298,13 +298,13 @@ void LootObjectStack::Clear()
 
 bool LootObjectStack::CanLoot(float maxDistance)
 {
-    vector<LootObject> ordered = OrderByDistance(maxDistance);
+    std::vector<LootObject> ordered = OrderByDistance(maxDistance);
     return !ordered.empty();
 }
 
 LootObject LootObjectStack::GetLoot(float maxDistance)
 {
-    vector<LootObject> ordered = OrderByDistance(maxDistance);
+    std::vector<LootObject> ordered = OrderByDistance(maxDistance);
     return ordered.empty() ? LootObject() : *ordered.begin();
 }
 
@@ -312,7 +312,7 @@ vector<LootObject> LootObjectStack::OrderByDistance(float maxDistance)
 {
     availableLoot.shrink(time(0) - 30);
 
-    map<float, LootObject> sortedMap;
+    std::map<float, LootObject> sortedMap;
     LootTargetList safeCopy(availableLoot);
     for (LootTargetList::iterator i = safeCopy.begin(); i != safeCopy.end(); i++)
     {
@@ -326,7 +326,7 @@ vector<LootObject> LootObjectStack::OrderByDistance(float maxDistance)
             sortedMap[distance] = lootObject;
     }
 
-    vector<LootObject> result;
+    std::vector<LootObject> result;
     for (map<float, LootObject>::iterator i = sortedMap.begin(); i != sortedMap.end(); i++)
         result.push_back(i->second);
     return result;

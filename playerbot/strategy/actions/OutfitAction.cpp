@@ -116,8 +116,8 @@ bool OutfitAction::Execute(Event event)
 
 void OutfitAction::Save(string name, ItemIds items)
 {
-    list<string>& outfits = AI_VALUE(list<string>&, "outfit list");
-    for (list<string>::iterator i = outfits.begin(); i != outfits.end(); ++i)
+    std::list<string>& outfits = AI_VALUE(std::list<string>&, "outfit list");
+    for (std::list<string>::iterator i = outfits.begin(); i != outfits.end(); ++i)
     {
         string outfit = *i;
         if (name == parseOutfitName(outfit))
@@ -143,8 +143,8 @@ void OutfitAction::Save(string name, ItemIds items)
 
 void OutfitAction::List()
 {
-    list<string>& outfits = AI_VALUE(list<string>&, "outfit list");
-    for (list<string>::iterator i = outfits.begin(); i != outfits.end(); ++i)
+    std::list<string>& outfits = AI_VALUE(std::list<string>&, "outfit list");
+    for (std::list<string>::iterator i = outfits.begin(); i != outfits.end(); ++i)
     {
         string outfit = *i;
         string name = parseOutfitName(outfit);

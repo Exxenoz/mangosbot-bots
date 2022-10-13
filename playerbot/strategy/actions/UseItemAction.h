@@ -181,8 +181,8 @@ namespace ai
            if (!added)
                return false;
 
-           list<Item*> items = AI_VALUE2(list<Item*>, "inventory items", goblinSapper == 10646 ? "goblin sapper charge" : "super sapper charge");
-           list<Item*>::iterator i = items.begin();
+           std::list<Item*> items = AI_VALUE2(std::list<Item*>, "inventory items", goblinSapper == 10646 ? "goblin sapper charge" : "super sapper charge");
+           std::list<Item*>::iterator i = items.begin();
            Item* item = *i;
 
            if (!item)
@@ -212,8 +212,8 @@ namespace ai
            if (!added)
                return false;
 
-           list<Item*> items = AI_VALUE2(list<Item*>, "inventory items", "oil of immolation");
-           list<Item*>::iterator i = items.begin();
+           std::list<Item*> items = AI_VALUE2(std::list<Item*>, "inventory items", "oil of immolation");
+           std::list<Item*>::iterator i = items.begin();
            Item* item = *i;
 
            if (!item)
@@ -261,8 +261,8 @@ namespace ai
            if (!added)
                return false;
 
-           list<Item*> items = AI_VALUE2(list<Item*>, "inventory items", skillValue > 325 ? "adamantite grenade" : "thorium grenade");
-           list<Item*>::iterator i = items.begin();
+           std::list<Item*> items = AI_VALUE2(std::list<Item*>, "inventory items", skillValue > 325 ? "adamantite grenade" : "thorium grenade");
+           std::list<Item*>::iterator i = items.begin();
            Item* item = *i;
 
            if (!item)
@@ -295,8 +295,8 @@ namespace ai
            if (!added)
                return false;
 
-           list<Item*> items = AI_VALUE2(list<Item*>, "inventory items", "dark rune");
-           list<Item*>::iterator i = items.begin();
+           std::list<Item*> items = AI_VALUE2(std::list<Item*>, "inventory items", "dark rune");
+           std::list<Item*>::iterator i = items.begin();
            Item* item = *i;
 
            if (!item)

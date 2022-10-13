@@ -40,7 +40,7 @@ bool PositionAction::Execute(Event event)
         return true;
     }
 
-    vector<string> params = split(param, ' ');
+    std::vector<string> params = split(param, ' ');
     if (params.size() != 2)
     {
         ai->TellMaster("Whisper position <name> ?/set/reset");
@@ -56,7 +56,7 @@ bool PositionAction::Execute(Event event)
 	    return true;
 	}
 
-    vector<string> coords = split(action, ',');
+    std::vector<string> coords = split(action, ',');
     if (coords.size() == 3)
     {
         pos.Set(atoi(coords[0].c_str()), atoi(coords[1].c_str()), atoi(coords[2].c_str()), ai->GetBot()->GetMapId());

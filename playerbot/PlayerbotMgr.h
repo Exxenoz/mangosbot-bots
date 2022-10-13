@@ -11,8 +11,8 @@ class Unit;
 class Object;
 class Item;
 
-typedef map<uint32, Player*> PlayerBotMap;
-typedef map<string, set<string> > PlayerBotErrorMap;
+typedef std::map<uint32, Player*> PlayerBotMap;
+typedef std::map<string, set<string> > PlayerBotErrorMap;
 
 class PlayerbotHolder : public PlayerbotAIBase
 {
@@ -35,7 +35,7 @@ public:
     void LogoutAllBots();
     void OnBotLogin(Player* bot);
 
-    list<string> HandlePlayerbotCommand(char const* args, Player* master = NULL);
+    std::list<string> HandlePlayerbotCommand(char const* args, Player* master = NULL);
     string ProcessBotCommand(string cmd, ObjectGuid guid, ObjectGuid masterguid, bool admin, uint32 masterAccountId, uint32 masterGuildId);
     uint32 GetAccountId(string name);
     string ListBots(Player* master);

@@ -64,8 +64,8 @@ string WhoAction::QueryTrade(string text)
 {
     ostringstream out;
 
-    list<Item*> items = InventoryAction::parseItems(text);
-    for (list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
+    std::list<Item*> items = InventoryAction::parseItems(text);
+    for (std::list<Item*>::iterator i = items.begin(); i != items.end(); ++i)
     {
         Item* sell = *i;
         int32 sellPrice = auctionbot.GetSellPrice(sell->GetProto()) * sRandomPlayerbotMgr.GetSellMultiplier(bot) * sell->GetCount();

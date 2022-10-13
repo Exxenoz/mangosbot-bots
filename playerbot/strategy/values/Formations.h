@@ -32,8 +32,8 @@ namespace ai
         MoveFormation(PlayerbotAI* ai, string name) : Formation(ai, name) {}
 
     protected:
-        WorldLocation MoveLine(vector<Player*> line, float diff, float cx, float cy, float cz, float orientation, float range);
-        WorldLocation MoveSingleLine(vector<Player*> line, float diff, float cx, float cy, float cz, float orientation, float range);
+        WorldLocation MoveLine(std::vector<Player*> line, float diff, float cx, float cy, float cz, float orientation, float range);
+        WorldLocation MoveSingleLine(std::vector<Player*> line, float diff, float cx, float cy, float cz, float orientation, float range);
     };
 
     class MoveAheadFormation : public MoveFormation

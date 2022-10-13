@@ -15,7 +15,7 @@ bool FlagAction::TellUsage()
 bool FlagAction::Execute(Event event)
 {
     string cmd = event.getParam();
-    vector<string> ss = split(cmd, ' ');
+    std::vector<string> ss = split(cmd, ' ');
     if (ss.size() != 2)
         return TellUsage();
 

@@ -28,8 +28,8 @@ public:
 #endif
 protected:
     bool JoinQueue(uint32 type);
-    vector<uint32> bgList;
-    vector<uint32> ratedList;
+    std::vector<uint32> bgList;
+    std::vector<uint32> ratedList;
 };
 
 class FreeBGJoinAction : public BGJoinAction

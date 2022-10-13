@@ -24,8 +24,8 @@ PlayerbotAIConfig::PlayerbotAIConfig()
 template <class T>
 void LoadList(string value, T &list)
 {
-    vector<string> ids = split(value, ',');
-    for (vector<string>::iterator i = ids.begin(); i != ids.end(); i++)
+    std::vector<string> ids = split(value, ',');
+    for (std::vector<string>::iterator i = ids.begin(); i != ids.end(); i++)
     {
         string string = *i;
         if (string.empty())
@@ -40,8 +40,8 @@ void LoadList(string value, T &list)
 template <class T>
 void LoadListString(string value, T& list)
 {
-    vector<string> strings = split(value, ',');
-    for (vector<string>::iterator i = strings.begin(); i != strings.end(); i++)
+    std::vector<string> strings = split(value, ',');
+    for (std::vector<string>::iterator i = strings.begin(); i != strings.end(); i++)
     {
         string string = *i;
         if (string.empty())
@@ -119,10 +119,10 @@ bool PlayerbotAIConfig::Initialize()
     allowGuildBots = config.GetBoolDefault("AiPlayerbot.AllowGuildBots", true);
 
     randomBotMapsAsString = config.GetStringDefault("AiPlayerbot.RandomBotMaps", "0,1,530,571");
-    LoadList<vector<uint32> >(randomBotMapsAsString, randomBotMaps);
-    LoadList<list<uint32> >(config.GetStringDefault("AiPlayerbot.RandomBotQuestItems", "6948,5175,5176,5177,5178,16309,12382,13704,11000,22754"), randomBotQuestItems);
-    LoadList<list<uint32> >(config.GetStringDefault("AiPlayerbot.RandomBotSpellIds", "54197"), randomBotSpellIds);
-	LoadList<list<uint32> >(config.GetStringDefault("AiPlayerbot.PvpProhibitedZoneIds", "2255,656,2361,2362,2363,976,35,2268,3425,392,541,1446,3828,3712,3738,3565,3539,3623,4152,3988,4658,4284,4418,4436,4275,4323"), pvpProhibitedZoneIds);
+    LoadList<std::vector<uint32> >(randomBotMapsAsString, randomBotMaps);
+    LoadList<std::list<uint32> >(config.GetStringDefault("AiPlayerbot.RandomBotQuestItems", "6948,5175,5176,5177,5178,16309,12382,13704,11000,22754"), randomBotQuestItems);
+    LoadList<std::list<uint32> >(config.GetStringDefault("AiPlayerbot.RandomBotSpellIds", "54197"), randomBotSpellIds);
+	LoadList<std::list<uint32> >(config.GetStringDefault("AiPlayerbot.PvpProhibitedZoneIds", "2255,656,2361,2362,2363,976,35,2268,3425,392,541,1446,3828,3712,3738,3565,3539,3623,4152,3988,4658,4284,4418,4436,4275,4323"), pvpProhibitedZoneIds);
     
 #ifndef MANGOSBOT_ZERO
     // disable pvp near dark portal if event is active
@@ -130,7 +130,7 @@ bool PlayerbotAIConfig::Initialize()
         pvpProhibitedZoneIds.insert(pvpProhibitedZoneIds.begin(), 72);
 #endif
 
-    LoadList<list<uint32> >(config.GetStringDefault("AiPlayerbot.RandomBotQuestIds", "7848,3802,5505,6502,7761"), randomBotQuestIds);
+    LoadList<std::list<uint32> >(config.GetStringDefault("AiPlayerbot.RandomBotQuestIds", "7848,3802,5505,6502,7761"), randomBotQuestIds);
 
     botAutologin = config.GetBoolDefault("AiPlayerbot.BotAutologin", false);
     randomBotAutologin = config.GetBoolDefault("AiPlayerbot.RandomBotAutologin", true);
@@ -238,7 +238,7 @@ bool PlayerbotAIConfig::Initialize()
     }
 
     botCheats.clear();
-    LoadListString<list<string>>(config.GetStringDefault("AiPlayerbot.BotCheats", "taxi,supply"), botCheats);
+    LoadListString<std::list<string>>(config.GetStringDefault("AiPlayerbot.BotCheats", "taxi,supply"), botCheats);
 
     botCheatMask = 0;
 
@@ -256,7 +256,7 @@ bool PlayerbotAIConfig::Initialize()
         botCheatMask |= (uint32)BotCheatMask::supply;
 
 
-    LoadListString<list<string>>(config.GetStringDefault("AiPlayerbot.AllowedLogFiles", ""), allowedLogFiles);
+    LoadListString<std::list<string>>(config.GetStringDefault("AiPlayerbot.AllowedLogFiles", ""), allowedLogFiles);
 
     worldBuffs.clear();
     
@@ -454,11 +454,11 @@ void PlayerbotAIConfig::SetValue(string name, string value)
 
 void PlayerbotAIConfig::loadWorldBuf(Config* config, uint32 factionId1, uint32 classId1, uint32 specId1, uint32 minLevel1, uint32 maxLevel1)
 {
-    list<uint32> buffs;
+    std::list<uint32> buffs;
 
     ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1 << "." << classId1 << "." << specId1 << "." << minLevel1 << "." << maxLevel1;
 
-    LoadList<list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
+    LoadList<std::list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
 
     for (auto buff : buffs)
     {
@@ -470,7 +470,7 @@ void PlayerbotAIConfig::loadWorldBuf(Config* config, uint32 factionId1, uint32 c
     {
         ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1 << "." << classId1 << "." << specId1 << "." << minLevel1;
 
-        LoadList<list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
+        LoadList<std::list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
 
         for (auto buff : buffs)
         {
@@ -483,7 +483,7 @@ void PlayerbotAIConfig::loadWorldBuf(Config* config, uint32 factionId1, uint32 c
     {
         ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1 << "." << classId1 << "." << specId1;
 
-        LoadList<list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
+        LoadList<std::list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
 
         for (auto buff : buffs)
         {
@@ -496,7 +496,7 @@ void PlayerbotAIConfig::loadWorldBuf(Config* config, uint32 factionId1, uint32 c
     {
         ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1 << "." << classId1;
 
-        LoadList<list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
+        LoadList<std::list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
 
         for (auto buff : buffs)
         {
@@ -509,7 +509,7 @@ void PlayerbotAIConfig::loadWorldBuf(Config* config, uint32 factionId1, uint32 c
     {
         ostringstream os; os << "AiPlayerbot.WorldBuff." << factionId1;
 
-        LoadList<list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
+        LoadList<std::list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
 
         for (auto buff : buffs)
         {
@@ -522,7 +522,7 @@ void PlayerbotAIConfig::loadWorldBuf(Config* config, uint32 factionId1, uint32 c
     {
         ostringstream os; os << "AiPlayerbot.WorldBuff";
 
-        LoadList<list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
+        LoadList<std::list<uint32> >(config->GetStringDefault(os.str().c_str(), ""), buffs);
 
         for (auto buff : buffs)
         {

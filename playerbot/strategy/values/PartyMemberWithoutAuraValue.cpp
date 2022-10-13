@@ -5,7 +5,7 @@
 #include "../../ServerFacade.h"
 using namespace ai;
 
-extern vector<string> split(const string &s, char delim);
+extern std::vector<string> split(const string &s, char delim);
 
 class PlayerWithoutAuraPredicate : public FindPlayerPredicate, public PlayerbotAIAware
 {
@@ -22,7 +22,7 @@ public:
 
         if (!sServerFacade.IsAlive(unit)) return false;
 
-        for (vector<string>::iterator i = auras.begin(); i != auras.end(); ++i)
+        for (std::vector<string>::iterator i = auras.begin(); i != auras.end(); ++i)
         {
             if (ai->HasAura(*i, unit))
                 return false;
@@ -32,7 +32,7 @@ public:
     }
 
 private:
-    vector<string> auras;
+    std::vector<string> auras;
 };
 
 Unit* PartyMemberWithoutAuraValue::Calculate()
@@ -57,7 +57,7 @@ public:
         if (!sServerFacade.IsAlive(unit)) return false;
         if (sServerFacade.GetDistance2d(unit, ai->GetBot()) > 30.0f) return false;
 
-        for (vector<string>::iterator i = auras.begin(); i != auras.end(); ++i)
+        for (std::vector<string>::iterator i = auras.begin(); i != auras.end(); ++i)
         {
             if (ai->HasMyAura(*i, unit))
                 return false;
@@ -67,7 +67,7 @@ public:
     }
 
 private:
-    vector<string> auras;
+    std::vector<string> auras;
 };
 
 Unit* PartyMemberWithoutMyAuraValue::Calculate()

@@ -8,10 +8,10 @@ using namespace ai;
 bool TellItemCountAction::Execute(Event event)
 {
     string text = event.getParam();
-    list<Item*> found = parseItems(text);
-    map<uint32, uint32> itemMap;
-    map<uint32, bool> soulbound;
-    for (list<Item*>::iterator i = found.begin(); i != found.end(); i++)
+    std::list<Item*> found = parseItems(text);
+    std::map<uint32, uint32> itemMap;
+    std::map<uint32, bool> soulbound;
+    for (std::list<Item*>::iterator i = found.begin(); i != found.end(); i++)
     {
         ItemPrototype const* proto = (*i)->GetProto();
         itemMap[proto->ItemId] += (*i)->GetCount();

@@ -17,7 +17,7 @@ namespace ai
         void TellCraft();
 
     private:
-        static map<uint32, SkillLineAbilityEntry const*> skillSpells;
+        static std::map<uint32, SkillLineAbilityEntry const*> skillSpells;
 
     };
 

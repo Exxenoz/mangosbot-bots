@@ -34,8 +34,8 @@ bool AcceptQuestAction::Execute(Event event)
 
     if (event.getPacket().empty())
     {
-        list<ObjectGuid> npcs = AI_VALUE(list<ObjectGuid>, "nearest npcs");
-        for (list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
+        std::list<ObjectGuid> npcs = AI_VALUE(std::list<ObjectGuid>, "nearest npcs");
+        for (std::list<ObjectGuid>::iterator i = npcs.begin(); i != npcs.end(); i++)
         {
             Unit* unit = ai->GetUnit(*i);
             if (unit && quest && unit->HasQuest(quest))
@@ -46,8 +46,8 @@ bool AcceptQuestAction::Execute(Event event)
             if (unit && text == "*" && sqrt(bot->GetDistance(unit)) <= INTERACTION_DISTANCE)
                 hasAccept |= QuestAction::ProcessQuests(unit);
         }
-        list<ObjectGuid> gos = AI_VALUE(list<ObjectGuid>, "nearest game objects");
-        for (list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); i++)
+        std::list<ObjectGuid> gos = AI_VALUE(std::list<ObjectGuid>, "nearest game objects");
+        for (std::list<ObjectGuid>::iterator i = gos.begin(); i != gos.end(); i++)
         {
             GameObject* go = ai->GetGameObject(*i);
             if (go && quest && go->HasQuest(quest))

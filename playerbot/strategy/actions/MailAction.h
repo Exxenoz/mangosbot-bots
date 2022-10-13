@@ -32,7 +32,7 @@ namespace ai
         bool CheckMailbox();
 
     private:
-        static map<string, MailProcessor*> processors;
+        static std::map<string, MailProcessor*> processors;
     };
 
 }

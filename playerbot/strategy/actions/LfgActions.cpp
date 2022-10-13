@@ -102,12 +102,12 @@ bool LfgJoinAction::JoinLFG()
     if (!stones.size())
         return false;
 
-    vector<uint32> dungeons = sRandomPlayerbotMgr.LfgDungeons[bot->GetTeam()];
+    std::vector<uint32> dungeons = sRandomPlayerbotMgr.LfgDungeons[bot->GetTeam()];
     if (!dungeons.size())
         return false;
 
-    vector<MeetingStoneInfo> selected;
-    for (vector<uint32>::iterator i = dungeons.begin(); i != dungeons.end(); ++i)
+    std::vector<MeetingStoneInfo> selected;
+    for (std::vector<uint32>::iterator i = dungeons.begin(); i != dungeons.end(); ++i)
     {
         uint32 zoneId = 0;
         uint32 dungeonId = (*i & 0xFFFF);
@@ -347,7 +347,7 @@ bool LfgJoinAction::JoinLFG()
         // lfm for random dungeon if nothing else to do
         else if (status >= TRAVEL_STATUS_COOLDOWN || state >= TRAVEL_STATE_TRAVEL_HAND_IN_QUEST || (state == TRAVEL_STATE_IDLE && !urand(0, 4)))
         {
-            vector<uint32> dungeons;
+            std::vector<uint32> dungeons;
             for (uint32 i = 0; i < sLFGDungeonStore.GetNumRows(); ++i)
             {
                 if (LFGDungeonEntry const* dungeon = sLFGDungeonStore.LookupEntry(i))
@@ -435,10 +435,10 @@ bool LfgJoinAction::JoinLFG()
                                         bot->GetSession()->HandleLfmSetAutoFillOpcode(p);
 
                                         // set auto invite if real player in queue
-                                        vector<uint32> player_dungeons = sRandomPlayerbotMgr.LfgDungeons[bot->GetTeam()];
+                                        std::vector<uint32> player_dungeons = sRandomPlayerbotMgr.LfgDungeons[bot->GetTeam()];
                                         if (!player_dungeons.empty())
                                         {
-                                            for (vector<uint32>::iterator i = player_dungeons.begin(); i != player_dungeons.end(); ++i)
+                                            for (std::vector<uint32>::iterator i = player_dungeons.begin(); i != player_dungeons.end(); ++i)
                                             {
                                                 uint32 zoneId = 0;
                                                 uint32 entry = (*i & 0xFFFF);
@@ -496,10 +496,10 @@ bool LfgJoinAction::JoinLFG()
         }
         
         // set auto invite if real player in queue 
-        vector<uint32> player_dungeons = sRandomPlayerbotMgr.LfgDungeons[bot->GetTeam()];
+        std::vector<uint32> player_dungeons = sRandomPlayerbotMgr.LfgDungeons[bot->GetTeam()];
         if (!player_dungeons.empty() && !group)
         {
-            for (vector<uint32>::iterator i = player_dungeons.begin(); i != player_dungeons.end(); ++i)
+            for (std::vector<uint32>::iterator i = player_dungeons.begin(); i != player_dungeons.end(); ++i)
             {
                 uint32 zoneId = 0;
                 uint32 entry = (*i & 0xFFFF) & 0xFF;
@@ -618,10 +618,10 @@ bool LfgJoinAction::JoinLFG()
             }
         }
         // lfg for dungeon if real player used LFM with auto invite
-        vector<uint32> player_dungeons = sRandomPlayerbotMgr.LfgDungeons[bot->GetTeam()];
+        std::vector<uint32> player_dungeons = sRandomPlayerbotMgr.LfgDungeons[bot->GetTeam()];
         if (!player_dungeons.empty())
         {
-            for (vector<uint32>::iterator i = player_dungeons.begin(); i != player_dungeons.end(); ++i)
+            for (std::vector<uint32>::iterator i = player_dungeons.begin(); i != player_dungeons.end(); ++i)
             {
                 uint32 zoneId = 0;
                 uint32 entry = (*i & 0xFFFF) & 0xFF;
@@ -692,7 +692,7 @@ bool LfgJoinAction::JoinLFG()
         // lfg slot 3 for random dungeon if not very busy
         else if (status >= TRAVEL_STATUS_COOLDOWN || state >= TRAVEL_STATE_TRAVEL_HAND_IN_QUEST || (state == TRAVEL_STATE_IDLE && !urand(0, 4)))
         {
-            vector<uint32> dungeons;
+            std::vector<uint32> dungeons;
             for (uint32 i = 0; i < sLFGDungeonStore.GetNumRows(); ++i)
             {
                 if (LFGDungeonEntry const* dungeon = sLFGDungeonStore.LookupEntry(i))
@@ -733,7 +733,7 @@ bool LfgJoinAction::JoinLFG()
                     /*vector<uint32> player_dungeons = sRandomPlayerbotMgr.LfgDungeons[bot->GetTeam()];
                     if (!player_dungeons.empty())
                     {
-                        for (vector<uint32>::iterator i = player_dungeons.begin(); i != player_dungeons.end(); ++i)
+                        for (std::vector<uint32>::iterator i = player_dungeons.begin(); i != player_dungeons.end(); ++i)
                         {
                             uint32 zoneId = 0;
                             uint32 entry = (*i & 0xFFFF) & 0xFF;
@@ -833,13 +833,13 @@ bool LfgJoinAction::JoinLFG()
     bool raid = !heroic && (urand(0, 100) < 50 && visitor.count[ITEM_QUALITY_EPIC] >= 5 && (bot->GetLevel() == 60 || bot->GetLevel() == 70 || bot->GetLevel() == 80));
 
     LfgDungeonSet list;
-    vector<uint32> selected;
+    std::vector<uint32> selected;
 
-    vector<uint32> dungeons = sRandomPlayerbotMgr.LfgDungeons[bot->GetTeam()];
+    std::vector<uint32> dungeons = sRandomPlayerbotMgr.LfgDungeons[bot->GetTeam()];
     if (!dungeons.size())
         return false;
 
-    for (vector<uint32>::iterator i = dungeons.begin(); i != dungeons.end(); ++i)
+    for (std::vector<uint32>::iterator i = dungeons.begin(); i != dungeons.end(); ++i)
     {
         LFGDungeonData const* dungeon = sLFGMgr.GetLFGDungeon(*i);
         if (!dungeon || (dungeon->type != LFG_TYPE_RANDOM_DUNGEON && dungeon->type != LFG_TYPE_DUNGEON && dungeon->type != LFG_TYPE_HEROIC_DUNGEON &&

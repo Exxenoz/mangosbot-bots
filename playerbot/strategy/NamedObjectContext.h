@@ -16,8 +16,8 @@ namespace ai
         virtual void Qualify(string qualifier) { this->qualifier = qualifier; }
         string getQualifier() { return qualifier; }
 
-        static string MultiQualify(vector<string> qualifiers) { ostringstream out; for (auto& qualifier : qualifiers) out << qualifier << (&qualifier != &qualifiers.back() ? " " : ""); return out.str();}
-        static vector<string> getMultiQualifiers(string qualifier1) { istringstream iss(qualifier1);   return { istream_iterator<string>{iss}, istream_iterator<string>{} }; }
+        static string MultiQualify(std::vector<string> qualifiers) { ostringstream out; for (auto& qualifier : qualifiers) out << qualifier << (&qualifier != &qualifiers.back() ? " " : ""); return out.str();}
+        static std::vector<string> getMultiQualifiers(string qualifier1) { istringstream iss(qualifier1);   return { istream_iterator<string>{iss}, istream_iterator<string>{} }; }
         static int32 getMultiQualifier(string qualifier1, uint32 pos) { return stoi(getMultiQualifiers(qualifier1)[pos]); }
     protected:
         string qualifier;
@@ -27,7 +27,7 @@ namespace ai
     {
     protected:
         typedef T* (*ActionCreator) (PlayerbotAI* ai);
-        map<string, ActionCreator> creators;
+        std::map<string, ActionCreator> creators;
 
     public:
         T* create(string name, PlayerbotAI* ai)
@@ -58,7 +58,7 @@ namespace ai
         set<string> supports()
         {
             set<string> keys;
-            for (typename map<string, ActionCreator>::iterator it = creators.begin(); it != creators.end(); it++)
+            for (typename std::map<string, ActionCreator>::iterator it = creators.begin(); it != creators.end(); it++)
                 keys.insert(it->first);
             return keys;
         }
@@ -86,7 +86,7 @@ namespace ai
 
         void Clear()
         {
-            for (typename map<string, T*>::iterator i = created.begin(); i != created.end(); i++)
+            for (typename std::map<string, T*>::iterator i = created.begin(); i != created.end(); i++)
             {
                 if (i->second)
                     delete i->second;
@@ -97,7 +97,7 @@ namespace ai
 
         void Update()
         {
-            for (typename map<string, T*>::iterator i = created.begin(); i != created.end(); i++)
+            for (typename std::map<string, T*>::iterator i = created.begin(); i != created.end(); i++)
             {
                 if (i->second)
                     i->second->Update();
@@ -106,7 +106,7 @@ namespace ai
 
         void Reset()
         {
-            for (typename map<string, T*>::iterator i = created.begin(); i != created.end(); i++)
+            for (typename std::map<string, T*>::iterator i = created.begin(); i != created.end(); i++)
             {
                 if (i->second)
                     i->second->Reset();
@@ -119,13 +119,13 @@ namespace ai
         set<string> GetCreated()
         {
             set<string> keys;
-            for (typename map<string, T*>::iterator it = created.begin(); it != created.end(); it++)
+            for (typename std::map<string, T*>::iterator it = created.begin(); it != created.end(); it++)
                 keys.insert(it->first);
             return keys;
         }
 
     protected:
-        map<string, T*> created;
+        std::map<string, T*> created;
         bool shared;
         bool supportsSiblings;
     };
@@ -135,7 +135,7 @@ namespace ai
     public:
         virtual ~NamedObjectContextList()
         {
-            for (typename list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
+            for (typename std::list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
             {
                 NamedObjectContext<T>* context = *i;
                 if (!context->IsShared())
@@ -150,7 +150,7 @@ namespace ai
 
         T* GetObject(string name, PlayerbotAI* ai)
         {
-            for (typename list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
+            for (typename std::list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
             {
                 T* object = (*i)->create(name, ai);
                 if (object) return object;
@@ -160,7 +160,7 @@ namespace ai
 
         void Update()
         {
-            for (typename list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
+            for (typename std::list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
             {
                 if (!(*i)->IsShared())
                     (*i)->Update();
@@ -169,7 +169,7 @@ namespace ai
 
         void Reset()
         {
-            for (typename list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
+            for (typename std::list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
             {
                 (*i)->Reset();
             }
@@ -177,7 +177,7 @@ namespace ai
 
         set<string> GetSiblings(string name)
         {
-            for (typename list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
+            for (typename std::list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
             {
                 if (!(*i)->IsSupportsSiblings())
                     continue;
@@ -198,7 +198,7 @@ namespace ai
         {
             set<string> result;
 
-            for (typename list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
+            for (typename std::list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
             {
                 set<string> supported = (*i)->supports();
 
@@ -212,7 +212,7 @@ namespace ai
         {
             set<string> result;
 
-            for (typename list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
+            for (typename std::list<NamedObjectContext<T>*>::iterator i = contexts.begin(); i != contexts.end(); i++)
             {
                 set<string> createdKeys = (*i)->GetCreated();
 
@@ -223,7 +223,7 @@ namespace ai
         }
 
     private:
-        list<NamedObjectContext<T>*> contexts;
+        std::list<NamedObjectContext<T>*> contexts;
     };
 
     template <class T> class NamedObjectFactoryList
@@ -231,7 +231,7 @@ namespace ai
     public:
         virtual ~NamedObjectFactoryList()
         {
-            for (typename list<NamedObjectFactory<T>*>::iterator i = factories.begin(); i != factories.end(); i++)
+            for (typename std::list<NamedObjectFactory<T>*>::iterator i = factories.begin(); i != factories.end(); i++)
                 delete *i;
         }
 
@@ -242,7 +242,7 @@ namespace ai
 
         T* GetObject(string name, PlayerbotAI* ai)
         {
-            for (typename list<NamedObjectFactory<T>*>::iterator i = factories.begin(); i != factories.end(); i++)
+            for (typename std::list<NamedObjectFactory<T>*>::iterator i = factories.begin(); i != factories.end(); i++)
             {
                 T* object = (*i)->create(name, ai);
                 if (object) return object;
@@ -251,6 +251,6 @@ namespace ai
         }
 
     private:
-        list<NamedObjectFactory<T>*> factories;
+        std::list<NamedObjectFactory<T>*> factories;
     };
 };

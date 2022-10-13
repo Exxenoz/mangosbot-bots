@@ -53,7 +53,7 @@ bool TradeStatusAction::Execute(Event event)
         {
             int32 botMoney = CalculateCost(bot, true);
 
-            map<uint32, uint32> givenItemIds, takenItemIds;
+            std::map<uint32, uint32> givenItemIds, takenItemIds;
             for (uint32 slot = 0; slot < TRADE_SLOT_TRADED_COUNT; ++slot)
             {
                 Item* item = trader->GetTradeData()->GetItem((TradeSlots)slot);

@@ -34,7 +34,7 @@ public:
     virtual string GetName() = 0;
     virtual bool PrintAlways() { return true; }
 
-    static list<ReadyChecker*> checkers;
+    static std::list<ReadyChecker*> checkers;
 };
 
 list<ReadyChecker*> ReadyChecker::checkers;
@@ -170,7 +170,7 @@ bool ReadyCheckAction::ReadyCheck()
     }
 
     bool result = true;
-    for (list<ReadyChecker*>::iterator i = ReadyChecker::checkers.begin(); i != ReadyChecker::checkers.end(); ++i)
+    for (std::list<ReadyChecker*>::iterator i = ReadyChecker::checkers.begin(); i != ReadyChecker::checkers.end(); ++i)
     {
         ReadyChecker* checker = *i;
         bool ok = checker->Check(ai, context);

@@ -11,7 +11,7 @@
 
 using namespace ai;
 
-bool ChooseRpgTargetAction::HasSameTarget(ObjectGuid guid, uint32 max, list<ObjectGuid>& nearGuids)
+bool ChooseRpgTargetAction::HasSameTarget(ObjectGuid guid, uint32 max, std::list<ObjectGuid>& nearGuids)
 {
     if (ai->HasRealPlayerMaster())
         return 0;
@@ -52,7 +52,7 @@ float ChooseRpgTargetAction::getMaxRelevance(GuidPosition guidP)
 
     Strategy* rpgStrategy;
 
-    list<TriggerNode*> triggerNodes;
+    std::list<TriggerNode*> triggerNodes;
 
     float maxRelevance = 0.0f;
 
@@ -107,7 +107,7 @@ float ChooseRpgTargetAction::getMaxRelevance(GuidPosition guidP)
             }
         }
 
-        for (list<TriggerNode*>::iterator i = triggerNodes.begin(); i != triggerNodes.end(); i++)
+        for (std::list<TriggerNode*>::iterator i = triggerNodes.begin(); i != triggerNodes.end(); i++)
         {
             TriggerNode* trigger = *i;
             delete trigger;
@@ -128,12 +128,12 @@ bool ChooseRpgTargetAction::Execute(Event event)
 {
     TravelTarget* travelTarget = AI_VALUE(TravelTarget*, "travel target");
 
-    unordered_map<ObjectGuid, uint32> targets;
-    vector<ObjectGuid> targetList;
+    std::unordered_map<ObjectGuid, uint32> targets;
+    std::vector<ObjectGuid> targetList;
 
-    list<ObjectGuid> possibleTargets = AI_VALUE(list<ObjectGuid>, "possible rpg targets");
-    list<ObjectGuid> possibleObjects = bot->GetMap()->IsDungeon() ? AI_VALUE(list<ObjectGuid>, "nearest game objects") : AI_VALUE(list<ObjectGuid>, "nearest game objects no los"); // skip not in LOS objects in dungeons
-    list<ObjectGuid> possiblePlayers = AI_VALUE(list<ObjectGuid>, "nearest friendly players");
+    std::list<ObjectGuid> possibleTargets = AI_VALUE(std::list<ObjectGuid>, "possible rpg targets");
+    std::list<ObjectGuid> possibleObjects = bot->GetMap()->IsDungeon() ? AI_VALUE(std::list<ObjectGuid>, "nearest game objects") : AI_VALUE(std::list<ObjectGuid>, "nearest game objects no los"); // skip not in LOS objects in dungeons
+    std::list<ObjectGuid> possiblePlayers = AI_VALUE(std::list<ObjectGuid>, "nearest friendly players");
     set<ObjectGuid>& ignoreList = AI_VALUE(set<ObjectGuid>&, "ignore rpg target");
 
     for (auto target : possibleTargets)
@@ -169,7 +169,7 @@ bool ChooseRpgTargetAction::Execute(Event event)
 
     //Update tradeskill items so we can use lazy in trigger check.
     if(ai->HasStrategy("rpg craft", BOT_STATE_NON_COMBAT))
-        AI_VALUE2(list<uint32>, "inventory item ids", "usage " + to_string(ITEM_USAGE_SKILL));
+        AI_VALUE2(std::list<uint32>, "inventory item ids", "usage " + to_string(ITEM_USAGE_SKILL));
 
     uint16 checked = 0;
 
@@ -260,7 +260,7 @@ bool ChooseRpgTargetAction::Execute(Event event)
 
     if (ai->HasStrategy("debug rpg", BOT_STATE_NON_COMBAT))
     {
-        vector<pair<ObjectGuid, uint32>> sortedTargets(targets.begin(), targets.end());
+        std::vector<pair<ObjectGuid, uint32>> sortedTargets(targets.begin(), targets.end());
 
         std::sort(sortedTargets.begin(), sortedTargets.end(), [](pair<ObjectGuid, uint32>i, pair<ObjectGuid, uint32> j) {return i.second > j.second; });
 
@@ -294,8 +294,8 @@ bool ChooseRpgTargetAction::Execute(Event event)
         }
     }
 
-    vector<GuidPosition> guidps;
-    vector<int> relevances;
+    std::vector<GuidPosition> guidps;
+    std::vector<int> relevances;
 
     for (auto& target : targets)
     {
@@ -344,7 +344,7 @@ bool ChooseRpgTargetAction::isUseful()
     if (travelTarget->isTraveling() && isFollowValid(bot, *travelTarget->getPosition()))
         return false;
 
-    if (AI_VALUE(list<ObjectGuid>, "possible rpg targets").empty())
+    if (AI_VALUE(std::list<ObjectGuid>, "possible rpg targets").empty())
         return false;
 
     if (!AI_VALUE(bool, "can move around"))

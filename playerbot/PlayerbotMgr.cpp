@@ -599,11 +599,11 @@ bool PlayerbotMgr::HandlePlayerbotMgrCommand(ChatHandler* handler, char const* a
         return false;
     }
 
-    list<string> messages = mgr->HandlePlayerbotCommand(args, player);
+    std::list<string> messages = mgr->HandlePlayerbotCommand(args, player);
     if (messages.empty())
         return true;
 
-    for (list<string>::iterator i = messages.begin(); i != messages.end(); ++i)
+    for (std::list<string>::iterator i = messages.begin(); i != messages.end(); ++i)
     {
         handler->PSendSysMessage("%s",i->c_str());
     }
@@ -613,7 +613,7 @@ bool PlayerbotMgr::HandlePlayerbotMgrCommand(ChatHandler* handler, char const* a
 
 list<string> PlayerbotHolder::HandlePlayerbotCommand(char const* args, Player* master)
 {
-    list<string> messages;
+    std::list<string> messages;
 
     if (!*args)
     {
@@ -748,8 +748,8 @@ list<string> PlayerbotHolder::HandlePlayerbotCommand(char const* args, Player* m
         }
     }
 
-    vector<string> chars = split(charnameStr, ',');
-    for (vector<string>::iterator i = chars.begin(); i != chars.end(); i++)
+    std::vector<string> chars = split(charnameStr, ',');
+    for (std::vector<string>::iterator i = chars.begin(); i != chars.end(); i++)
     {
         string s = *i;
 
@@ -824,7 +824,7 @@ uint32 PlayerbotHolder::GetAccountId(string name)
 string PlayerbotHolder::ListBots(Player* master)
 {
     set<string> bots;
-    map<uint8,string> classNames;
+    std::map<uint8,string> classNames;
     classNames[CLASS_DRUID] = "Druid";
     classNames[CLASS_HUNTER] = "Hunter";
     classNames[CLASS_MAGE] = "Mage";
@@ -838,9 +838,9 @@ string PlayerbotHolder::ListBots(Player* master)
     classNames[CLASS_DEATH_KNIGHT] = "DeathKnight";
 #endif
 
-    map<string, string> online;
-    list<string> names;
-    map<string, string> classes;
+    std::map<string, string> online;
+    std::list<string> names;
+    std::map<string, string> classes;
 
     for (PlayerBotMap::const_iterator it = GetPlayerBotsBegin(); it != GetPlayerBotsEnd(); ++it)
     {
@@ -898,7 +898,7 @@ string PlayerbotHolder::ListBots(Player* master)
     ostringstream out;
     bool first = true;
     out << "Bot roster: ";
-    for (list<string>::iterator i = names.begin(); i != names.end(); ++i)
+    for (std::list<string>::iterator i = names.begin(); i != names.end(); ++i)
     {
         if (first) first = false; else out << ", ";
         string name = *i;
@@ -931,9 +931,9 @@ void PlayerbotMgr::HandleCommand(uint32 type, const string& text)
 
     if (text.find(sPlayerbotAIConfig.commandSeparator) != string::npos)
     {
-        vector<string> commands;
+        std::vector<string> commands;
         split(commands, text, sPlayerbotAIConfig.commandSeparator.c_str());
-        for (vector<string>::iterator i = commands.begin(); i != commands.end(); ++i)
+        for (std::vector<string>::iterator i = commands.begin(); i != commands.end(); ++i)
         {
             HandleCommand(type, *i);
         }

@@ -15,8 +15,8 @@ namespace ai
         bool ReceiveEmote(Player* source, uint32 emote, bool verbal = false);
         Unit* GetTarget();
         void InitEmotes();
-        static map<string, uint32> emotes;
-        static map<string, uint32> textEmotes;
+        static std::map<string, uint32> emotes;
+        static std::map<string, uint32> textEmotes;
 
     };
 

@@ -119,11 +119,11 @@ namespace ai
         LogCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) : MemoryCalculatedValue<T>(ai, name, checkInterval) {};
         virtual bool UpdateChange() { if (this->UpdateChange()) return false; valueLog.push_back(make_pair(this->value, time(0))); if (valueLog.size() > logLength) valueLog.pop_front(); return true; }
 
-        list<pair<T, time_t>> ValueLog() { return valueLog; }
+        std::list<pair<T, time_t>> ValueLog() { return valueLog; }
 
         virtual void Reset() { this->Reset(); valueLog.clear(); }
     protected:
-        list<pair<T, time_t>> valueLog;
+        std::list<pair<T, time_t>> valueLog;
         uint8 logLength = 10; //Maxium number of values recorded.
     };    
 
@@ -205,17 +205,17 @@ namespace ai
         }
     };
 
-    class CDPairListCalculatedValue : public CalculatedValue<list<CreatureDataPair const*>>
+    class CDPairListCalculatedValue : public CalculatedValue<std::list<CreatureDataPair const*>>
     {
     public:
         CDPairListCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
-            CalculatedValue<list<CreatureDataPair const*>>(ai, name, checkInterval) { this->lastCheckTime = time(0) - checkInterval / 2; }
+            CalculatedValue<std::list<CreatureDataPair const*>>(ai, name, checkInterval) { this->lastCheckTime = time(0) - checkInterval / 2; }
 
         virtual string Format()
         {
             ostringstream out; out << "{";
-            list<CreatureDataPair const*> cdPairs = this->Calculate();
-            for (list<CreatureDataPair const*>::iterator i = cdPairs.begin(); i != cdPairs.end(); ++i)
+            std::list<CreatureDataPair const*> cdPairs = this->Calculate();
+            for (std::list<CreatureDataPair const*>::iterator i = cdPairs.begin(); i != cdPairs.end(); ++i)
             {
                 CreatureDataPair const* cdPair = *i;
                 out << cdPair->first << ",";
@@ -238,17 +238,17 @@ namespace ai
         }
     };
 
-    class ObjectGuidListCalculatedValue : public CalculatedValue<list<ObjectGuid> >
+    class ObjectGuidListCalculatedValue : public CalculatedValue<std::list<ObjectGuid> >
     {
     public:
         ObjectGuidListCalculatedValue(PlayerbotAI* ai, string name = "value", int checkInterval = 1) :
-            CalculatedValue<list<ObjectGuid> >(ai, name, checkInterval) { this->lastCheckTime = time(0) - checkInterval/2; }
+            CalculatedValue<std::list<ObjectGuid> >(ai, name, checkInterval) { this->lastCheckTime = time(0) - checkInterval/2; }
 
         virtual string Format()
         {
             ostringstream out; out << "{";
-            list<ObjectGuid> guids = this->Calculate();
-            for (list<ObjectGuid>::iterator i = guids.begin(); i != guids.end(); ++i)
+            std::list<ObjectGuid> guids = this->Calculate();
+            for (std::list<ObjectGuid>::iterator i = guids.begin(); i != guids.end(); ++i)
             {
                 ObjectGuid guid = *i;
                 out << guid.GetRawValue() << ",";

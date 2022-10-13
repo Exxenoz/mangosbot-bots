@@ -29,11 +29,11 @@ namespace ai
         virtual ActionThreatType getThreatType() { return ACTION_THREAT_NONE; }
         virtual bool Execute(Event event)
         {
-            list<ObjectGuid> closeObjects = AI_VALUE(list<ObjectGuid>, "nearest game objects no los");
+            std::list<ObjectGuid> closeObjects = AI_VALUE(std::list<ObjectGuid>, "nearest game objects no los");
             if (closeObjects.empty())
                 return false;
 
-            for (list<ObjectGuid>::iterator i = closeObjects.begin(); i != closeObjects.end(); ++i)
+            for (std::list<ObjectGuid>::iterator i = closeObjects.begin(); i != closeObjects.end(); ++i)
             {
                 GameObject* go = ai->GetGameObject(*i);
                 if (!go)

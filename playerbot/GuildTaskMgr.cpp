@@ -193,7 +193,7 @@ bool GuildTaskMgr::CreateKillTask(uint32 owner, uint32 guildId)
         return false;
 
     uint32 rank = !urand(0, 2) ? CREATURE_ELITE_RAREELITE : CREATURE_ELITE_RARE;
-    vector<uint32> ids;
+    std::vector<uint32> ids;
 	for (uint32 id = 0; id < sCreatureStorage.GetMaxEntry(); ++id)
 	{
 		CreatureInfo const* co = sCreatureStorage.LookupEntry<CreatureInfo>(id);
@@ -498,7 +498,7 @@ bool GuildTaskMgr::IsGuildTaskItem(uint32 itemId, uint32 guildId)
 
 map<uint32,uint32> GuildTaskMgr::GetTaskValues(uint32 owner, string type, uint32 *validIn /* = NULL */)
 {
-    map<uint32,uint32> result;
+    std::map<uint32,uint32> result;
 
     QueryResult* results = PlayerbotDatabase.PQuery(
             "select `value`, `time`, validIn, guildid from ai_playerbot_guild_tasks where owner = '%u' and `type` = '%s'",
@@ -981,7 +981,7 @@ void GuildTaskMgr::CheckKillTaskInternal(Player* player, Unit* victim)
     if (!creature)
         return;
 
-    map<uint32,uint32> tasks = GetTaskValues(owner, "killTask");
+    std::map<uint32,uint32> tasks = GetTaskValues(owner, "killTask");
     for (map<uint32,uint32>::iterator i = tasks.begin(); i != tasks.end(); ++i)
     {
         uint32 guildId = i->first;
@@ -1036,7 +1036,7 @@ void GuildTaskMgr::RemoveDuplicatedAdverts()
     if (!result)
         return;
 
-    list<uint32> ids;
+    std::list<uint32> ids;
     int count = 0;
     do
     {
@@ -1052,8 +1052,8 @@ void GuildTaskMgr::RemoveDuplicatedAdverts()
 
     if (count > 0)
     {
-        list<uint32> buffer;
-        for (list<uint32>::iterator i = ids.begin(); i != ids.end(); ++i)
+        std::list<uint32> buffer;
+        for (std::list<uint32>::iterator i = ids.begin(); i != ids.end(); ++i)
         {
             buffer.push_back(*i);
             if (buffer.size() > 50)
@@ -1068,12 +1068,12 @@ void GuildTaskMgr::RemoveDuplicatedAdverts()
 
 }
 
-void GuildTaskMgr::DeleteMail(list<uint32> buffer)
+void GuildTaskMgr::DeleteMail(std::list<uint32> buffer)
 {
     ostringstream sql;
     sql << "delete from mail where id in ( ";
     bool first = true;
-    for (list<uint32>::iterator j = buffer.begin(); j != buffer.end(); ++j)
+    for (std::list<uint32>::iterator j = buffer.begin(); j != buffer.end(); ++j)
     {
         if (first) first = false; else sql << ",";
         sql << "'" << *j << "'";

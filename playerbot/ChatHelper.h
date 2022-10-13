@@ -25,8 +25,8 @@ namespace ai
         static string formatWorldobject(WorldObject* wo);
         static string formatWorldEntry(int32 entry);
         static string formatQuestObjective(string name, int available, int required);
-        static list<ObjectGuid> parseGameobjects(string& text);
-        static list<int32> parseWorldEntries(string& text);
+        static std::list<ObjectGuid> parseGameobjects(string& text);
+        static std::list<int32> parseWorldEntries(string& text);
 
         static ChatMsg parseChat(string& text);
         static string formatChat(ChatMsg chat);
@@ -47,15 +47,15 @@ namespace ai
         void eraseAllSubStr(std::string& mainStr, const std::string& toErase);
 
     private:
-        static map<string, uint32> consumableSubClasses;
-        static map<string, uint32> tradeSubClasses;
-        static map<string, uint32> itemQualities;
-        static map<string, uint32> projectileSubClasses;
-        static map<string, uint32> slots;
-        static map<string, uint32> skills;
-        static map<string, ChatMsg> chats;
-        static map<uint8, string> classes;
-        static map<uint8, string> races;
-        static map<uint8, map<uint8, string> > specs;
+        static std::map<string, uint32> consumableSubClasses;
+        static std::map<string, uint32> tradeSubClasses;
+        static std::map<string, uint32> itemQualities;
+        static std::map<string, uint32> projectileSubClasses;
+        static std::map<string, uint32> slots;
+        static std::map<string, uint32> skills;
+        static std::map<string, ChatMsg> chats;
+        static std::map<uint8, string> classes;
+        static std::map<uint8, string> races;
+        static std::map<uint8, std::map<uint8, string> > specs;
     };
 };

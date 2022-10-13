@@ -36,7 +36,7 @@ bool CastCustomSpellAction::Execute(Event event)
     string text = event.getParam();
     Player* master = GetMaster();
 
-    list<ObjectGuid> gos = chat->parseGameobjects(text);
+    std::list<ObjectGuid> gos = chat->parseGameobjects(text);
 
     if (!gos.empty())
     {
@@ -68,7 +68,7 @@ bool CastCustomSpellAction::Execute(Event event)
     if (pos != string::npos)
     {
         string param = text.substr(pos + 1);
-        list<Item*> items = InventoryAction::parseItems(param, ITERATE_ITEMS_IN_BAGS);
+        std::list<Item*> items = InventoryAction::parseItems(param, ITERATE_ITEMS_IN_BAGS);
         if (!items.empty()) itemTarget = *items.begin();
         else
         {
@@ -147,7 +147,7 @@ bool CastCustomSpellAction::Execute(Event event)
 
 bool CastRandomSpellAction::Execute(Event event)
 {
-    list<pair<uint32, string>> spellMap = GetSpellList();
+    std::list<pair<uint32, string>> spellMap = GetSpellList();
     Player* master = GetMaster();
     
     Unit* target = nullptr;
@@ -157,7 +157,7 @@ bool CastRandomSpellAction::Execute(Event event)
     if (name.empty())
         name = getName();
 
-    list<ObjectGuid> wos = chat->parseGameobjects(name);
+    std::list<ObjectGuid> wos = chat->parseGameobjects(name);
 
     for (auto wo : wos)
     {
@@ -181,7 +181,7 @@ bool CastRandomSpellAction::Execute(Event event)
     if (!got && !target)
         target = bot;
 
-    vector<pair<uint32, pair<uint32, WorldObject*>>> spellList;
+    std::vector<pair<uint32, pair<uint32, WorldObject*>>> spellList;
 
     for (auto & spell : spellMap)
     {
@@ -258,7 +258,7 @@ bool CastRandomSpellAction::castSpell(uint32 spellId, WorldObject* wo)
 
 bool DisEnchantRandomItemAction::Execute(Event event)
 {
-    list<uint32> items = AI_VALUE2(list<uint32>, "inventory item ids", "usage " + to_string(ITEM_USAGE_DISENCHANT));
+    std::list<uint32> items = AI_VALUE2(std::list<uint32>, "inventory item ids", "usage " + to_string(ITEM_USAGE_DISENCHANT));
 
     items.reverse();
 

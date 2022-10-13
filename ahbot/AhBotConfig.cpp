@@ -14,8 +14,8 @@ AhBotConfig::AhBotConfig()
 template <class T>
 void LoadSet(string value, T &res)
 {
-    vector<string> ids = split(value, ',');
-    for (vector<string>::iterator i = ids.begin(); i != ids.end(); i++)
+    std::vector<string> ids = split(value, ',');
+    for (std::vector<string>::iterator i = ids.begin(); i != ids.end(); i++)
     {
         uint32 id = atoi((*i).c_str());
         if (!id)
