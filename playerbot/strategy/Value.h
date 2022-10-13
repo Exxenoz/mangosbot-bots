@@ -5,6 +5,7 @@
 #include "../PerformanceMonitor.h"
 #include "ObjectMgr.h"
 #include "AiObject.h"
+#include "AiObjectContext.h"
 
 namespace ai
 {

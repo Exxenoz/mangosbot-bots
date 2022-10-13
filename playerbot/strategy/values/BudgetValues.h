@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Value.h"
+#include "../NamedObjectContext.h"
 
 namespace ai
 {
