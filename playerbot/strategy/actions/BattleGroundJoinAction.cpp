@@ -1,7 +1,7 @@
 #include "ObjectGuid.h"
 #include "botpch.h"
 #include "../../playerbot.h"
-#include "../../playerbotAI.h"
+#include "../../PlayerbotAI.h"
 #include "LfgActions.h"
 #include "../../AiFactory.h"
 //#include "../../PlayerbotAIConfig.h"
