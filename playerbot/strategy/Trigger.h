@@ -7,6 +7,7 @@ class Unit;
 
 namespace ai
 {
+    class NextAction;
     template<class T> class Value;
 }
 
