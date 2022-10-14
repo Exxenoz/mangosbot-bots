@@ -7,6 +7,12 @@ class Unit;
 
 namespace ai
 {
+    class NextAction;
+    template<class T> class Value;
+}
+
+namespace ai
+{
     class NextAction
     {
     public:
