@@ -8,6 +8,12 @@
 
 namespace ai
 {
+    class UntypedValue;
+    template<class T> class Value;
+}
+
+namespace ai
+{
     class AiObjectContext : public PlayerbotAIAware
     {
     public:

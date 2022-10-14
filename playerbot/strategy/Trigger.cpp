@@ -3,6 +3,7 @@
 #include "Trigger.h"
 #include "Action.h"
 #include "Unit.h"
+#include "Value.h"
 
 using namespace ai;
 
