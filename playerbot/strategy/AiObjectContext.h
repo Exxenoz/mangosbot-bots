@@ -61,28 +61,7 @@ namespace ai
             return actionContexts.supports();
         }
 
-        std::string FormatValues(std::string findName = "")
-        {
-            std::ostringstream out;
-            std::set<std::string> names = valueContexts.GetCreated();
-            for (std::set<std::string>::iterator i = names.begin(); i != names.end(); ++i)
-            {
-                UntypedValue* value = GetUntypedValue(*i);
-                if (!value)
-                    continue;
-
-                if (!findName.empty() && i->find(findName) == string::npos)
-                    continue;
-
-                std::string text = value->Format();
-                if (text == "?")
-                    continue;
-
-                out << "{" << *i << "=" << text << "}|";
-            }
-            out.seekp(-1, out.cur);
-            return out.str();
-        }
+        std::string FormatValues(std::string findName = "");
 
     public:
         virtual void Update();

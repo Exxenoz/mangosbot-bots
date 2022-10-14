@@ -36,6 +36,29 @@ AiObjectContext::AiObjectContext(PlayerbotAI* ai) : PlayerbotAIAware(ai)
     valueContexts.Add(&sSharedValueContext);
 }
 
+std::string AiObjectContext::FormatValues(std::string findName)
+{
+    std::ostringstream out;
+    std::set<std::string> names = valueContexts.GetCreated();
+    for (std::set<std::string>::iterator i = names.begin(); i != names.end(); ++i)
+    {
+        UntypedValue* value = GetUntypedValue(*i);
+        if (!value)
+            continue;
+
+        if (!findName.empty() && i->find(findName) == string::npos)
+            continue;
+
+        std::string text = value->Format();
+        if (text == "?")
+            continue;
+
+        out << "{" << *i << "=" << text << "}|";
+    }
+    out.seekp(-1, out.cur);
+    return out.str();
+}
+
 void AiObjectContext::Update()
 {
     strategyContexts.Update();

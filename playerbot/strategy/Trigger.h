@@ -69,7 +69,7 @@ namespace ai
 
     public:
         NextAction** getHandlers();
-        float getFirstRelevance() {return handlers[0] ? handlers[0]->getRelevance() : -1; }
+        float getFirstRelevance();
     private:
         std::string name;
         Trigger* trigger;
