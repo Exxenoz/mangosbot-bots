@@ -27,3 +27,13 @@ Unit* Trigger::GetTarget()
 {
     return GetTargetValue()->Get();
 }
+
+TriggerNode::~TriggerNode()
+{
+	NextAction::destroy(handlers);
+}
+
+NextAction** TriggerNode::getHandlers()
+{
+	return NextAction::merge(NextAction::clone(handlers), trigger->getHandlers());
+}

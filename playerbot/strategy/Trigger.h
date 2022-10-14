@@ -60,10 +60,7 @@ namespace ai
             this->handlers = handlers;
             this->trigger = NULL;
         }
-        virtual ~TriggerNode()
-        {
-            NextAction::destroy(handlers);
-        }
+        virtual ~TriggerNode();
 
     public:
         Trigger* getTrigger() { return trigger; }
@@ -71,7 +68,7 @@ namespace ai
         std::string getName() { return name; }
 
     public:
-        NextAction** getHandlers() { return NextAction::merge(NextAction::clone(handlers), trigger->getHandlers()); }
+        NextAction** getHandlers();
         float getFirstRelevance() {return handlers[0] ? handlers[0]->getRelevance() : -1; }
     private:
         std::string name;
