@@ -3,6 +3,7 @@
 #include "strategy/AiObject.h"
 #include <boost/functional/hash.hpp>
 #include "GuidPosition.h"
+#include <numeric>
 
 namespace ai
 {   
@@ -359,6 +360,11 @@ namespace ai
         {
             while (first != last && first_weight != last_weight)
             {
+                if (std::accumulate(first_weight, last_weight, 0) == 0)
+                {
+                    return;
+                }
+
                 std::discrete_distribution<int> dd(first_weight, last_weight);
                 auto i = dd(g);
 
