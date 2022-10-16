@@ -12,6 +12,10 @@ ImbueWithPoisonAction::ImbueWithPoisonAction(PlayerbotAI* ai) : Action(ai, "appl
 
 bool ImbueWithPoisonAction::Execute(Event& event)
 {
+#ifndef _WIN32
+    return false; // Disable on Linux
+#endif
+
 #ifdef CMANGOS
     if (bot->IsInCombat())
 #endif
@@ -94,6 +98,10 @@ ImbueWithStoneAction::ImbueWithStoneAction(PlayerbotAI* ai) : Action(ai, "apply 
 
 bool ImbueWithStoneAction::Execute(Event& event)
 {
+#ifndef _WIN32
+    return false; // Disable on Linux
+#endif
+
 #ifdef CMANGOS
    if (bot->IsInCombat())
 #endif
@@ -148,6 +156,10 @@ ImbueWithOilAction::ImbueWithOilAction(PlayerbotAI* ai) : Action(ai, "apply oil"
 
 bool ImbueWithOilAction::Execute(Event& event)
 {
+#ifndef _WIN32
+    return false; // Disable on Linux
+#endif
+
 #ifdef CMANGOS
    if (bot->IsInCombat())
 #endif
