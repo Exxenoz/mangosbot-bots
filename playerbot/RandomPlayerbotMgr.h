@@ -176,6 +176,7 @@ class RandomPlayerbotMgr : public PlayerbotHolder
     private:
         PlayerBotMap players;
         int processTicks;
+        int processIndex;
         map<uint8, vector<WorldLocation> > locsPerLevelCache;
         map<uint32, vector<WorldLocation> > rpgLocsCache;
 		map<uint32, map<uint32, vector<WorldLocation> > > rpgLocsCacheLevel;

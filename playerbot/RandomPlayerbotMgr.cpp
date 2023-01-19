@@ -250,7 +250,7 @@ botPIDImpl::~botPIDImpl()
 {
 }
 
-RandomPlayerbotMgr::RandomPlayerbotMgr() : PlayerbotHolder(), processTicks(0), loginProgressBar(NULL)
+RandomPlayerbotMgr::RandomPlayerbotMgr() : PlayerbotHolder(), processTicks(0), processIndex(0), loginProgressBar(NULL)
 {
     if (sPlayerbotAIConfig.enabled || sPlayerbotAIConfig.randomBotAutologin)
     {
@@ -568,7 +568,7 @@ void RandomPlayerbotMgr::UpdateAIInternal(uint32 elapsed, bool minimal)
     if (onlineBotCount < (uint32)(sPlayerbotAIConfig.minRandomBots * 90 / 100))
         onlineBotFocus = 25;
 
-    SetAIInternalUpdateDelay(sPlayerbotAIConfig.randomBotUpdateInterval * (onlineBotFocus+25) * 10);
+    //SetAIInternalUpdateDelay(sPlayerbotAIConfig.randomBotUpdateInterval * (onlineBotFocus+25) * 10);
 
     PerformanceMonitorOperation *pmo = sPerformanceMonitor.start(PERF_MON_TOTAL,
         onlineBotCount < maxAllowedBotCount ? "RandomPlayerbotMgr::Login" : "RandomPlayerbotMgr::UpdateAIInternal");
@@ -613,7 +613,33 @@ void RandomPlayerbotMgr::UpdateAIInternal(uint32 elapsed, bool minimal)
     if(!availableBots.empty())
     {
         //Update bots
-        for (auto bot : availableBots)
+        PerformanceMonitorOperation *pmoUpdate = sPerformanceMonitor.start(PERF_MON_TOTAL, "RandomPlayerbotMgr::UpdateAIInternal UpdateBots");
+        if (processIndex >= maxAllowedBotCount)
+            processIndex = 0;
+        if (processIndex >= availableBots.size())
+            processIndex = 0;
+        auto botItr = availableBots.begin();
+        std::advance(botItr, processIndex);
+        ProcessBot(*botItr);
+        ++processIndex;
+        if (loginBots)
+        {
+            //Log in bots
+            for (auto bot : availableBots)
+            {
+                if (GetPlayerBot(bot))
+                    continue;
+
+                if (ProcessBot(bot)) {
+                    loginBots--;
+                }
+
+                if (!loginBots)
+                    break;
+            };
+        }
+        if (pmoUpdate) pmoUpdate->finish();
+        /*for (auto bot : availableBots)
         {
             if (!GetPlayerBot(bot))
                 continue;
@@ -646,7 +672,7 @@ void RandomPlayerbotMgr::UpdateAIInternal(uint32 elapsed, bool minimal)
                 if (!loginBots)
                     break;
             };
-        }
+        }*/
     }
     if (pmo) pmo->finish();
 
